@@ -38,22 +38,55 @@ function configure_lr-bluemsx() {
     mkRomDir "msx"
     ensureSystemretroconfig "msx"
 
+    mkRomDir "msx2"
+    ensureSystemretroconfig "msx2"
+
     mkRomDir "coleco"
     ensureSystemretroconfig "coleco"
 
     # force colecovision system
-    local core_config="$md_conf_root/coleco/retroarch-core-options.cfg"
+    local cv_core_config="$configdir/coleco/retroarch.cfg"
     iniConfig " = " '"' "$md_conf_root/coleco/retroarch.cfg"
-    iniSet "core_options_path" "$core_config"
     iniSet "bluemsx_msxtype" "ColecoVision" "$core_config"
-    chown $user:$user "$core_config"
+    chown $user:$user "$cv_core_config"
+
+# force msx system
+    local msx_core_config="$configdir/msx/retroarch.cfg"
+    iniConfig " = " '"' "$md_conf_root/msx/retroarch.cfg"
+    iniSet "bluemsx_msxtype" "MSX" "$msx_core_config"
+    iniSet "msx_video_mode" "PAL" "$msx_core_config"
+    iniSet "bluemsx_nospritelimits" "ON" "$msx_core_config"
+
+    chown $user:$user "$msx_core_config"
+
+# force msx2 system
+    local msx2_core_config="$configdir/msx2/retroarch.cfg"
+    iniConfig " = " '"' "$md_conf_root/msx2/retroarch.cfg"
+    iniSet "bluemsx_msxtype" "MSX2+" "$msx2_core_config"
+    iniSet "msx_video_mode" "PAL" "$msx_core_config"
+    iniSet "bluemsx_nospritelimits" "ON" "$msx_core_config"
+    chown $user:$user "$msx2_core_config"
 
     cp -rv "$md_inst/"{Databases,Machines} "$biosdir/"
     chown -R $user:$user "$biosdir/"{Databases,Machines}
 
-    addEmulator 1 "$md_id" "msx" "$md_inst/bluemsx_libretro.so"
-    addSystem "msx"
+
+    addEmulator 1 "$md_id" "msx2" "$md_inst/bluemsx_libretro.so"
+    addSystem "msx2"
+
 
     addEmulator 1 "$md_id" "coleco" "$md_inst/bluemsx_libretro.so"
     addSystem "coleco"
+     if [ -e /usr/lib/libretro/bluemsx_libretro.so ]
+                then 
+   addEmulator 1 "$md_id-ppa" "msx" "$md_instppa/bluemsx_libretro.so"
+    addSystem "msx"
+
+    addEmulator 1 "$md_id-ppa" "msx2" "$md_inst/bluemsx_libretro.so"
+    addSystem "msx2"
+
+
+    addEmulator 1 "$md_id-ppa" "coleco" "$md_instppa/bluemsx_libretro.so"
+    addSystem "coleco"
+    fi
 }

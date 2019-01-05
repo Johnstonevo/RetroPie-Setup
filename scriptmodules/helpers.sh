@@ -382,7 +382,8 @@ function setupDirectories() {
     mkUserDir "$biosdir"
     mkUserDir "$configdir"
     mkUserDir "$configdir/all"
-
+    mkUserDir "$datadir/saves/$user"
+    mkUserDir "$raconfigdir"
     # some home folders for configs that modules rely on
     mkUserDir "$home/.cache"
     mkUserDir "$home/.config"
@@ -399,7 +400,7 @@ function setupDirectories() {
     done
 
     # create template for autoconf.cfg and make sure it is owned by $user
-    local config="$configdir/all/autoconf.cfg"
+    local config="$raconfigdir/autoconf.cfg"
     if [[ ! -f "$config" ]]; then
         echo "# this file can be used to enable/disable retropie autoconfiguration features" >"$config"
     fi
@@ -542,7 +543,7 @@ function copyDefaultConfig() {
         cp "$from" "$to"
     fi
 
-    chown $user:$user "$to"
+    chown -R $user:$user "$to"
 }
 
 ## @fn renameModule()
@@ -830,20 +831,20 @@ function ensureSystemretroconfig() {
     local config="$(mktemp)"
     # add the initial comment regarding include order
     echo -e "# Settings made here will only override settings in the global retroarch.cfg if placed above the #include line\n" >"$config"
-
+    echo -e "core_options_path = $configdir/$system/retroarch.cfg"  >>"$config"
     # add the per system default settings
     iniConfig " = " '"' "$config"
     iniSet "input_remapping_directory" "$configdir/$system/"
 
     if [[ -n "$shader" ]]; then
         iniUnset "video_smooth" "false"
-        iniSet "video_shader" "$emudir/retroarch/shader/$shader"
+        iniSet "video_shader" "$raconfigdir/shaders/$shader"
         iniUnset "video_shader_enable" "true"
     fi
 
     # include the main retroarch config
-    echo -e "\n#include \"$configdir/all/retroarch.cfg\"" >>"$config"
-
+    echo -e "\ncore_options_path = \"$configdir/$system/retroarch.cfg\""
+    echo -e "\n#include \"$raconfigdir/retroarch.cfg\"" >>"$config"
     copyDefaultConfig "$config" "$configdir/$system/retroarch.cfg"
     rm "$config"
 }
@@ -851,16 +852,16 @@ function ensureSystemretroconfig() {
 ## @fn setRetroArchCoreOption()
 ## @param option option to set
 ## @param value value to set
-## @brief Sets a retroarch core option in `$configdir/all/retroarch-core-options.cfg`.
+## @brief Sets a retroarch core option in `$raconfigdir/retroarch-core-options.cfg`.
 function setRetroArchCoreOption() {
     local option="$1"
     local value="$2"
-    iniConfig " = " "\"" "$configdir/all/retroarch-core-options.cfg"
+    iniConfig " = " "\"" "$raconfigdir/retroarch-core-options.cfg"
     iniGet "$option"
     if [[ -z "$ini_value" ]]; then
         iniSet "$option" "$value"
     fi
-    chown $user:$user "$configdir/all/retroarch-core-options.cfg"
+    chown $user:$user "$raconfigdir/retroarch-core-options.cfg"
 }
 
 ## @fn setConfigRoot()
@@ -1066,7 +1067,7 @@ function joy2keyStop() {
 function getPlatformConfig() {
     local key="$1"
     local conf
-    for conf in "$configdir/all/platforms.cfg" "$scriptdir/platforms.cfg"; do
+    for conf in "$raconfigdir/platforms.cfg" "$scriptdir/platforms.cfg"; do
         [[ ! -f "$conf" ]] && continue
         iniConfig "=" '"' "$conf"
         iniGet "$key"
@@ -1203,7 +1204,7 @@ function addPort() {
 "$rootdir/supplementary/runcommand/runcommand.sh" 0 _PORT_ "$port" "$game"
 _EOF_
 
-    chown $user:$user "$file"
+    chown -R $user:$user "$file"
     chmod +x "$file"
 
     [[ -n "$cmd" ]] && addEmulator 1 "$id" "$port" "$cmd"
@@ -1248,7 +1249,7 @@ function addEmulator() {
     fi
 
     # automatically add parameters for libretro modules
-    if [[ "$id" == lr-* && "$cmd" =~ ^"$md_inst"[^[:space:]]*\.so ]]; then
+    if [[ "$id" == lr-* && "$cmd" != "$emudir/retroarch/bin/retroarch"* ]]; then
         cmd="$emudir/retroarch/bin/retroarch -L $cmd --config $md_conf_root/$system/retroarch.cfg %ROM%"
     fi
 
@@ -1264,7 +1265,7 @@ function addEmulator() {
         if [[ -z "$ini_value" && "$default" -eq 1 ]]; then
             iniSet "default" "$id"
         fi
-        chown $user:$user "$md_conf_root/$system/emulators.cfg"
+        chown -R $user:$user "$md_conf_root/$system/emulators.cfg"
     fi
 }
 

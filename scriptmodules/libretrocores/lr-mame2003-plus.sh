@@ -37,4 +37,22 @@ function install_lr-mame2003-plus() {
 
 function configure_lr-mame2003-plus() {
     configure_lr-mame2003
+    iniSet  "mame2003-plus_cheat_input ports" "disabled"
+    iniSet  "mame2003-plus_core_save_subfolder" "enabled"
+    iniSet  "mame2003-plus_core_sys_subfolder" "enabled"
+    iniSet  "mame2003-plus_dcs_speedhack" "enabled"
+    iniSet  "mame2003-plus_display_artwork" "enabled"
+    iniSet  "mame2003-plus_display_setup" "disabled"
+    iniSet  "mame2003-plus_dual_joysticks" "disabled"
+    iniSet  "mame2003-plus_frameskip" "0"
+    iniSet  "mame2003-plus_gamma" "1.2"
+    iniSet  "mame2003-plus_input_interface" "retroarch"
+    iniSet  "mame2003-plus_machine_timing" "enabled"
+    iniSet  "mame2003-plus_mame_remapping" "disabled"
+    iniSet  "mame2003-plus_mouse_device" "mouse"
+    iniSet  "mame2003-plus_rstick_to_btns" "enabled"
+    iniSet  "mame2003-plus_sample_rate" "48000"
+    iniSet  "mame2003-plus_skip_disclaimer" "enabled"
+    iniSet  "mame2003-plus_skip_warnings" "enabled"
+    iniSet  "mame2003-plus_tate_mode" "disabled"
 }

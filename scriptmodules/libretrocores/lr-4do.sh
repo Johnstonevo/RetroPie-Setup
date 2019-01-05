@@ -37,4 +37,9 @@ function configure_lr-4do() {
 
     addEmulator 1 "$md_id" "3do" "$md_inst/4do_libretro.so"
     addSystem "3do"
+     if [ -e /usr/lib/libretro/4do_libretro.so ]
+                then 
+                            addEmulator  0 "$md_id-ppa" "3do" "$md_instppa/4do_libretro.so"
+                            addSystem "3do" 
+            fi
 }

@@ -43,10 +43,168 @@ function install_lr-picodrive() {
 
 function configure_lr-picodrive() {
     local system
-    for system in megadrive mastersystem segacd sega32x; do
+    for system in megadrive mastersystem segacd sega32x megadrive-japan; do
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
         addEmulator 1 "$md_id" "$system" "$md_inst/picodrive_libretro.so"
         addSystem "$system"
+    
+
+        if [ -e /usr/lib/libretro/picodrive_libretro.so ]
+            then
+                addEmulator "$def" "$md_id-ppa" "$system" "$md_instppa/picodrive_libretro.so"
+                addSystem "$system"
+        fi
     done
+setRetroArchCoreOption "picodrive_input1" "6 button pad"
+setRetroArchCoreOption "picodrive_input2" "6 button pad"
+setRetroArchCoreOption "picodrive_sprlim" "disabled"
+setRetroArchCoreOption "picodrive_ramcart" "disabled"
+setRetroArchCoreOption "picodrive_region" "Auto"
+setRetroArchCoreOption "picodrive_drc" "enabled"
+
+ if [ ! -d $raconfigdir/overlay/GameBezels/Megadrive ]
+    then
+        git clone  https://github.com/thebezelproject/bezelproject-MegaDrive.git  "/home/$user/RetroPie-Setup/tmp/MegaDrive"
+        cp -r  /home/$user/RetroPie-Setup/tmp/MegaDrive/retroarch/  /home/$user/.config/
+        rm -rf /home/$user/RetroPie-Setup/tmp/MegaDrive/
+        cd /home/$user/.config/retroarch
+        chown -R $user:$user ../retroarch
+        find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+fi
+ if [ ! -d $raconfigdir/overlay/GameBezels/SegaCD ]
+    then
+        git clone  https://github.com/thebezelproject/bezelproject-SegaCD.git  "/home/$user/RetroPie-Setup/tmp/SegaCD"
+        cp -r  /home/$user/RetroPie-Setup/tmp/SegaCD/retroarch/  /home/$user/.config/
+        rm -rf /home/$user/RetroPie-Setup/tmp/SegaCD/
+        cd /home/$user/.config/retroarch
+        chown -R $user:$user ../retroarch
+        find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+fi
+ if [ ! -d $raconfigdir/overlay/GameBezels/MasterSystem ]
+    then
+        git clone  https://github.com/thebezelproject/bezelproject-MasterSystem.git  "/home/$user/RetroPie-Setup/tmp/MasterSystem"
+        cp -r  /home/$user/RetroPie-Setup/tmp/MasterSystem/retroarch/  /home/$user/.config/
+        rm -rf /home/$user/RetroPie-Setup/tmp/MasterSystem/
+        cd /home/$user/.config/retroarch
+        chown -R $user:$user ../retroarch
+        find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+fi
+ if [ ! -d $raconfigdir/overlay/GameBezels/Sega32X ]
+    then
+        git clone  https://github.com/thebezelproject/bezelproject-Sega32X.git  "/home/$user/RetroPie-Setup/tmp/Sega32X"
+        cp -r  /home/$user/RetroPie-Setup/tmp/Sega32X/retroarch/  /home/$user/.config/
+        rm -rf /home/$user/RetroPie-Setup/tmp/Sega32X/
+        cd /home/$user/.config/retroarch
+        chown -R $user:$user ../retroarch
+        find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+fi
+
+if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
+ then
+             cp /home/$user/.config/RetroPie/megadrive/retroarch.cfg /home/$user/.config/RetroPie/megadrive/retroarch.cfg.bkp
+            local core_config="$configdir/megadrive/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/megadrive/retroarch.cfg"
+            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Mega-Drive.cfg" "$core_config"
+            iniSet "input_overlay_opacity" "1.0" "$core_config"
+            iniSet "input_overlay_scale" "1.0" "$core_config"
+            iniSet "video_fullscreen_x" "1920" "$core_config"
+            iniSet "video_fullscreen_y" "1080" "$core_config"
+            iniSet "custom_viewport_width" "1194" "$core_config"
+            iniSet "custom_viewport_height" "896" "$core_config"
+            iniSet "custom_viewport_x" "363" "$core_config"
+            iniSet "custom_viewport_y" "90" "$core_config"
+            iniSet "aspect_ratio_index" "22" "$core_config"
+            iniSet "input_overlay_enable" "true" "$core_config"
+            iniSet "video_smooth" "true" "$core_config"
+            iniSet "picodrive_input1" "6 button pad" "$core_config"
+            iniSet "picodrive_input1" "6 button pad" "$core_config"
+            iniSet "picodrive_sprlim"  "disabled" "$core_config"
+            iniSet "picodrive_ramcart"  "disabled" "$core_config"
+            iniSet "picodrive_region"  "Auto" "$core_config"
+            iniSet "picodrive_drc"  "enabled" "$core_config"
+fi
+if [  -d $raconfigdir/overlay/GameBezels/SegaCD ]
+ then
+             cp /home/$user/.config/RetroPie/segacd/retroarch.cfg /home/$user/.config/RetroPie/segacd/retroarch.cfg.bkp
+            local core_config="$configdir/segacd/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/segacd/retroarch.cfg"
+            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/segacd.cfg" "$core_config"
+            iniSet "input_overlay_opacity" "1.0" "$core_config"
+            iniSet "input_overlay_scale" "1.0" "$core_config"
+            iniSet "video_fullscreen_x" "1920" "$core_config"
+            iniSet "video_fullscreen_y" "1080" "$core_config"
+            iniSet "custom_viewport_width" "1194" "$core_config"
+            iniSet "custom_viewport_height" "896" "$core_config"
+            iniSet "custom_viewport_x" "363" "$core_config"
+            iniSet "custom_viewport_y" "90" "$core_config"
+            iniSet "aspect_ratio_index" "22" "$core_config"
+            iniSet "input_overlay_enable" "true" "$core_config"
+            iniSet "video_smooth" "true" "$core_config"
+            iniSet "picodrive_input1" "6 button pad" "$core_config"
+            iniSet "picodrive_input1" "6 button pad" "$core_config"
+            iniSet "picodrive_sprlim"  "disabled" "$core_config"
+            iniSet "picodrive_ramcart"  "disabled" "$core_config"
+            iniSet "picodrive_region"  "Auto" "$core_config"
+            iniSet "picodrive_drc"  "enabled" "$core_config"
+fi
+if [  -d $raconfigdir/overlay/GameBezels/MegaDrive ]
+ then
+             cp /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg.bkp
+            local core_config="$configdir/megadrive-japan/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/megadrive-japan/retroarch.cfg"
+            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Mega-Drive.cfg" "$core_config"
+            iniSet "input_overlay_opacity" "1.0" "$core_config"
+            iniSet "input_overlay_scale" "1.0" "$core_config"
+            iniSet "video_fullscreen_x" "1920" "$core_config"
+            iniSet "video_fullscreen_y" "1080" "$core_config"
+            iniSet "custom_viewport_width" "1194" "$core_config"
+            iniSet "custom_viewport_height" "896" "$core_config"
+            iniSet "custom_viewport_x" "363" "$core_config"
+            iniSet "custom_viewport_y" "90" "$core_config"
+            iniSet "aspect_ratio_index" "22" "$core_config"
+            iniSet "input_overlay_enable" "true" "$core_config"
+            iniSet "video_smooth" "true" "$core_config"
+            iniSet "picodrive_input1" "6 button pad" "$core_config"
+            iniSet "picodrive_input1" "6 button pad" "$core_config"
+            iniSet "picodrive_sprlim"  "disabled" "$core_config"
+            iniSet "picodrive_ramcart"  "disabled" "$core_config"
+            iniSet "picodrive_region"  "Auto" "$core_config"
+            iniSet "picodrive_drc"  "enabled" "$core_config"
+fi
+if [  -d $raconfigdir/overlay/GameBezels/MasterSystem ]
+ then
+             cp /home/$user/.config/RetroPie/mastersystem/retroarch.cfg /home/$user/.config/RetroPie/mastersystem/retroarch.cfg.bkp
+            local core_config="$configdir/mastersystem/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/mastersystem/retroarch.cfg"
+            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Master-System.cfg" "$core_config"
+            iniSet "input_overlay_opacity" "1.0" "$core_config"
+            iniSet "input_overlay_scale" "1.0" "$core_config"
+            iniSet "video_fullscreen_x" "1920" "$core_config"
+            iniSet "video_fullscreen_y" "1080" "$core_config"
+fi
+if [  -d $raconfigdir/overlay/GameBezels/Sega32X ]
+ then
+             cp /home/$user/.config/RetroPie/sega32x/retroarch.cfg /home/$user/.config/RetroPie/sega32x/retroarch.cfg.bkp
+            local core_config="$configdir/sega32x/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/sega32x/retroarch.cfg"
+            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-32X.cfg" "$core_config"
+            iniSet "input_overlay_opacity" "1.0" "$core_config"
+            iniSet "input_overlay_scale" "1.0" "$core_config"
+            iniSet "video_fullscreen_x" "1920" "$core_config"
+            iniSet "video_fullscreen_y" "1080" "$core_config"
+            iniSet "custom_viewport_width" "1194" "$core_config"
+            iniSet "custom_viewport_height" "896" "$core_config"
+            iniSet "custom_viewport_x" "363" "$core_config"
+            iniSet "custom_viewport_y" "90" "$core_config"
+            iniSet "aspect_ratio_index" "22" "$core_config"
+            iniSet "input_overlay_enable" "true" "$core_config"
+            iniSet "video_smooth" "true" "$core_config"
+            iniSet "picodrive_input1" "6 button pad" "$core_config"
+            iniSet "picodrive_input1" "6 button pad" "$core_config"
+            iniSet "picodrive_sprlim"  "disabled" "$core_config"
+            iniSet "picodrive_ramcart"  "disabled" "$core_config"
+            iniSet "picodrive_region"  "Auto" "$core_config"
+            iniSet "picodrive_drc"  "enabled" "$core_config"
+fi
 }

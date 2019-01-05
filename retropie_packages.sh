@@ -9,7 +9,7 @@
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
 
-__version="4.4.4"
+__version="0.0.1alpha"
 
 [[ "$__debug" -eq 1 ]] && set -x
 
@@ -33,8 +33,8 @@ datadir="$home/RetroPie"
 biosdir="$datadir/BIOS"
 romdir="$datadir/roms"
 emudir="$rootdir/emulators"
-configdir="$rootdir/configs"
-
+configdir="$home/.config/RetroPie"
+raconfigdir="$home/.config/retroarch"
 scriptdir="$(dirname "$0")"
 scriptdir="$(cd "$scriptdir" && pwd)"
 

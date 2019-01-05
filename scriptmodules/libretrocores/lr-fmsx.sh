@@ -60,4 +60,20 @@ function configure_lr-fmsx() {
 
     addEmulator 0 "$md_id" "msx" "$md_inst/fmsx_libretro.so"
     addSystem "msx"
+    addEmulator 0 "$md_id" "msx2" "$md_inst/fmsx_libretro.so"
+    addSystem "msx2"
+
+ # force msx system
+    local msx_core_config="$configdir/msx/retroarch.cfg"
+    iniConfig " = " '"' "$md_conf_root/msx/retroarch.cfg"
+    iniSet  "fmsx_mode" "MSX1" "$msx_core_config"
+    iniSet "fmsx_video_mode" "PAL" "$msx_core_config"
+    chown $user:$user "$msx_core_config"
+
+# force msx2 system
+    local msx2_core_config="$configdir/msx2/retroarch.cfg"
+    iniConfig " = " '"' "$md_conf_root/msx2/retroarch.cfg"
+    iniSet  "fmsx_mode" "MSX2+" "$msx2_core_config"
+    iniSet "fmsx_video_mode" "PAL" "$msx2_core_config"
+    chown $user:$user "$msx2_core_config"
 }

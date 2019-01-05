@@ -187,7 +187,7 @@ function retroarchIncludeToEnd() {
 function addAutoConf() {
     local key="$1"
     local default="$2"
-    local file="$configdir/all/autoconf.cfg"
+    local file="$raconfigdir/autoconf.cfg"
 
     if [[ -z "$default" ]]; then
        default="1"
@@ -205,7 +205,7 @@ function addAutoConf() {
 function setAutoConf() {
     local key="$1"
     local value="$2"
-    local file="$configdir/all/autoconf.cfg"
+    local file="$raconfigdir/autoconf.cfg"
 
     iniConfig " = " '"' "$file"
     iniSet "$key" "$value"
@@ -215,7 +215,7 @@ function setAutoConf() {
 function getAutoConf(){
     local key="$1"
 
-    iniConfig " = " '"' "$configdir/all/autoconf.cfg"
+    iniConfig " = " '"' "$raconfigdir/autoconf.cfg"
     iniGet "$key"
 
     [[ "$ini_value" == "1" ]] && return 0

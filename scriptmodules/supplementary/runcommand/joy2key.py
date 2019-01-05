@@ -30,9 +30,9 @@ JS_THRESH = 0.75
 JS_EVENT_BUTTON = 0x01
 JS_EVENT_AXIS = 0x02
 JS_EVENT_INIT = 0x80
-
+RACONFIG_DIR = '$HOME/.config/retroarch'
 CONFIG_DIR = '/opt/retropie/configs/'
-RETROARCH_CFG = CONFIG_DIR + 'all/retroarch.cfg'
+RETROARCH_CFG = '$HOME/.config/retroarch/retroarch.cfg'
 
 def ini_get(key, cfg_file):
     pattern = r'[ |\t]*' + key + r'[ |\t]*=[ |\t]*'
@@ -60,7 +60,7 @@ def sysdev_get(key, sysdev_path):
     return value
 
 def get_button_codes(dev_path):
-    js_cfg_dir = CONFIG_DIR + 'all/retroarch-joypads/'
+    js_cfg_dir = RACONFIG_DIR+ '/retroarch-joypads/'
     js_cfg = ''
     dev_name = ''
     dev_button_codes = list(default_button_codes)

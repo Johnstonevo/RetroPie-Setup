@@ -172,9 +172,9 @@ function basic_configedit() {
         'aspect_ratio_index _id_ 4:3 16:9 16:10 16:15 21:9 1:1 2:1 3:2 3:4 4:1 4:4 5:4 6:5 7:9 8:3 8:7 19:12 19:14 30:17 32:9 config square core custom'
         '_function_ _video_fullscreen_configedit'
         'video_shader_enable true false'
-        "video_shader _file_ *.*p $rootdir/emulators/retroarch/shader"
+        "video_shader _file_ *.*p $raconfigdir/shader"
         'input_overlay_enable true false'
-        "input_overlay _file_ *.cfg $rootdir/emulators/retroarch/overlays"
+        "input_overlay _file_ *.cfg $raconfigdir/overlay"
         '_function_ _joypad_index_configedit'
         'input_player1_analog_dpad_mode _id_ disabled left-stick right-stick'
         'input_player2_analog_dpad_mode _id_ disabled left-stick right-stick'
@@ -227,9 +227,9 @@ function advanced_configedit() {
         'video_smooth true false'
         'aspect_ratio_index _id_ 4:3 16:9 16:10 16:15 21:9 1:1 2:1 3:2 3:4 4:1 4:4 5:4 6:5 7:9 8:3 8:7 19:12 19:14 30:17 32:9 config square core custom'
         'video_shader_enable true false'
-        "video_shader _file_ *.*p $rootdir/emulators/retroarch/shader"
+        "video_shader _file_ *.*p $raconfigdir/shader"
         'input_overlay_enable true false'
-        "input_overlay _file_ *.cfg $rootdir/emulators/retroarch/overlays"
+        "input_overlay _file_ *.cfg $raconfigdir/overlay"
         "audio_driver $audio_opts"
         'video_driver gl dispmanx sdl2 vg vulkan'
         'menu_driver rgui xmb'

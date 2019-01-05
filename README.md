@@ -1,6 +1,13 @@
 RetroPie-Setup
 ==============
+This is my Fork of the standard RetroPie.  It moves retroarch config into the defaul location of ~/.config/retroarch, the $system configs into ~/.config/retroPie in the hope different users can have different settings (Retroacheivments etc) and looks for any cores downloaded through the libretro PPA and adds them to the list of emulators.  
 
+I'm also working through adding the https://github.com/thebezelproject bezels as it installs.
+
+It also moves libretro core options to the $system/retroarch.cfg and sets the controller to my controller (Afterglow PS3 but shows up as Xbox. ). 
+
+Still a work in progress, working through the systems.  So far FBA, Sega and Nintendo consoles have been done. 
+===============================
 General Usage
 -------------
 
@@ -20,7 +27,7 @@ Then you can download the latest RetroPie setup script with
 
 ```shell
 cd
-git clone --depth=1 https://github.com/RetroPie/RetroPie-Setup.git
+git clone --depth=1 https://github.com/Johnstonevo/RetroPie-Setup.git
 ```
 
 The script is executed with 

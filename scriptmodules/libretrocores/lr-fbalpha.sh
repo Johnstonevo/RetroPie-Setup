@@ -89,4 +89,53 @@ function configure_lr-fbalpha() {
     addSystem "mastersystem"
     addSystem "megadrive"
     addSystem "sg-1000"
+
+    
+if [ -e /usr/lib/libretro/fbalpha_libretro.so ]
+    then
+        addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/fbalpha_libretro.so"
+        addEmulator 0 "$md_id-ppa-neocd" "arcade" "$md_instppa/fbalpha_libretro.so --subsystem neocd"
+        addEmulator 0 "$md_id-ppa" "neogeo" "$md_instppa/fbalpha_libretro.so"
+        addEmulator 0 "$md_id-ppa-neocd" "neogeo" "$md_instppa/fbalpha_libretro.so --subsystem neocd"
+        addEmulator 0 "$md_id-ppa" "fba" "$md_instppa/fbalpha_libretro.so"
+        addEmulator 0 "$md_id-ppa-neocd" "fba" "$md_instppa/fbalpha_libretro.so --subsystem neocd"
+
+        addEmulator 0 "$md_id-ppa-pce" "pcengine" "$md_instppa/fbalpha_libretro.so --subsystem pce"
+        addEmulator 0 "$md_id-ppa-sgx" "pcengine" "$md_instppa/fbalpha_libretro.so --subsystem sgx"
+        addEmulator 0 "$md_id-ppa-tg" "pcengine" "$md_instppa/fbalpha_libretro.so --subsystem tg"
+        addEmulator 0 "$md_id-ppa-gg" "gamegear" "$md_instppa/fbalpha_libretro.so --subsystem gg"
+        addEmulator 0 "$md_id-ppa-sms" "mastersystem" "$md_instppa/fbalpha_libretro.so --subsystem sms"
+        addEmulator 0 "$md_id-ppa-md" "megadrive" "$md_instppa/fbalpha_libretro.so --subsystem md"
+        addEmulator 0 "$md_id-ppa-sg1k" "sg-1000" "$md_instppa/fbalpha_libretro.so --subsystem sg1k"
+
+        addSystem "arcade"
+        addSystem "neogeo"
+        addSystem "fba"
+        
+        addSystem "pcengine"
+        addSystem "gamegear"
+        addSystem "mastersystem"
+        addSystem "megadrive"
+        addSystem "sg-1000"
+        
+fi
+
+if [ !  -d $raconfigdir/overlay/GameBezels/MAME ]
+  then 
+    git clone  https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
+    cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
+    rm -rf /home/$user/RetroPie-Setup/tmp/MAME/
+    cd /home/$user/.config/retroarch/
+    chown -R $user:$user ../retroarch
+    find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+fi
+if [  -d $raconfigdir/overlay/GameBezels/MAME ]
+ then
+    cp /home/$user/.config/RetroPie/fba/retroarch.cfg /home/$user/.config/RetroPie/fba/retroarch.cfg.bkp
+    local core_config="$configdir/fba/retroarch.cfg"
+     iniConfig " = " '"' "$md_conf_root/fba/retroarch.cfg"
+
+    iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
+    iniSet "input_overlay_opacity" "1.0"
+fi
 }

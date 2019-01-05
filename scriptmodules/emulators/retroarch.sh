@@ -62,6 +62,25 @@ function build_retroarch() {
     make clean
     make
     md_ret_require="$md_build/retroarch"
+    mkUserDir "$raconfigdir/"
+    mkUserDir "$raconfigdir/assets"
+    mkUserDir "$raconfigdir/shaders"
+    mkUserDir "$raconfigdir/overlay"
+    mkUserDir "$raconfigdir/database"
+    mkUserDir "$raconfigdir/cheats"
+    mkUserDir "$raconfigdir/retroarch-joypads"
+    mkUserDir "$raconfigdir/downloads"
+    mkUserDir "$raconfigdir/config"
+    mkUserDir "$raconfigdir/cores"
+    mkUserDir "$raconfigdir/screenshots"
+    mkUserDir "$raconfigdir/playlists"
+    mkUserDir "$raconfigdir/thumbnails"
+    mkUserDir "$raconfigdir/records_config"
+    mkUserDir "$raconfigdir/records"
+    mkUserDir "$datadir/saves/$user/savefiles"
+    mkUserDir "$datadir/saves/$user/savestates"
+    chown -R $user:$user "$raconfigdir"
+    chmod -R 775 "$raconfigdir"
 }
 
 function install_retroarch() {
@@ -72,70 +91,121 @@ function install_retroarch() {
 }
 
 function update_shaders_retroarch() {
-    local dir="$configdir/all/retroarch/shaders"
+    local dir="$raconfigdir/shaders"
     local branch=""
-    isPlatform "rpi" && branch="rpi"
+    if isPlatform "rpi" && branch="rpi"; then
     # remove if not git repository for fresh checkout
     [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
     gitPullOrClone "$dir" https://github.com/RetroPie/common-shaders.git "$branch"
+    fi
+   if  isPlatform "x86" ; then
+     [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
+    gitPullOrClone "$dir" https://github.com/Johnstonevo/common-shaders.git 
+    fi
     chown -R $user:$user "$dir"
 }
 
 function update_overlays_retroarch() {
-    local dir="$configdir/all/retroarch/overlay"
+    local dir="$raconfigdir/overlay"
     # remove if not a git repository for fresh checkout
     [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
-    gitPullOrClone "$configdir/all/retroarch/overlay" https://github.com/libretro/common-overlays.git
+    gitPullOrClone "$raconfigdir" https://github.com/Johnstonevo/overlays.git
     chown -R $user:$user "$dir"
 }
 
 function update_assets_retroarch() {
-    local dir="$configdir/all/retroarch/assets"
+    local dir="$raconfigdir/assets"
     # remove if not a git repository for fresh checkout
     [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
     gitPullOrClone "$dir" https://github.com/libretro/retroarch-assets.git
     chown -R $user:$user "$dir"
 }
 
+
+
+function update_database_retroarch() {
+     if  isPlatform "x86" ; then   
+    mkUserDir "$raconfigdir/database"
+    local dir="$raconfigdir/database"
+    # remove if not a git repository for fresh checkout
+    [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
+    gitPullOrClone "$md_build/libretro-super" https://github.com/libretro/libretro-super.git
+    cd "$md_build/libretro-super"
+   ./libretro-fetch.sh retroarch
+   ./libretro-build-database.sh
+    cd "$md_build/libretro-super/retroarch/media/libretrodb/rdb" 
+    cp -R "$md_build/libretro-super/retroarch/media/libretrodb/rdb" "$dir"
+    chown -R $user:$user "$dir"
+    fi
+}
+
 function install_xmb_monochrome_assets_retroarch() {
-    local dir="$configdir/all/retroarch/assets"
+    if  isPlatform "x86" ; then
+    local dir="$raconfigdir/assets"
     [[ -d "$dir/.git" ]] && return
     [[ ! -d "$dir" ]] && mkUserDir "$dir"
     downloadAndExtract "$__archive_url/retroarch-xmb-monochrome.tar.gz" "$dir"
     chown -R $user:$user "$dir"
+    fi
 }
 
 function _package_xmb_monochrome_assets_retroarch() {
+    if  isPlatform "x86" ; then
     gitPullOrClone "$md_build/assets" https://github.com/libretro/retroarch-assets.git
     mkdir -p "$__tmpdir/archives"
     local archive="$__tmpdir/archives/retroarch-xmb-monochrome.tar.gz"
     rm -f "$archive"
     tar cvzf "$archive" -C "$md_build/assets" xmb/monochrome
+    chown -R $user:$user "$dir"
+    fi
 }
+
 
 function configure_retroarch() {
     [[ "$md_mode" == "remove" ]] && return
 
     # move / symlink the retroarch configuration
-    moveConfigDir "$home/.config/retroarch" "$configdir/all/retroarch"
+    mkUserDir "$raconfigdir"
+    mkUserDir "$raconfigdir/assets"
+    mkUserDir "$raconfigdir/shaders"
+    mkUserDir "$raconfigdir/overlay"
+    mkUserDir "$raconfigdir/database"
+    mkUserDir "$raconfigdir/cheats"
+    mkUserDir "$raconfigdir/retroarch-joypads"
+    mkUserDir "$raconfigdir/downloads"
+    mkUserDir "$raconfigdir/config"
+    mkUserDir "$raconfigdir/cores"
+    mkUserDir "$raconfigdir/screenshots"
+    mkUserDir "$raconfigdir/playlists"
+    mkUserDir "$raconfigdir/thumbnails"
+    mkUserDir "$raconfigdir/records_config"
+    mkUserDir "$raconfigdir/records"
+    mkUserDir "$datadir/saves/$user/savefiles"
+    mkUserDir "$datadir/saves/$user/savestates"
+    chown -R $user:$user "$raconfigdir"
+    chmod -R 775 "$raconfigdir"
+    #moveConfigDir "$raconfigdir" "$raconfigdir"
 
     # move / symlink our old retroarch-joypads folder
-    moveConfigDir "$configdir/all/retroarch-joypads" "$configdir/all/retroarch/autoconfig"
+     moveConfigDir "$raconfigdir/retroarch-joypads" "$raconfigdir/autoconfig"
 
     # move / symlink old assets / overlays and shader folder
-    moveConfigDir "$md_inst/assets" "$configdir/all/retroarch/assets"
-    moveConfigDir "$md_inst/overlays" "$configdir/all/retroarch/overlay"
-    moveConfigDir "$md_inst/shader" "$configdir/all/retroarch/shaders"
+    #moveConfigDir "$md_inst/assets" "$raconfigdir/assets"
+    #moveConfigDir "$md_inst/overlays" "$raconfigdir/overlays"
+    #moveConfigDir "$md_inst/shader" "$raconfigdir/shaders"
 
     # install shaders by default
     update_shaders_retroarch
-
-    # install minimal assets
+    update_assets_retroarch
+    # install assets
     install_xmb_monochrome_assets_retroarch
+    _package_xmb_monochrome_assets_retroarch
+    #install databases
+    update_database_retroarch
 
     local config="$(mktemp)"
 
-    cp "$md_inst/retroarch.cfg" "$config"
+    cp "$md_inst/retroarch.cfg" "$raconfig"
 
     # query ES A/B key swap configuration
     local es_swap="false"
@@ -153,8 +223,8 @@ function configure_retroarch() {
         iniSet "video_threaded" "true"
     fi
 
-    iniSet "video_font_size" "12"
-    iniSet "core_options_path" "$configdir/all/retroarch-core-options.cfg"
+    iniSet "video_font_size" "20"
+    iniSet "core_options_path" "$raconfigdir/retroarch-core-options.cfg"
     isPlatform "x11" && iniSet "video_fullscreen" "true"
 
     # set default render resolution to 640x480 for rpi1
@@ -170,7 +240,7 @@ function configure_retroarch() {
     # enable and configure rewind feature
     iniSet "rewind_enable" "false"
     iniSet "rewind_buffer_size" "10"
-    iniSet "rewind_granularity" "2"
+    iniSet "rewind_granularity" "2"S
     iniSet "input_rewind" "r"
 
     # enable gpu screenshots
@@ -218,12 +288,77 @@ function configure_retroarch() {
 
     # swap A/B buttons based on ES configuration
     iniSet "menu_swap_ok_cancel_buttons" "$es_swap"
+    #configure my main settings
+    iniSet "assets_directory" "$raconfigdir/assets"
+    iniSet "video_shader_dir" "$raconfigdir/shaders"
+    iniSet "overlay_directory " "$raconfigdir/overlay/"
+    iniSet "input_player1_analog_dpad_mode " "1"
+    iniSet "input_player2_analog_dpad_mode " "1"
+    iniSet "input_player3_analog_dpad_mode " "1"
+    iniSet "input_player4_analog_dpad_mode " "1"
+    iniSet "input_player5_analog_dpad_mode " "1"
+    iniSet "input_player6_analog_dpad_mode " "1"
+    iniSet "input_player7_analog_dpad_mode " "1"
+    iniSet "input_player8_analog_dpad_mode " "1"
+    # Add inputs for Afterglow.  Poss Xbox
+    iniSet "input_player1_select_btn" "6"
+    iniSet "input_player1_start_btn" "7"
+    iniSet "input_remap_binds_enable" "true"
+    iniSet "input_remapping_directory" "/home/$user/.config/retroarch/config/remaps"
+    iniSet "input_player1_up_btn" "h0up"
+    iniSet "input_player1_down_btn" "h0down"
+    iniSet "input_player1_left_btn" "h0left"
+    iniSet "input_player1_right_btn" "h0right"
+    iniSet "input_player1_a_btn" "1"
+    iniSet "input_player1_b_btn" "0"
+    iniSet "input_player1_x_btn" "3"
+    iniSet "input_player1_y_btn" "2"
+    iniSet "input_player1_l_btn" "4"
+    iniSet "input_player1_r_btn" "5"
+    iniSet "input_player1_l2_axis" "+2"
+    iniSet "input_player1_r2_axis" "+5"
+    iniSet "input_player1_l3_btn" "9"
+    iniSet "input_player1_r3_btn" "10"
+    iniSet "input_player1_l_x_minus_axis" "-0"
+    iniSet "input_player1_l_x_plus_axis" "+0"
+    iniSet "input_player1_l_y_minus_axis" "-1"
+    iniSet "input_player1_l_y_plus_axis" "+1"
+    iniSet "input_player1_r_x_minus_axis" "-3"
+    iniSet "input_player1_r_x_plus_axis" "+3"
+    iniSet "input_player1_r_y_minus_axis" "-4"
+    iniSet "input_player1_r_y_plus_axis" "+4"
+    iniSet "input_enable_hotkey_btn" "6"
+    iniSet "input_exit_emulator_btn" "7"
+    iniSet "input_save_state_btn" "5"
+    iniSet "input_load_state_btn" "4"
+    iniSet "input_state_slot_increase_btn" "h0right"
+    iniSet "input_state_slot_decrease_btn" "h0left"
+    iniSet "input_menu_toggle_btn" "3"
+    iniSet "input_reset_btn" "0"
 
-    copyDefaultConfig "$config" "$configdir/all/retroarch.cfg"
+
+#add cheevos retroachievments 
+    iniSet "cheevos_username" "yourusername"
+    iniSet "cheevos_password" "yourpassword"
+    iniSet "cheevos_enable" " true"
+    iniSet "cheevos_hardcore_mode_enable" "false"
+    iniSet "cheevos_verbose_enable" "true"
+    iniSet "cheevos_leaderboards_enable" "true"
+
+    #Game Saves
+    iniSet "savefile_directory "  "$datadir/saves/$user/savefiles"
+    iniSet "savestate_directory" "$datadir/saves/$user/savestates"
+    #Cheat Path
+    iniSet "content_database_path" "$raconfigdir/database/rdb"
+    iniSet "cheat_database_path" "$raconfigdir/cheats"
+    iniSet "cheat_settings_path" "$raconfigdir/cheats/xml"
+
+
+    copyDefaultConfig "$config" "$raconfigdir/retroarch.cfg"
     rm "$config"
 
     # if no menu_driver is set, force RGUI, as the default has now changed to XMB.
-    iniConfig " = " '"' "$configdir/all/retroarch.cfg"
+    iniConfig " = " '"' "$raconfigdir/retroarch.cfg"
     iniGet "menu_driver"
     [[ -z "$ini_value" ]] && iniSet "menu_driver" "rgui"
 
@@ -237,12 +372,13 @@ function configure_retroarch() {
 }
 
 function keyboard_retroarch() {
-    if [[ ! -f "$configdir/all/retroarch.cfg" ]]; then
-        printMsgs "dialog" "No RetroArch configuration file found at $configdir/all/retroarch.cfg"
+    if [[ ! -f "$raconfigdir/retroarch.cfg" ]]; then
+        printMsgs "dialog" "No RetroArch configuration file found at $raconfigdir/retroarch.cfg"
         return
     fi
     local input
     local options
+
     local i=1
     local key=()
     while read input; do
@@ -250,14 +386,14 @@ function keyboard_retroarch() {
         key+=("${parts[0]}")
         options+=("${parts[0]}" $i 2 "${parts[*]:2}" $i 26 16 0)
         ((i++))
-    done < <(grep "^[[:space:]]*input_player[0-9]_[a-z]*" "$configdir/all/retroarch.cfg")
+    done < <(grep "^[[:space:]]*input_player[0-9]_[a-z]*" "$raconfigdir/retroarch.cfg")
     local cmd=(dialog --backtitle "$__backtitle" --form "RetroArch keyboard configuration" 22 48 16)
     local choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     if [[ -n "$choice" ]]; then
         local value
         local values
         readarray -t values <<<"$choice"
-        iniConfig " = " "" "$configdir/all/retroarch.cfg"
+        iniConfig " = " "" "$raconfigdir/retroarch.cfg"
         i=0
         for value in "${values[@]}"; do
             iniSet "${key[$i]}" "$value" >/dev/null
@@ -267,7 +403,7 @@ function keyboard_retroarch() {
 }
 
 function hotkey_retroarch() {
-    iniConfig " = " '"' "$configdir/all/retroarch.cfg"
+    iniConfig " = " '"' "$raconfigdir/retroarch.cfg"
     local cmd=(dialog --backtitle "$__backtitle" --menu "Choose the desired hotkey behaviour." 22 76 16)
     local options=(1 "Hotkeys enabled. (default)"
              2 "Press ALT to enable hotkeys."
@@ -296,14 +432,14 @@ function hotkey_retroarch() {
 
 function gui_retroarch() {
     while true; do
-        local names=(shaders overlays assets)
-        local dirs=(shaders overlay assets)
+        local names=(shaders overlays assets database)
+        local dirs=(shaders overlays assets database)
         local options=()
         local name
         local dir
         local i=1
         for name in "${names[@]}"; do
-            if [[ -d "$configdir/all/retroarch/${dirs[i-1]}/.git" ]]; then
+            if [[ -d "$raconfigdir/${dirs[i-1]}/.git" ]]; then
                 options+=("$i" "Manage $name (installed)")
             else
                 options+=("$i" "Manage $name (not installed)")
@@ -329,7 +465,7 @@ function gui_retroarch() {
                         "update_${name}_retroarch"
                         ;;
                     2)
-                        rm -rf "$configdir/all/retroarch/$dir"
+                        rm -rf "$raconfigdir/$dir"
                         [[ "$dir" == "assets" ]] && install_xmb_monochrome_assets_retroarch
                         ;;
                     *)

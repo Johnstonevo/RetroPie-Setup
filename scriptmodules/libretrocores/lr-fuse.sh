@@ -37,9 +37,24 @@ function configure_lr-fuse() {
     mkRomDir "zxspectrum"
     ensureSystemretroconfig "zxspectrum"
 
-    # default to 128k spectrum
-    setRetroArchCoreOption "fuse_machine" "Spectrum 128K"
+    #local core_config="$configdir/zxspectrum/retroarch.cfg"
+    #iniConfig " = " '"' "$md_conf_root/zxspectrum/retroarch.cfg"
+    #iniSet "core_options_path" "$core_config"
+    #iniSet "fuse_machine" "Spectrum 128K"  "$core_config"
+    #chown $user:$user "$core_config"
 
+    setRetroArchCoreOption "fuse_machine" "Spectrum 128K"
+    local core_config="$configdir/zxspectrum/retroarch.cfg"
+    iniConfig " = " '"' "$md_conf_root/zxspectrum/retroarch.cfg"
+    iniSet  "fuse_machine" "Spectrum 128K" "$core_config"
+    iniSet "fuse_load_sound" "off"
+    chown $user:$user "$core_config"
     addEmulator 1 "$md_id" "zxspectrum" "$md_inst/fuse_libretro.so"
     addSystem "zxspectrum"
+
+    if [ -e /usr/lib/libretro/fuse_libretro.so ]
+                    then 
+                                addEmulator 0 "$md_id-ppa" "zxspectrum" "$md_instppa/fuse_libretro.so"
+                                addSystem "zxspectrum" "$md_instppa/fuse_libretro.so"
+    fi
 }
