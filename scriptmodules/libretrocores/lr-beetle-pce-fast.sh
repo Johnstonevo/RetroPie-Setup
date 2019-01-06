@@ -39,8 +39,74 @@ function install_lr-beetle-pce-fast() {
 
 function configure_lr-beetle-pce-fast() {
     mkRomDir "pcengine"
-    ensureSystemretroconfig "pcengine"
+    mkRomDir "pce-cd"
+    mkRomDir "pcengine"
+    mkRomDir "pce-cd"
+    ensureSystemretroconfig "tg16"
+    ensureSystemretroconfig "tg16cd"
 
     addEmulator 1 "$md_id" "pcengine" "$md_inst/mednafen_pce_fast_libretro.so"
+    addEmulator 1 "$md_id" "pce-cd" "$md_inst/mednafen_pce_fast_libretro.so"
+    addEmulator 1 "$md_id" "tg16" "$md_inst/mednafen_pce_fast_libretro.so"
+    addEmulator 1 "$md_id" "tg16cd" "$md_inst/mednafen_pce_fast_libretro.so"
     addSystem "pcengine"
+    addSystem "pce-cd"
+    addSystem "tg16"
+    addSystem "tg16cd"
+
+        if [ -e /usr/lib/libretro/mednafen_pce_fast.so ]
+        then
+        ensureSystemretroconfig "tg16"
+        ensureSystemretroconfig "tg16cd"
+
+        addEmulator 1 "$md_id" "pcengine" "$md_inst/mednafen_pce_fast_libretro.so"
+        addEmulator 1 "$md_id" "pce-cd" "$md_inst/mednafen_pce_fast_libretro.so"
+        addEmulator 1 "$md_id" "tg16" "$md_inst/mednafen_pce_fast_libretro.so"
+        addEmulator 1 "$md_id" "tg16cd" "$md_inst/mednafen_pce_fast_libretro.so"
+        addSystem "pcengine"
+        addSystem "pce-cd"
+        addSystem "tg16"
+        addSystem "tg16cd"
+        
+        fi
+        if [ ! -d $raconfigdir/overlay/GameBezels/TG-CD ]
+        then
+            git clone  https://github.com/thebezelproject/bezelproject-TG-CD.git  "/home/$user/RetroPie-Setup/tmp/TG-CD"
+            cp -r  /home/$user/RetroPie-Setup/tmp/TG-CD/retroarch/  /home/$user/.config/
+            rm -rf /home/$user/RetroPie-Setup/tmp/TG-CD/
+            cd /home/$user/.config/retroarch
+            chown -R $user:$user ../retroarch
+            find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+        fi
+        if [ ! -d $raconfigdir/overlay/GameBezels/TG16 ]
+        then
+            git clone  https://github.com/thebezelproject/bezelproject-TG16.git  "/home/$user/RetroPie-Setup/tmp/TG16"
+            cp -r  /home/$user/RetroPie-Setup/tmp/TG16/retroarch/  /home/$user/.config/
+            rm -rf /home/$user/RetroPie-Setup/tmp/TG16/
+            cd /home/$user/.config/retroarch
+            ln -s  "$raconfigdir/config/Mednafen PCE Fast" "$raconfigdir/config/Beetle PCE Fast"
+            chown -R $user:$user ../retroarch
+            find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+        fi
+        if [ ! -d $raconfigdir/overlay/GameBezels/TG16 ]
+            then
+             cp /home/$user/.config/RetroPie/tg16/retroarch.cfg /home/$user/.config/RetroPie/tg16/retroarch.cfg.bkp
+            local core_config="$configdir/tg16/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/tg16/retroarch.cfg"
+            iniSet "input_overlay_opacity" "1.0" "$core_config"
+            iniSet "input_overlay_scale" "1.0" "$core_config"
+            iniSet "input_overlay_enable" "true" "$core_config"
+        fi
+        if [ ! -d $raconfigdir/overlay/GameBezels/TG-CD ]
+            then
+             cp /home/$user/.config/RetroPie/tg16cd/retroarch.cfg /home/$user/.config/RetroPie/tg16cd/retroarch.cfg.bkp
+            local core_config="$configdir/tg16cd/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/tg16cd/retroarch.cfg"
+            iniSet "input_overlay_opacity" "1.0" "$core_config"
+            iniSet "input_overlay_scale" "1.0" "$core_config"
+            iniSet "input_overlay_enable" "true" "$core_config"
+        fi
+
+
+
 }
