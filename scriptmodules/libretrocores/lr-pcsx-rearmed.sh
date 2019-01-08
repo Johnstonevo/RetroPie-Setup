@@ -60,8 +60,6 @@ function configure_lr-pcsx-rearmed() {
         addSystem "$system"
         setRetroArchCoreOption "pcsx_rearmed_neon_enhancement_enable" "enabled" # Double resolution
         setRetroArchCoreOption "pcsx_rearmed_neon_enhancement_no_main" "enabled" # Speed hack
-        setRetroArchCoreOption "pcsx_rearmed_pad1type"  "analog"
-        setRetroArchCoreOption "pcsx_rearmed_pad2type"  "analog"
 
     if [ -e /usr/lib/libretro/pcsx1_libretro.so ]
                     then 
@@ -105,15 +103,9 @@ function configure_lr-pcsx-rearmed() {
         iniSet  "game_specific_options" "true" "$core_config"
         iniSet  "input_player1_analog_dpad_mode" "0" "$core_config"
         iniSet  "input_player2_analog_dpad_mode" "0" "$core_config"
-        #iniSet  "beetle_psx_hw_pgxp_texture" "On" "$core_config"
         iniSet  "pcsx_rearmed_neon_enhancement_enable" "enabled" "$core_config"
         iniSet  "pcsx_rearmed_neon_enhancement_no_main" "enabled" "$core_config"
-        iniSet  "pcsx_rearmed_pad1type" "analog" "$core_config"
-        iniSet  "pcsx_rearmed_pad2type" "analog" "$core_config"
-    # iniSet  "pcsx_rearmed_show_bios_bootlogo" "enabled" "$core_config"
-        iniSet  "beetle_psx_widescreen_hack" "on" "$core_config"
-        iniSet  "beetle_psx_internal_resolution" "4x" "$core_config"
-        iniSet  "beetle_psx_skipbios" "off"  "$core_config"
+        iniSet  "pcsx_rearmed_show_bios_bootlogo" "enabled" "$core_config"
         chown $user:$user "$core_config"
     fi
     if [ -d $raconfigdir/overlay/GameBezels/PSX ]
