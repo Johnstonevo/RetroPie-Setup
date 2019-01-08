@@ -6,7 +6,7 @@
 # too numerous to list here. Please refer to the COPYRIGHT.md file distributed with this source.
 # 
 # See the LICENSE.md file at the top-level directory of this distribution and 
-# at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
+# at https://raw.githubUSER/content.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
 
 import os, sys, struct, time, fcntl, termios, signal
@@ -30,9 +30,10 @@ JS_THRESH = 0.75
 JS_EVENT_BUTTON = 0x01
 JS_EVENT_AXIS = 0x02
 JS_EVENT_INIT = 0x80
+
 RACONFIG_DIR = '$HOME/.config/retroarch'
-CONFIG_DIR = '/opt/retropie/configs/'
-RETROARCH_CFG = '$HOME/.config/retroarch/retroarch.cfg'
+CONFIG_DIR = '$HOME/.config/retropie'
+RETROARCH_CFG = '$HOME/retroarch/retroarch.cfg'
 
 def ini_get(key, cfg_file):
     pattern = r'[ |\t]*' + key + r'[ |\t]*=[ |\t]*'
@@ -60,7 +61,7 @@ def sysdev_get(key, sysdev_path):
     return value
 
 def get_button_codes(dev_path):
-    js_cfg_dir = RACONFIG_DIR+ '/retroarch-joypads/'
+    js_cfg_dir = RACONFIG_DIR + '/retroarch-joypads/'
     js_cfg = ''
     dev_name = ''
     dev_button_codes = list(default_button_codes)

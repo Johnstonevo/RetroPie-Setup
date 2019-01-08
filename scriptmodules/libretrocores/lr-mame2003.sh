@@ -96,8 +96,8 @@ function configure_lr-mame2003() {
     cd /home/$user/.config/retroarch/
     chown -R $user:$user ../retroarch
     find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-    ln -s "$raconfigdir.config/MAME 2003" "$raconfigdir/MAME 2003 (0.78)"
-    ln -s "$raconfigdir.config/MAME 2003" "$raconfigdir/MAME 2003-Plus"
+    ln -s "$raconfigdir/.config/MAME 2003" "$raconfigdir/config/MAME 2003 (0.78)"
+    ln -s "$raconfigdir/.config/MAME 2003" "$raconfigdir/config/MAME 2003-Plus"
 
 fi
 if [  -d $raconfigdir/overlay/GameBezels/MAME ]

@@ -37,4 +37,33 @@ function configure_lr-beetle-supergrafx() {
 
     addEmulator 0 "$md_id" "pcengine" "$md_inst/mednafen_supergrafx_libretro.so"
     addSystem "pcengine"
+    
+    mkRomDir "sgfx"
+    ensureSystemretroconfig "sgfx"
+
+    addEmulator 0 "$md_id" "sgfx" "$md_inst/mednafen_supergrafx_libretro.so"
+    addSystem "sgfx"
+        if [ ! -d $raconfigdir/overlay/GameBezels/SuperGrafx ]
+        then
+            git clone  https://github.com/thebezelproject/bezelproject-SuperGrafx.git  "/home/$user/RetroPie-Setup/tmp/SuperGrafx"
+            cp -r  /home/$user/RetroPie-Setup/tmp/SuperGrafx/retroarch/  /home/$user/.config/
+            rm -rf /home/$user/RetroPie-Setup/tmp/SuperGrafx/
+            cd /home/$user/.config/retroarch
+            chown -R $user:$user ../retroarch
+            find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+        fi
+        if [ ! -d $raconfigdir/overlay/GameBezels/SuperGrafx ]
+            then
+             cp /home/$user/.config/RetroPie/sgfx/retroarch.cfg /home/$user/.config/RetroPie/sgfx/retroarch.cfg.bkp
+            local core_config="$configdir/sgfx/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/sgfx/retroarch.cfg"
+            iniSet  "core_options_path" "/home/$user/.config/RetroPie/sfgx/retroarch.cfg" "$core_config"
+            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/NEC-SuperGrafx.cfg" "$core_config"
+            iniSet  "input_overlay_opacity" "1.0" "$core_config"
+            iniSet  "input_overlay_scale" "1.0" "$core_config"
+            iniSet  "video_fullscreen_x" "1920" "$core_config"
+            iniSet  "video_fullscreen_y" "1080" "$core_config"
+            iniSet "input_overlay_enable" "true" "$core_config"
+        fi
+
 }

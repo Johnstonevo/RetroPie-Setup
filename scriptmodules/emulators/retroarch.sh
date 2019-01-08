@@ -81,6 +81,7 @@ function build_retroarch() {
     mkUserDir "$datadir/saves/$user/savestates"
     chown -R $user:$user "$raconfigdir"
     chmod -R 775 "$raconfigdir"
+    chown -R :users "$datadir"
 }
 
 function install_retroarch() {
