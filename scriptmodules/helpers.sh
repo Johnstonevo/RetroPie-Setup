@@ -852,16 +852,16 @@ function ensureSystemretroconfig() {
 ## @fn setRetroArchCoreOption()
 ## @param option option to set
 ## @param value value to set
-## @brief Sets a retroarch core option in `$raconfigdir/retroarch-core-options.cfg`.
+## @brief Sets a retroarch core option in `$raconfigdir/config/retroarch-core-options.cfg`.
 function setRetroArchCoreOption() {
     local option="$1"
     local value="$2"
-    iniConfig " = " "\"" "$raconfigdir/retroarch-core-options.cfg"
+    iniConfig " = " "\"" "$raconfigdir/config/retroarch-core-options.cfg"
     iniGet "$option"
     if [[ -z "$ini_value" ]]; then
         iniSet "$option" "$value"
     fi
-    chown $user:$user "$raconfigdir/retroarch-core-options.cfg"
+    chown $user:$user "$raconfigdir/config/retroarch-core-options.cfg"
 }
 
 ## @fn setConfigRoot()

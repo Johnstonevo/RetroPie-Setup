@@ -77,11 +77,11 @@ function build_retroarch() {
     mkUserDir "$raconfigdir/thumbnails"
     mkUserDir "$raconfigdir/records_config"
     mkUserDir "$raconfigdir/records"
-    mkUserDir "$datadir/saves/$user/savefiles"
-    mkUserDir "$datadir/saves/$user/savestates"
+    mkUserDir "$raconfigdir/savefiles"
+    mkUserDir "$raconfigdir/savestates"
     chown -R $user:$user "$raconfigdir"
     chmod -R 775 "$raconfigdir"
-    chown -R :users "$datadir"
+
 }
 
 function install_retroarch() {
@@ -101,13 +101,13 @@ function update_shaders_retroarch() {
     fi
    if  isPlatform "x86" ; then
      [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
-    gitPullOrClone "$dir" https://github.com/Johnstonevo/common-shaders.git 
+    gitPullOrClone "$dir" https://github.com/Johnstonevo/common-shaders.git
     fi
     chown -R $user:$user "$dir"
 }
 
 function update_overlays_retroarch() {
-    local dir="$raconfigdir/overlay"
+    local dir="$raconfigdir/overlays"
     # remove if not a git repository for fresh checkout
     [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
     gitPullOrClone "$raconfigdir" https://github.com/Johnstonevo/overlays.git
@@ -125,7 +125,7 @@ function update_assets_retroarch() {
 
 
 function update_database_retroarch() {
-     if  isPlatform "x86" ; then   
+     if  isPlatform "x86" ; then
     mkUserDir "$raconfigdir/database"
     local dir="$raconfigdir/database"
     # remove if not a git repository for fresh checkout
@@ -134,7 +134,7 @@ function update_database_retroarch() {
     cd "$md_build/libretro-super"
    ./libretro-fetch.sh retroarch
    ./libretro-build-database.sh
-    cd "$md_build/libretro-super/retroarch/media/libretrodb/rdb" 
+    cd "$md_build/libretro-super/retroarch/media/libretrodb/rdb"
     cp -R "$md_build/libretro-super/retroarch/media/libretrodb/rdb" "$dir"
     chown -R $user:$user "$dir"
     fi
@@ -181,10 +181,11 @@ function configure_retroarch() {
     mkUserDir "$raconfigdir/thumbnails"
     mkUserDir "$raconfigdir/records_config"
     mkUserDir "$raconfigdir/records"
-    mkUserDir "$datadir/saves/$user/savefiles"
-    mkUserDir "$datadir/saves/$user/savestates"
+    mkUserDir "$raconfigdir/savefiles"
+    mkUserDir "$raconfigdir/savestates"
     chown -R $user:$user "$raconfigdir"
     chmod -R 775 "$raconfigdir"
+
     #moveConfigDir "$raconfigdir" "$raconfigdir"
 
     # move / symlink our old retroarch-joypads folder
@@ -225,7 +226,7 @@ function configure_retroarch() {
     fi
 
     iniSet "video_font_size" "20"
-    iniSet "core_options_path" "$raconfigdir/retroarch-core-options.cfg"
+    iniSet "core_options_path" "$raconfigdir/config/retroarch-core-options.cfg"
     isPlatform "x11" && iniSet "video_fullscreen" "true"
 
     # set default render resolution to 640x480 for rpi1
@@ -292,7 +293,7 @@ function configure_retroarch() {
     #configure my main settings
     iniSet "assets_directory" "$raconfigdir/assets"
     iniSet "video_shader_dir" "$raconfigdir/shaders"
-    iniSet "overlay_directory " "$raconfigdir/overlay/"
+    iniSet "overlay_directory " "$raconfigdir/overlays/"
     iniSet "input_player1_analog_dpad_mode " "1"
     iniSet "input_player2_analog_dpad_mode " "1"
     iniSet "input_player3_analog_dpad_mode " "1"
@@ -338,7 +339,7 @@ function configure_retroarch() {
     iniSet "input_reset_btn" "0"
 
 
-#add cheevos retroachievments 
+#add cheevos retroachievments
     iniSet "cheevos_username" "yourusername"
     iniSet "cheevos_password" "yourpassword"
     iniSet "cheevos_enable" " true"
@@ -347,8 +348,8 @@ function configure_retroarch() {
     iniSet "cheevos_leaderboards_enable" "true"
 
     #Game Saves
-    iniSet "savefile_directory "  "$datadir/saves/$user/savefiles"
-    iniSet "savestate_directory" "$datadir/saves/$user/savestates"
+    iniSet "savefile_directory "  "$raconfigdir/savefiles"
+    iniSet "savestate_directory" "$raconfigdir/savestates"
     #Cheat Path
     iniSet "content_database_path" "$raconfigdir/database/rdb"
     iniSet "cheat_database_path" "$raconfigdir/cheats"

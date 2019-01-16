@@ -128,7 +128,7 @@ function depends_attractmode() {
     )
     isPlatform "rpi" && depends+=(libraspberrypi-dev)
     isPlatform "x11" && depends+=(libsfml-dev)
-    getDepends "${depends[@]}" 
+    getDepends "${depends[@]}"
 }
 
 function sources_attractmode() {
@@ -168,17 +168,17 @@ function remove_attractmode() {
 }
 
 function configure_attractmode() {
-    moveConfigDir "$home/.attract" "$md_conf_root/all/attractmode"
+    #moveConfigDir "$home/.attract" "$md_conf_root/all/attractmode"
 
     [[ "$md_mode" == "remove" ]] && return
 
-    local config="$md_conf_root/all/attractmode/attract.cfg"
+    local config="$home/.attract/attract.cfg"
     if [[ ! -f "$config" ]]; then
         echo "general" >"$config"
         echo -e "\twindow_mode          fullscreen" >>"$config"
     fi
 
-    mkUserDir "$md_conf_root/all/attractmode/emulators"
+    #mkUserDir "$md_conf_root/all/attractmode/emulators"
     cat >/usr/bin/attract <<_EOF_
 #!/bin/bash
 LD_LIBRARY_PATH="$md_inst/sfml/lib" "$md_inst/bin/attract" "\$@"
