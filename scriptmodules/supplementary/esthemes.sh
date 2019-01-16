@@ -92,7 +92,9 @@ function gui_esthemes() {
         'anthonycaccese art-book'
         'anthonycaccese art-book-4-3'
         'anthonycaccese art-book-pocket'
+        'anthonycaccese art-book-micro'
         'anthonycaccese tft'
+        'anthonycaccese picade'
         'TMNTturtleguy ComicBook'
         'TMNTturtleguy ComicBook_4-3'
         'TMNTturtleguy ComicBook_SE-Wheelart'
@@ -168,6 +170,9 @@ function gui_esthemes() {
         'RetroHursty69 heman'
         'RetroHursty69 pitube'
         'RetroHursty69 batmanburton'
+        'RetroHursty69 NegativeColor'
+        'RetroHursty69 NegativeSepia'
+        'RetroHursty69 corg'
         'Saracade scv720'
         'chicueloarcade Chicuelo'
         'SuperMagicom nostalgic'
@@ -211,7 +216,7 @@ function gui_esthemes() {
                 installed_themes+=("$theme $repo")
             else
                 status+=("n")
-                options+=("$i" "Install $repo/$theme (not installed)")
+                options+=("$i" "Install $repo/$theme")
             fi
             ((i++))
         done
