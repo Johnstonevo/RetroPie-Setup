@@ -69,7 +69,7 @@ function configure_lr-fbalpha() {
     addEmulator 0 "$md_id-neocd" "arcade" "$md_inst/fbalpha_libretro.so --subsystem neocd"
     addEmulator $def "$md_id" "neogeo" "$md_inst/fbalpha_libretro.so"
     addEmulator 0 "$md_id-neocd" "neogeo" "$md_inst/fbalpha_libretro.so --subsystem neocd"
-    addEmulator $def "$md_id" "fba" "$md_inst/fbalpha_libretro.so"
+    addEmulator 1 $def "$md_id" "fba" "$md_inst/fbalpha_libretro.so"
     addEmulator 0 "$md_id-neocd" "fba" "$md_inst/fbalpha_libretro.so --subsystem neocd"
 
     addEmulator 0 "$md_id-pce" "pcengine" "$md_inst/fbalpha_libretro.so --subsystem pce"
