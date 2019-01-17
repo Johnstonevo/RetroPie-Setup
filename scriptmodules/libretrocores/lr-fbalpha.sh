@@ -78,19 +78,21 @@ function configure_lr-fbalpha() {
     addEmulator 0 "$md_id-gg" "gamegear" "$md_inst/fbalpha_libretro.so --subsystem gg"
     addEmulator 0 "$md_id-sms" "mastersystem" "$md_inst/fbalpha_libretro.so --subsystem sms"
     addEmulator 0 "$md_id-md" "megadrive" "$md_inst/fbalpha_libretro.so --subsystem md"
+    addEmulator 0 "$md_id-md" "megadrive-japan" "$md_inst/fbalpha_libretro.so --subsystem md"
     addEmulator 0 "$md_id-sg1k" "sg-1000" "$md_inst/fbalpha_libretro.so --subsystem sg1k"
 
     addSystem "arcade"
     addSystem "neogeo"
     addSystem "fba"
-    
+
     addSystem "pcengine"
     addSystem "gamegear"
     addSystem "mastersystem"
     addSystem "megadrive"
+    addSystem "megadrive-japan"
     addSystem "sg-1000"
 
-    
+
 if [ -e /usr/lib/libretro/fbalpha_libretro.so ]
     then
         addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/fbalpha_libretro.so"
@@ -111,17 +113,17 @@ if [ -e /usr/lib/libretro/fbalpha_libretro.so ]
         addSystem "arcade"
         addSystem "neogeo"
         addSystem "fba"
-        
+
         addSystem "pcengine"
         addSystem "gamegear"
         addSystem "mastersystem"
         addSystem "megadrive"
         addSystem "sg-1000"
-        
+
 fi
 
 if [ !  -d $raconfigdir/overlay/GameBezels/MAME ]
-  then 
+  then
     git clone  https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
     cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
     rm -rf /home/$user/RetroPie-Setup/tmp/MAME/
