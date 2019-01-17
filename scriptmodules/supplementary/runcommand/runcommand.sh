@@ -783,7 +783,7 @@ function retroarch_append_config() {
     # make sure tmp folder exists for unpacking archives
     mkdir -p "/tmp/retroarch"
 
-    local conf="/home/$USER/.config/retroarch.cfg"
+    local conf="$CONFIGDIR/all/retroarch.cfg"
     rm -f "$conf"
     touch "$conf"
     if [[ "$HAS_TVS" -eq 1 && "${MODE_CUR[5]}" -gt 0 ]]; then

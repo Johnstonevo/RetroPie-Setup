@@ -48,7 +48,7 @@ function configure_lr-genesis-plus-gx() {
         then
         addEmulator "$def" "$md_id-ppa" "$system" "$md_instppa/genesis_plus_gx_libretro.so"
         addSystem "$system"
-    
+
     fi
     if [ ! -d $raconfigdir/overlay/GameBezels/Megadrive ]
         then
@@ -91,6 +91,26 @@ function configure_lr-genesis-plus-gx() {
                 cp /home/$user/.config/RetroPie/megadrive/retroarch.cfg /home/$user/.config/RetroPie/megadrive/retroarch.cfg.bkp
                 local core_config="$configdir/megadrive/retroarch.cfg"
                 iniConfig " = " '"' "$md_conf_root/megadrive/retroarch.cfg"
+                iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Mega-Drive.cfg" "$core_config"
+                iniSet "input_overlay_opacity" "1.0" "$core_config"
+                iniSet "input_overlay_scale" "1.0" "$core_config"
+                iniSet "video_fullscreen_x" "1920" "$core_config"
+                iniSet "video_fullscreen_y" "1080" "$core_config"
+                iniSet "custom_viewport_width" "1194" "$core_config"
+                iniSet "custom_viewport_height" "896" "$core_config"
+                iniSet "custom_viewport_x" "363" "$core_config"
+                iniSet "custom_viewport_y" "90" "$core_config"
+                iniSet "aspect_ratio_index" "22" "$core_config"
+                iniSet "input_overlay_enable" "true" "$core_config"
+                iniSet "video_smooth" "true" "$core_config"
+                iniSet "input_libretro_device_p1" "513" "$core_config"
+                iniSet "input_libretro_device_p2" "513" "$core_config"
+    fi
+    if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
+    then
+                cp /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg.bkp
+                local core_config="$configdir/megadrive-japan/retroarch.cfg"
+                iniConfig " = " '"' "$md_conf_root/megadrive-japan/retroarch.cfg"
                 iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Mega-Drive.cfg" "$core_config"
                 iniSet "input_overlay_opacity" "1.0" "$core_config"
                 iniSet "input_overlay_scale" "1.0" "$core_config"
