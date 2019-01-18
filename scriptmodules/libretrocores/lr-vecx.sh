@@ -48,4 +48,33 @@ function configure_lr-vecx() {
 
     addEmulator 1 "$md_id" "vectrex" "$md_inst/vecx_libretro.so"
     addSystem "vectrex"
+    if [ -e /usr/lib/libretro/vecx_libretro.so ]
+        then
+          addEmulator 0 "$md_id-ppa" "GCEVectrex" "$md_instppa/vecx_libretro.so"
+          addSystem "vectrex"
+    fi
+    if [ ! -d $raconfigdir/overlay/GameBezels/GCEVectrex ]
+    then
+        git clone  https://github.com/thebezelproject/bezelproject-GCEVectrex.git  "/home/$user/RetroPie-Setup/tmp/GCEVectrex"
+        cp -r  /home/$user/RetroPie-Setup/tmp/GCEVectrex/retroarch/  /home/$user/.config/
+        rm -rf /home/$user/RetroPie-Setup/tmp/GCEVectrex/
+        cd /home/$user/.config/retroarch
+        chown -R $user:$user overlay config
+        find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+
+    fi
+    if [  -d $raconfigdir/overlay/GameBezels/GCEVectrex ]
+      then
+          cp /home/$user/.config/RetroPie/vectrex/retroarch.cfg /home/$user/.config/RetroPie/vectrex/retroarch.cfg.bkp
+          local core_config="$configdir/vectrex/retroarch.cfg"
+          iniConfig " = " '"' "$md_conf_root/vectrex/retroarch.cfg"
+          iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/GCE-Vectrex.cfg" "$core_config"
+          iniSet "input_overlay_opacity" "1.0" "$core_config"
+          iniSet "input_overlay_scale" "1.0" "$core_config"
+          iniSet "video_fullscreen_x" "1920" "$core_config"
+          iniSet "video_fullscreen_y" "1080" "$core_config"
+          iniSet "input_overlay_enable" "true" "$core_config"
+          iniSet "video_smooth" "true" "$core_config"
+    fi
+
 }

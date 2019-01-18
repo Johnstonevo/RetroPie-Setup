@@ -41,4 +41,34 @@ function configure_lr-prosystem() {
 
     addEmulator 1 "$md_id" "atari7800" "$md_inst/prosystem_libretro.so"
     addSystem "atari7800"
+    if [ -e /usr/lib/libretro/prosystem_libretro.so ]
+        then
+          addEmulator 0 "$md_id-ppa" "atari2600" "$md_instppa/prosystem_libretro.so"
+          addSystem "atari2600"
+    fi
+    if [ ! -d $raconfigdir/overlay/GameBezels/Atari7800 ]
+    then
+        git clone  https://github.com/thebezelproject/bezelproject-Atari7800.git  "/home/$user/RetroPie-Setup/tmp/Atari7800"
+        cp -r  /home/$user/RetroPie-Setup/tmp/Atari7800/retroarch/  /home/$user/.config/
+       rm -rf /home/$user/RetroPie-Setup/tmp/Atari7800/
+        cd /home/$user/.config/retroarch
+        chown -R $user:$user overlay config
+        find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+    fi
+
+    if [  -d $raconfigdir/overlay/GameBezels/Atari7800 ]
+    then
+      cp /home/$user/.config/RetroPie/atari7800/retroarch.cfg /home/$user/.config/RetroPie/atari7800/retroarch.cfg.bkp
+      local core_config="$configdir/atari7800/retroarch.cfg"
+      iniConfig " = " '"' "$md_conf_root/atari7800/retroarch.cfg"
+      iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Atari-7800.cfg" "$core_config"
+      iniSet "input_overlay_opacity" "1.0" "$core_config"
+      iniSet "input_overlay_scale" "1.0" "$core_config"
+      iniSet "video_fullscreen_x" "1920" "$core_config"
+      iniSet "video_fullscreen_y" "1080" "$core_config"
+      iniSet "input_overlay_enable" "true" "$core_config"
+      iniSet "video_smooth" "true" "$core_config"
+    fi
+
+
 }
