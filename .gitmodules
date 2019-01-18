@@ -1,0 +1,3 @@
+[submodule "BezelProject"]
+	path = BezelProject
+	url = https://github.com/Johnstonevo/BezelProject.git
