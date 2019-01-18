@@ -78,7 +78,7 @@ function configure_lr-bluemsx() {
     addEmulator 1 "$md_id" "coleco" "$md_inst/bluemsx_libretro.so"
     addSystem "coleco"
      if [ -e /usr/lib/libretro/bluemsx_libretro.so ]
-                then 
+                then
    addEmulator 1 "$md_id-ppa" "msx" "$md_instppa/bluemsx_libretro.so"
     addSystem "msx"
 
@@ -89,4 +89,34 @@ function configure_lr-bluemsx() {
     addEmulator 1 "$md_id-ppa" "coleco" "$md_instppa/bluemsx_libretro.so"
     addSystem "coleco"
     fi
+
+    if [ ! -d $raconfigdir/overlay/GameBezels/ColecoVision ]
+        then
+            git clone  --depth 1 https://github.com/thebezelproject/bezelproject-ColecoVision.git  "/home/$user/RetroPie-Setup/tmp/ColecoVision"
+            cp -r  /home/$user/RetroPie-Setup/tmp/ColecoVision/retroarch/  /home/$user/.config/
+            rm -rf /home/$user/RetroPie-Setup/tmp/ColecoVision/
+            ln -s /home/$user/.config/retroarch/config/BlueMSX /home/$user/.config/retroarch/config/blueMSX
+            cd /home/$user/.config/retroarch
+            chown -R $user:$user ../retroarch
+            find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+    fi
+    if [  -d $raconfigdir/overlay/GameBezels/ColecoVision ]
+    then
+          cp /home/$user/.config/RetroPie/coleco/retroarch.cfg /home/$user/.config/RetroPie/coleco/retroarch.cfg.bkp
+          local core_config="$configdir/coleco/retroarch.cfg"
+          iniConfig " = " '"' "$md_conf_root/coleco/retroarch.cfg"
+          iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Colecovision.cfg" "$core_config"
+          iniSet "input_overlay_opacity" "1.0" "$core_config"
+          iniSet "input_overlay_scale" "1.0" "$core_config"
+          iniSet "video_fullscreen_x" "1920" "$core_config"
+          iniSet "video_fullscreen_y" "1080" "$core_config"
+          iniSet "custom_viewport_width" "1194" "$core_config"
+          iniSet "custom_viewport_height" "896" "$core_config"
+          iniSet "input_overlay_enable" "true" "$core_config"
+          iniSet "video_smooth" "true" "$core_config"
+          iniSet "bluemsx_msxtype" "ColecoVision" "$core_config"
+
+    fi
+
+
 }

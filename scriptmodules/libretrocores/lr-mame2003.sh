@@ -89,25 +89,25 @@ function configure_lr-mame2003() {
     addSystem "mame-libretro"
     fi
     if [ !  -d $raconfigdir/overlay/GameBezels/MAME ]
-  then 
-    git clone  https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
-    cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
-    rm -rf /home/$user/RetroPie-Setup/tmp/MAME/
-    cd /home/$user/.config/retroarch/
-    chown -R $user:$user ../retroarch
-    find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-    ln -s "$raconfigdir/.config/MAME 2003" "$raconfigdir/config/MAME 2003 (0.78)"
-    ln -s "$raconfigdir/.config/MAME 2003" "$raconfigdir/config/MAME 2003-Plus"
+    then
+      git clone  https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
+      cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
+      rm -rf /home/$user/RetroPie-Setup/tmp/MAME/
+      cd /home/$user/.config/retroarch/
+      chown -R $user:$user ../retroarch
+      find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+      ln -s "$raconfigdir/.config/MAME 2003" "$raconfigdir/config/MAME 2003 (0.78)"
+      ln -s "$raconfigdir/.config/MAME 2003" "$raconfigdir/config/MAME 2003-Plus"
 
-fi
-if [  -d $raconfigdir/overlay/GameBezels/MAME ]
- then
-    cp /home/$user/.config/RetroPie/mame-libretro/retroarch.cfg /home/$user/.config/RetroPie/mame-libretro/retroarch.cfg.bkp
-    local core_config="$configdir/mame-libretro/retroarch.cfg"
-     iniConfig " = " '"' "$md_conf_root/mame-libretro/retroarch.cfg"
+    fi
+    if [  -d $raconfigdir/overlay/GameBezels/MAME ]
+     then
+        cp /home/$user/.config/RetroPie/mame-libretro/retroarch.cfg /home/$user/.config/RetroPie/mame-libretro/retroarch.cfg.bkp
+        local core_config="$configdir/mame-libretro/retroarch.cfg"
+         iniConfig " = " '"' "$md_conf_root/mame-libretro/retroarch.cfg"
 
-    iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
-    iniSet "input_overlay_opacity" "1.0"
-    iniSet "input_overlay_enable" "true"
-fi
+        iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
+        iniSet "input_overlay_opacity" "1.0"
+        iniSet "input_overlay_enable" "true"
+    fi
 }
