@@ -43,8 +43,8 @@ function configure_lr-prosystem() {
     addSystem "atari7800"
     if [ -e /usr/lib/libretro/prosystem_libretro.so ]
         then
-          addEmulator 0 "$md_id-ppa" "atari2600" "$md_instppa/prosystem_libretro.so"
-          addSystem "atari2600"
+          addEmulator 0 "$md_id-ppa" "atari7800" "$md_instppa/prosystem_libretro.so"
+          addSystem "atari780000"
     fi
     if [ ! -d $raconfigdir/overlay/GameBezels/Atari7800 ]
     then

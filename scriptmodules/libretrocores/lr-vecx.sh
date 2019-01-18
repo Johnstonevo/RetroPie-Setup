@@ -50,7 +50,7 @@ function configure_lr-vecx() {
     addSystem "vectrex"
     if [ -e /usr/lib/libretro/vecx_libretro.so ]
         then
-          addEmulator 0 "$md_id-ppa" "GCEVectrex" "$md_instppa/vecx_libretro.so"
+          addEmulator 0 "$md_id-ppa" "vectrex" "$md_instppa/vecx_libretro.so"
           addSystem "vectrex"
     fi
     if [ ! -d $raconfigdir/overlay/GameBezels/GCEVectrex ]
