@@ -52,12 +52,10 @@ then
     cd /home/$user/.config/retroarch
     chown -R $user:$user ../retroarch
     find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-else
-    ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes
 fi
 
 if [ ! -d $raconfigdir/overlay/GameBezels/SFC ]
-then 
+then
     git clone  https://github.com/thebezelproject/bezelproject-SFC.git  "/home/$user/RetroPie-Setup/tmp/SFC"
     cp -r  /home/$user/RetroPie-Setup/tmp/SFC/retroarch/  /home/$user/.config/
     rm -rf /home/$user/RetroPie-Setup/tmp/SFC/
@@ -124,23 +122,24 @@ fi
 
 if [  -d $raconfigdir/overlay/GameBezels/SNES ]
  then
-             cp /home/$user/.config/RetroPie/snes/retroarch.cfg /home/$user/.config/RetroPie/snes/retroarch.cfg.bkp
-            local core_config="$configdir/snes/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/snes/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Super-Nintendo-Entertainment-System.cfg" "$core_config"
-            iniSet "input_overlay_opacity" "1.0" "$core_config"
-            iniSet "input_overlay_scale" "1.0" "$core_config"
-            iniSet "video_fullscreen_x" "1920" "$core_config"
-            iniSet "video_fullscreen_y" "1080" "$core_config"
-            iniSet "custom_viewport_width" "1194" "$core_config"
-            iniSet "custom_viewport_height" "896" "$core_config"
-            iniSet "custom_viewport_x" "363" "$core_config"
-            iniSet "custom_viewport_y" "90" "$core_config"
-            iniSet "aspect_ratio_index" "22" "$core_config"
-            iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_smooth" "true" "$core_config"
-            chown $user:$user "$core_config"
-        
+    ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes
+    cp /home/$user/.config/RetroPie/snes/retroarch.cfg /home/$user/.config/RetroPie/snes/retroarch.cfg.bkp
+    local core_config="$configdir/snes/retroarch.cfg"
+    iniConfig " = " '"' "$md_conf_root/snes/retroarch.cfg"
+    iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Super-Nintendo-Entertainment-System.cfg" "$core_config"
+    iniSet "input_overlay_opacity" "1.0" "$core_config"
+    iniSet "input_overlay_scale" "1.0" "$core_config"
+    iniSet "video_fullscreen_x" "1920" "$core_config"
+    iniSet "video_fullscreen_y" "1080" "$core_config"
+    iniSet "custom_viewport_width" "1194" "$core_config"
+    iniSet "custom_viewport_height" "896" "$core_config"
+    iniSet "custom_viewport_x" "363" "$core_config"
+    iniSet "custom_viewport_y" "90" "$core_config"
+    iniSet "aspect_ratio_index" "22" "$core_config"
+    iniSet "input_overlay_enable" "true" "$core_config"
+    iniSet "video_smooth" "true" "$core_config"
+    chown $user:$user "$core_config"
+
 fi
 if [  -d $raconfigdir/overlay/snescd ]
  then
@@ -160,7 +159,7 @@ if [  -d $raconfigdir/overlay/snescd ]
             iniSet "input_overlay_enable" "true" "$core_config"
             iniSet "video_smooth" "true" "$core_config"
             chown $user:$user "$core_config"
-            
+
 fi
 if [  -d $raconfigdir/overlay/sfc ]
  then

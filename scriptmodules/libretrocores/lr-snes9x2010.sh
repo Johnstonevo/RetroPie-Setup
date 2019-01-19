@@ -52,7 +52,7 @@ function configure_lr-snes9x2010() {
         isPlatform "armv6" && def=1
         addEmulator $def "$md_id" "$system" "$md_inst/snes9x2002_libretro.so"
         addSystem "$system"
-    done  
+    done
 if [ -e /usr/lib/libretro/snes9x2010_libretro.so ]
     then
     local system
@@ -60,8 +60,7 @@ if [ -e /usr/lib/libretro/snes9x2010_libretro.so ]
     for system in snes sfc snescd nintendobsx sufami; do
             def=0
             [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
-            addEmulator "$def" "$md_id-ppa" "$system" "$md_instppa/snes9x2010_libretro.so"
-            addSystem "$system"
+            addEmulator  "$md_id-ppa" "$system" "$md_instppa/snes9x2010_libretro.so"
  done
 fi
 
@@ -77,7 +76,7 @@ then
 fi
 
 if [ ! -d $raconfigdir/overlay/GameBezels/SFC ]
-then 
+then
     git clone  https://github.com/thebezelproject/bezelproject-SFC.git  "/home/$user/RetroPie-Setup/tmp/SFC"
     cp -r  /home/$user/RetroPie-Setup/tmp/SFC/retroarch/  /home/$user/.config/
     rm -rf /home/$user/RetroPie-Setup/tmp/SFC/
@@ -85,7 +84,7 @@ then
     chown -R $user:$user ../retroarch
     find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
 fi
-if [ ! -d $raconfigdir/overlay/GameBezels/SNES ]
+if [  -d $raconfigdir/overlay/GameBezels/SNES ]
  then
              cp /home/$user/.config/RetroPie/snes/retroarch.cfg /home/$user/.config/RetroPie/snes/retroarch.cfg.bkp
             local core_config="$configdir/snes/retroarch.cfg"
@@ -104,7 +103,7 @@ if [ ! -d $raconfigdir/overlay/GameBezels/SNES ]
             iniSet "video_smooth" "true" "$core_config"
             chown $user:$user "$core_config"
 fi
-if [ ! -d $configdir/snescd ]
+if [  -d $configdir/snescd ]
  then
              cp /home/$user/.config/RetroPie/snescd/retroarch.cfg /home/$user/.config/RetroPie/snescd/retroarch.cfg.bkp
             local core_config="$configdir/snescd/retroarch.cfg"
@@ -123,7 +122,7 @@ if [ ! -d $configdir/snescd ]
             iniSet "video_smooth" "true" "$core_config"
             chown $user:$user "$core_config"
 fi
-if [ ! -d $configdir/sfc ]
+if [  -d $configdir/sfc ]
  then
              cp /home/$user/.config/RetroPie/sfc/retroarch.cfg /home/$user/.config/RetroPie/sfc/retroarch.cfg.bkp
             local core_config="$configdir/sfc/retroarch.cfg"
@@ -142,7 +141,7 @@ if [ ! -d $configdir/sfc ]
             iniSet "video_smooth" "true" "$core_config"
             chown $user:$user "$core_config"
 fi
-if [ ! -d $configdir/nintendobsx ]
+if [  -d $configdir/nintendobsx ]
  then
              cp /home/$user/.config/RetroPie/nintendobsx/retroarch.cfg /home/$user/.config/RetroPie/nintendobsx/retroarch.cfg.bkp
             local core_config="$configdir/nintendobsx/retroarch.cfg"
@@ -161,7 +160,7 @@ if [ ! -d $configdir/nintendobsx ]
             iniSet "video_smooth" "true" "$core_config"
             chown $user:$user "$core_config"
 fi
-if [ ! -d $configdir/sufami ]
+if [  -d $configdir/sufami ]
  then
              cp /home/$user/.config/RetroPie/sufami/retroarch.cfg /home/$user/.config/RetroPie/sufami/retroarch.cfg.bkp
             local core_config="$configdir/sufami/retroarch.cfg"

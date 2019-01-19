@@ -12,7 +12,7 @@
 rp_module_id="emulationstation"
 rp_module_desc="EmulationStation - Frontend used by RetroPie for launching emulators"
 rp_module_licence="MIT https://raw.githubusercontent.com/RetroPie/EmulationStation/master/LICENSE.md"
-rp_module_section="core"
+rp_module_section=""
 rp_module_flags="frontend"
 
 function _get_input_cfg_emulationstation() {
