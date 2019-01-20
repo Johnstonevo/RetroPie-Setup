@@ -10,7 +10,7 @@
 #
 
 function onstart_retroarch_joystick() {
-    iniConfig " = " '"' "$configdir/all/retroarch.cfg"
+    iniConfig " = " '"' "$raconfigdir/retroarch.cfg"
     iniGet "input_joypad_driver"
     local input_joypad_driver="$ini_value"
     if [[ -z "$input_joypad_driver" ]]; then
