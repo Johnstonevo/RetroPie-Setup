@@ -19,104 +19,103 @@ function _get_configdir_attractmode() {
     echo "$home/.attract"
 }
 
-#function _add_system_attractmode() {
-#    local attract_dir="$(_get_configdir_attractmode)"
-#    [[ ! -d "$attract_dir" || ! -f /usr/bin/attract ]] && return 0
-#    local fullname="$1"
-#    local name="$2"
-#    local path="$3"
-#    local extensions="$4"
-#    local command="$5"
-#    local platform="$6"
-#    local theme="$7"
+function _add_system_attractmode() {
+    local attract_dir="$(_get_configdir_attractmode)"
+    [[ ! -d "$attract_dir" || ! -f /usr/bin/attract ]] && return 0
+    local fullname="$1"
+    local name="$2"
+    local path="$3"
+    local extensions="$4"
+    local command="$5"
+    local platform="$6"
+    local theme="$7"
 
     # replace any / characters in fullname
-#    fullname="${fullname//\/ }"
+    fullname="${fullname//\/ }"
 
-#    local config="$attract_dir/emulators/$fullname.cfg"
-#    iniConfig " " "" "$config"
+    local config="$attract_dir/emulators/$fullname.cfg"
+    iniConfig " " "" "$config"
     # replace %ROM% with "[romfilename]" and convert to array
-#    command=(${command//%ROM%/\"[romfilename]\"})
-#    iniSet "executable" "${command[0]}"
-#    iniSet "args" "${command[*]:1}"
+    command=(${command//%ROM%/\"[romfilename]\"})
+    iniSet "executable" "${command[0]}"
+    iniSet "args" "${command[*]:1}"
 
-#    iniSet "rompath" "$path"
-#    iniSet "system" "$fullname"
+    iniSet "rompath" "$path"
+    iniSet "system" "$fullname"
 
     # extensions separated by semicolon
-#    extensions="${extensions// /;}"
-#    iniSet "romext" "$extensions"
+    extensions="${extensions// /;}"
+    iniSet "romext" "$extensions"
 
     # snap path
-#    local snap="snap"
-#    [[ "$name" == "retropie" ]] && snap="icons"
-#    iniSet "artwork flyer" "$path/flyer"
-#    iniSet "artwork marquee" "$path/marquee"
-#    iniSet "artwork snap" "$path/$snap"
-#    iniSet "artwork wheel" "$path/wheel"
+    local snap="snap"
+    [[ "$name" == "retropie" ]] && snap="icons"
+    iniSet "artwork flyer" "$path/flyer"
+    iniSet "artwork marquee" "$path/marquee"
+    iniSet "artwork snap" "$path/$snap"
+    iniSet "artwork wheel" "$path/wheel"
 
-#    chown $user:$user "$config"
+    chown $user:$user "$config"
 
     # if no gameslist, generate one
-#    if [[ ! -f "$attract_dir/romlists/$fullname.txt" ]]; then
-#        sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
-#    fi
+    if [[ ! -f "$attract_dir/romlists/$fullname.txt" ]]; then
+        sudo -u $user /usr/bin/attract --build-romlist "$fullname" -o "$fullname"
+    fi
 
-#    local config="$attract_dir/attract.cfg"
-#    local tab=$'\t'
-#    if [[ -f "$config" ]] && ! grep -q "display$tab$fullname" "$config"; then
-#        cp "$config" "$config.bak"
-#        cat >>"$config" <<_EOF_
-#display${tab}$fullname
-#${tab}layout               Basic
-#${tab}romlist              $fullname
-#_EOF_
-#        chown $user:$user "$config"
-#    fi
-#}
+    local config="$attract_dir/attract.cfg"
+    local tab=$'\t'
+    if [[ -f "$config" ]] && ! grep -q "display$tab$fullname" "$config"; then
+        cp "$config" "$config.bak"
+        cat >>"$config" <<_EOF_
+display${tab}$fullname
+${tab}layout               HP2-Sub-Menu
+${tab}romlist              $fullname
+_EOF_
+        chown $user:$user "$config"
+    fi
+}
 
-#function _del_system_attractmode() {
-#    local attract_dir="$(_get_configdir_attractmode)"
-#    [[ ! -d "$attract_dir" ]] && return 0
+function _del_system_attractmode() {
+    local attract_dir="$(_get_configdir_attractmode)"
+    [[ ! -d "$attract_dir" ]] && return 0
+    local fullname="$1"
+    local name="$2"
 
-#    local fullname="$1"
-#    local name="$2"
+    rm -rf "$attract_dir/romlists/$fullname.txt"
 
-#    rm -rf "$attract_dir/romlists/$fullname.txt"
-
-#    local tab=$'\t'
+    local tab=$'\t'
     # remove display block from "^display$tab$fullname" to next "^display" or empty line keeping the next display line
-#    sed -i "/^display$tab$fullname/,/^display\|^$/{/^display$tab$fullname/d;/^display\$/!d}" "$attract_dir/attract.cfg"
-#}
+    sed -i "/^display$tab$fullname/,/^display\|^$/{/^display$tab$fullname/d;/^display\$/!d}" "$attract_dir/attract.cfg"
+}
 
-#function _add_rom_attractmode() {
-#    local attract_dir="$(_get_configdir_attractmode)"
-#    [[ ! -d "$attract_dir" ]] && return 0
+function _add_rom_attractmode() {
+    local attract_dir="$(_get_configdir_attractmode)"
+    [[ ! -d "$attract_dir" ]] && return 0
 
-#    local system_name="$1"
-#    local system_fullname="$2"
-#    local path="$3"
-#    local name="$4"
-#    local desc="$5"
-#    local image="$6"
+    local system_name="$1"
+    local system_fullname="$2"
+    local path="$3"
+    local name="$4"
+    local desc="$5"
+    local image="$6"
 
-#    local config="$attract_dir/romlists/$system_fullname.txt"
+    local config="$attract_dir/romlists/$system_fullname.txt"
 
     # remove extension
-#    path="${path/%.*}"
+    path="${path/%.*}"
 
-#    if [[ ! -f "$config" ]]; then
-#        echo "#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons" >"$config"
-#    fi
+    if [[ ! -f "$config" ]]; then
+        echo "#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons" >"$config"
+    fi
 
     # if the entry already exists, remove it
-#    if grep -q "^$path;" "$config"; then
-#        sed -i "/^$path/d" "$config"
-#    fi
+    if grep -q "^$path;" "$config"; then
+        sed -i "/^$path/d" "$config"
+    fi
 
-#    echo "$path;$name;$system_fullname;;;;;;;;;;;;;;" >>"$config"
-#    chown $user:$user "$config"
-#}
+    echo "$path;$name;$system_fullname;;;;;;;;;;;;;;" >>"$config"
+    chown $user:$user "$config"
+}
 
 function depends_attractmode() {
     local depends=(
@@ -173,11 +172,11 @@ function configure_attractmode() {
 
     #[[ "$md_mode" == "remove" ]] && return
 
-    #local config="$home/.attract/attract.cfg"
-    #if [[ ! -f "$config" ]]; then
-    #    echo "general" >"$config"
-    #    echo -e "\twindow_mode          fullscreen" >>"$config"
-    #fi
+    local config="$home/.attract/attract.cfg"
+    if [[ ! -f "$config" ]]; then
+        echo "general" >"$config"
+        echo -e "\twindow_mode          fullscreen" >>"$config"
+    fi
 
     #mkUserDir "$md_conf_root/all/attractmode/emulators"
     cat >/usr/bin/attract <<_EOF_

@@ -43,9 +43,9 @@ function install_lr-snes9x() {
 function configure_lr-snes9x() {
     local system
     local def
-    for system in snes sfc snescd nintendobsx sufami; do
+    for system in snes sfc snescd snesh nintendobsx sufami; do
         def=0
-        [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
+        [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "snesh"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
         addEmulator "$def" "$md_id" "$system" "$md_inst/snes9x_libretro.so"
@@ -56,9 +56,9 @@ if [ -e /usr/lib/libretro/snes9x_libretro.so ]
     then
     local system
     local def
-    for system in snes sfc snescd nintendobsx sufami; do
+    for system in snes sfc snescd snesh nintendobsx sufami; do
             def=0
-            [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
+            [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "snesh"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
             addEmulator  "$md_id-ppa" "$system" "$md_instppa/snes9x_libretro.so"
             addSystem "$system"
  done
@@ -89,6 +89,25 @@ if [  -d $raconfigdir/overlay/GameBezels/SNES ]
              cp /home/$user/.config/RetroPie/snes/retroarch.cfg /home/$user/.config/RetroPie/snes/retroarch.cfg.bkp
             local core_config="$configdir/snes/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/snes/retroarch.cfg"
+            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Super-Nintendo-Entertainment-System.cfg" "$core_config"
+            iniSet "input_overlay_opacity" "1.0" "$core_config"
+            iniSet "input_overlay_scale" "1.0" "$core_config"
+            iniSet "video_fullscreen_x" "1920" "$core_config"
+            iniSet "video_fullscreen_y" "1080" "$core_config"
+            iniSet "custom_viewport_width" "1194" "$core_config"
+            iniSet "custom_viewport_height" "896" "$core_config"
+            iniSet "custom_viewport_x" "363" "$core_config"
+            iniSet "custom_viewport_y" "90" "$core_config"
+            iniSet "aspect_ratio_index" "22" "$core_config"
+            iniSet "input_overlay_enable" "true" "$core_config"
+            iniSet "video_smooth" "true" "$core_config"
+            chown $user:$user "$core_config"
+fi
+if [  -d $raconfigdir/overlay/GameBezels/SNES ]
+ then
+             cp /home/$user/.config/RetroPie/snesh/retroarch.cfg /home/$user/.config/RetroPie/snesh/retroarch.cfg.bkp
+            local core_config="$configdir/snesh/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/snesh/retroarch.cfg"
             iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Super-Nintendo-Entertainment-System.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"

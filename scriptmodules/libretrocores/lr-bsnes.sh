@@ -36,9 +36,9 @@ function install_lr-bsnes() {
 function configure_lr-bsnes() {
     local system
     local def
-    for system in snes sfc snescd nintendobsx sufami; do
+    for system in snes sfc snescd snesh nintendobsx sufami; do
         def=0
-        [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
+        [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "snesh"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
         addEmulator "$def" "$md_id" "$system" "$md_inst/bsnes_accuracy_libretro.so"
@@ -68,9 +68,9 @@ if [ -e /usr/lib/libretro/bsnes_balanced_libretro.so ]
     then
     local system
     local def
-    for system in snes sfc snescd nintendobsx sufami; do
+    for system in snes sfc snescd snesh nintendobsx sufami; do
             def=0
-            [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
+            [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "snesh"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
             addEmulator "$def" "$md_id-balanced-ppa" "$system" "$md_instppa/bsnes_balanced_libretro.so"
             addSystem "$system"
  done
@@ -79,9 +79,9 @@ if [ -e /usr/lib/libretro/bsnes_accuracy_libretro.so ]
     then
     local system
     local def
-    for system in snes sfc snescd nintendobsx sufami; do
+    for system in snes sfc snescd snesh nintendobsx sufami; do
             def=0
-            [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
+            [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "snesh"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
             addEmulator "$def" "$md_id-ppa" "$system" "$md_instppa/bsnes_accuracy_libretro.so"
             addSystem "$system"
  done
@@ -90,9 +90,9 @@ if [ -e /usr/lib/libretro/bsnes_mercury_accuracy_libretro.so ]
     then
     local system
     local def
-    for system in snes sfc snescd nintendobsx sufami; do
+    for system in snes sfc snescd snesh nintendobsx sufami; do
             def=0
-            [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
+            [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "snesh"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
             addEmulator "$def" "$md_id-mercury_accuracy-ppa" "$system" "$md_instppa/bsnes_mercury_accuracy_libretro.so"
             addSystem "$system"
  done
@@ -101,9 +101,9 @@ if [ -e /usr/lib/libretro/bsnes_mercury_balanced_libretro.so ]
     then
     local system
     local def
-    for system in snes sfc snescd nintendobsx sufami; do
+    for system in snes sfc snescd snesh nintendobsx sufami; do
             def=0
-            [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
+            [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "snesh"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
             addEmulator "$def" "$md_id-mercury_balanced-ppa" "$system" "$md_instppa/bsnes_mercury_balanced_libretro.so"
             addSystem "$system"
  done
@@ -112,9 +112,9 @@ if [ -e /usr/lib/libretro/bsnes_mercury_performance_libretro.so ]
     then
     local system
     local def
-    for system in snes sfc snescd nintendobsx sufami; do
+    for system in snes sfc snescd snesh nintendobsx sufami; do
             def=0
-            [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
+            [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "snesh"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
             addEmulator "$def" "$md_id-mercury_performance-ppa" "$system" "$md_instppa/bsnes_mercury_performance_libretro.so"
             addSystem "$system"
  done

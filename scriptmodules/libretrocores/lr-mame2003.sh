@@ -51,7 +51,7 @@ function configure_lr-mame2003() {
 
     local mame_dir
     local mame_sub_dir
-    for mame_dir in arcade mame-libretro; do
+    for mame_dir in arcade mame-2003 mame-2003-plus ; do
         mkRomDir "$mame_dir"
         mkRomDir "$mame_dir/$dir_name"
         ensureSystemretroconfig "$mame_dir"
@@ -78,15 +78,14 @@ function configure_lr-mame2003() {
 
     local so_name="$(_get_so_name_${md_id})"
     addEmulator 0 "$md_id" "arcade" "$md_inst/${so_name}_libretro.so"
-    addEmulator 1 "$md_id" "mame-libretro" "$md_inst/${so_name}_libretro.so"
+    addEmulator 0 "$md_id" "mame-2003" "$md_inst/${so_name}_libretro.so"
+    addEmulator 1 "$md_id" "mame-2003-plus" "$md_inst/${so_name}_libretro.so"
     addSystem "arcade"
-    addSystem "mame-libretro"
+    addSystem "mame-2003"
     if [ -e /usr/lib/libretro/mame2003_libretro.so ]
     then
-        addEmulator 0 "$md_id-ppa" "arcade" "$md_inst/${so_name}_libretro.so"
-    addEmulator 1 "$md_id-ppa" "mame-libretro" "$md_inst/${so_name}_libretro.so"
-    addSystem "arcade"
-    addSystem "mame-libretro"
+        addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/${so_name}_libretro.so"
+        addEmulator 0 "$md_id-ppa" "mame-2003" "$md_instppa/${so_name}_libretro.so"
     fi
     if [ !  -d $raconfigdir/overlay/GameBezels/MAME ]
     then
@@ -102,12 +101,15 @@ function configure_lr-mame2003() {
     fi
     if [  -d $raconfigdir/overlay/GameBezels/MAME ]
      then
-        cp /home/$user/.config/RetroPie/mame-libretro/retroarch.cfg /home/$user/.config/RetroPie/mame-libretro/retroarch.cfg.bkp
-        local core_config="$configdir/mame-libretro/retroarch.cfg"
-         iniConfig " = " '"' "$md_conf_root/mame-libretro/retroarch.cfg"
+        cp /home/$user/.config/RetroPie/mame-2003/retroarch.cfg /home/$user/.config/RetroPie/mame-libretro/retroarch.cfg.bkp
+        local core_config="$configdir/mame-2003/retroarch.cfg"
+         iniConfig " = " '"' "$md_conf_root/mame-2003/retroarch.cfg"
 
         iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
         iniSet "input_overlay_opacity" "1.0"
         iniSet "input_overlay_enable" "true"
+        iniSet "mame2003-skip_disclaimer" "enabled"
+        iniSet "mame2003-dcs-speedhack" "enabled"
+        iniSet "mame2003-samples" "enabled"
     fi
 }

@@ -39,10 +39,39 @@ function install_lr-mame2010() {
 
 function configure_lr-mame2010() {
     local system
-    for system in arcade mame-libretro; do
+    for system in arcade mame-2010; do
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
-        addEmulator 0 "$md_id" "$system" "$md_inst/mame2010_libretro.so"
+        addEmulator 1 "$md_id" "$system" "$md_inst/mame2010_libretro.so"
         addSystem "$system"
     done
+    if [ -e /usr/lib/libretro/mame2010_libretro.so ]
+    then
+        addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame2010_libretro.so"
+        addEmulator 0 "$md_id-ppa" "mame-2010" "$md_instppa/mame2010_libretro.so"
+    fi
+    if [ !  -d $raconfigdir/overlay/GameBezels/MAME ]
+    then
+      git clone  https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
+      cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
+      rm -rf /home/$user/RetroPie-Setup/tmp/MAME/
+      cd /home/$user/.config/retroarch/
+      chown -R $user:$user ../retroarch
+      find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+
+    fi
+    if [  -d $raconfigdir/overlay/GameBezels/MAME ]
+     then
+        cp /home/$user/.config/RetroPie/mame-2010/retroarch.cfg /home/$user/.config/RetroPie/mame-libretro/retroarch.cfg.bkp
+        local core_config="$configdir/mame-2010/retroarch.cfg"
+         iniConfig " = " '"' "$md_conf_root/mame-2010/retroarch.cfg"
+
+        iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
+        iniSet "input_overlay_opacity" "1.0"
+        iniSet "input_overlay_enable" "true"
+        iniSet "mame2010-skip_disclaimer" "enabled"
+        iniSet "mame2010-dcs-speedhack" "enabled"
+        iniSet "mame2010-samples" "enabled"
+    fi
+
 }

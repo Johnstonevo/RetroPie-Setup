@@ -43,12 +43,12 @@ function install_lr-picodrive() {
 
 function configure_lr-picodrive() {
     local system
-    for system in megadrive mastersystem segacd sega32x megadrive-japan; do
+    for system in megadrive genh genesis mastersystem segacd sega32x megadrive-japan; do
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
         addEmulator 1 "$md_id" "$system" "$md_inst/picodrive_libretro.so"
         addSystem "$system"
-    
+
 
         if [ -e /usr/lib/libretro/picodrive_libretro.so ]
             then
@@ -123,6 +123,68 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "picodrive_ramcart"  "disabled" "$core_config"
             iniSet "picodrive_region"  "Auto" "$core_config"
             iniSet "picodrive_drc"  "enabled" "$core_config"
+
+            cp /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg.bkp
+            local core_config="$configdir/megadrive-japan/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/megadrive-japan/retroarch.cfg"
+            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Mega-Drive.cfg" "$core_config"
+            iniSet "input_overlay_opacity" "1.0" "$core_config"
+            iniSet "input_overlay_scale" "1.0" "$core_config"
+            iniSet "video_fullscreen_x" "1920" "$core_config"
+            iniSet "video_fullscreen_y" "1080" "$core_config"
+            iniSet "custom_viewport_width" "1194" "$core_config"
+            iniSet "custom_viewport_height" "896" "$core_config"
+            iniSet "custom_viewport_x" "363" "$core_config"
+            iniSet "custom_viewport_y" "90" "$core_config"
+            iniSet "aspect_ratio_index" "22" "$core_config"
+            iniSet "input_overlay_enable" "true" "$core_config"
+            iniSet "video_smooth" "true" "$core_config"
+            iniSet "picodrive_input1" "6 button pad" "$core_config"
+            iniSet "picodrive_input1" "6 button pad" "$core_config"
+            iniSet "picodrive_sprlim"  "disabled" "$core_config"
+            iniSet "picodrive_ramcart"  "disabled" "$core_config"
+            iniSet "picodrive_region"  "Auto" "$core_config"
+            iniSet "picodrive_drc"  "enabled" "$core_config"
+
+            cp /home/$user/.config/RetroPie/genesis/retroarch.cfg /home/$user/.config/RetroPie/genesis/retroarch.cfg.bkp
+            local core_config="$configdir/genesis/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/genesis/retroarch.cfg"
+            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Mega-Drive.cfg" "$core_config"
+            iniSet "input_overlay_opacity" "1.0" "$core_config"
+            iniSet "input_overlay_scale" "1.0" "$core_config"
+            iniSet "video_fullscreen_x" "1920" "$core_config"
+            iniSet "video_fullscreen_y" "1080" "$core_config"
+            iniSet "custom_viewport_width" "1194" "$core_config"
+            iniSet "custom_viewport_height" "896" "$core_config"
+            iniSet "custom_viewport_x" "363" "$core_config"
+            iniSet "custom_viewport_y" "90" "$core_config"
+            iniSet "aspect_ratio_index" "22" "$core_config"
+            iniSet "input_overlay_enable" "true" "$core_config"
+            iniSet "video_smooth" "true" "$core_config"
+            iniSet "picodrive_input1" "6 button pad" "$core_config"
+            iniSet "picodrive_input1" "6 button pad" "$core_config"
+            iniSet "picodrive_sprlim"  "disabled" "$core_config"
+            iniSet "picodrive_ramcart"  "disabled" "$core_config"
+            iniSet "picodrive_region"  "Auto" "$core_config"
+            iniSet "picodrive_drc"  "enabled" "$core_config"
+
+            cp /home/$user/.config/RetroPie/genh/retroarch.cfg /home/$user/.config/RetroPie/genh/retroarch.cfg.bkp
+            local core_config="$configdir/genh/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/genh/retroarch.cfg"
+            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Mega-Drive.cfg" "$core_config"
+            iniSet "input_overlay_opacity" "1.0" "$core_config"
+            iniSet "input_overlay_scale" "1.0" "$core_config"
+            iniSet "video_fullscreen_x" "1920" "$core_config"
+            iniSet "video_fullscreen_y" "1080" "$core_config"
+            iniSet "custom_viewport_width" "1194" "$core_config"
+            iniSet "custom_viewport_height" "896" "$core_config"
+            iniSet "custom_viewport_x" "363" "$core_config"
+            iniSet "custom_viewport_y" "90" "$core_config"
+            iniSet "aspect_ratio_index" "22" "$core_config"
+            iniSet "input_overlay_enable" "true" "$core_config"
+            iniSet "video_smooth" "true" "$core_config"
+            iniSet "input_libretro_device_p1" "513" "$core_config"
+            iniSet "input_libretro_device_p2" "513" "$core_config"
 fi
 if [  -d $raconfigdir/overlay/GameBezels/SegaCD ]
  then
@@ -147,30 +209,7 @@ if [  -d $raconfigdir/overlay/GameBezels/SegaCD ]
             iniSet "picodrive_ramcart"  "disabled" "$core_config"
             iniSet "picodrive_region"  "Auto" "$core_config"
             iniSet "picodrive_drc"  "enabled" "$core_config"
-fi
-if [  -d $raconfigdir/overlay/GameBezels/MegaDrive ]
- then
-             cp /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg.bkp
-            local core_config="$configdir/megadrive-japan/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/megadrive-japan/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Mega-Drive.cfg" "$core_config"
-            iniSet "input_overlay_opacity" "1.0" "$core_config"
-            iniSet "input_overlay_scale" "1.0" "$core_config"
-            iniSet "video_fullscreen_x" "1920" "$core_config"
-            iniSet "video_fullscreen_y" "1080" "$core_config"
-            iniSet "custom_viewport_width" "1194" "$core_config"
-            iniSet "custom_viewport_height" "896" "$core_config"
-            iniSet "custom_viewport_x" "363" "$core_config"
-            iniSet "custom_viewport_y" "90" "$core_config"
-            iniSet "aspect_ratio_index" "22" "$core_config"
-            iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_smooth" "true" "$core_config"
-            iniSet "picodrive_input1" "6 button pad" "$core_config"
-            iniSet "picodrive_input1" "6 button pad" "$core_config"
-            iniSet "picodrive_sprlim"  "disabled" "$core_config"
-            iniSet "picodrive_ramcart"  "disabled" "$core_config"
-            iniSet "picodrive_region"  "Auto" "$core_config"
-            iniSet "picodrive_drc"  "enabled" "$core_config"
+
 fi
 if [  -d $raconfigdir/overlay/GameBezels/MasterSystem ]
  then

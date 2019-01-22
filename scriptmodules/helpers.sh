@@ -429,11 +429,11 @@ function mkUserDir() {
 ## @brief Creates a directory under $romdir owned by the current user.
 function mkRomDir() {
     mkUserDir "$romdir/$1"
-    if [[ "$1" == "megadrive" ]]; then
-        pushd "$romdir"
-        ln -snf "$1" "genesis"
-        popd
-    fi
+    #if [[ "$1" == "megadrive" ]]; then
+    #    pushd "$romdir"
+    #    ln -snf "$1" "genesis"
+    #    popd
+    #fi
 }
 
 ## @fn moveConfigDir()
@@ -1218,7 +1218,7 @@ _EOF_
 ## @param cmd commandline to launch
 ## @brief Adds a new emulator for a system.
 ## @details This is the primary function for adding emulators to a system which can be
-## switched between via the runcommand launch menu 
+## switched between via the runcommand launch menu
 ##
 ##     addEmulator 1 "vice-x64" "c64" "$md_inst/bin/x64 %ROM%"
 ##     addEmulator 0 "vice-xvic" "c64" "$md_inst/bin/xvic %ROM%"

@@ -40,22 +40,26 @@ function install_lr-snes9x2002() {
 
 function configure_lr-snes9x2002() {
     mkRomDir "snes"
+    mkRomDir "snesh"
     mkRomDir "sfc"
     mkRomDir "snescd"
     mkRomDir "nintendobsx"
     mkRomDir "sufami"
     ensureSystemretroconfig "snes"
+    ensureSystemretroconfig "snesh"
     ensureSystemretroconfig "sfc"
     ensureSystemretroconfig "snescd"
     ensureSystemretroconfig "nintendobsx"
     ensureSystemretroconfig "sufami"
 
     addEmulator 0 "$md_id" "snes" "$md_inst/snes9x2002_libretro.so"
+    addEmulator 0 "$md_id" "snesh" "$md_inst/snes9x2002_libretro.so"
     addEmulator 0 "$md_id" "sfc" "$md_inst/snes9x2002_libretro.so"
     addEmulator 0 "$md_id" "snescd" "$md_inst/snes9x2002_libretro.so"
     addEmulator 0 "$md_id" "nintendobsx" "$md_inst/snes9x2002_libretro.so"
     addEmulator 0 "$md_id" "sufami" "$md_inst/snes9x2002_libretro.so"
     addSystem "snes"
+    addSystem "snesh"
     addSystem "sfc"
     addSystem "snescd"
     addSystem "nintendobsx"
@@ -63,6 +67,7 @@ function configure_lr-snes9x2002() {
     if [ -e /usr/lib/libretro/snes9x2002_libretro.so ]
         then
           addEmulator 0 "$md_id-ppa" "snes" "$md_instppa/snes9x2002_libretro.so"
+          addEmulator 0 "$md_id-ppa" "snesh" "$md_instppa/snes9x2002_libretro.so"
           addEmulator 0 "$md_id-ppa" "sfc" "$md_instppa/snes9x2002_libretro.so"
           addEmulator 0 "$md_id-ppa" "snescd" "$md_instppa/snes9x2002_libretro.so"
           addEmulator 0 "$md_id-ppa" "nintendobsx" "$md_instppa/snes9x2002_libretro.so"
@@ -95,6 +100,25 @@ function configure_lr-snes9x2002() {
                 cp /home/$user/.config/RetroPie/snes/retroarch.cfg /home/$user/.config/RetroPie/snes/retroarch.cfg.bkp
                 local core_config="$configdir/snes/retroarch.cfg"
                 iniConfig " = " '"' "$md_conf_root/snes/retroarch.cfg"
+                iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Super-Nintendo-Entertainment-System.cfg" "$core_config"
+                iniSet "input_overlay_opacity" "1.0" "$core_config"
+                iniSet "input_overlay_scale" "1.0" "$core_config"
+                iniSet "video_fullscreen_x" "1920" "$core_config"
+                iniSet "video_fullscreen_y" "1080" "$core_config"
+                iniSet "custom_viewport_width" "1194" "$core_config"
+                iniSet "custom_viewport_height" "896" "$core_config"
+                iniSet "custom_viewport_x" "363" "$core_config"
+                iniSet "custom_viewport_y" "90" "$core_config"
+                iniSet "aspect_ratio_index" "22" "$core_config"
+                iniSet "input_overlay_enable" "true" "$core_config"
+                iniSet "video_smooth" "true" "$core_config"
+                chown $user:$user "$core_config"
+    fi
+    if [  -d $raconfigdir/overlay/GameBezels/SNES ]
+     then
+                 cp /home/$user/.config/RetroPie/snesh/retroarch.cfg /home/$user/.config/RetroPie/snesh/retroarch.cfg.bkp
+                local core_config="$configdir/snesh/retroarch.cfg"
+                iniConfig " = " '"' "$md_conf_root/snesh/retroarch.cfg"
                 iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Super-Nintendo-Entertainment-System.cfg" "$core_config"
                 iniSet "input_overlay_opacity" "1.0" "$core_config"
                 iniSet "input_overlay_scale" "1.0" "$core_config"

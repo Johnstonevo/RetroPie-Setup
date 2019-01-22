@@ -37,22 +37,47 @@ function install_lr-mame2003-plus() {
 
 function configure_lr-mame2003-plus() {
     configure_lr-mame2003
-    iniSet  "mame2003-plus_cheat_input ports" "disabled"
-    iniSet  "mame2003-plus_core_save_subfolder" "enabled"
-    iniSet  "mame2003-plus_core_sys_subfolder" "enabled"
-    iniSet  "mame2003-plus_dcs_speedhack" "enabled"
-    iniSet  "mame2003-plus_display_artwork" "enabled"
-    iniSet  "mame2003-plus_display_setup" "disabled"
-    iniSet  "mame2003-plus_dual_joysticks" "disabled"
-    iniSet  "mame2003-plus_frameskip" "0"
-    iniSet  "mame2003-plus_gamma" "1.2"
-    iniSet  "mame2003-plus_input_interface" "retroarch"
-    iniSet  "mame2003-plus_machine_timing" "enabled"
-    iniSet  "mame2003-plus_mame_remapping" "disabled"
-    iniSet  "mame2003-plus_mouse_device" "mouse"
-    iniSet  "mame2003-plus_rstick_to_btns" "enabled"
-    iniSet  "mame2003-plus_sample_rate" "48000"
-    iniSet  "mame2003-plus_skip_disclaimer" "enabled"
-    iniSet  "mame2003-plus_skip_warnings" "enabled"
-    iniSet  "mame2003-plus_tate_mode" "disabled"
+    if [ !  -d $raconfigdir/overlay/GameBezels/MAME ]
+    then
+      git clone  https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
+      cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
+      rm -rf /home/$user/RetroPie-Setup/tmp/MAME/
+      cd /home/$user/.config/retroarch/
+      chown -R $user:$user ../retroarch
+      find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+      ln -s "$raconfigdir/config/MAME 2003" "$raconfigdir/config/MAME 2003-Plus"
+
+    fi
+    if [  -d $raconfigdir/overlay/GameBezels/MAME ]
+     then
+        cp /home/$user/.config/RetroPie/mame-2003-plus/retroarch.cfg /home/$user/.config/RetroPie/mame-libretro/retroarch.cfg.bkp
+        local core_config="$configdir/mame-2003/retroarch.cfg"
+         iniConfig " = " '"' "$md_conf_root/mame-2003-plus/retroarch.cfg"
+
+        iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
+        iniSet "input_overlay_opacity" "1.0"
+        iniSet "input_overlay_enable" "true"
+        iniSet  "mame2003-plus_cheat_input ports" "disabled"
+        iniSet  "mame2003-plus_core_save_subfolder" "enabled"
+        iniSet  "mame2003-plus_core_sys_subfolder" "enabled"
+        iniSet  "mame2003-plus_dcs_speedhack" "enabled"
+        iniSet  "mame2003-plus_display_artwork" "enabled"
+        iniSet  "mame2003-plus_display_setup" "disabled"
+        iniSet  "mame2003-plus_dual_joysticks" "disabled"
+        iniSet  "mame2003-plus_frameskip" "0"
+        iniSet  "mame2003-plus_gamma" "1.2"
+        iniSet  "mame2003-plus_input_interface" "retroarch"
+        iniSet  "mame2003-plus_machine_timing" "enabled"
+        iniSet  "mame2003-plus_mame_remapping" "disabled"
+        iniSet  "mame2003-plus_mouse_device" "mouse"
+        iniSet  "mame2003-plus_rstick_to_btns" "enabled"
+        iniSet  "mame2003-plus_sample_rate" "48000"
+        iniSet  "mame2003-plus_skip_disclaimer" "enabled"
+        iniSet  "mame2003-plus_skip_warnings" "enabled"
+        iniSet  "mame2003-plus_tate_mode" "disabled"
+        iniSet  "mame2003-plus-dcs-speedhack" "enabled"
+        iniSet "mame2003-plus-samples" "enabled"
+    fi
+
+
 }

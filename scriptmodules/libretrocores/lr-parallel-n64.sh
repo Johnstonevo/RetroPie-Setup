@@ -12,7 +12,7 @@
 rp_module_id="lr-parallel-n64"
 rp_module_desc="N64 emu - Highly modified Mupen64Plus port for libretro"
 rp_module_help="ROM Extensions: .z64 .n64 .v64\n\nCopy your N64 roms to $romdir/n64"
-rp_module_licence="GPL2 https://raw.githubusercontent.com/libretro/parallel-n64/master/mupen64plus-core/LICENSES"
+rp_module_licence="GPL2 https://raw.githubusercontent.com/libretro/parallel-n64/master/parallel-n64-core/LICENSES"
 rp_module_section="opt"
 
 function depends_lr-parallel-n64() {
@@ -54,8 +54,12 @@ function install_lr-parallel-n64() {
 }
 
 function configure_lr-parallel-n64() {
-    mkRomDir "n64"
-    ensureSystemretroconfig "n64"
+  mkRomDir "n64"
+  mkRomDir "n64-japan"
+  mkRomDir "n64dd"
+  ensureSystemretroconfig "n64"
+  ensureSystemretroconfig "n64-japan"
+  ensureSystemretroconfig "n64dd"
 
     # Set core options
     setRetroArchCoreOption "parallel-n64-gfxplugin" "auto"
@@ -167,6 +171,86 @@ target FPS=25
 _EOF_
     chown $user:$user "$biosdir/gles2n64rom.conf"
 
-    addEmulator 0 "$md_id" "n64" "$md_inst/parallel_n64_libretro.so"
+    addEmulator 0 "$md_id" "n64" "$md_inst/parallel-n64_libretro.so"
+    addEmulator 0 "$md_id" "n64-japan" "$md_inst/parallel-n64_libretro.so"
+    addEmulator 0 "$md_id" "n64dd" "$md_inst/parallel-n64_libretro.so"
     addSystem "n64"
+    addSystem "n64-japan"
+    addSystem "n64dd"
+    if [ -e /usr/lib/libretro/parallel-n64_libretro.so ]
+    then
+      ensureSystemretroconfig "n64"
+      ensureSystemretroconfig "n64-japan"
+      ensureSystemretroconfig "n64dd"
+
+      addEmulator 0 "$md_id-ppa" "n64" "$md_instppa/parallel-n64_libretro.so"
+      addEmulator 0 "$md_id-ppa" "n64-japan" "$md_instppa/parallel-n64_libretro.so"
+      addEmulator 0 "$md_id-ppa" "n64dd" "$md_instppa/parallel-n64_libretro.so"
+      addSystem "n64"
+      addSystem "n64-japan"
+      addSystem "n64dd"
+  fi
+  if [ ! -d $raconfigdir/overlay/GameBezels/N64 ]
+  then
+      git clone  https://github.com/thebezelproject/bezelproject-N64.git  "/home/$user/RetroPie-Setup/tmp/N64"
+      cp -r  /home/$user/RetroPie-Setup/tmp/N64/retroarch/  /home/$user/.config/
+      rm -rf /home/$user/RetroPie-Setup/tmp/N64/
+      cd /home/$user/.config/retroarch/
+      chown -R $user:$user ../retroarch
+      find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+  fi
+  if [  -d $raconfigdir/overlay/GameBezels/N64 ]
+   then
+               cp /home/$user/.config/RetroPie/n64/retroarch.cfg /home/$user/.config/RetroPie/n64/retroarch.cfg.bkp
+              local core_config="$configdir/n64/retroarch.cfg"
+              iniConfig " = " '"' "$md_conf_root/n64/retroarch.cfg"
+              iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
+              iniSet "input_overlay_opacity" "1.0"
+              iniSet "input_overlay_scale" "1.0"
+              iniSet "input_overlay_enable" "true"
+              iniSet "video_force_aspect" "true"
+              iniSet "video_aspect_ratio" "1.0"
+              iniSet "video_smooth" "true"
+              iniSet "parallel-n64-gfxplugin" "auto"
+              iniSet "parallel-n64-gfxplugin-accuracy" "low"
+              iniSet "parallel-n64-screensize" "640x480"
+
+              chown $user:$user "$core_config"
+
+              cp /home/$user/.config/RetroPie/n64dd/retroarch.cfg /home/$user/.config/RetroPie/n64dd/retroarch.cfg.bkp
+              local core_config="$configdir/n64dd/retroarch.cfg"
+              iniConfig " = " '"' "$md_conf_root/n64dd/retroarch.cfg"
+              iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
+              iniSet "input_overlay_opacity" "1.0"
+              iniSet "input_overlay_scale" "1.0"
+              iniSet "input_overlay_enable" "true"
+              iniSet "video_force_aspect" "true"
+              iniSet "video_aspect_ratio" "1.0"
+              iniSet "video_smooth" "true"
+              iniSet "parallel-n64-gfxplugin" "auto"
+              iniSet "parallel-n64-gfxplugin-accuracy" "low"
+              iniSet "parallel-n64-screensize" "640x480"
+
+              chown $user:$user "$core_config"
+
+
+              cp /home/$user/.config/RetroPie/n64-japan/retroarch.cfg /home/$user/.config/RetroPie/n64-japan/retroarch.cfg.bkp
+              local core_config="$configdir/n64-japan/retroarch.cfg"
+              iniConfig " = " '"' "$md_conf_root/n64-japan/retroarch.cfg"
+              iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
+              iniSet "input_overlay_opacity" "1.0"
+              iniSet "input_overlay_scale" "1.0"
+              iniSet "input_overlay_enable" "true"
+              iniSet "video_force_aspect" "true"
+              iniSet "video_aspect_ratio" "1.0"
+              iniSet "video_smooth" "true"
+              iniSet "parallel-n64-gfxplugin" "auto"
+              iniSet "parallel-n64-gfxplugin-accuracy" "low"
+              iniSet "parallel-n64-screensize" "640x480"
+
+              chown $user:$user "$core_config"
+
+
+  fi
+
 }
