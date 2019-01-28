@@ -21,7 +21,7 @@ rootdir="/opt/retropie"
 configdir="$rootdir/configs"
 config="$configdir/n64/mupen64plus.cfg"
 inputconfig="$configdir/n64/InputAutoCfg.ini"
-datadir="$HOME/RetroPie"
+datadir="/home/public/RetroPie"
 romdir="$datadir/roms"
 
 source "$rootdir/lib/inifuncs.sh"
@@ -170,7 +170,7 @@ function testCompatibility() {
     # fallback for glesn64 and rice plugin
     # some roms lead to a black screen of death
     local game
-    
+
     # these games need RSP-LLE
     local blacklist=(
         naboo

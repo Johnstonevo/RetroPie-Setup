@@ -65,21 +65,21 @@ function configure_lr-fbalpha() {
 
     local def=1
     isPlatform "armv6" && def=0
-    addEmulator 0 "$md_id" "arcade" "$md_inst/fbalpha_libretro.so"
-    addEmulator 0 "$md_id-neocd" "arcade" "$md_inst/fbalpha_libretro.so --subsystem neocd"
+    addEmulator $def "$md_id" "arcade" "$md_inst/fbalpha_libretro.so"
+    addEmulator $def "$md_id-neocd" "arcade" "$md_inst/fbalpha_libretro.so --subsystem neocd"
     addEmulator $def "$md_id" "neogeo" "$md_inst/fbalpha_libretro.so"
-    addEmulator 0 "$md_id-neocd" "neogeo" "$md_inst/fbalpha_libretro.so --subsystem neocd"
-    addEmulator 1 $def "$md_id" "fba" "$md_inst/fbalpha_libretro.so"
-    addEmulator 0 "$md_id-neocd" "fba" "$md_inst/fbalpha_libretro.so --subsystem neocd"
+    addEmulator $def "$md_id-neocd" "neogeo" "$md_inst/fbalpha_libretro.so --subsystem neocd"
+    addEmulator $def "$md_id" "fba" "$md_inst/fbalpha_libretro.so"
+    addEmulator $def "$md_id-neocd" "fba" "$md_inst/fbalpha_libretro.so --subsystem neocd"
 
-    addEmulator 0 "$md_id-pce" "pcengine" "$md_inst/fbalpha_libretro.so --subsystem pce"
-    addEmulator 0 "$md_id-sgx" "pcengine" "$md_inst/fbalpha_libretro.so --subsystem sgx"
-    addEmulator 0 "$md_id-tg" "pcengine" "$md_inst/fbalpha_libretro.so --subsystem tg"
-    addEmulator 0 "$md_id-gg" "gamegear" "$md_inst/fbalpha_libretro.so --subsystem gg"
-    addEmulator 0 "$md_id-sms" "mastersystem" "$md_inst/fbalpha_libretro.so --subsystem sms"
-    addEmulator 0 "$md_id-md" "megadrive" "$md_inst/fbalpha_libretro.so --subsystem md"
-    addEmulator 0 "$md_id-md" "megadrive-japan" "$md_inst/fbalpha_libretro.so --subsystem md"
-    addEmulator 0 "$md_id-sg1k" "sg-1000" "$md_inst/fbalpha_libretro.so --subsystem sg1k"
+    addEmulator $def "$md_id-pce" "pcengine" "$md_inst/fbalpha_libretro.so --subsystem pce"
+    addEmulator $def "$md_id-sgx" "pcengine" "$md_inst/fbalpha_libretro.so --subsystem sgx"
+    addEmulator $def "$md_id-tg" "pcengine" "$md_inst/fbalpha_libretro.so --subsystem tg"
+    addEmulator $def "$md_id-gg" "gamegear" "$md_inst/fbalpha_libretro.so --subsystem gg"
+    addEmulator $def "$md_id-sms" "mastersystem" "$md_inst/fbalpha_libretro.so --subsystem sms"
+    addEmulator $def "$md_id-md" "megadrive" "$md_inst/fbalpha_libretro.so --subsystem md"
+    addEmulator $def "$md_id-md" "megadrive-japan" "$md_inst/fbalpha_libretro.so --subsystem md"
+    addEmulator $def "$md_id-sg1k" "sg-1000" "$md_inst/fbalpha_libretro.so --subsystem sg1k"
 
     addSystem "arcade"
     addSystem "neogeo"
@@ -110,19 +110,9 @@ if [ -e /usr/lib/libretro/fbalpha_libretro.so ]
         addEmulator 0 "$md_id-ppa-md" "megadrive" "$md_instppa/fbalpha_libretro.so --subsystem md"
         addEmulator 0 "$md_id-ppa-sg1k" "sg-1000" "$md_instppa/fbalpha_libretro.so --subsystem sg1k"
 
-        addSystem "arcade"
-        addSystem "neogeo"
-        addSystem "fba"
-
-        addSystem "pcengine"
-        addSystem "gamegear"
-        addSystem "mastersystem"
-        addSystem "megadrive"
-        addSystem "sg-1000"
-
 fi
 
-if [ !  -d $raconfigdir/overlay/GameBezels/MAME ]
+if [ !  -d $raconfigdir/overlay/ArcadeBezels ]
   then
     git clone  https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
     cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
@@ -131,7 +121,7 @@ if [ !  -d $raconfigdir/overlay/GameBezels/MAME ]
     chown -R $user:$user ../retroarch
     find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
 fi
-if [  -d $raconfigdir/overlay/GameBezels/MAME ]
+if [  -d $raconfigdir/overlay/ArcadeBezels ]
  then
     cp /home/$user/.config/RetroPie/fba/retroarch.cfg /home/$user/.config/RetroPie/fba/retroarch.cfg.bkp
     local core_config="$configdir/fba/retroarch.cfg"
@@ -139,5 +129,6 @@ if [  -d $raconfigdir/overlay/GameBezels/MAME ]
 
     iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
     iniSet "input_overlay_opacity" "1.0"
+    iniSet "fba-diagnostic-input" "Hold Start"
 fi
 }

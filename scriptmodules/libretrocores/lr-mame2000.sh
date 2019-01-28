@@ -55,7 +55,7 @@ function configure_lr-mame2000() {
     addEmulator 1 "$md_id-ppa" "mame-mame4all" "$md_instppa/${so_name}_libretro.so"
     fi
 
-    if [ !  -d $raconfigdir/overlay/GameBezels/MAME ]
+    if [ !  -d $raconfigdir/overlay/ArcadeBezels ]
     then
       git clone  https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
       cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
@@ -66,7 +66,7 @@ function configure_lr-mame2000() {
       ln -s "$raconfigdir/config/MAME 2003" "$raconfigdir/config/MAME 2000"
 
     fi
-    if [  -d $raconfigdir/overlay/GameBezels/MAME ]
+    if [  -d $raconfigdir/overlay/ArcadeBezels ]
      then
         cp /home/$user/.config/RetroPie/mame-mame4all/retroarch.cfg /home/$user/.config/RetroPie/mame-mame4all/retroarch.cfg.bkp
         local core_config="$configdir/mame-mame4all/retroarch.cfg"

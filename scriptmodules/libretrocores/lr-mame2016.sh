@@ -13,7 +13,7 @@ rp_module_id="lr-mame2016"
 rp_module_desc="MAME emulator - MAME 0.174 port for libretro"
 rp_module_help="ROM Extension: .zip\n\nCopy your MAME roms to either $romdir/mame-libretro or\n$romdir/arcade"
 rp_module_licence="GPL2 https://raw.githubusercontent.com/libretro/mame2016-libretro/master/LICENSE.md"
-rp_module_section="exp"
+rp_module_section="main"
 
 function sources_lr-mame2016() {
     gitPullOrClone "$md_build" https://github.com/libretro/mame2016-libretro.git
@@ -47,7 +47,7 @@ function configure_lr-mame2016() {
         addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame2016_libretro.so"
         addEmulator 0 "$md_id-ppa" "mame-2016" "$md_instppa/mame2016_libretro.so"
     fi
-    if [ !  -d $raconfigdir/overlay/GameBezels/MAME ]
+    if [ !  -d $raconfigdir/overlay/ArcadeBezels ]
     then
       git clone  https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
       cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
@@ -58,7 +58,7 @@ function configure_lr-mame2016() {
       ln -s "$raconfigdir/config/MAME 2010" "$raconfigdir/config/MAME 2016"
 
     fi
-    if [  -d $raconfigdir/overlay/GameBezels/MAME ]
+    if [  -d $raconfigdir/overlay/ArcadeBezels ]
      then
         cp /home/$user/.config/RetroPie/mame-2016/retroarch.cfg /home/$user/.config/RetroPie/mame-libretro/retroarch.cfg.bkp
         local core_config="$configdir/mame-2016/retroarch.cfg"

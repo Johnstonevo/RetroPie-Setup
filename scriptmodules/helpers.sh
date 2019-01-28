@@ -382,7 +382,6 @@ function setupDirectories() {
     mkUserDir "$biosdir"
     mkUserDir "$configdir"
     mkUserDir "$configdir/all"
-    mkUserDir "$datadir/saves/$user"
     mkUserDir "$raconfigdir"
     # some home folders for configs that modules rely on
     mkUserDir "$home/.cache"

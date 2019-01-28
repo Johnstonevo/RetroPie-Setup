@@ -47,13 +47,29 @@ function _add_system_attractmode() {
     extensions="${extensions// /;}"
     iniSet "romext" "$extensions"
 
+
     # snap path
     local snap="snap"
     [[ "$name" == "retropie" ]] && snap="icons"
-    iniSet "artwork flyer" "$path/flyer"
-    iniSet "artwork marquee" "$path/marquee"
-    iniSet "artwork snap" "$path/$snap"
-    iniSet "artwork wheel" "$path/wheel"
+
+    if [[  "$fullname" =~ MAME*|Final*|Multiple*|Arcade*  ]]; then
+      iniSet "system" "Arcade"
+      iniSet "info_source"
+      iniSet "import_extras"        "./mame-config/catver.ini;./mame-config/nplayers.ini;./mame-config/$fullname.xml;./mame-config/history.dat"
+      iniSet "artwork flyer" "$datadir/roms/arcade/flyer"
+      iniSet "artwork marquee" "$datadir/roms/arcade/marquee"
+      iniSet "artwork snap" "$datadir/roms/arcade/$snap"
+      iniSet "artwork wheel" "$datadir/roms/arcade/wheel"
+    else
+      iniSet "info_source"          "thegamesdb.net"
+      iniSet "artwork flyer" "$path/flyer"
+      iniSet "artwork marquee" "$path/marquee"
+      iniSet "artwork snap" "$path/$snap"
+      iniSet "artwork wheel" "$path/wheel"
+    fi
+
+
+
 
     chown $user:$user "$config"
 
@@ -70,6 +86,20 @@ function _add_system_attractmode() {
 display${tab}$fullname
 ${tab}layout               HP2-Sub-Menu
 ${tab}romlist              $fullname
+${tab}in_cycle             no
+${tab}in_menu              yes
+${tab}global_filter
+${tab}${tab}rule                 FileIsAvailable equals 1
+${tab}filter               All
+${tab}filter               Favourites
+${tab}${tab}rule                 Favourite equals 1
+${tab}filter               "Most Played Games"
+${tab}${tab}sort_by              PlayedCount
+${tab}${tab}reverse_order        true
+${tab}${tab}rule                 PlayedCount not_contains 0
+
+
+
 _EOF_
         chown $user:$user "$config"
     fi
@@ -131,7 +161,7 @@ function depends_attractmode() {
 
 function sources_attractmode() {
     isPlatform "rpi" && gitPullOrClone "$md_build/sfml-pi" "https://github.com/mickelson/sfml-pi"
-    gitPullOrClone "$md_build/attract" "https://github.com/mickelson/attract"
+    gitPullOrClone "$md_build/attract" "https://github.com/mickelson/attract.git"
 }
 
 function build_attractmode() {
@@ -166,7 +196,8 @@ function install_attractmode() {
 #}
 
 function configure_attractmode() {
-  gitPullOrClone "$home/.attract" https://github.com/Johnstonevo/config.git
+  gitPullOrClone "$__builddir/.attract" https://github.com/Johnstonevo/config.git
+  cp -r  "$__builddir/.attract"  /home/$user/
   chown -R $user:$user $home.attract
     #moveConfigDir "$home/.attract" "$md_conf_root/all/attractmode"
 

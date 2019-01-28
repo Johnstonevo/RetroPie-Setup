@@ -36,8 +36,40 @@ function install_lr-mame2003-plus() {
 }
 
 function configure_lr-mame2003-plus() {
-    configure_lr-mame2003
-    if [ !  -d $raconfigdir/overlay/GameBezels/MAME ]
+  local dir_name="$(_get_dir_name_${md_id})"
+
+  local mame_dir
+  local mame_sub_dir
+  for mame_dir in mame-2003-plus ; do
+      mkRomDir "$mame_dir"
+      mkRomDir "$mame_dir/$dir_name"
+      ensureSystemretroconfig "$mame_dir"
+
+      for mame_sub_dir in cfg ctrlr diff hi memcard nvram; do
+          mkRomDir "$mame_dir/$dir_name/$mame_sub_dir"
+      done
+
+      # lr-mame2003-plus also has an artwork folder
+      [[ "$md_id" == "lr-mame2003-plus" ]] && mkRomDir "$mame_dir/$dir_name/artwork"
+  done
+
+  mkUserDir "$biosdir/$dir_name"
+  mkUserDir "$biosdir/$dir_name/samples"
+
+  # copy hiscore.dat
+  cp "$md_inst/metadata/"{hiscore.dat,cheat.dat} "$biosdir/$dir_name/"
+  chown $user:$user "$biosdir/$dir_name/"{hiscore.dat,cheat.dat}
+
+  # Set core options
+  setRetroArchCoreOption "${dir_name}-skip_disclaimer" "enabled"
+  setRetroArchCoreOption "${dir_name}-dcs-speedhack" "enabled"
+  setRetroArchCoreOption "${dir_name}-samples" "enabled"
+
+  local so_name="$(_get_so_name_${md_id})"
+  addEmulator 1 "$md_id" "mame-2003-plus" "$md_inst/${so_name}_libretro.so"
+  addSystem "arcade"
+  addSystem "mame-2003-plus"
+    if [ ! -d $raconfigdir/overlay/ArcadeBezels ]
     then
       git clone  https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
       cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
@@ -48,9 +80,9 @@ function configure_lr-mame2003-plus() {
       ln -s "$raconfigdir/config/MAME 2003" "$raconfigdir/config/MAME 2003-Plus"
 
     fi
-    if [  -d $raconfigdir/overlay/GameBezels/MAME ]
+    if [  -d $raconfigdir/overlay/ArcadeBezels ]
      then
-        cp /home/$user/.config/RetroPie/mame-2003-plus/retroarch.cfg /home/$user/.config/RetroPie/mame-libretro/retroarch.cfg.bkp
+        cp /home/$user/.config/RetroPie/mame-2003-plus/retroarch.cfg /home/$user/.config/RetroPie/mame-2003-plus/retroarch.cfg.bkp
         local core_config="$configdir/mame-2003/retroarch.cfg"
          iniConfig " = " '"' "$md_conf_root/mame-2003-plus/retroarch.cfg"
 

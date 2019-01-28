@@ -13,7 +13,7 @@ rp_module_id="lr-mame2010"
 rp_module_desc="Arcade emu - MAME 0.139 port for libretro"
 rp_module_help="ROM Extension: .zip\n\nCopy your MAME roms to either $romdir/mame-libretro or\n$romdir/arcade"
 rp_module_licence="NONCOM https://raw.githubusercontent.com/libretro/mame2010-libretro/master/docs/license.txt"
-rp_module_section="opt"
+rp_module_section="main"
 
 function sources_lr-mame2010() {
     gitPullOrClone "$md_build" https://github.com/libretro/mame2010-libretro.git
@@ -50,7 +50,7 @@ function configure_lr-mame2010() {
         addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame2010_libretro.so"
         addEmulator 0 "$md_id-ppa" "mame-2010" "$md_instppa/mame2010_libretro.so"
     fi
-    if [ !  -d $raconfigdir/overlay/GameBezels/MAME ]
+    if [ !  -d $raconfigdir/overlay/ArcadeBezels ]
     then
       git clone  https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
       cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
@@ -60,7 +60,7 @@ function configure_lr-mame2010() {
       find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
 
     fi
-    if [  -d $raconfigdir/overlay/GameBezels/MAME ]
+    if [  -d $raconfigdir/overlay/ArcadeBezels ]
      then
         cp /home/$user/.config/RetroPie/mame-2010/retroarch.cfg /home/$user/.config/RetroPie/mame-libretro/retroarch.cfg.bkp
         local core_config="$configdir/mame-2010/retroarch.cfg"

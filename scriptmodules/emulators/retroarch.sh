@@ -62,6 +62,10 @@ function build_retroarch() {
     make clean
     make
     md_ret_require="$md_build/retroarch"
+
+}
+
+function install_retroarch() {
     mkUserDir "$raconfigdir/"
     mkUserDir "$raconfigdir/assets"
     mkUserDir "$raconfigdir/shaders"
@@ -82,9 +86,6 @@ function build_retroarch() {
     chown -R $user:$user "$raconfigdir"
     chmod -R 775 "$raconfigdir"
 
-}
-
-function install_retroarch() {
     make install
     md_ret_files=(
         'retroarch.cfg'
@@ -124,21 +125,21 @@ function update_assets_retroarch() {
 
 
 
-function update_database_retroarch() {
-     if  isPlatform "x86" ; then
-    mkUserDir "$raconfigdir/database"
-    local dir="$raconfigdir/database"
-    # remove if not a git repository for fresh checkout
-    [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
-    gitPullOrClone "$md_build/libretro-super" https://github.com/libretro/libretro-super.git
-    cd "$md_build/libretro-super"
-   ./libretro-fetch.sh retroarch
-   ./libretro-build-database.sh
-    cd "$md_build/libretro-super/retroarch/media/libretrodb/rdb"
-    cp -R "$md_build/libretro-super/retroarch/media/libretrodb/rdb" "$dir"
-    chown -R $user:$user "$dir"
-    fi
-}
+#function update_database_retroarch() {
+#     if  isPlatform "x86" ; then
+#    mkUserDir "$raconfigdir/database"
+#    local dir="$raconfigdir/database"
+#    # remove if not a git repository for fresh checkout
+#    [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
+#    gitPullOrClone "$md_build/libretro-super" https://github.com/libretro/libretro-super.git
+#    cd "$md_build/libretro-super"
+#   ./libretro-fetch.sh retroarch
+#   ./libretro-build-database.sh
+#    cd "$md_build/libretro-super/retroarch/media/libretrodb/rdb"
+#    cp -R "$md_build/libretro-super/retroarch/media/libretrodb/rdb" "$dir"
+#    chown -R $user:$user "$dir"
+#    fi
+#}
 
 function install_xmb_monochrome_assets_retroarch() {
     if  isPlatform "x86" ; then
@@ -166,7 +167,7 @@ function configure_retroarch() {
     [[ "$md_mode" == "remove" ]] && return
 
     # move / symlink the retroarch configuration
-    mkUserDir "$raconfigdir"
+    mkUserDir "$raconfigdir/"
     mkUserDir "$raconfigdir/assets"
     mkUserDir "$raconfigdir/shaders"
     mkUserDir "$raconfigdir/overlay"
