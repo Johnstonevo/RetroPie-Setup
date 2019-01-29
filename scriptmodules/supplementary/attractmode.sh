@@ -189,6 +189,8 @@ function install_attractmode() {
     mkdir -p "$md_inst"/{bin,share,share/attract}
     cp -v attract/attract "$md_inst/bin/"
     cp -Rv attract/config/* "$md_inst/share/attract"
+    cd attract
+    make install
 }
 
 #function remove_attractmode() {
