@@ -56,7 +56,7 @@ function configure_lr-nestopia() {
     addEmulator 0 "$md_id" "nes" "$md_inst/nestopia_libretro.so"
     addEmulator 0 "$md_id" "nesh" "$md_inst/nestopia_libretro.so"
     addEmulator 1 "$md_id" "fds" "$md_inst/nestopia_libretro.so"
-    addEmulator 1 "$md_id" "famicom" "$md_inst/nestopia_libretro.so"
+    addEmulator 0 "$md_id" "famicom" "$md_inst/nestopia_libretro.so"
     addSystem "nes"
     addSystem "nesh"
     addSystem "fds"
@@ -70,10 +70,10 @@ function configure_lr-nestopia() {
 
 if [ -e /usr/lib/libretro/nestopia_libretro.so ]
 then
-  addEmulator 0 "$md_id-ppa" "nes" "$md_inst/nestopia_libretro.so"
-  addEmulator 0 "$md_id-ppa" "nesh" "$md_inst/nestopia_libretro.so"
-    addEmulator 1 "$md_id-ppa" "fds" "$md_inst/nestopia_libretro.so"
-    addEmulator 1 "$md_id-ppa" "famicom" "$md_inst/nestopia_libretro.so"
+    addEmulator 0 "$md_id-ppa" "nes" "$md_inst/nestopia_libretro.so"
+    addEmulator 0 "$md_id-ppa" "nesh" "$md_inst/nestopia_libretro.so"
+    addEmulator 0 "$md_id-ppa" "fds" "$md_inst/nestopia_libretro.so"
+    addEmulator 0 "$md_id-ppa" "famicom" "$md_inst/nestopia_libretro.so"
     addSystem "nes"
     addSystem "fds"
     addSystem "famicom"
@@ -128,6 +128,8 @@ if [  -d $raconfigdir/overlay/GameBezels/NES ]
             iniSet "video_smooth" "false"
             iniSet "nestopia_palette" "pal"
             iniSet "nestopia_nospritelimie" "enabled"
+            iniSet "nestopia_aspect" "pal"
+            iniSet "nestopia_favored_system" "pal"
             chown $user:$user "$core_config"
 
 fi

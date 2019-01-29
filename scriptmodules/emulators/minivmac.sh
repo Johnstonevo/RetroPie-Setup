@@ -40,6 +40,6 @@ function configure_minivmac() {
 
     ln -sf "$biosdir/vMac.ROM" "$md_inst/vMac.ROM"
 
-    addEmulator 1 "$md_id" "macintosh" "pushd $md_inst; $md_inst/minivmac $romdir/macintosh/System\ Tools.dsk %ROM%; popd"
+    addEmulator 0 "$md_id" "macintosh" "pushd $md_inst; $md_inst/minivmac $romdir/macintosh/System\ Tools.dsk %ROM%; popd"
     addSystem "macintosh"
 }

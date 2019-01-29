@@ -37,6 +37,6 @@ function configure_lr-virtualjaguar() {
     mkRomDir "atarijaguar"
     ensureSystemretroconfig "atarijaguar"
 
-    addEmulator 1 "$md_id" "atarijaguar" "$md_inst/virtualjaguar_libretro.so"
+    addEmulator 0 "$md_id" "atarijaguar" "$md_inst/virtualjaguar_libretro.so"
     addSystem "atarijaguar"
 }

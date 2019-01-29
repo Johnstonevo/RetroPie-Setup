@@ -35,6 +35,6 @@ function configure_drastic() {
         ln -sfv "$md_inst/$file" "$md_conf_root/nds/drastic/$file"
     done
 
-    addEmulator 1 "$md_id" "nds" "pushd $md_conf_root/nds/drastic; $md_inst/drastic %ROM%; popd"
+    addEmulator 0 "$md_id" "nds" "pushd $md_conf_root/nds/drastic; $md_inst/drastic %ROM%; popd"
     addSystem "nds"
 }

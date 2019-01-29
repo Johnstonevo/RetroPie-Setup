@@ -135,6 +135,6 @@ _EOF_
 
     moveConfigDir "$home/.$md_id" "$md_conf_root/pc"
 
-    addEmulator "$def" "$md_id" "pc" "bash $romdir/pc/${launcher_name// /\\ } %ROM%"
+    addEmulator 0 "$md_id" "pc" "bash $romdir/pc/${launcher_name// /\\ } %ROM%"
     addSystem "pc"
 }

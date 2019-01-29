@@ -52,6 +52,6 @@ function configure_np2pi() {
     # symlink font
     ln -sf /usr/share/fonts/truetype/takao-gothic/TakaoGothic.ttf "$md_conf_root/pc98/default.ttf"
 
-    addEmulator 1 "$md_id" "pc98" "pushd $md_conf_root/pc98; $md_inst/np2 %ROM%; popd"
+    addEmulator 0 "$md_id" "pc98" "pushd $md_conf_root/pc98; $md_inst/np2 %ROM%; popd"
     addSystem "pc98"
 }

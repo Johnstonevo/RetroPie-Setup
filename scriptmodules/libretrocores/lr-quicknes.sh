@@ -32,8 +32,8 @@ function install_lr-quicknes() {
 }
 
 function configure_lr-quicknes() {
-  mkRomDir "nes"
-  mkRomDir "nesh"
+    mkRomDir "nes"
+    mkRomDir "nesh"
     mkRomDir "fds"
     mkRomDir "famicom"
     ensureSystemretroconfig "nes"
@@ -42,12 +42,12 @@ function configure_lr-quicknes() {
     ensureSystemretroconfig "famicom"
 
     local def=0
-    isPlatform "armv6" && def=1
+    isPlatform "armv6" && def=0
 
     addEmulator 0 "$md_id" "nes" "$md_inst/quicknes_libretro.so"
     addEmulator 0 "$md_id" "nesh" "$md_inst/quicknes_libretro.so"
-    addEmulator 1 "$md_id" "fds" "$md_inst/quicknes_libretro.so"
-    addEmulator 1 "$md_id" "famicom" "$md_inst/quicknes_libretro.so"
+    addEmulator 0 "$md_id" "fds" "$md_inst/quicknes_libretro.so"
+    addEmulator 0 "$md_id" "famicom" "$md_inst/quicknes_libretro.so"
     addSystem "nes"
     addSystem "nesh"
     addSystem "fds"
@@ -56,8 +56,8 @@ if [ -e /usr/lib/libretro/quicknes_libretro.so ]
 then
   addEmulator 0 "$md_id-ppa" "nes" "$md_inst/quicknes_libretro.so"
   addEmulator 0 "$md_id-ppa" "nesh" "$md_inst/quicknes_libretro.so"
-    addEmulator 1 "$md_id-ppa" "fds" "$md_inst/quicknes_libretro.so"
-    addEmulator 1 "$md_id-ppa" "famicom" "$md_inst/quicknes_libretro.so"
+    addEmulator 0 "$md_id-ppa" "fds" "$md_inst/quicknes_libretro.so"
+    addEmulator 0 "$md_id-ppa" "famicom" "$md_inst/quicknes_libretro.so"
     addSystem "nes"
     addSystem "fds"
     addSystem "famicom"

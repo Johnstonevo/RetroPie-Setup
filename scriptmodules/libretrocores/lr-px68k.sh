@@ -39,6 +39,6 @@ function configure_lr-px68k() {
 
     mkUserDir "$biosdir/keropi"
 
-    addEmulator 1 "$md_id" "x68000" "$md_inst/px68k_libretro.so"
+    addEmulator 0 "$md_id" "x68000" "$md_inst/px68k_libretro.so"
     addSystem "x68000"
 }

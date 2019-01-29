@@ -9,22 +9,22 @@
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
 
-rp_module_id="lr-snes9x2010"
-rp_module_desc="Super Nintendo emu - Snes9x 1.52 based port for libretro"
-rp_module_help="Previously called lr-snes9x-next\n\nROM Extensions: .bin .smc .sfc .fig .swc .mgd .zip\n\nCopy your SNES roms to $romdir/snes"
-rp_module_licence="NONCOM https://raw.githubusercontent.com/libretro/snes9x2010/master/docs/snes9x-license.txt"
+rp_module_id="lr-snes9x20102010"
+rp_module_desc="Super Nintendo emu - snes9x2010 1.52 based port for libretro"
+rp_module_help="Previously called lr-snes9x2010-next\n\nROM Extensions: .bin .smc .sfc .fig .swc .mgd .zip\n\nCopy your SNES roms to $romdir/snes"
+rp_module_licence="NONCOM https://raw.githubusercontent.com/libretro/snes9x20102010/master/docs/snes9x2010-license.txt"
 rp_module_section="main"
 
-function _update_hook_lr-snes9x2010() {
+function _update_hook_lr-snes9x20102010() {
     # move from old location and update emulators.cfg
-    renameModule "lr-snes9x-next" "lr-snes9x2010"
+    renameModule "lr-snes9x2010-next" "lr-snes9x20102010"
 }
 
-function sources_lr-snes9x2010() {
-    gitPullOrClone "$md_build" https://github.com/libretro/snes9x2010.git
+function sources_lr-snes9x20102010() {
+    gitPullOrClone "$md_build" https://github.com/libretro/snes9x20102010.git
 }
 
-function build_lr-snes9x2010() {
+function build_lr-snes9x20102010() {
     make -f Makefile.libretro clean
     local platform=""
     isPlatform "arm" && platform+="armv"
@@ -34,35 +34,51 @@ function build_lr-snes9x2010() {
     else
         make -f Makefile.libretro
     fi
-    md_ret_require="$md_build/snes9x2010_libretro.so"
+    md_ret_require="$md_build/snes9x20102010_libretro.so"
 }
 
-function install_lr-snes9x2010() {
+function install_lr-snes9x20102010() {
     md_ret_files=(
-        'snes9x2010_libretro.so'
+        'snes9x20102010_libretro.so'
         'docs'
     )
 }
 
-function configure_lr-snes9x2010() {
-     local system
-    for system in snes sfc snescd nintendobsx sufami snesh; do
-        mkRomDir "$system"
-        ensureSystemretroconfig "$system"
-        isPlatform "armv6" && def=1
-        addEmulator $def "$md_id" "$system" "$md_inst/snes9x2002_libretro.so"
-        addSystem "$system"
-    done
-if [ -e /usr/lib/libretro/snes9x2010_libretro.so ]
-    then
-    local system
-    local def
-    for system in snes sfc snescd snesh nintendobsx sufami; do
-            def=0
-            [[ "$system" == "snes" || "$system" == "snesh" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
-            addEmulator  "$md_id-ppa" "$system" "$md_instppa/snes9x2010_libretro.so"
- done
-fi
+function configure_lr-snes9x20102010() {
+  mkRomDir "snes"
+  mkRomDir "snesh"
+    mkRomDir "sfc"
+    mkRomDir "snescd"
+    mkRomDir "nintendobsx"
+    mkRomDir "sufami"
+    ensureSystemretroconfig "snes"
+    ensureSystemretroconfig "snesh"
+    ensureSystemretroconfig "sfc"
+    ensureSystemretroconfig "snescd"
+    ensureSystemretroconfig "nintendobsx"
+    ensureSystemretroconfig "sufami"
+
+    addEmulator 1 "$md_id" "snes" "$md_inst/snes9x2010_libretro.so"
+    addEmulator 0 "$md_id" "snesh" "$md_inst/snes9x2010_libretro.so"
+    addEmulator 1 "$md_id" "sfc" "$md_inst/snes9x2010_libretro.so"
+    addEmulator 1 "$md_id" "snescd" "$md_inst/snes9x2010_libretro.so"
+    addEmulator 1 "$md_id" "nintendobsx" "$md_inst/snes9x2010_libretro.so"
+    addEmulator 1 "$md_id" "sufami" "$md_inst/snes9x2010_libretro.so"
+    addSystem "snes"
+    addSystem "snesh"
+    addSystem "sfc"
+    addSystem "snescd"
+    addSystem "nintendobsx"
+    addSystem "sufami"
+    if [ -e /usr/lib/libretro/snes9x2010_libretro.so ]
+        then
+          addEmulator 0 "$md_id-ppa" "snes" "$md_instppa/snes9x2010_libretro.so"
+          addEmulator 0 "$md_id-ppa" "snesh" "$md_instppa/snes9x2010_libretro.so"
+          addEmulator 0 "$md_id-ppa" "sfc" "$md_instppa/snes9x2010_libretro.so"
+          addEmulator 0 "$md_id-ppa" "snescd" "$md_instppa/snes9x2010_libretro.so"
+          addEmulator 0 "$md_id-ppa" "nintendobsx" "$md_instppa/snes9x2010_libretro.so"
+          addEmulator 0 "$md_id-ppa" "sufami" "$md_instppa/snes9x2010_libretro.so"
+    fi
 
 
 if [ ! -d $raconfigdir/overlay/GameBezels/SNES ]

@@ -120,8 +120,8 @@ function configure_advmame() {
         fi
     fi
 
-    addEmulator 1 "$md_id" "arcade" "$md_inst/bin/advmame %BASENAME%"
-    addEmulator 1 "$md_id" "mame-advmame" "$md_inst/bin/advmame %BASENAME%"
+    addEmulator 0 "$md_id" "arcade" "$md_inst/bin/advmame %BASENAME%"
+    addEmulator 0 "$md_id" "mame-advmame" "$md_inst/bin/advmame %BASENAME%"
 
     addSystem "arcade"
     addSystem "mame-advmame"

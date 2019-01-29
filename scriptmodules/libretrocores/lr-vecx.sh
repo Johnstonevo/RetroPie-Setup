@@ -46,7 +46,7 @@ function configure_lr-vecx() {
         rm -f "$biosdir/"{fast.bin,skip.bin,system.bin}
     fi
 
-    addEmulator 1 "$md_id" "vectrex" "$md_inst/vecx_libretro.so"
+    addEmulator 0 "$md_id" "vectrex" "$md_inst/vecx_libretro.so"
     addSystem "vectrex"
     if [ -e /usr/lib/libretro/vecx_libretro.so ]
         then

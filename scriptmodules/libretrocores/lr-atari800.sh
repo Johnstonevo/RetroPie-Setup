@@ -42,8 +42,8 @@ function configure_lr-atari800() {
     mkUserDir "$md_conf_root/atari800"
     moveConfigFile "$home/.atari800.cfg" "$md_conf_root/atari800/atari800.cfg"
 
-    addEmulator 1 "lr-atari800" "atari800" "$md_inst/atari800_libretro.so"
-    addEmulator 1 "lr-atari800" "atari5200" "$md_inst/atari800_libretro.so"
+    addEmulator 0 "lr-atari800" "atari800" "$md_inst/atari800_libretro.so"
+    addEmulator 0 "lr-atari800" "atari5200" "$md_inst/atari800_libretro.so"
     addSystem "atari800"
     addSystem "atari5200"
 

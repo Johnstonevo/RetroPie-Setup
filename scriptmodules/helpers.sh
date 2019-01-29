@@ -1206,7 +1206,7 @@ _EOF_
     chown -R $user:$user "$file"
     chmod +x "$file"
 
-    [[ -n "$cmd" ]] && addEmulator 1 "$id" "$port" "$cmd"
+    [[ -n "$cmd" ]] && addEmulator 0 "$id" "$port" "$cmd"
     addSystem "ports"
 }
 
@@ -1219,7 +1219,7 @@ _EOF_
 ## @details This is the primary function for adding emulators to a system which can be
 ## switched between via the runcommand launch menu
 ##
-##     addEmulator 1 "vice-x64" "c64" "$md_inst/bin/x64 %ROM%"
+##     addEmulator 0 "vice-x64" "c64" "$md_inst/bin/x64 %ROM%"
 ##     addEmulator 0 "vice-xvic" "c64" "$md_inst/bin/xvic %ROM%"
 ##
 ## Would add two optional emulators for the c64 - with vice-x64 being the default if no default
@@ -1234,7 +1234,7 @@ _EOF_
 ##
 ## eg. for the lr-fcuemm module
 ##
-##     addEmulator 1 "$md_id" "nes" "$md_inst/fceumm_libretro.so"
+##     addEmulator 0 "$md_id" "nes" "$md_inst/fceumm_libretro.so"
 function addEmulator() {
     local default="$1"
     local id="$2"

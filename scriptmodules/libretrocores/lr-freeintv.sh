@@ -37,6 +37,6 @@ function configure_lr-freeintv() {
     mkRomDir "intellivision"
     ensureSystemretroconfig "intellivision"
 
-    addEmulator 1 "$md_id" "intellivision" "$md_inst/freeintv_libretro.so"
+    addEmulator 0 "$md_id" "intellivision" "$md_inst/freeintv_libretro.so"
     addSystem "intellivision"
 }

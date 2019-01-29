@@ -56,7 +56,7 @@ function configure_lr-pcsx-rearmed() {
         [[ "$system" == "psx" || "$system" == "psx-japan" ]] && def=1
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
-        addEmulator "$def" "$md_id" "$system" "$md_inst/libretro.so"
+        addEmulator 0 "$md_id" "$system" "$md_inst/libretro.so"
         addSystem "$system"
         setRetroArchCoreOption "pcsx_rearmed_neon_enhancement_enable" "enabled" # Double resolution
         setRetroArchCoreOption "pcsx_rearmed_neon_enhancement_no_main" "enabled" # Speed hack

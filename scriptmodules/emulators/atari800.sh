@@ -57,8 +57,8 @@ function configure_atari800() {
     fi
     moveConfigFile "$home/.atari800.cfg" "$md_conf_root/atari800/atari800.cfg"
 
-    addEmulator 1 "atari800" "atari800" "$md_inst/bin/atari800 %ROM%"
-    addEmulator 1 "atari800" "atari5200" "$md_inst/bin/atari800 %ROM%"
+    addEmulator 0 "atari800" "atari800" "$md_inst/bin/atari800 %ROM%"
+    addEmulator 0 "atari800" "atari5200" "$md_inst/bin/atari800 %ROM%"
     addSystem "atari800"
     addSystem "atari5200"
 }

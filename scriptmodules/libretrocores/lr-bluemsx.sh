@@ -71,22 +71,22 @@ function configure_lr-bluemsx() {
     chown -R $user:$user "$biosdir/"{Databases,Machines}
 
 
-    addEmulator 1 "$md_id" "msx2" "$md_inst/bluemsx_libretro.so"
+    addEmulator 0 "$md_id" "msx2" "$md_inst/bluemsx_libretro.so"
     addSystem "msx2"
 
 
-    addEmulator 1 "$md_id" "coleco" "$md_inst/bluemsx_libretro.so"
+    addEmulator 0 "$md_id" "coleco" "$md_inst/bluemsx_libretro.so"
     addSystem "coleco"
      if [ -e /usr/lib/libretro/bluemsx_libretro.so ]
                 then
-   addEmulator 1 "$md_id-ppa" "msx" "$md_instppa/bluemsx_libretro.so"
+   addEmulator 0 "$md_id-ppa" "msx" "$md_instppa/bluemsx_libretro.so"
     addSystem "msx"
 
-    addEmulator 1 "$md_id-ppa" "msx2" "$md_inst/bluemsx_libretro.so"
+    addEmulator 0 "$md_id-ppa" "msx2" "$md_inst/bluemsx_libretro.so"
     addSystem "msx2"
 
 
-    addEmulator 1 "$md_id-ppa" "coleco" "$md_instppa/bluemsx_libretro.so"
+    addEmulator 0 "$md_id-ppa" "coleco" "$md_instppa/bluemsx_libretro.so"
     addSystem "coleco"
     fi
 

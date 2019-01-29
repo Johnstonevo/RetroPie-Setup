@@ -83,6 +83,6 @@ _EOF_
     chown $user:$user "$romdir/scummvm/+Start $name.sh"
     chmod u+x "$romdir/scummvm/+Start $name.sh"
 
-    addEmulator 1 "$md_id" "scummvm" "bash $romdir/scummvm/+Start\ $name.sh %BASENAME%"
+    addEmulator 0 "$md_id" "scummvm" "bash $romdir/scummvm/+Start\ $name.sh %BASENAME%"
     addSystem "scummvm"
 }

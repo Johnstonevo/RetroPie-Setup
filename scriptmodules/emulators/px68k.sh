@@ -52,6 +52,6 @@ function configure_px68k() {
 
     setDispmanx "$md_id" 0
 
-    addEmulator 1 "$md_id" "x68000" "$md_inst/px68k %ROM%"
+    addEmulator 0 "$md_id" "x68000" "$md_inst/px68k %ROM%"
     addSystem "x68000"
 }

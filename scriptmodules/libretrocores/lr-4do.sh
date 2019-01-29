@@ -35,7 +35,7 @@ function configure_lr-4do() {
     mkRomDir "3do"
     ensureSystemretroconfig "3do"
 
-    addEmulator 1 "$md_id" "3do" "$md_inst/4do_libretro.so"
+    addEmulator 0 "$md_id" "3do" "$md_inst/4do_libretro.so"
     addSystem "3do"
      if [ -e /usr/lib/libretro/4do_libretro.so ]
                 then 

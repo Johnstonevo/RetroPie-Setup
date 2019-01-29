@@ -36,6 +36,6 @@ function configure_lr-beetle-saturn() {
     mkRomDir "saturn"
     ensureSystemretroconfig "saturn"
 
-    addEmulator 1 "$md_id" "saturn" "$md_inst/mednafen_saturn_libretro.so"
+    addEmulator 0 "$md_id" "saturn" "$md_inst/mednafen_saturn_libretro.so"
     addSystem "saturn"
 }

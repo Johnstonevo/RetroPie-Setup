@@ -47,6 +47,6 @@ function configure_pcsx2() {
     mkRomDir "ps2"
 
     addEmulator 0 "$md_id-nogui" "ps2" "PCSX2 %ROM% --fullscreen --nogui"
-    addEmulator 1 "$md_id" "ps2" "PCSX2 %ROM% --windowed"
+    addEmulator 0 "$md_id" "ps2" "PCSX2 %ROM% --windowed"
     addSystem "ps2"
 }

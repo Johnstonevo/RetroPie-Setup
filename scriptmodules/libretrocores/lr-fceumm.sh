@@ -37,8 +37,8 @@ function install_lr-fceumm() {
 }
 
 function configure_lr-fceumm() {
-  mkRomDir "nes"
-  mkRomDir "nesh"
+    mkRomDir "nes"
+    mkRomDir "nesh"
     mkRomDir "fds"
     mkRomDir "famicom"
     ensureSystemretroconfig "nes"
@@ -46,21 +46,21 @@ function configure_lr-fceumm() {
     ensureSystemretroconfig "fds"
     ensureSystemretroconfig "famicom"
 
-    local def=1
+    local def=0
     isPlatform "armv6" && def=0
 
-    addEmulator "$def" "$md_id" "nes" "$md_inst/fceumm_libretro.so"
-    addEmulator "$def" "$md_id" "nesh" "$md_inst/fceumm_libretro.so"
+    addEmulator 1 "$md_id" "nes" "$md_inst/fceumm_libretro.so"
+    addEmulator 1 "$md_id" "nesh" "$md_inst/fceumm_libretro.so"
     addEmulator 0 "$md_id" "fds" "$md_inst/fceumm_libretro.so"
-    addEmulator 0 "$md_id" "famicom" "$md_inst/fceumm_libretro.so"
+    addEmulator 1 "$md_id" "famicom" "$md_inst/fceumm_libretro.so"
     addSystem "nes"
     addSystem "fds"
     addSystem "famicom"
 
 if [ -e /usr/lib/libretro/fceumm_libretro.so ]
     then
-      addEmulator "$def" "$md_id-ppa" "nes" "$md_inst/fceumm_libretro.so"
-      addEmulator "$def" "$md_id-ppa" "nesh" "$md_inst/fceumm_libretro.so"
+      addEmulator 0 "$md_id-ppa" "nes" "$md_inst/fceumm_libretro.so"
+      addEmulator 0 "$md_id-ppa" "nesh" "$md_inst/fceumm_libretro.so"
     addEmulator 0 "$md_id-ppa" "fds" "$md_inst/fceumm_libretro.so"
     addEmulator 0 "$md_id-ppa" "famicom" "$md_inst/fceumm_libretro.so"
     addSystem "nes"

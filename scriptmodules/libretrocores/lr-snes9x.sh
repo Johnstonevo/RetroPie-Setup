@@ -41,28 +41,41 @@ function install_lr-snes9x() {
 }
 
 function configure_lr-snes9x() {
-    local system
-    local def
-    for system in snes sfc snescd snesh nintendobsx sufami; do
-        def=0
-        [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "snesh"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
-        mkRomDir "$system"
-        ensureSystemretroconfig "$system"
-        addEmulator "$def" "$md_id" "$system" "$md_inst/snes9x_libretro.so"
-        addSystem "$system"
- done
+  mkRomDir "snes"
+  mkRomDir "snesh"
+    mkRomDir "sfc"
+    mkRomDir "snescd"
+    mkRomDir "nintendobsx"
+    mkRomDir "sufami"
+    ensureSystemretroconfig "snes"
+    ensureSystemretroconfig "snesh"
+    ensureSystemretroconfig "sfc"
+    ensureSystemretroconfig "snescd"
+    ensureSystemretroconfig "nintendobsx"
+    ensureSystemretroconfig "sufami"
 
-if [ -e /usr/lib/libretro/snes9x_libretro.so ]
-    then
-    local system
-    local def
-    for system in snes sfc snescd snesh nintendobsx sufami; do
-            def=0
-            [[ "$system" == "snes" || "$system" == "sfc" || "$system" == "snescd"  || "$system" == "snesh"  || "$system" == "nintendobsx" || "$system" == "sufami" ]] && def=1
-            addEmulator  "$md_id-ppa" "$system" "$md_instppa/snes9x_libretro.so"
-            addSystem "$system"
- done
-fi
+    addEmulator 0 "$md_id" "snes" "$md_inst/snes9x_libretro.so"
+    addEmulator 1 "$md_id" "snesh" "$md_inst/snes9x_libretro.so"
+    addEmulator 0 "$md_id" "sfc" "$md_inst/snes9x_libretro.so"
+    addEmulator 0 "$md_id" "snescd" "$md_inst/snes9x_libretro.so"
+    addEmulator 0 "$md_id" "nintendobsx" "$md_inst/snes9x_libretro.so"
+    addEmulator 0 "$md_id" "sufami" "$md_inst/snes9x_libretro.so"
+    addSystem "snes"
+    addSystem "snesh"
+    addSystem "sfc"
+    addSystem "snescd"
+    addSystem "nintendobsx"
+    addSystem "sufami"
+    if [ -e /usr/lib/libretro/snes9x_libretro.so ]
+        then
+          addEmulator 0 "$md_id-ppa" "snes" "$md_instppa/snes9x_libretro.so"
+          addEmulator 0 "$md_id-ppa" "snesh" "$md_instppa/snes9x_libretro.so"
+          addEmulator 0 "$md_id-ppa" "sfc" "$md_instppa/snes9x_libretro.so"
+          addEmulator 0 "$md_id-ppa" "snescd" "$md_instppa/snes9x_libretro.so"
+          addEmulator 0 "$md_id-ppa" "nintendobsx" "$md_instppa/snes9x_libretro.so"
+          addEmulator 0 "$md_id-ppa" "sufami" "$md_instppa/snes9x_libretro.so"
+    fi
+
 
 
 if [ ! -d $raconfigdir/overlay/GameBezels/SNES ]
@@ -101,6 +114,7 @@ if [  -d $raconfigdir/overlay/GameBezels/SNES ]
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
             iniSet "video_smooth" "true" "$core_config"
+            iniSet "snes9x_aspect" "pal" "$core_config"
             chown $user:$user "$core_config"
 fi
 if [  -d $raconfigdir/overlay/GameBezels/SNES ]
@@ -139,6 +153,8 @@ if [  -d $configdir/snescd ]
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
             iniSet "video_smooth" "true" "$core_config"
+            iniSet "snes9x_aspect" "pal" "$core_config"
+
             chown $user:$user "$core_config"
 fi
 if [  -d $configdir/sfc ]

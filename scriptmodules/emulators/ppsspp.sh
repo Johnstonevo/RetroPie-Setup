@@ -163,7 +163,7 @@ function configure_ppsspp() {
     ln -snf "$romdir/psp" "$md_conf_root/psp/PSP/GAME"
 
     if isPlatform "tinker"; then
-        addEmulator 1 "$md_id" "psp" "$md_inst/PPSSPPSDL --fullscreen %ROM%"
+        addEmulator 0 "$md_id" "psp" "$md_inst/PPSSPPSDL --fullscreen %ROM%"
     else
         addEmulator 0 "$md_id" "psp" "$md_inst/PPSSPPSDL %ROM%"
     fi

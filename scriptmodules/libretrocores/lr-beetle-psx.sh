@@ -47,7 +47,7 @@ function configure_lr-beetle-psx() {
         [[ "$system" == "psx" || "$system" == "psx-japan" ]] && def=1
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
-        addEmulator "$def" "$md_id" "$system" "$md_inst/mednafen_psx_hw_libretro.so"
+        addEmulator 0 "$md_id" "$system" "$md_inst/mednafen_psx_hw_libretro.so"
         addSystem "$system"
     done
     if [ -e /usr/lib/libretro/mednafen_psx_hw_libretro.so ]

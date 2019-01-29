@@ -59,6 +59,6 @@ function configure_xm7() {
         ln -sf "$biosdir/fm7/$bios" "$md_conf_root/fm7/$bios"
     done
 
-    addEmulator 1 "$md_id" "fm7" "$md_inst/bin/xm7 %ROM%"
+    addEmulator 0 "$md_id" "fm7" "$md_inst/bin/xm7 %ROM%"
     addSystem "fm7"
 }

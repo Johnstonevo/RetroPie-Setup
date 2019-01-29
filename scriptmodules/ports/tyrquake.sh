@@ -42,7 +42,7 @@ function install_tyrquake() {
 function add_games_tyrquake() {
     _add_games_lr-tyrquake "$md_inst/bin/tyr-quake -basedir $romdir/ports/quake -game %QUAKEDIR%"
     if isPlatform "x11"; then
-        addEmulator 1 "$md_id-gl" "quake ports" "$md_inst/bin/tyr-glquake -basedir $romdir/ports/quake -game %QUAKEDIR%"
+        addEmulator 0 "$md_id-gl" "quake ports" "$md_inst/bin/tyr-glquake -basedir $romdir/ports/quake -game %QUAKEDIR%"
     fi
 }
 

@@ -110,6 +110,7 @@ function configure_lr-snes9x2005() {
                 iniSet "aspect_ratio_index" "22" "$core_config"
                 iniSet "input_overlay_enable" "true" "$core_config"
                 iniSet "video_smooth" "true" "$core_config"
+                iniSet "catsfc_VideoMode" "pal" "$core_config"
                 chown $user:$user "$core_config"
     fi
     if [  -d $raconfigdir/overlay/GameBezels/SNES ]

@@ -46,8 +46,8 @@ function configure_lr-dolphin() {
     ensureSystemretroconfig "gc"
     ensureSystemretroconfig "wii"
 
-    addEmulator 1 "$md_id" "gc" "$md_inst/dolphin_libretro.so"
-    addEmulator 1 "$md_id" "wii" "$md_inst/dolphin_libretro.so"
+    addEmulator 0 "$md_id" "gc" "$md_inst/dolphin_libretro.so"
+    addEmulator 0 "$md_id" "wii" "$md_inst/dolphin_libretro.so"
 
     addSystem "gc"
     addSystem "wii"

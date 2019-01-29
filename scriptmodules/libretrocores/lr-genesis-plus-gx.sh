@@ -35,21 +35,97 @@ function install_lr-genesis-plus-gx() {
 }
 
 function configure_lr-genesis-plus-gx() {
-    local system
-    local def
-    for system in gamegear mastersystem megadrive genesis genh sg-1000 segacd megadrive-japan; do
-        def=0
-        [[ "$system" == "gamegear" || "$system" == "sg-1000"|| "$system" == "mastersystem"|| "$system" == "megadrive"|| "$system" == "genesis"|| "$system" == "genh"|| "$system" == "segacd" || "$system" == "megadrive-japan" ]] && def=1
-        mkRomDir "$system"
-        ensureSystemretroconfig "$system"
-        addEmulator "$def" "$md_id" "$system" "$md_inst/genesis_plus_gx_libretro.so"
-        addSystem "$system"
-        if [ -e /usr/lib/libretro/genesis_plus_gx_libretro.so ]
-        then
-        addEmulator "$def" "$md_id-ppa" "$system" "$md_instppa/genesis_plus_gx_libretro.so"
-        addSystem "$system"
+    mkRomDir "gamegear"
+    mkRomDir "ggh"
+    mkRomDir "mastersystem"
+    mkRomDir "megadrive"
+    mkRomDir "megadrive-japan"
+    mkRomDir "genesis"
+    mkRomDir "genh"
+    mkRomDir "sg-1000"
+    mkRomDir "segacd"
+    mkRomDir "markiii"
+    ensureSystemretroconfig "gamegear"
+    ensureSystemretroconfig "ggh"
+    ensureSystemretroconfig "mastersystem"
+    ensureSystemretroconfig "megadrive"
+    ensureSystemretroconfig "megadrive-japan"
+    ensureSystemretroconfig "genesis"
+    ensureSystemretroconfig "genh"
+    ensureSystemretroconfig "sg-1000"
+    ensureSystemretroconfig "segacd"
+    ensureSystemretroconfig "markiii"
 
+    local def=0
+    isPlatform "armv6" && def=0
+
+    addEmulator 1 "gamegear"
+    addEmulator 1 "ggh"
+    addEmulator 0 "mastersystem"
+    addEmulator 0 "megadrive"
+    addEmulator 0 "megadrive-japan"
+    addEmulator 0 "genesis"
+    addEmulator 0 "genh"
+    addEmulator 1 "sg-1000"
+    addEmulator 1 "segacd"
+    addEmulator 1 "markiii"
+    addSystem  "gamegear"
+    addSystem  "mastersystem"
+    addSystem  "megadrive"
+    addSystem  "megadrive-japan"
+    addSystem  "genesis"
+    addSystem  "genh"
+    addSystem  "sg-1000"
+    addSystem  "segacd"
+    addSystem  "markiii"
+
+    if [ -e /usr/lib/libretro/genesis_plus_gx_libretro.so ]
+        then
+          mkRomDir "gamegear"
+          mkRomDir "ggh"
+          mkRomDir "mastersystem"
+          mkRomDir "megadrive"
+          mkRomDir "megadrive-japan"
+          mkRomDir "genesis"
+          mkRomDir "genh"
+          mkRomDir "sg-1000"
+          mkRomDir "segacd"
+          mkRomDir "markiii"
+          ensureSystemretroconfig "gamegear"
+          ensureSystemretroconfig "ggh"
+          ensureSystemretroconfig "mastersystem"
+          ensureSystemretroconfig "megadrive"
+          ensureSystemretroconfig "megadrive-japan"
+          ensureSystemretroconfig "genesis"
+          ensureSystemretroconfig "genh"
+          ensureSystemretroconfig "sg-1000"
+          ensureSystemretroconfig "segacd"
+          ensureSystemretroconfig "markiii"
+
+          local def=0
+          isPlatform "armv6" && def=0
+
+          addEmulator 0 "gamegear"
+          addEmulator 0 "ggh"
+          addEmulator 0 "mastersystem"
+          addEmulator 0 "megadrive"
+          addEmulator 0 "megadrive-japan"
+          addEmulator 0 "genesis"
+          addEmulator 0 "genh"
+          addEmulator 0 "sg-1000"
+          addEmulator 0 "segacd"
+          addEmulator 0 "markiii"
+          addSystem  "gamegear"
+          addSystem  "mastersystem"
+          addSystem  "megadrive"
+          addSystem  "megadrive-japan"
+          addSystem  "genesis"
+          addSystem  "genh"
+          addSystem  "sg-1000"
+          addSystem  "segacd"
+          addSystem  "markiii"
     fi
+
     if [ ! -d $raconfigdir/overlay/GameBezels/Megadrive ]
         then
             git clone  https://github.com/thebezelproject/bezelproject-MegaDrive.git  "/home/$user/RetroPie-Setup/tmp/MegaDrive"
@@ -105,6 +181,7 @@ function configure_lr-genesis-plus-gx() {
                 iniSet "video_smooth" "true" "$core_config"
                 iniSet "input_libretro_device_p1" "513" "$core_config"
                 iniSet "input_libretro_device_p2" "513" "$core_config"
+                iniSet "genesis_plus_gx_region_detect" "pal" "$core_config"
 
                 cp /home/$user/.config/RetroPie/genesis/retroarch.cfg /home/$user/.config/RetroPie/genesis/retroarch.cfg.bkp
                 local core_config="$configdir/genesis/retroarch.cfg"
@@ -123,6 +200,8 @@ function configure_lr-genesis-plus-gx() {
                 iniSet "video_smooth" "true" "$core_config"
                 iniSet "input_libretro_device_p1" "513" "$core_config"
                 iniSet "input_libretro_device_p2" "513" "$core_config"
+                iniSet "genesis_plus_gx_region_detect" "ntsc-u" "$core_config"
+
 
 
                 cp /home/$user/.config/RetroPie/genh/retroarch.cfg /home/$user/.config/RetroPie/genh/retroarch.cfg.bkp
@@ -160,6 +239,8 @@ function configure_lr-genesis-plus-gx() {
                 iniSet "video_smooth" "true" "$core_config"
                 iniSet "input_libretro_device_p1" "513" "$core_config"
                 iniSet "input_libretro_device_p2" "513" "$core_config"
+                iniSet "genesis_plus_gx_region_detect" "ntsc-j" "$core_config"
+
     fi
     if [  -d $raconfigdir/overlay/GameBezels/SG-1000 ]
     then
@@ -191,6 +272,8 @@ function configure_lr-genesis-plus-gx() {
                 iniSet "video_smooth" "true" "$core_config"
                 iniSet "input_libretro_device_p1" "513" "$core_config"
                 iniSet "input_libretro_device_p2" "513" "$core_config"
+                iniSet "genesis_plus_gx_region_detect" "pal" "$core_config"
+
     fi
     if [  -d $raconfigdir/overlay/GameBezels/SG-1000 ]
     then
@@ -213,6 +296,8 @@ function configure_lr-genesis-plus-gx() {
                 iniSet "input_overlay_scale" "1.0" "$core_config"
                 iniSet "video_fullscreen_x" "1920" "$core_config"
                 iniSet "video_fullscreen_y" "1080" "$core_config"
+                iniSet "genesis_plus_gx_region_detect" "pal" "$core_config"
+
     fi
-done
+
 }

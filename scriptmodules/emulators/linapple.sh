@@ -57,6 +57,6 @@ function configure_linapple() {
         done
     fi
 
-    addEmulator 1 "$md_id" "apple2" "pushd $romdir/apple2; $md_inst/linapple -1 %ROM%; popd"
+    addEmulator 0 "$md_id" "apple2" "pushd $romdir/apple2; $md_inst/linapple -1 %ROM%; popd"
     addSystem "apple2"
 }

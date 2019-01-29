@@ -71,6 +71,6 @@ _EOF_
     chown -R $user:$user "$md_inst"
     chown -R $user:$user "$md_conf_root/daphne/dapinput.ini"
 
-    addEmulator 1 "$md_id" "daphne" "$md_inst/daphne.sh %ROM%"
+    addEmulator 0 "$md_id" "daphne" "$md_inst/daphne.sh %ROM%"
     addSystem "daphne"
 }

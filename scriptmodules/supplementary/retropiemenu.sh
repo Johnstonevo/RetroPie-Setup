@@ -34,7 +34,7 @@ function configure_retropiemenu()
 {
     [[ "$md_mode" == "remove" ]] && return
 
-    local rpdir="$home/RetroPie/retropiemenu"
+    local rpdir="$datadir/retropiemenu"
     mkdir -p "$rpdir"
     cp -Rv "$md_data/icons" "$rpdir/"
     chown -R $user:$user "$rpdir"

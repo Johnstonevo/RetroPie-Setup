@@ -42,20 +42,98 @@ function install_lr-picodrive() {
 }
 
 function configure_lr-picodrive() {
-    local system
-    for system in megadrive genh genesis mastersystem segacd sega32x megadrive-japan; do
-        mkRomDir "$system"
-        ensureSystemretroconfig "$system"
-        addEmulator 1 "$md_id" "$system" "$md_inst/picodrive_libretro.so"
-        addSystem "$system"
+  mkRomDir "gamegear"
+  mkRomDir "ggh"
+  mkRomDir "mastersystem"
+  mkRomDir "megadrive"
+  mkRomDir "megadrive-japan"
+  mkRomDir "genesis"
+  mkRomDir "genh"
+  mkRomDir "sg-1000"
+  mkRomDir "segacd"
+  mkRomDir "markiii"
+  ensureSystemretroconfig "gamegear"
+  ensureSystemretroconfig "ggh"
+  ensureSystemretroconfig "mastersystem"
+  ensureSystemretroconfig "megadrive"
+  ensureSystemretroconfig "megadrive-japan"
+  ensureSystemretroconfig "genesis"
+  ensureSystemretroconfig "genh"
+  ensureSystemretroconfig "sg-1000"
+  ensureSystemretroconfig "segacd"
+  ensureSystemretroconfig "markiii"
+
+  local def=0
+  isPlatform "armv6" && def=0
+
+  addEmulator 0 "gamegear"
+  addEmulator 0 "ggh"
+  addEmulator 0 "mastersystem"
+  addEmulator 0 "megadrive"
+  addEmulator 0 "megadrive-japan"
+  addEmulator 0 "genesis"
+  addEmulator 0 "genh"
+  addEmulator 0 "sg-1000"
+  addEmulator 0 "segacd"
+  addEmulator 0 "markiii"
+  addSystem  "gamegear"
+  addSystem  "mastersystem"
+  addSystem  "megadrive"
+  addSystem  "megadrive-japan"
+  addSystem  "genesis"
+  addSystem  "genh"
+  addSystem  "sg-1000"
+  addSystem  "segacd"
+  addSystem  "markiii"
 
 
         if [ -e /usr/lib/libretro/picodrive_libretro.so ]
             then
-                addEmulator "$def" "$md_id-ppa" "$system" "$md_instppa/picodrive_libretro.so"
-                addSystem "$system"
+              mkRomDir "gamegear"
+              mkRomDir "ggh"
+              mkRomDir "mastersystem"
+              mkRomDir "megadrive"
+              mkRomDir "megadrive-japan"
+              mkRomDir "genesis"
+              mkRomDir "genh"
+              mkRomDir "sg-1000"
+              mkRomDir "segacd"
+              mkRomDir "markiii"
+              ensureSystemretroconfig "gamegear"
+              ensureSystemretroconfig "ggh"
+              ensureSystemretroconfig "mastersystem"
+              ensureSystemretroconfig "megadrive"
+              ensureSystemretroconfig "megadrive-japan"
+              ensureSystemretroconfig "genesis"
+              ensureSystemretroconfig "genh"
+              ensureSystemretroconfig "sg-1000"
+              ensureSystemretroconfig "segacd"
+              ensureSystemretroconfig "markiii"
+
+              local def=0
+              isPlatform "armv6" && def=0
+
+              addEmulator 0 "gamegear"
+              addEmulator 0 "ggh"
+              addEmulator 0 "mastersystem"
+              addEmulator 0 "megadrive"
+              addEmulator 0 "megadrive-japan"
+              addEmulator 0 "genesis"
+              addEmulator 0 "genh"
+              addEmulator 0 "sg-1000"
+              addEmulator 0 "segacd"
+              addEmulator 0 "markiii"
+              addSystem  "gamegear"
+              addSystem  "mastersystem"
+              addSystem  "megadrive"
+              addSystem  "megadrive-japan"
+              addSystem  "genesis"
+              addSystem  "genh"
+              addSystem  "sg-1000"
+              addSystem  "segacd"
+              addSystem  "markiii"
         fi
-    done
+
 setRetroArchCoreOption "picodrive_input1" "6 button pad"
 setRetroArchCoreOption "picodrive_input2" "6 button pad"
 setRetroArchCoreOption "picodrive_sprlim" "disabled"
@@ -123,6 +201,7 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "picodrive_ramcart"  "disabled" "$core_config"
             iniSet "picodrive_region"  "Auto" "$core_config"
             iniSet "picodrive_drc"  "enabled" "$core_config"
+            iniSet "picodrive_region" "Europe" "$core_config"
 
             cp /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg.bkp
             local core_config="$configdir/megadrive-japan/retroarch.cfg"
@@ -145,6 +224,7 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "picodrive_ramcart"  "disabled" "$core_config"
             iniSet "picodrive_region"  "Auto" "$core_config"
             iniSet "picodrive_drc"  "enabled" "$core_config"
+            iniSet "picodrive_region" "Japan Pal" "$core_config"
 
             cp /home/$user/.config/RetroPie/genesis/retroarch.cfg /home/$user/.config/RetroPie/genesis/retroarch.cfg.bkp
             local core_config="$configdir/genesis/retroarch.cfg"
@@ -209,6 +289,8 @@ if [  -d $raconfigdir/overlay/GameBezels/SegaCD ]
             iniSet "picodrive_ramcart"  "disabled" "$core_config"
             iniSet "picodrive_region"  "Auto" "$core_config"
             iniSet "picodrive_drc"  "enabled" "$core_config"
+            iniSet "picodrive_region" "Europe" "$core_config"
+
 
 fi
 if [  -d $raconfigdir/overlay/GameBezels/MasterSystem ]
@@ -221,6 +303,8 @@ if [  -d $raconfigdir/overlay/GameBezels/MasterSystem ]
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
             iniSet "video_fullscreen_y" "1080" "$core_config"
+            iniSet "picodrive_region" "Europe" "$core_config"
+
 fi
 if [  -d $raconfigdir/overlay/GameBezels/Sega32X ]
  then
@@ -245,5 +329,7 @@ if [  -d $raconfigdir/overlay/GameBezels/Sega32X ]
             iniSet "picodrive_ramcart"  "disabled" "$core_config"
             iniSet "picodrive_region"  "Auto" "$core_config"
             iniSet "picodrive_drc"  "enabled" "$core_config"
+            iniSet "picodrive_region" "Europe" "$core_config"
+
 fi
 }

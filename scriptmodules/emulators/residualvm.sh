@@ -82,6 +82,6 @@ _EOF_
     chmod u+x "$romdir/residualvm/+Start ResidualVM.sh"
 
     addEmulator 0 "$md_id" "residualvm" "bash $romdir/residualvm/+Start\ ResidualVM.sh opengl_shaders %BASENAME%"
-    addEmulator 1 "$md_id-software" "residualvm" "bash $romdir/residualvm/+Start\ ResidualVM.sh software %BASENAME%"
+    addEmulator 0 "$md_id-software" "residualvm" "bash $romdir/residualvm/+Start\ ResidualVM.sh software %BASENAME%"
     addSystem "residualvm" "ResidualVM" ".sh .rvm"
 }

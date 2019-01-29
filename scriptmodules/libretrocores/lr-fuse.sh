@@ -49,7 +49,7 @@ function configure_lr-fuse() {
     iniSet  "fuse_machine" "Spectrum 128K" "$core_config"
     iniSet "fuse_load_sound" "off"
     chown $user:$user "$core_config"
-    addEmulator 1 "$md_id" "zxspectrum" "$md_inst/fuse_libretro.so"
+    addEmulator 0 "$md_id" "zxspectrum" "$md_inst/fuse_libretro.so"
     addSystem "zxspectrum"
 
     if [ -e /usr/lib/libretro/fuse_libretro.so ]

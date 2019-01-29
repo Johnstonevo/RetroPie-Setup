@@ -59,7 +59,7 @@ function configure_lr-mame() {
   if [ -e /usr/lib/libretro/mame_libretro.so ]
   then
       addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame_libretro.so"
-  addEmulator 1 "$md_id-ppa" "mame-current" "$md_instppa/mame_libretro.so"
+  addEmulator 0 "$md_id-ppa" "mame-current" "$md_instppa/mame_libretro.so"
   fi
 if [ !  -d $raconfigdir/overlay/ArcadeBezels ]
 then
