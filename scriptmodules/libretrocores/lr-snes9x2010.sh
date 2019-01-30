@@ -9,22 +9,22 @@
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
 
-rp_module_id="lr-snes9x20102010"
+rp_module_id="lr-snes9x2010"
 rp_module_desc="Super Nintendo emu - snes9x2010 1.52 based port for libretro"
 rp_module_help="Previously called lr-snes9x2010-next\n\nROM Extensions: .bin .smc .sfc .fig .swc .mgd .zip\n\nCopy your SNES roms to $romdir/snes"
-rp_module_licence="NONCOM https://raw.githubusercontent.com/libretro/snes9x20102010/master/docs/snes9x2010-license.txt"
+rp_module_licence="NONCOM https://raw.githubusercontent.com/libretro/snes9x2010/master/docs/snes9x2010-license.txt"
 rp_module_section="main"
 
-function _update_hook_lr-snes9x20102010() {
+function _update_hook_lr-snes9x2010() {
     # move from old location and update emulators.cfg
-    renameModule "lr-snes9x2010-next" "lr-snes9x20102010"
+    renameModule "lr-snes9x2010-next" "lr-snes9x2010"
 }
 
-function sources_lr-snes9x20102010() {
-    gitPullOrClone "$md_build" https://github.com/libretro/snes9x20102010.git
+function sources_lr-snes9x2010() {
+    gitPullOrClone "$md_build" https://github.com/libretro/snes9x2010.git
 }
 
-function build_lr-snes9x20102010() {
+function build_lr-snes9x2010() {
     make -f Makefile.libretro clean
     local platform=""
     isPlatform "arm" && platform+="armv"
@@ -34,17 +34,17 @@ function build_lr-snes9x20102010() {
     else
         make -f Makefile.libretro
     fi
-    md_ret_require="$md_build/snes9x20102010_libretro.so"
+    md_ret_require="$md_build/snes9x2010_libretro.so"
 }
 
-function install_lr-snes9x20102010() {
+function install_lr-snes9x2010() {
     md_ret_files=(
-        'snes9x20102010_libretro.so'
+        'snes9x2010_libretro.so'
         'docs'
     )
 }
 
-function configure_lr-snes9x20102010() {
+function configure_lr-snes9x2010() {
   mkRomDir "snes"
   mkRomDir "snesh"
     mkRomDir "sfc"
@@ -61,7 +61,7 @@ function configure_lr-snes9x20102010() {
     addEmulator 1 "$md_id" "snes" "$md_inst/snes9x2010_libretro.so"
     addEmulator 0 "$md_id" "snesh" "$md_inst/snes9x2010_libretro.so"
     addEmulator 1 "$md_id" "sfc" "$md_inst/snes9x2010_libretro.so"
-    addEmulator 1 "$md_id" "snescd" "$md_inst/snes9x2010_libretro.so"
+    addEmulator 0 "$md_id" "snescd" "$md_inst/snes9x2010_libretro.so"
     addEmulator 1 "$md_id" "nintendobsx" "$md_inst/snes9x2010_libretro.so"
     addEmulator 1 "$md_id" "sufami" "$md_inst/snes9x2010_libretro.so"
     addSystem "snes"
@@ -116,8 +116,9 @@ if [  -d $raconfigdir/overlay/GameBezels/SNES ]
             iniSet "custom_viewport_y" "90" "$core_config"
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_smooth" "true" "$core_config"
-            chown $user:$user "$core_config"
+            iniSet "video_smooth" "false" "$core_config"
+            iniSet "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/snes_scanline.glslp" "$core_config"
+            iniSet "video_shader_enable"  "true" "$core_config"
 fi
 if [  -d $raconfigdir/overlay/GameBezels/SNES ]
  then
@@ -135,8 +136,9 @@ if [  -d $raconfigdir/overlay/GameBezels/SNES ]
             iniSet "custom_viewport_y" "90" "$core_config"
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_smooth" "true" "$core_config"
-            chown $user:$user "$core_config"
+            iniSet "video_smooth" "false" "$core_config"
+            iniSet "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/snes_scanline.glslp" "$core_config"
+            iniSet "video_shader_enable"  "true" "$core_config"
 fi
 if [  -d $configdir/snescd ]
  then
@@ -154,8 +156,9 @@ if [  -d $configdir/snescd ]
             iniSet "custom_viewport_y" "90" "$core_config"
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_smooth" "true" "$core_config"
-            chown $user:$user "$core_config"
+            iniSet "video_smooth" "false" "$core_config"
+            iniSet "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/snes_scanline.glslp" "$core_config"
+            iniSet "video_shader_enable"  "true" "$core_config"
 fi
 if [  -d $configdir/sfc ]
  then
@@ -173,8 +176,9 @@ if [  -d $configdir/sfc ]
             iniSet "custom_viewport_y" "90" "$core_config"
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_smooth" "true" "$core_config"
-            chown $user:$user "$core_config"
+            iniSet "video_smooth" "false" "$core_config"
+            iniSet "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/snes_scanline.glslp" "$core_config"
+            iniSet "video_shader_enable"  "true" "$core_config"
 fi
 if [  -d $configdir/nintendobsx ]
  then
@@ -192,8 +196,9 @@ if [  -d $configdir/nintendobsx ]
             iniSet "custom_viewport_y" "90" "$core_config"
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_smooth" "true" "$core_config"
-            chown $user:$user "$core_config"
+            iniSet "video_smooth" "false" "$core_config"
+            iniSet "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/snes_scanline.glslp" "$core_config"
+            iniSet "video_shader_enable"  "true" "$core_config"
 fi
 if [  -d $configdir/sufami ]
  then
@@ -211,7 +216,8 @@ if [  -d $configdir/sufami ]
             iniSet "custom_viewport_y" "90" "$core_config"
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_smooth" "true" "$core_config"
-            chown $user:$user "$core_config"
+            iniSet "video_smooth" "false" "$core_config"
+            iniSet "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/snes_scanline.glslp" "$core_config"
+            iniSet "video_shader_enable"  "true" "$core_config"
 fi
 }

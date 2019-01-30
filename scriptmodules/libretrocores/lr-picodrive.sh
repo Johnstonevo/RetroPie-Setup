@@ -52,6 +52,8 @@ function configure_lr-picodrive() {
   mkRomDir "sg-1000"
   mkRomDir "segacd"
   mkRomDir "markiii"
+  mkRomDir "32x"
+  mkRomDir "sc-3000"
   ensureSystemretroconfig "gamegear"
   ensureSystemretroconfig "ggh"
   ensureSystemretroconfig "mastersystem"
@@ -62,20 +64,24 @@ function configure_lr-picodrive() {
   ensureSystemretroconfig "sg-1000"
   ensureSystemretroconfig "segacd"
   ensureSystemretroconfig "markiii"
+  ensureSystemretroconfig "32x"
+  ensureSystemretroconfig "sc-3000"
 
   local def=0
   isPlatform "armv6" && def=0
 
-  addEmulator 0 "gamegear"
-  addEmulator 0 "ggh"
-  addEmulator 0 "mastersystem"
-  addEmulator 0 "megadrive"
-  addEmulator 0 "megadrive-japan"
-  addEmulator 0 "genesis"
-  addEmulator 0 "genh"
-  addEmulator 0 "sg-1000"
-  addEmulator 0 "segacd"
-  addEmulator 0 "markiii"
+  addEmulator 0 "$md_id"  "gamegear" "$md_inst/picodrive_libretro.so"
+  addEmulator 0 "$md_id"  "ggh" "$md_inst/picodrive_libretro.so"
+  addEmulator 1 "$md_id"  "mastersystem" "$md_inst/picodrive_libretro.so"
+  addEmulator 1 "$md_id"  "megadrive" "$md_inst/picodrive_libretro.so"
+  addEmulator 1 "$md_id"  "megadrive-japan" "$md_inst/picodrive_libretro.so"
+  addEmulator 1 "$md_id"  "genesis" "$md_inst/picodrive_libretro.so"
+  addEmulator 1 "$md_id"  "genh" "$md_inst/picodrive_libretro.so"
+  addEmulator 0 "$md_id"  "sg-1000" "$md_inst/picodrive_libretro.so"
+  addEmulator 0 "$md_id"  "segacd" "$md_inst/picodrive_libretro.so"
+  addEmulator 0 "$md_id"  "markiii" "$md_inst/picodrive_libretro.so"
+  addEmulator 1 "$md_id"  "32x" "$md_inst/picodrive_libretro.so"
+  addEmulator 1 "$md_id"  "sc-3000" "$md_inst/picodrive_libretro.so"
   addSystem  "gamegear"
   addSystem  "mastersystem"
   addSystem  "megadrive"
@@ -85,6 +91,8 @@ function configure_lr-picodrive() {
   addSystem  "sg-1000"
   addSystem  "segacd"
   addSystem  "markiii"
+  addSystem  "32x"
+  addSystem  "sc-3000"
 
 
         if [ -e /usr/lib/libretro/picodrive_libretro.so ]
@@ -99,6 +107,8 @@ function configure_lr-picodrive() {
               mkRomDir "sg-1000"
               mkRomDir "segacd"
               mkRomDir "markiii"
+              mkRomDir "32x"
+              mkRomDir "sc-3000"
               ensureSystemretroconfig "gamegear"
               ensureSystemretroconfig "ggh"
               ensureSystemretroconfig "mastersystem"
@@ -109,20 +119,24 @@ function configure_lr-picodrive() {
               ensureSystemretroconfig "sg-1000"
               ensureSystemretroconfig "segacd"
               ensureSystemretroconfig "markiii"
+              ensureSystemretroconfig "32x"
+              ensureSystemretroconfig "sc-3000"
 
               local def=0
               isPlatform "armv6" && def=0
 
-              addEmulator 0 "gamegear"
-              addEmulator 0 "ggh"
-              addEmulator 0 "mastersystem"
-              addEmulator 0 "megadrive"
-              addEmulator 0 "megadrive-japan"
-              addEmulator 0 "genesis"
-              addEmulator 0 "genh"
-              addEmulator 0 "sg-1000"
-              addEmulator 0 "segacd"
-              addEmulator 0 "markiii"
+              addEmulator 0 "$md_id-ppa"  "gamegear" "$md_instppa/picodrive_libretro.so"
+              addEmulator 0 "$md_id-ppa" "ggh" "$md_instppa/picodrive_libretro.so"
+              addEmulator 1 "$md_id-ppa" "mastersystem" "$md_instppa/picodrive_libretro.so"
+              addEmulator 1 "$md_id-ppa" "megadrive" "$md_instppa/picodrive_libretro.so"
+              addEmulator 1 "$md_id-ppa" "megadrive-japan" "$md_instppa/picodrive_libretro.so"
+              addEmulator 1 "$md_id-ppa" "genesis" "$md_instppa/picodrive_libretro.so"
+              addEmulator 1 "$md_id-ppa" "genh" "$md_instppa/picodrive_libretro.so"
+              addEmulator 0 "$md_id-ppa" "sg-1000" "$md_instppa/picodrive_libretro.so"
+              addEmulator 0 "$md_id-ppa" "segacd" "$md_instppa/picodrive_libretro.so"
+              addEmulator 0 "$md_id-ppa" "markiii" "$md_instppa/picodrive_libretro.so"
+              addEmulator 1 "$md_id-ppa" "32x" "$md_instppa/picodrive_libretro.so"
+              addEmulator 1 "$md_id-ppa" "sc-3000" "$md_instppa/picodrive_libretro.so"
               addSystem  "gamegear"
               addSystem  "mastersystem"
               addSystem  "megadrive"
@@ -132,6 +146,9 @@ function configure_lr-picodrive() {
               addSystem  "sg-1000"
               addSystem  "segacd"
               addSystem  "markiii"
+              addSystem  "32x"
+              addSystem  "sc-3000"
+
         fi
 
 setRetroArchCoreOption "picodrive_input1" "6 button pad"
@@ -194,14 +211,16 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "custom_viewport_y" "90" "$core_config"
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_smooth" "true" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
             iniSet "picodrive_sprlim"  "disabled" "$core_config"
             iniSet "picodrive_ramcart"  "disabled" "$core_config"
             iniSet "picodrive_region"  "Auto" "$core_config"
             iniSet "picodrive_drc"  "enabled" "$core_config"
-            iniSet "picodrive_region" "Europe" "$core_config"
+            iniSet "picodrive_region" "Auto" "$core_config"
+            iniSet "video_smooth" "false" "$core_config"
+            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader_enable"  "true" "$core_config"
 
             cp /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg.bkp
             local core_config="$configdir/megadrive-japan/retroarch.cfg"
@@ -217,7 +236,9 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "custom_viewport_y" "90" "$core_config"
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_smooth" "true" "$core_config"
+            iniSet "video_smooth" "false" "$core_config"
+            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader_enable"  "true" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
             iniSet "picodrive_sprlim"  "disabled" "$core_config"
@@ -240,7 +261,9 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "custom_viewport_y" "90" "$core_config"
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_smooth" "true" "$core_config"
+            iniSet "video_smooth" "false" "$core_config"
+            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader_enable"  "true" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
             iniSet "picodrive_sprlim"  "disabled" "$core_config"
@@ -262,7 +285,9 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "custom_viewport_y" "90" "$core_config"
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_smooth" "true" "$core_config"
+            iniSet "video_smooth" "false" "$core_config"
+            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader_enable"  "true" "$core_config"
             iniSet "input_libretro_device_p1" "513" "$core_config"
             iniSet "input_libretro_device_p2" "513" "$core_config"
 fi
@@ -282,14 +307,16 @@ if [  -d $raconfigdir/overlay/GameBezels/SegaCD ]
             iniSet "custom_viewport_y" "90" "$core_config"
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_smooth" "true" "$core_config"
+            iniSet "video_smooth" "false" "$core_config"
+            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader_enable"  "true" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
             iniSet "picodrive_sprlim"  "disabled" "$core_config"
             iniSet "picodrive_ramcart"  "disabled" "$core_config"
             iniSet "picodrive_region"  "Auto" "$core_config"
             iniSet "picodrive_drc"  "enabled" "$core_config"
-            iniSet "picodrive_region" "Europe" "$core_config"
+            iniSet "picodrive_region" "Auto" "$core_config"
 
 
 fi
@@ -303,7 +330,11 @@ if [  -d $raconfigdir/overlay/GameBezels/MasterSystem ]
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
             iniSet "video_fullscreen_y" "1080" "$core_config"
-            iniSet "picodrive_region" "Europe" "$core_config"
+            iniSet "picodrive_region" "Auto" "$core_config"
+            iniSet "video_smooth" "false" "$core_config"
+            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader_enable"  "true" "$core_config"
+
 
 fi
 if [  -d $raconfigdir/overlay/GameBezels/Sega32X ]
@@ -329,7 +360,11 @@ if [  -d $raconfigdir/overlay/GameBezels/Sega32X ]
             iniSet "picodrive_ramcart"  "disabled" "$core_config"
             iniSet "picodrive_region"  "Auto" "$core_config"
             iniSet "picodrive_drc"  "enabled" "$core_config"
-            iniSet "picodrive_region" "Europe" "$core_config"
+            iniSet "picodrive_region" "Auto" "$core_config"
+            iniSet "video_smooth" "false" "$core_config"
+            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader_enable"  "true" "$core_config"
+
 
 fi
 }

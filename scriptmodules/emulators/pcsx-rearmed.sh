@@ -55,7 +55,9 @@ function install_pcsx-rearmed() {
 
 function configure_pcsx-rearmed() {
     mkRomDir "psx"
+    mkRomDir "psx-japan"
     mkUserDir "$md_conf_root/psx"
+    mkUserDir "$md_conf_root/psx-japan"
     mkdir -p "$md_inst/bios"
 
     # symlink the bios so it can be installed with the other bios files
@@ -68,4 +70,6 @@ function configure_pcsx-rearmed() {
 
     addEmulator 0 "$md_id" "psx" "pushd $md_inst; ./pcsx -cdfile %ROM%; popd"
     addSystem "psx"
+    addEmulator 0 "$md_id" "psx-japan" "pushd $md_inst; ./pcsx -cdfile %ROM%; popd"
+    addSystem "psx-japan"
 }

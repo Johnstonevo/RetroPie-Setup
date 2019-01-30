@@ -76,9 +76,9 @@ function configure_lr-mupen64plus() {
   ensureSystemretroconfig "n64-japan"
   ensureSystemretroconfig "n64dd"
 
-  addEmulator 0 "$md_id" "n64" "$md_inst/mupen64plus_libretro.so"
-  addEmulator 0 "$md_id" "n64-japan" "$md_inst/mupen64plus_libretro.so"
-  addEmulator 0 "$md_id" "n64dd" "$md_inst/mupen64plus_libretro.so"
+  addEmulator 1 "$md_id" "n64" "$md_inst/mupen64plus_libretro.so"
+  addEmulator 1 "$md_id" "n64-japan" "$md_inst/mupen64plus_libretro.so"
+  addEmulator 1 "$md_id" "n64dd" "$md_inst/mupen64plus_libretro.so"
   addSystem "n64"
   addSystem "n64-japan"
   addSystem "n64dd"

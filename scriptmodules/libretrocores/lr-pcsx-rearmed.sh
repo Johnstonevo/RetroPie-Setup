@@ -49,20 +49,23 @@ function install_lr-pcsx-rearmed() {
 }
 
 function configure_lr-pcsx-rearmed() {
-    local system
     local def
-    for system in psx psx-japan; do
         def=1
-        [[ "$system" == "psx" || "$system" == "psx-japan" ]] && def=1
-        mkRomDir "$system"
-        ensureSystemretroconfig "$system"
-        addEmulator 0 "$md_id" "$system" "$md_inst/libretro.so"
-        addSystem "$system"
+        mkRomDir "psx"
+        ensureSystemretroconfig "psx"
+        addEmulator 1 "$md_id" "psx" "$md_inst/libretro.so"
+        addSystem "psx"
+
+        mkRomDir "psx-japan"
+        ensureSystemretroconfig "psx-japan"
+        addEmulator 1 "$md_id" "psx-japan" "$md_inst/libretro.so"
+        addSystem "psx-japan"
+
         setRetroArchCoreOption "pcsx_rearmed_neon_enhancement_enable" "enabled" # Double resolution
         setRetroArchCoreOption "pcsx_rearmed_neon_enhancement_no_main" "enabled" # Speed hack
 
     if [ -e /usr/lib/libretro/pcsx1_libretro.so ]
-                    then 
+                    then
                                 addEmulator 0 "$md_id-ppa" "psx" "$md_instppa/pcsx1_libretro.so"
                                 addSystem "psx" "$md_instppa/pcsx1_libretro.so"
                                 addEmulator 0 "$md_id-ppa" "psx-japan" "$md_instppa/pcsx1_libretro.so"
@@ -72,7 +75,7 @@ function configure_lr-pcsx-rearmed() {
     fi
 
     if [ ! -d $raconfigdir/overlay/GameBezels/PSX ]
-        then 
+        then
             git clone  https://github.com/thebezelproject/bezelproject-PSX.git  "/home/$user/RetroPie-Setup/tmp/PSX"
             cp -r  /home/$user/RetroPie-Setup/tmp/PSX/retroarch/  /home/$user/.config/
             rm -rf /home/$user/RetroPie-Setup/tmp/PSX/
@@ -134,12 +137,12 @@ function configure_lr-pcsx-rearmed() {
         iniSet  "pcsx_rearmed_neon_enhancement_no_main" "enabled" "$core_config"
         iniSet  "pcsx_rearmed_pad1type" "analog" "$core_config"
         iniSet  "pcsx_rearmed_pad2type" "analog" "$core_config"
-        #iniSet "pcsx_rearmed_show_bios_bootlogo" "enableded" "$core_config"
+        iniSet "pcsx_rearmed_show_bios_bootlogo" "enabled" "$core_config"
         iniSet  "beetle_psx_widescreen_hack" "on" "$core_config"
         iniSet  "beetle_psx_internal_resolution" "4x" "$core_config"
 
         chown $user:$user "$core_config"
 
     fi
-    done
+
 }

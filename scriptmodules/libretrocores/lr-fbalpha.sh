@@ -109,6 +109,8 @@ if [ -e /usr/lib/libretro/fbalpha_libretro.so ]
         addEmulator 0 "$md_id-ppa-sms" "mastersystem" "$md_instppa/fbalpha_libretro.so --subsystem sms"
         addEmulator 0 "$md_id-ppa-md" "megadrive" "$md_instppa/fbalpha_libretro.so --subsystem md"
         addEmulator 0 "$md_id-ppa-sg1k" "sg-1000" "$md_instppa/fbalpha_libretro.so --subsystem sg1k"
+        addEmulator 0 "$md_id-md" "megadrive-japan" "$md_inst/fbalpha_libretro.so --subsystem md"
+
 
 fi
 

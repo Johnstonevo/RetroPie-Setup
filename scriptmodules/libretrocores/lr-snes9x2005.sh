@@ -109,8 +109,7 @@ function configure_lr-snes9x2005() {
                 iniSet "custom_viewport_y" "90" "$core_config"
                 iniSet "aspect_ratio_index" "22" "$core_config"
                 iniSet "input_overlay_enable" "true" "$core_config"
-                iniSet "video_smooth" "true" "$core_config"
-                iniSet "catsfc_VideoMode" "pal" "$core_config"
+                iniSet "video_smooth" "false" "$core_config"
                 chown $user:$user "$core_config"
     fi
     if [  -d $raconfigdir/overlay/GameBezels/SNES ]
@@ -129,7 +128,10 @@ function configure_lr-snes9x2005() {
                 iniSet "custom_viewport_y" "90" "$core_config"
                 iniSet "aspect_ratio_index" "22" "$core_config"
                 iniSet "input_overlay_enable" "true" "$core_config"
-                iniSet "video_smooth" "true" "$core_config"
+                iniSet "video_smooth" "false" "$core_config"
+                iniSet "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/snes_scanline.glslp" "$core_config"
+                iniSet "video_shader_enable"  "true" "$core_config"
+
                 chown $user:$user "$core_config"
     fi
     if [  -d $configdir/snescd ]
@@ -148,8 +150,9 @@ function configure_lr-snes9x2005() {
                 iniSet "custom_viewport_y" "90" "$core_config"
                 iniSet "aspect_ratio_index" "22" "$core_config"
                 iniSet "input_overlay_enable" "true" "$core_config"
-                iniSet "video_smooth" "true" "$core_config"
-                chown $user:$user "$core_config"
+                iniSet "video_smooth" "false" "$core_config"
+                iniSet "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/snes_scanline.glslp" "$core_config"
+                iniSet "video_shader_enable"  "true" "$core_config"
     fi
     if [  -d $configdir/sfc ]
      then
@@ -167,8 +170,9 @@ function configure_lr-snes9x2005() {
                 iniSet "custom_viewport_y" "90" "$core_config"
                 iniSet "aspect_ratio_index" "22" "$core_config"
                 iniSet "input_overlay_enable" "true" "$core_config"
-                iniSet "video_smooth" "true" "$core_config"
-                chown $user:$user "$core_config"
+                iniSet "video_smooth" "false" "$core_config"
+                iniSet "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/snes_scanline.glslp" "$core_config"
+                iniSet "video_shader_enable"  "true" "$core_config"
     fi
     if [  -d $configdir/nintendobsx ]
      then
@@ -186,8 +190,9 @@ function configure_lr-snes9x2005() {
                 iniSet "custom_viewport_y" "90" "$core_config"
                 iniSet "aspect_ratio_index" "22" "$core_config"
                 iniSet "input_overlay_enable" "true" "$core_config"
-                iniSet "video_smooth" "true" "$core_config"
-                chown $user:$user "$core_config"
+                iniSet "video_smooth" "false" "$core_config"
+                iniSet "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/snes_scanline.glslp" "$core_config"
+                iniSet "video_shader_enable"  "true" "$core_config"
     fi
     if [ -d $configdir/sufami ]
      then
@@ -205,8 +210,9 @@ function configure_lr-snes9x2005() {
                 iniSet "custom_viewport_y" "90" "$core_config"
                 iniSet "aspect_ratio_index" "22" "$core_config"
                 iniSet "input_overlay_enable" "true" "$core_config"
-                iniSet "video_smooth" "true" "$core_config"
-                chown $user:$user "$core_config"
+                iniSet "video_smooth" "false" "$core_config"
+                iniSet "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/snes_scanline.glslp" "$core_config"
+                iniSet "video_shader_enable"  "true" "$core_config"
     fi
 
 }

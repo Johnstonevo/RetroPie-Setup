@@ -138,7 +138,6 @@ if [  -d $raconfigdir/overlay/GameBezels/NES ]
             iniSet "video_force_aspect" "true"
             iniSet "video_aspect_ratio" "1.0"
             iniSet "video_smooth" "false"
-            iniSet "fceumm_region" "PAL"
            chown $user:$user "$core_config"
 
 fi
@@ -161,7 +160,6 @@ if [  -d $raconfigdir/overlay/GameBezels/fds ]
             iniSet "video_force_aspect" "true"
             iniSet "video_aspect_ratio" "1.0"
             iniSet "video_smooth" "false"
-            iniSet "fceumm_region" "PAL"
            chown $user:$user "$core_config"
 
 fi
@@ -184,7 +182,6 @@ if [  -d $raconfigdir/overlay/GameBezels/Famicom ]
             iniSet "video_force_aspect" "true"
             iniSet "video_aspect_ratio" "1.0"
             iniSet "video_smooth" "false"
-            iniSet "fceumm_region" "PAL"
            chown $user:$user "$core_config"
 fi
 }

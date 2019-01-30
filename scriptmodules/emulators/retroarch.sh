@@ -111,7 +111,8 @@ function update_overlays_retroarch() {
     local dir="$raconfigdir/overlays"
     # remove if not a git repository for fresh checkout
     [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
-    gitPullOrClone "$raconfigdir" https://github.com/Johnstonevo/overlays.git
+
+    gitPullOrClone "$raconfigdir/overlays" https://github.com/Johnstonevo/overlays.git
     chown -R $user:$user "$dir"
 }
 
@@ -125,21 +126,21 @@ function update_assets_retroarch() {
 
 
 
-#function update_database_retroarch() {
-#     if  isPlatform "x86" ; then
-#    mkUserDir "$raconfigdir/database"
-#    local dir="$raconfigdir/database"
-#    # remove if not a git repository for fresh checkout
-#    [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
-#    gitPullOrClone "$md_build/libretro-super" https://github.com/libretro/libretro-super.git
-#    cd "$md_build/libretro-super"
-#   ./libretro-fetch.sh retroarch
-#   ./libretro-build-database.sh
-#    cd "$md_build/libretro-super/retroarch/media/libretrodb/rdb"
-#    cp -R "$md_build/libretro-super/retroarch/media/libretrodb/rdb" "$dir"
-#    chown -R $user:$user "$dir"
-#    fi
-#}
+function install_database_retroarch() {
+     if  isPlatform "x86" ; then
+    mkUserDir "$raconfigdir/database"
+    local dir="$raconfigdir/database"
+    # remove if not a git repository for fresh checkout
+    [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
+    gitPullOrClone "$md_build/libretro-super" https://github.com/libretro/libretro-super.git
+    cd "$md_build/libretro-super"
+   ./libretro-fetch.sh retroarch
+   ./libretro-build-database.sh
+    cd "$md_build/libretro-super/retroarch/media/libretrodb/rdb"
+    cp -R "$md_build/libretro-super/retroarch/media/libretrodb/rdb" "$dir"
+    chown -R $user:$user "$dir"
+    fi
+}
 
 function install_xmb_monochrome_assets_retroarch() {
     if  isPlatform "x86" ; then
@@ -200,11 +201,12 @@ function configure_retroarch() {
     # install shaders by default
     update_shaders_retroarch
     update_assets_retroarch
+    update_overlays_retroarch
     # install assets
     install_xmb_monochrome_assets_retroarch
     _package_xmb_monochrome_assets_retroarch
     #install databases
-    update_database_retroarch
+    install_database_retroarch
 
     local config="$(mktemp)"
 

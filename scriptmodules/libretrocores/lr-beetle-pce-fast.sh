@@ -43,31 +43,31 @@ function configure_lr-beetle-pce-fast() {
     mkRomDir "pcengine"
     mkRomDir "pce-cd"
     ensureSystemretroconfig "tg16"
-    ensureSystemretroconfig "tg16cd"
+    ensureSystemretroconfig "tg-cd"
 
-    addEmulator 0 "$md_id" "pcengine" "$md_inst/mednafen_pce_fast_libretro.so"
-    addEmulator 0 "$md_id" "pce-cd" "$md_inst/mednafen_pce_fast_libretro.so"
-    addEmulator 0 "$md_id" "tg16" "$md_inst/mednafen_pce_fast_libretro.so"
-    addEmulator 0 "$md_id" "tg16cd" "$md_inst/mednafen_pce_fast_libretro.so"
+    addEmulator 1 "$md_id" "pcengine" "$md_inst/mednafen_pce_fast_libretro.so"
+    addEmulator 1 "$md_id" "pce-cd" "$md_inst/mednafen_pce_fast_libretro.so"
+    addEmulator 1 "$md_id" "tg16" "$md_inst/mednafen_pce_fast_libretro.so"
+    addEmulator 1 "$md_id" "tg-cd" "$md_inst/mednafen_pce_fast_libretro.so"
     addSystem "pcengine"
     addSystem "pce-cd"
     addSystem "tg16"
-    addSystem "tg16cd"
+    addSystem "tg-cd"
 
         if [ -e /usr/lib/libretro/mednafen_pce_fast.so ]
         then
         ensureSystemretroconfig "tg16"
-        ensureSystemretroconfig "tg16cd"
+        ensureSystemretroconfig "tg-cd"
 
         addEmulator 0 "$md_id" "pcengine" "$md_inst/mednafen_pce_fast_libretro.so"
         addEmulator 0 "$md_id" "pce-cd" "$md_inst/mednafen_pce_fast_libretro.so"
         addEmulator 0 "$md_id" "tg16" "$md_inst/mednafen_pce_fast_libretro.so"
-        addEmulator 0 "$md_id" "tg16cd" "$md_inst/mednafen_pce_fast_libretro.so"
+        addEmulator 0 "$md_id" "tg-cd" "$md_inst/mednafen_pce_fast_libretro.so"
         addSystem "pcengine"
         addSystem "pce-cd"
         addSystem "tg16"
-        addSystem "tg16cd"
-        
+        addSystem "tg-cd"
+
         fi
         if [ ! -d $raconfigdir/overlay/GameBezels/TG-CD ]
         then
@@ -99,9 +99,9 @@ function configure_lr-beetle-pce-fast() {
         fi
         if [ ! -d $raconfigdir/overlay/GameBezels/TG-CD ]
             then
-             cp /home/$user/.config/RetroPie/tg16cd/retroarch.cfg /home/$user/.config/RetroPie/tg16cd/retroarch.cfg.bkp
-            local core_config="$configdir/tg16cd/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/tg16cd/retroarch.cfg"
+             cp /home/$user/.config/RetroPie/tg-cd/retroarch.cfg /home/$user/.config/RetroPie/tg-cd/retroarch.cfg.bkp
+            local core_config="$configdir/tg-cd/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/tg-cd/retroarch.cfg"
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"

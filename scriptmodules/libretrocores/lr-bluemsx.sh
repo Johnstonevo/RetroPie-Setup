@@ -40,6 +40,8 @@ function configure_lr-bluemsx() {
 
     mkRomDir "msx2"
     ensureSystemretroconfig "msx2"
+    mkRomDir "msx2+"
+    ensureSystemretroconfig "msx2+"
 
     mkRomDir "coleco"
     ensureSystemretroconfig "coleco"
@@ -73,9 +75,11 @@ function configure_lr-bluemsx() {
 
     addEmulator 0 "$md_id" "msx2" "$md_inst/bluemsx_libretro.so"
     addSystem "msx2"
+    addEmulator 0 "$md_id" "msx2+" "$md_inst/bluemsx_libretro.so"
+    addSystem "msx2+"
 
 
-    addEmulator 0 "$md_id" "coleco" "$md_inst/bluemsx_libretro.so"
+    addEmulator 1 "$md_id" "coleco" "$md_inst/bluemsx_libretro.so"
     addSystem "coleco"
      if [ -e /usr/lib/libretro/bluemsx_libretro.so ]
                 then
@@ -84,6 +88,8 @@ function configure_lr-bluemsx() {
 
     addEmulator 0 "$md_id-ppa" "msx2" "$md_inst/bluemsx_libretro.so"
     addSystem "msx2"
+    addEmulator 0 "$md_id-ppa" "msx2+" "$md_inst/bluemsx_libretro.so"
+    addSystem "msx2+"
 
 
     addEmulator 0 "$md_id-ppa" "coleco" "$md_instppa/bluemsx_libretro.so"

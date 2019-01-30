@@ -177,6 +177,7 @@ function build_attractmode() {
     local params=(prefix="$md_inst")
     isPlatform "rpi" && params+=(USE_GLES=1 EXTRA_CFLAGS="$CFLAGS -I$md_build/sfml-pi/include -L$md_build/sfml-pi/lib")
     make "${params[@]}"
+    make install
 
     # remove example configs
     rm -rf "$md_build/attract/config/emulators/"*
@@ -189,8 +190,8 @@ function install_attractmode() {
     mkdir -p "$md_inst"/{bin,share,share/attract}
     cp -v attract/attract "$md_inst/bin/"
     cp -Rv attract/config/* "$md_inst/share/attract"
-    cd attract
-    make install
+    #cd attract
+    #make install
 }
 
 #function remove_attractmode() {

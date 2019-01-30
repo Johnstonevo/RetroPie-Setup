@@ -37,11 +37,11 @@ function configure_lr-beetle-supergrafx() {
 
     addEmulator 0 "$md_id" "pcengine" "$md_inst/mednafen_supergrafx_libretro.so"
     addSystem "pcengine"
-    
+
     mkRomDir "sgfx"
     ensureSystemretroconfig "sgfx"
 
-    addEmulator 0 "$md_id" "sgfx" "$md_inst/mednafen_supergrafx_libretro.so"
+    addEmulator 1 "$md_id" "sgfx" "$md_inst/mednafen_supergrafx_libretro.so"
     addSystem "sgfx"
         if [ ! -d $raconfigdir/overlay/GameBezels/SuperGrafx ]
         then

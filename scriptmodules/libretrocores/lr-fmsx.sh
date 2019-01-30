@@ -48,8 +48,13 @@ function install_lr-fmsx() {
 }
 
 function configure_lr-fmsx() {
-    mkRomDir "msx"
-    ensureSystemretroconfig "msx"
+  mkRomDir "msx"
+  mkRomDir "msx2"
+  mkRomDir "msx2+"
+
+  ensureSystemretroconfig "msx"
+  ensureSystemretroconfig "msx2"
+  ensureSystemretroconfig "msx2+"
 
     # default to MSX2+ core
     setRetroArchCoreOption "fmsx_mode" "MSX2+"
@@ -58,10 +63,12 @@ function configure_lr-fmsx() {
     cp "$md_inst/"{*.ROM,*.FNT,*.SHA} "$biosdir/"
     chown $user:$user "$biosdir/"{*.ROM,*.FNT,*.SHA}
 
-    addEmulator 0 "$md_id" "msx" "$md_inst/fmsx_libretro.so"
+    addEmulator 1 "$md_id" "msx" "$md_inst/fmsx_libretro.so"
     addSystem "msx"
-    addEmulator 0 "$md_id" "msx2" "$md_inst/fmsx_libretro.so"
+    addEmulator 1 "$md_id" "msx2" "$md_inst/fmsx_libretro.so"
     addSystem "msx2"
+    addEmulator 1 "$md_id" "msx2+" "$md_inst/fmsx_libretro.so"
+    addSystem "msx2+"
 
  # force msx system
     local msx_core_config="$configdir/msx/retroarch.cfg"
@@ -70,10 +77,16 @@ function configure_lr-fmsx() {
     iniSet "fmsx_video_mode" "PAL" "$msx_core_config"
     chown $user:$user "$msx_core_config"
 
-# force msx2 system
-    local msx2_core_config="$configdir/msx2/retroarch.cfg"
-    iniConfig " = " '"' "$md_conf_root/msx2/retroarch.cfg"
-    iniSet  "fmsx_mode" "MSX2+" "$msx2_core_config"
-    iniSet "fmsx_video_mode" "PAL" "$msx2_core_config"
-    chown $user:$user "$msx2_core_config"
+    # force msx2 system
+        local msx2_core_config="$configdir/msx2/retroarch.cfg"
+        iniConfig " = " '"' "$md_conf_root/msx2/retroarch.cfg"
+        iniSet  "fmsx_mode" "MSX2+" "$msx2_core_config"
+        iniSet "fmsx_video_mode" "PAL" "$msx2_core_config"
+        chown $user:$user "$msx2_core_config"
+        # force msx2 system
+            local msx2+_core_config="$configdir/msx2+/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/msx2+/retroarch.cfg"
+            iniSet  "fmsx_mode" "MSX2+" "$msx2+_core_config"
+            iniSet "fmsx_video_mode" "PAL" "$msx2+_core_config"
+            chown $user:$user "$msx2+_core_config"
 }
