@@ -62,7 +62,7 @@ function configure_lr-snes9x2010() {
     addEmulator 0 "$md_id" "snesh" "$md_inst/snes9x2010_libretro.so"
     addEmulator 1 "$md_id" "sfc" "$md_inst/snes9x2010_libretro.so"
     addEmulator 0 "$md_id" "snescd" "$md_inst/snes9x2010_libretro.so"
-    addEmulator 1 "$md_id" "nintendobsx" "$md_inst/snes9x2010_libretro.so"
+    addEmulator 0 "$md_id" "nintendobsx" "$md_inst/snes9x2010_libretro.so"
     addEmulator 1 "$md_id" "sufami" "$md_inst/snes9x2010_libretro.so"
     addSystem "snes"
     addSystem "snesh"
