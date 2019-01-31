@@ -75,7 +75,7 @@ function install_retroarch() {
     mkUserDir "$raconfigdir/retroarch-joypads"
     mkUserDir "$raconfigdir/downloads"
     mkUserDir "$raconfigdir/config"
-    mkUserDir "$raconfigdir/cores"
+    #mkUserDir "$raconfigdir/cores"
     mkUserDir "$raconfigdir/screenshots"
     mkUserDir "$raconfigdir/playlists"
     mkUserDir "$raconfigdir/thumbnails"
@@ -254,6 +254,8 @@ function configure_retroarch() {
     # enable and configure shaders
     iniSet "input_shader_next" "m"
     iniSet "input_shader_prev" "n"
+    iniSet  "video_shader" "$raconfigdir/shaders/rpi/retropie/crt-pi.glslp"
+    iniSet  "video_shader_enable"  "true"
 
     # configure keyboard mappings
     iniSet "input_player1_a" "x"

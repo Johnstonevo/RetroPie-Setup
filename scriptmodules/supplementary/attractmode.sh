@@ -87,7 +87,7 @@ display${tab}$fullname
 ${tab}layout               HP2-Sub-Menu
 ${tab}romlist              $fullname
 ${tab}in_cycle             no
-${tab}in_menu              yes
+${tab}in_menu              no
 ${tab}global_filter
 ${tab}${tab}rule                 FileIsAvailable equals 1
 ${tab}filter               All

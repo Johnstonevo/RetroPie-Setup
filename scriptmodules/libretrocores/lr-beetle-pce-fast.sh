@@ -74,6 +74,7 @@ function configure_lr-beetle-pce-fast() {
             git clone  https://github.com/thebezelproject/bezelproject-TG-CD.git  "/home/$user/RetroPie-Setup/tmp/TG-CD"
             cp -r  /home/$user/RetroPie-Setup/tmp/TG-CD/retroarch/  /home/$user/.config/
             rm -rf /home/$user/RetroPie-Setup/tmp/TG-CD/
+            ln -s "$raconfigdir/config/Mednafen PCE Fast" "$raconfigdir/config/Beetle PCE Fast"
             cd /home/$user/.config/retroarch
             chown -R $user:$user ../retroarch
             find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
@@ -96,6 +97,14 @@ function configure_lr-beetle-pce-fast() {
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
+
+            cp /home/$user/.config/RetroPie/pcengine/retroarch.cfg /home/$user/.config/RetroPie/pcengine/retroarch.cfg.bkp
+           local core_config="$configdir/pcengine/retroarch.cfg"
+           iniConfig " = " '"' "$md_conf_root/pcengine/retroarch.cfg"
+           iniSet "input_overlay_opacity" "1.0" "$core_config"
+           iniSet "input_overlay_scale" "1.0" "$core_config"
+           iniSet "input_overlay_enable" "true" "$core_config"
+
         fi
         if [ ! -d $raconfigdir/overlay/GameBezels/TG-CD ]
             then
@@ -105,6 +114,13 @@ function configure_lr-beetle-pce-fast() {
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
+            cp /home/$user/.config/RetroPie/pce-cd/retroarch.cfg /home/$user/.config/RetroPie/pce-cd/retroarch.cfg.bkp
+            local core_config="$configdir/pce-cd/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/pce-cd/retroarch.cfg"
+            iniSet "input_overlay_opacity" "1.0" "$core_config"
+            iniSet "input_overlay_scale" "1.0" "$core_config"
+            iniSet "input_overlay_enable" "true" "$core_config"
+
         fi
 
 
