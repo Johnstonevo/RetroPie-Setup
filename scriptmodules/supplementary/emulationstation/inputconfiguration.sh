@@ -209,7 +209,7 @@ user=$(id -un)
 home="$(eval echo ~$user)"
 
 rootdir="/opt/retropie"
-configdir="$raconfigdir"
+configdir="$HOME/.config/RetroPie"
 
 source "$rootdir/lib/inifuncs.sh"
 
