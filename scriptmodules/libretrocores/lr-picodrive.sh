@@ -52,7 +52,7 @@ function configure_lr-picodrive() {
   mkRomDir "sg-1000"
   mkRomDir "segacd"
   mkRomDir "markiii"
-  mkRomDir "32x"
+  mkRomDir "sega32x"
   mkRomDir "sc-3000"
   ensureSystemretroconfig "gamegear"
   ensureSystemretroconfig "ggh"
@@ -64,7 +64,7 @@ function configure_lr-picodrive() {
   ensureSystemretroconfig "sg-1000"
   ensureSystemretroconfig "segacd"
   ensureSystemretroconfig "markiii"
-  ensureSystemretroconfig "32x"
+  ensureSystemretroconfig "sega32x"
   ensureSystemretroconfig "sc-3000"
 
   local def=0
@@ -80,7 +80,7 @@ function configure_lr-picodrive() {
   addEmulator 0 "$md_id"  "sg-1000" "$md_inst/picodrive_libretro.so"
   addEmulator 0 "$md_id"  "segacd" "$md_inst/picodrive_libretro.so"
   addEmulator 0 "$md_id"  "markiii" "$md_inst/picodrive_libretro.so"
-  addEmulator 1 "$md_id"  "32x" "$md_inst/picodrive_libretro.so"
+  addEmulator 1 "$md_id"  "sega32x" "$md_inst/picodrive_libretro.so"
   addEmulator 1 "$md_id"  "sc-3000" "$md_inst/picodrive_libretro.so"
   addSystem  "gamegear"
   addSystem  "mastersystem"
@@ -91,7 +91,7 @@ function configure_lr-picodrive() {
   addSystem  "sg-1000"
   addSystem  "segacd"
   addSystem  "markiii"
-  addSystem  "32x"
+  addSystem  "sega32x"
   addSystem  "sc-3000"
 
 
@@ -107,7 +107,7 @@ function configure_lr-picodrive() {
               mkRomDir "sg-1000"
               mkRomDir "segacd"
               mkRomDir "markiii"
-              mkRomDir "32x"
+              mkRomDir "sega32x"
               mkRomDir "sc-3000"
               ensureSystemretroconfig "gamegear"
               ensureSystemretroconfig "ggh"
@@ -119,7 +119,7 @@ function configure_lr-picodrive() {
               ensureSystemretroconfig "sg-1000"
               ensureSystemretroconfig "segacd"
               ensureSystemretroconfig "markiii"
-              ensureSystemretroconfig "32x"
+              ensureSystemretroconfig "sega32x"
               ensureSystemretroconfig "sc-3000"
 
               local def=0
@@ -135,7 +135,7 @@ function configure_lr-picodrive() {
               addEmulator 0 "$md_id-ppa" "sg-1000" "$md_instppa/picodrive_libretro.so"
               addEmulator 0 "$md_id-ppa" "segacd" "$md_instppa/picodrive_libretro.so"
               addEmulator 0 "$md_id-ppa" "markiii" "$md_instppa/picodrive_libretro.so"
-              addEmulator 1 "$md_id-ppa" "32x" "$md_instppa/picodrive_libretro.so"
+              addEmulator 1 "$md_id-ppa" "sega32x" "$md_instppa/picodrive_libretro.so"
               addEmulator 1 "$md_id-ppa" "sc-3000" "$md_instppa/picodrive_libretro.so"
               addSystem  "gamegear"
               addSystem  "mastersystem"
@@ -146,7 +146,7 @@ function configure_lr-picodrive() {
               addSystem  "sg-1000"
               addSystem  "segacd"
               addSystem  "markiii"
-              addSystem  "32x"
+              addSystem  "sega32x"
               addSystem  "sc-3000"
 
         fi

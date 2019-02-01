@@ -38,11 +38,11 @@ function configure_lr-beetle-supergrafx() {
     addEmulator 0 "$md_id" "pcengine" "$md_inst/mednafen_supergrafx_libretro.so"
     addSystem "pcengine"
 
-    mkRomDir "sgfx"
-    ensureSystemretroconfig "sgfx"
+    mkRomDir "supergrafx"
+    ensureSystemretroconfig "supergrafx"
 
-    addEmulator 1 "$md_id" "sgfx" "$md_inst/mednafen_supergrafx_libretro.so"
-    addSystem "sgfx"
+    addEmulator 1 "$md_id" "supergrafx" "$md_inst/mednafen_supergrafx_libretro.so"
+    addSystem "supergrafx"
         if [ ! -d $raconfigdir/overlay/GameBezels/SuperGrafx ]
         then
             git clone  https://github.com/thebezelproject/bezelproject-SuperGrafx.git  "/home/$user/RetroPie-Setup/tmp/SuperGrafx"
@@ -54,9 +54,9 @@ function configure_lr-beetle-supergrafx() {
         fi
         if [ ! -d $raconfigdir/overlay/GameBezels/SuperGrafx ]
             then
-             cp /home/$user/.config/RetroPie/sgfx/retroarch.cfg /home/$user/.config/RetroPie/sgfx/retroarch.cfg.bkp
-            local core_config="$configdir/sgfx/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/sgfx/retroarch.cfg"
+             cp /home/$user/.config/RetroPie/supergrafx/retroarch.cfg /home/$user/.config/RetroPie/supergrafx/retroarch.cfg.bkp
+            local core_config="$configdir/supergrafx/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/supergrafx/retroarch.cfg"
             iniSet  "core_options_path" "/home/$user/.config/RetroPie/sfgx/retroarch.cfg" "$core_config"
             iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/NEC-SuperGrafx.cfg" "$core_config"
             iniSet  "input_overlay_opacity" "1.0" "$core_config"

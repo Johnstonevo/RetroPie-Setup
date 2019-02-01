@@ -49,26 +49,26 @@ function configure_lr-snes9x2010() {
   mkRomDir "snesh"
     mkRomDir "sfc"
     mkRomDir "snescd"
-    mkRomDir "nintendobsx"
+    mkRomDir "satellaview"
     mkRomDir "sufami"
     ensureSystemretroconfig "snes"
     ensureSystemretroconfig "snesh"
     ensureSystemretroconfig "sfc"
     ensureSystemretroconfig "snescd"
-    ensureSystemretroconfig "nintendobsx"
+    ensureSystemretroconfig "satellaview"
     ensureSystemretroconfig "sufami"
 
     addEmulator 1 "$md_id" "snes" "$md_inst/snes9x2010_libretro.so"
     addEmulator 0 "$md_id" "snesh" "$md_inst/snes9x2010_libretro.so"
     addEmulator 1 "$md_id" "sfc" "$md_inst/snes9x2010_libretro.so"
     addEmulator 0 "$md_id" "snescd" "$md_inst/snes9x2010_libretro.so"
-    addEmulator 0 "$md_id" "nintendobsx" "$md_inst/snes9x2010_libretro.so"
+    addEmulator 0 "$md_id" "satellaview" "$md_inst/snes9x2010_libretro.so"
     addEmulator 1 "$md_id" "sufami" "$md_inst/snes9x2010_libretro.so"
     addSystem "snes"
     addSystem "snesh"
     addSystem "sfc"
     addSystem "snescd"
-    addSystem "nintendobsx"
+    addSystem "satellaview"
     addSystem "sufami"
     if [ -e /usr/lib/libretro/snes9x2010_libretro.so ]
         then
@@ -76,7 +76,7 @@ function configure_lr-snes9x2010() {
           addEmulator 0 "$md_id-ppa" "snesh" "$md_instppa/snes9x2010_libretro.so"
           addEmulator 0 "$md_id-ppa" "sfc" "$md_instppa/snes9x2010_libretro.so"
           addEmulator 0 "$md_id-ppa" "snescd" "$md_instppa/snes9x2010_libretro.so"
-          addEmulator 0 "$md_id-ppa" "nintendobsx" "$md_instppa/snes9x2010_libretro.so"
+          addEmulator 0 "$md_id-ppa" "satellaview" "$md_instppa/snes9x2010_libretro.so"
           addEmulator 0 "$md_id-ppa" "sufami" "$md_instppa/snes9x2010_libretro.so"
     fi
 
@@ -180,11 +180,11 @@ if [  -d $configdir/sfc ]
             iniSet "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/snes_scanline.glslp" "$core_config"
             iniSet "video_shader_enable"  "true" "$core_config"
 fi
-if [  -d $configdir/nintendobsx ]
+if [  -d $configdir/satellaview ]
  then
-             cp /home/$user/.config/RetroPie/nintendobsx/retroarch.cfg /home/$user/.config/RetroPie/nintendobsx/retroarch.cfg.bkp
-            local core_config="$configdir/nintendobsx/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/nintendobsx/retroarch.cfg"
+             cp /home/$user/.config/RetroPie/satellaview/retroarch.cfg /home/$user/.config/RetroPie/satellaview/retroarch.cfg.bkp
+            local core_config="$configdir/satellaview/retroarch.cfg"
+            iniConfig " = " '"' "$md_conf_root/satellaview/retroarch.cfg"
             iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Super-Nintendo-Entertainment-System.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
