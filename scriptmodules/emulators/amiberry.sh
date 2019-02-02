@@ -101,4 +101,14 @@ function configure_amiberry() {
     cp -R "$md_inst/whdboot-dist/"{game-data,save-data,boot-data.zip} "$config_dir/whdboot/"
 
     chown -R $user:$user "$config_dir/whdboot"
+
+    mkRomDir "amiga"
+    mkRomDir "amigacd32"
+    ensureSystemretroconfig "amiga"
+    ensureSystemretroconfig "amigacd32"
+    addEmulator 0 "$md_id" "amiga" "$md_inst/amiberry.sh"
+    addEmulator 0 "$md_id" "amigacd32" "$md_inst/amiberry.sh"
+    addSystem "amiga"
+    addSystem "amigacd32"
+
 }

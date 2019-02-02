@@ -42,26 +42,26 @@ function configure_lr-snes9x2002() {
     mkRomDir "snes"
     mkRomDir "snesh"
     mkRomDir "sfc"
-    mkRomDir "snescd"
+    mkRomDir "snesmsu1"
     mkRomDir "satellaview"
     mkRomDir "sufami"
     ensureSystemretroconfig "snes"
     ensureSystemretroconfig "snesh"
     ensureSystemretroconfig "sfc"
-    ensureSystemretroconfig "snescd"
+    ensureSystemretroconfig "snesmsu1"
     ensureSystemretroconfig "satellaview"
     ensureSystemretroconfig "sufami"
 
     addEmulator 0 "$md_id" "snes" "$md_inst/snes9x2002_libretro.so"
     addEmulator 0 "$md_id" "snesh" "$md_inst/snes9x2002_libretro.so"
     addEmulator 0 "$md_id" "sfc" "$md_inst/snes9x2002_libretro.so"
-    addEmulator 0 "$md_id" "snescd" "$md_inst/snes9x2002_libretro.so"
+    addEmulator 0 "$md_id" "snesmsu1" "$md_inst/snes9x2002_libretro.so"
     addEmulator 0 "$md_id" "satellaview" "$md_inst/snes9x2002_libretro.so"
     addEmulator 0 "$md_id" "sufami" "$md_inst/snes9x2002_libretro.so"
     addSystem "snes"
     addSystem "snesh"
     addSystem "sfc"
-    addSystem "snescd"
+    addSystem "snesmsu1"
     addSystem "satellaview"
     addSystem "sufami"
     if [ -e /usr/lib/libretro/snes9x2002_libretro.so ]
@@ -69,7 +69,7 @@ function configure_lr-snes9x2002() {
           addEmulator 0 "$md_id-ppa" "snes" "$md_instppa/snes9x2002_libretro.so"
           addEmulator 0 "$md_id-ppa" "snesh" "$md_instppa/snes9x2002_libretro.so"
           addEmulator 0 "$md_id-ppa" "sfc" "$md_instppa/snes9x2002_libretro.so"
-          addEmulator 0 "$md_id-ppa" "snescd" "$md_instppa/snes9x2002_libretro.so"
+          addEmulator 0 "$md_id-ppa" "snesmsu1" "$md_instppa/snes9x2002_libretro.so"
           addEmulator 0 "$md_id-ppa" "satellaview" "$md_instppa/snes9x2002_libretro.so"
           addEmulator 0 "$md_id-ppa" "sufami" "$md_instppa/snes9x2002_libretro.so"
     fi
@@ -139,11 +139,11 @@ function configure_lr-snes9x2002() {
 
                 chown $user:$user "$core_config"
     fi
-    if [  -d $configdir/snescd ]
+    if [  -d $configdir/snesmsu1 ]
      then
-                 cp /home/$user/.config/RetroPie/snescd/retroarch.cfg /home/$user/.config/RetroPie/snescd/retroarch.cfg.bkp
-                local core_config="$configdir/snescd/retroarch.cfg"
-                iniConfig " = " '"' "$md_conf_root/snescd/retroarch.cfg"
+                 cp /home/$user/.config/RetroPie/snesmsu1/retroarch.cfg /home/$user/.config/RetroPie/snesmsu1/retroarch.cfg.bkp
+                local core_config="$configdir/snesmsu1/retroarch.cfg"
+                iniConfig " = " '"' "$md_conf_root/snesmsu1/retroarch.cfg"
                 iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Super-Nintendo-Entertainment-System.cfg" "$core_config"
                 iniSet "input_overlay_opacity" "1.0" "$core_config"
                 iniSet "input_overlay_scale" "1.0" "$core_config"
