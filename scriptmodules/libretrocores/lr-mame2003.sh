@@ -81,11 +81,11 @@ function configure_lr-mame2003() {
     addEmulator 0 "$md_id" "mame-2003" "$md_inst/${so_name}_libretro.so"
     addEmulator 0 "$md_id" "mame-2003-plus" "$md_inst/${so_name}_libretro.so"
     addSystem "arcade"
-    addSystem "mame-2003"
+    addSystem "mame-2003-plus"
     if [ -e /usr/lib/libretro/mame2003_libretro.so ]
     then
         addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/${so_name}_libretro.so"
-        addEmulator 0 "$md_id-ppa" "mame-2003" "$md_instppa/${so_name}_libretro.so"
+        addEmulator 0 "$md_id-ppa" "mame-2003-plus" "$md_instppa/${so_name}_libretro.so"
     fi
     if [ !  -d $raconfigdir/overlay/ArcadeBezels ]
     then
@@ -101,9 +101,9 @@ function configure_lr-mame2003() {
     fi
     if [  -d $raconfigdir/overlay/ArcadeBezels ]
      then
-        cp /home/$user/.config/RetroPie/mame-2003/retroarch.cfg /home/$user/.config/RetroPie/mame-libretro/retroarch.cfg.bkp
-        local core_config="$configdir/mame-2003/retroarch.cfg"
-         iniConfig " = " '"' "$md_conf_root/mame-2003/retroarch.cfg"
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+        local core_config="$configdir/$system/retroarch.cfg"
+         iniConfig " = " '"' "$md_conf_root/$system/retroarch.cfg"
 
         iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
         iniSet "input_overlay_opacity" "1.0"

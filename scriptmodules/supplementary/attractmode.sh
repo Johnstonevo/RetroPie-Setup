@@ -55,13 +55,14 @@ function _add_system_attractmode() {
     if [[  "$fullname" =~ MAME*|Final*|Multiple*|Arcade*  ]]; then
       iniSet "system" "Arcade"
       iniSet "info_source"
-      iniSet "import_extras"        "./mame-config/catver.ini;./mame-config/nplayers.ini;./mame-config/$fullname.xml;./mame-config/history.dat"
+      iniSet "import_extras"        "./mame-config/catver.ini;./mame-config/nplayers.ini;./xml/listxml.xml"
       iniSet "artwork flyer" "$datadir/roms/arcade/flyer"
       iniSet "artwork marquee" "$datadir/roms/arcade/marquee"
       iniSet "artwork snap" "$datadir/roms/arcade/$snap"
       iniSet "artwork wheel" "$datadir/roms/arcade/wheel"
     else
       iniSet "info_source"          "thegamesdb.net"
+      iniSet "import_extras"        "./xml/$fullname.xml"
       iniSet "artwork flyer" "$path/flyer"
       iniSet "artwork marquee" "$path/marquee"
       iniSet "artwork snap" "$path/$snap"
@@ -75,19 +76,108 @@ function _add_system_attractmode() {
 
     # if no gameslist, generate one
     if [[ ! -f "$attract_dir/romlists/$fullname.txt" ]]; then
-        sudo -u $user /usr/bin/attract --build-romlist "$fullname" -o "$fullname"
+        sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
     fi
 
     local config="$attract_dir/attract.cfg"
     local tab=$'\t'
     if [[ -f "$config" ]] && ! grep -q "display$tab$fullname" "$config"; then
         cp "$config" "$config.bak"
+        if [[  "$fullname" =~ MAME*|Final*|Multiple*|Arcade*  ]]; then
+          cat >>"$config" <<_EOF_
+${tab}
+display${tab}$fullname
+${tab}layout               HP2-Arcade-Menu
+${tab}romlist              $fullname
+${tab}in_cycle             no
+${tab}in_menu              yes
+${tab}global_filter
+${tab}${tab}rule                    FileIsAvailable equals 1
+${tab}${tab}rule                    Category not_contains Mature
+${tab}${tab}rule                    Status not_equals preliminary
+${tab}${tab}rule                    Category not_contains Electromechanical|Tabletop|Casino|Quiz|Mahjong|Computer|Microcomputer|Test|Portable|Console|Handheld|Device|Training Board|Synthesiser|Clock|Document Processors
+${tab}${tab}rule                    Category not_equals Misc.|Quiz / Korean|Electromechanical / Reels|Casino / Cards|Casino / Reels
+${tab}filter              All
+${tab}${tab}rule                    Name not_contains "(Japan"|"(Brazil"|"(Asia"|Bust-A-Move
+${tab}${tab}rule                    Title not_contains bootleg|prototype
+${tab}${tab}rule                    Manufacturer not_contains bootleg
+${tab}filter              Favourites
+${tab}${tab}rule                    Favourite equals 1
+${tab}filter              "Most Played Games"
+${tab}${tab}sort_by              PlayedCount
+${tab}${tab}reverse_order        true
+${tab}${tab}rule                    PlayedCount not_contains 0
+${tab}filter              Breakout
+${tab}${tab}rule                    Category contains Ball & Paddle|Breakout
+${tab}${tab}rule                    Title not_contains bootleg|prototype
+${tab}${tab}rule                    Manufacturer not_contains bootleg
+${tab}${tab}rule                    CloneOf not_equals .*
+${tab}filter              Driving
+${tab}${tab}rule                    Category contains Driving|Biking|Motorcycle
+${tab}${tab}rule                    Title not_contains bootleg|prototype
+${tab}${tab}rule                    Manufacturer not_contains bootleg
+${tab}${tab}rule                    CloneOf not_equals .*
+${tab}filter              Fighter
+${tab}${tab}rule                    Category contains Fighter
+${tab}${tab}rule                    Title not_contains bootleg|prototype
+${tab}${tab}rule                    Manufacturer not_contains bootleg
+${tab}${tab}rule                    CloneOf not_equals .*
+${tab}filter              "Maze Games"
+${tab}${tab}rule                    Category equals Maze
+${tab}${tab}rule                    Title not_contains bootleg|prototype
+${tab}${tab}rule                    Manufacturer not_contains bootleg
+${tab}${tab}rule                    CloneOf not_equals .*
+${tab}filter              Mini-Games
+${tab}${tab}rule                    Category contains Mini-Games
+${tab}${tab}rule                    Title not_contains bootleg|prototype
+${tab}${tab}rule                    Manufacturer not_contains bootleg
+${tab}${tab}rule                    CloneOf not_equals .*
+${tab}filter              Pinball
+${tab}${tab}rule                    Category contains Pinball
+${tab}${tab}rule                    Title not_contains bootleg|prototype
+${tab}${tab}rule                    Manufacturer not_contains bootleg
+${tab}${tab}rule                    CloneOf not_equals .*
+${tab}filter              Platform
+${tab}${tab}rule                    Category contains Platform
+${tab}${tab}rule                    Title not_contains bootleg|prototype
+${tab}${tab}rule                    Manufacturer not_contains bootleg
+${tab}${tab}rule                    CloneOf not_equals .*
+${tab}filter              Puzzle
+${tab}${tab}rule                    Category contains Puzzlefi
+${tab}${tab}rule                    Title not_contains bootleg|prototype
+${tab}${tab}rule                    Manufacturer not_contains bootleg
+${tab}${tab}rule                    CloneOf not_equals .*
+${tab}filter              Rhythm
+${tab}${tab}rule                    Category contains Rhythm
+${tab}${tab}rule                    Title not_contains bootleg|prototype
+${tab}${tab}rule                    Manufacturer not_contains bootleg
+${tab}${tab}rule                    CloneOf not_equals .*
+${tab}filter              Shooter
+${tab}${tab}rule                    Category contains Shooter
+${tab}${tab}rule                    Title not_contains bootleg|prototype
+${tab}${tab}rule                    Manufacturer not_contains bootleg
+${tab}${tab}rule                    CloneOf not_equals .*
+${tab}filter              Sports
+${tab}${tab}rule                    Category contains Sports
+${tab}${tab}rule                    Title not_contains bootleg|prototype
+${tab}${tab}rule                    Manufacturer not_contains bootleg
+${tab}${tab}rule                    CloneOf not_equals .*
+${tab}filter              Clones
+${tab}${tab}rule                    CloneOf contains .*
+${tab}filter              Bootleg
+${tab}${tab}rule                    Manufacturer contains bootleg
+${tab}filter              Prototype
+${tab}${tab}rule                    Title contains prototype
+${tab}
+_EOF_
+        else
         cat >>"$config" <<_EOF_
+${tab}
 display${tab}$fullname
 ${tab}layout               HP2-Sub-Menu
 ${tab}romlist              $fullname
-${tab}in_cycle             no
-${tab}in_menu              no
+${tab}in_cycle             yes
+${tab}in_menu              yes
 ${tab}global_filter
 ${tab}${tab}rule                 FileIsAvailable equals 1
 ${tab}filter               All
@@ -97,13 +187,13 @@ ${tab}filter               "Most Played Games"
 ${tab}${tab}sort_by              PlayedCount
 ${tab}${tab}reverse_order        true
 ${tab}${tab}rule                 PlayedCount not_contains 0
-
-
-
+${tab}
 _EOF_
+        fi
         chown $user:$user "$config"
     fi
 }
+
 
 function _del_system_attractmode() {
     local attract_dir="$(_get_configdir_attractmode)"
@@ -199,9 +289,11 @@ function install_attractmode() {
 #}
 
 function configure_attractmode() {
-  gitPullOrClone "$__builddir/.attract" https://github.com/Johnstonevo/config.git
-  cp -r  "$__builddir/.attract"  /home/$user/
-  chown -R $user:$user $home.attract
+
+  [[ ! -d "$attract_dir/.git" ]] && rm -rf "$attract_dir"
+  gitPullOrClone "$home/.attract" https://github.com/Johnstonevo/config.git
+  #cp -r  "$__builddir/.attract"  /home/$user/
+  chown -R $user:$user $home/.attract
     #moveConfigDir "$home/.attract" "$md_conf_root/all/attractmode"
 
     #[[ "$md_mode" == "remove" ]] && return
