@@ -45,9 +45,21 @@ function install_lr-yabause() {
 }
 
 function configure_lr-yabause() {
-    mkRomDir "saturn"
-    ensureSystemretroconfig "saturn"
+  mkRomDir "saturn"
+  ensureSystemretroconfig "saturn"
+  mkRomDir "saturn-japan"
+  ensureSystemretroconfig "saturn-japan"
 
-    addEmulator 0 "$md_id" "saturn" "$md_inst/yabause_libretro.so"
-    addSystem "saturn"
+  addEmulator 1 "$md_id" "saturn" "$md_inst/yabause_libretro.so"
+  addSystem "saturn"
+  addEmulator 1 "$md_id" "saturn-japan" "$md_inst/yabause_libretro.so"
+  addSystem "saturn-japan"
+
+
+  if [ -e /usr/lib/libretro/yabause_libretro.so ]
+      then
+        addEmulator 0 "$md_id-ppa" "saturn" "$md_instppa/yabause_libretro.so"
+
+        addEmulator 0 "$md_id-ppa" "saturn-japan" "$md_instppa/yabause_libretro.so"
+  fi
 }
