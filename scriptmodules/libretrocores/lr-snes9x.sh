@@ -57,7 +57,7 @@ function configure_lr-snes9x() {
     addEmulator 0 "$md_id" "snes" "$md_inst/snes9x_libretro.so"
     addEmulator 1 "$md_id" "snesh" "$md_inst/snes9x_libretro.so"
     addEmulator 0 "$md_id" "sfc" "$md_inst/snes9x_libretro.so"
-    addEmulator 0 "$md_id" "snesmsu1" "$md_inst/snes9x_libretro.so"
+    addEmulator 1 "$md_id" "snesmsu1" "$md_inst/snes9x_libretro.so"
     addEmulator 0 "$md_id" "satellaview" "$md_inst/snes9x_libretro.so"
     addEmulator 0 "$md_id" "sufami" "$md_inst/snes9x_libretro.so"
     addSystem "snes"
