@@ -357,7 +357,7 @@ function gitPullOrClone() {
         runCmd git submodule update --init --recursive
         popd > /dev/null
     else
-        local git="git clone --recursive"
+        local git="git clone --depth 1 --recursive"
         #if [[ "$__persistent_repos" -ne 1 && "$repo" == *github* && -z "$commit" ]]; then
         #    git+=" --depth 1"
         #fi
