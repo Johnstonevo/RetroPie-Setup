@@ -66,11 +66,11 @@ function configure_lr-fbalpha() {
     local def=1
     isPlatform "armv6" && def=0
     addEmulator $def "$md_id" "arcade" "$md_inst/fbalpha_libretro.so"
-    addEmulator $def "$md_id-neocd" "arcade" "$md_inst/fbalpha_libretro.so --subsystem neocd"
+    addEmulator $def "$md_id-neocdz" "arcade" "$md_inst/fbalpha_libretro.so --subsystem neocd"
     addEmulator $def "$md_id" "neogeo" "$md_inst/fbalpha_libretro.so"
-    addEmulator $def "$md_id-neocd" "neogeo" "$md_inst/fbalpha_libretro.so --subsystem neocd"
+    addEmulator $def "$md_id-neocdz" "neocdz" "$md_inst/fbalpha_libretro.so --subsystem neocd"
     addEmulator $def "$md_id" "fba" "$md_inst/fbalpha_libretro.so"
-    addEmulator $def "$md_id-neocd" "fba" "$md_inst/fbalpha_libretro.so --subsystem neocd"
+    addEmulator $def "$md_id-neocdz" "fba" "$md_inst/fbalpha_libretro.so --subsystem neocd"
 
     addEmulator 0 "$md_id-pce" "pcengine" "$md_inst/fbalpha_libretro.so --subsystem pce"
     addEmulator 0 "$md_id-sgx" "pcengine" "$md_inst/fbalpha_libretro.so --subsystem sgx"
@@ -96,11 +96,11 @@ function configure_lr-fbalpha() {
 if [ -e /usr/lib/libretro/fbalpha_libretro.so ]
     then
         addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/fbalpha_libretro.so"
-        addEmulator 0 "$md_id-ppa-neocd" "arcade" "$md_instppa/fbalpha_libretro.so --subsystem neocd"
+        addEmulator 0 "$md_id-ppa-neocdz" "arcade" "$md_instppa/fbalpha_libretro.so --subsystem neocd"
         addEmulator 0 "$md_id-ppa" "neogeo" "$md_instppa/fbalpha_libretro.so"
-        addEmulator 0 "$md_id-ppa-neocd" "neogeo" "$md_instppa/fbalpha_libretro.so --subsystem neocd"
+        addEmulator 0 "$md_id-ppa-neocdz" "neocdz" "$md_instppa/fbalpha_libretro.so --subsystem neocd"
         addEmulator 0 "$md_id-ppa" "fba" "$md_instppa/fbalpha_libretro.so"
-        addEmulator 0 "$md_id-ppa-neocd" "fba" "$md_instppa/fbalpha_libretro.so --subsystem neocd"
+        addEmulator 0 "$md_id-ppa-neocdz" "fba" "$md_instppa/fbalpha_libretro.so --subsystem neocd"
 
         addEmulator 0 "$md_id-ppa-pce" "pcengine" "$md_instppa/fbalpha_libretro.so --subsystem pce"
         addEmulator 0 "$md_id-ppa-sgx" "pcengine" "$md_instppa/fbalpha_libretro.so --subsystem sgx"

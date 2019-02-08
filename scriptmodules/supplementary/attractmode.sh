@@ -61,8 +61,8 @@ function _add_system_attractmode() {
       iniSet "artwork snap" "$datadir/roms/arcade/$snap"
       iniSet "artwork wheel" "$datadir/roms/arcade/wheel"
     else
-      iniSet "info_source"          "thegamesdb.net"
-      iniSet "import_extras"        "./xml/$fullname.xml"
+      iniSet "info_source"
+      iniSet "import_extras"        #"$attract_dir/xml/$fullname.xml"
       iniSet "artwork flyer" "$path/flyer"
       iniSet "artwork marquee" "$path/marquee"
       iniSet "artwork snap" "$path/$snap"
@@ -76,7 +76,12 @@ function _add_system_attractmode() {
 
     # if no gameslist, generate one
     if [[ ! -f "$attract_dir/romlists/$fullname.txt" ]]; then
-        sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
+        #sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
+        if [[ -f "$attract_dir/xml/$fullname.xml" ]]; then
+          sudo -u $user attract --import-romlist "$attract_dir/xml/$fullname.xml" "$fullname"
+        else
+          sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
+        fi
     fi
 
     local config="$attract_dir/attract.cfg"
