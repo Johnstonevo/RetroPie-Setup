@@ -75,7 +75,7 @@ function configure_lr-atari800() {
 
 if [ ! -d $raconfigdir/overlay/GameBezels/Atari5200 ]
 then
-    git clone  https://github.com/thebezelproject/bezelproject-Atari5200.git  "/home/$user/RetroPie-Setup/tmp/Atari5200"
+    git clone https://github.com/thebezelproject/bezelproject-Atari5200.git  "/home/$user/RetroPie-Setup/tmp/Atari5200"
     cp -r  /home/$user/RetroPie-Setup/tmp/Atari5200/retroarch/  /home/$user/.config/
    rm -rf /home/$user/RetroPie-Setup/tmp/Atari5200/
     cd /home/$user/.config/retroarch/

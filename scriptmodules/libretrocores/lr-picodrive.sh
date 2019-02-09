@@ -160,7 +160,7 @@ setRetroArchCoreOption "picodrive_drc" "enabled"
 
  if [ ! -d $raconfigdir/overlay/GameBezels/Megadrive ]
     then
-        git clone  https://github.com/thebezelproject/bezelproject-MegaDrive.git  "/home/$user/RetroPie-Setup/tmp/MegaDrive"
+        git clone https://github.com/thebezelproject/bezelproject-MegaDrive.git  "/home/$user/RetroPie-Setup/tmp/MegaDrive"
         cp -r  /home/$user/RetroPie-Setup/tmp/MegaDrive/retroarch/  /home/$user/.config/
         rm -rf /home/$user/RetroPie-Setup/tmp/MegaDrive/
         cd /home/$user/.config/retroarch
@@ -169,7 +169,7 @@ setRetroArchCoreOption "picodrive_drc" "enabled"
 fi
  if [ ! -d $raconfigdir/overlay/GameBezels/SegaCD ]
     then
-        git clone  https://github.com/thebezelproject/bezelproject-SegaCD.git  "/home/$user/RetroPie-Setup/tmp/SegaCD"
+        git clone https://github.com/thebezelproject/bezelproject-SegaCD.git  "/home/$user/RetroPie-Setup/tmp/SegaCD"
         cp -r  /home/$user/RetroPie-Setup/tmp/SegaCD/retroarch/  /home/$user/.config/
         rm -rf /home/$user/RetroPie-Setup/tmp/SegaCD/
         cd /home/$user/.config/retroarch
@@ -178,7 +178,7 @@ fi
 fi
  if [ ! -d $raconfigdir/overlay/GameBezels/MasterSystem ]
     then
-        git clone  https://github.com/thebezelproject/bezelproject-MasterSystem.git  "/home/$user/RetroPie-Setup/tmp/MasterSystem"
+        git clone https://github.com/thebezelproject/bezelproject-MasterSystem.git  "/home/$user/RetroPie-Setup/tmp/MasterSystem"
         cp -r  /home/$user/RetroPie-Setup/tmp/MasterSystem/retroarch/  /home/$user/.config/
         rm -rf /home/$user/RetroPie-Setup/tmp/MasterSystem/
         cd /home/$user/.config/retroarch
@@ -187,7 +187,7 @@ fi
 fi
  if [ ! -d $raconfigdir/overlay/GameBezels/Sega32X ]
     then
-        git clone  https://github.com/thebezelproject/bezelproject-Sega32X.git  "/home/$user/RetroPie-Setup/tmp/Sega32X"
+        git clone https://github.com/thebezelproject/bezelproject-Sega32X.git  "/home/$user/RetroPie-Setup/tmp/Sega32X"
         cp -r  /home/$user/RetroPie-Setup/tmp/Sega32X/retroarch/  /home/$user/.config/
         rm -rf /home/$user/RetroPie-Setup/tmp/Sega32X/
         cd /home/$user/.config/retroarch

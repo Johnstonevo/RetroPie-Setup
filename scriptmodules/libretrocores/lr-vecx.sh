@@ -55,7 +55,7 @@ function configure_lr-vecx() {
     fi
     if [ ! -d $raconfigdir/overlay/GameBezels/GCEVectrex ]
     then
-        git clone  https://github.com/thebezelproject/bezelproject-GCEVectrex.git  "/home/$user/RetroPie-Setup/tmp/GCEVectrex"
+        git clone https://github.com/thebezelproject/bezelproject-GCEVectrex.git  "/home/$user/RetroPie-Setup/tmp/GCEVectrex"
         cp -r  /home/$user/RetroPie-Setup/tmp/GCEVectrex/retroarch/  /home/$user/.config/
         rm -rf /home/$user/RetroPie-Setup/tmp/GCEVectrex/
         cd /home/$user/.config/retroarch

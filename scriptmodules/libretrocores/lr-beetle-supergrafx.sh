@@ -45,7 +45,7 @@ function configure_lr-beetle-supergrafx() {
     addSystem "supergrafx"
         if [ ! -d $raconfigdir/overlay/GameBezels/SuperGrafx ]
         then
-            git clone  https://github.com/thebezelproject/bezelproject-SuperGrafx.git  "/home/$user/RetroPie-Setup/tmp/SuperGrafx"
+            git clone https://github.com/thebezelproject/bezelproject-SuperGrafx.git  "/home/$user/RetroPie-Setup/tmp/SuperGrafx"
             cp -r  /home/$user/RetroPie-Setup/tmp/SuperGrafx/retroarch/  /home/$user/.config/
             rm -rf /home/$user/RetroPie-Setup/tmp/SuperGrafx/
             cd /home/$user/.config/retroarch

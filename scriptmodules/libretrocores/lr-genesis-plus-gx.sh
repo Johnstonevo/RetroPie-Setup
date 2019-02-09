@@ -132,36 +132,36 @@ function configure_lr-genesis-plus-gx() {
 
     if [ ! -d $raconfigdir/overlay/GameBezels/Megadrive ]
         then
-            git clone  https://github.com/thebezelproject/bezelproject-MegaDrive.git  "/home/$user/RetroPie-Setup/tmp/MegaDrive"
+            git clone https://github.com/thebezelproject/bezelproject-MegaDrive.git  "/home/$user/RetroPie-Setup/tmp/MegaDrive"
             cp -r  /home/$user/RetroPie-Setup/tmp/MegaDrive/retroarch/  /home/$user/.config/
-            rm -rf /home/$user/RetroPie-Setup/tmp/MegaDrive/
+            rm -rf  /home/$user/RetroPie-Setup/tmp/MegaDrive/
             cd /home/$user/.config/retroarch
             chown -R $user:$user ../retroarch
             find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
     fi
     if [ ! -d $raconfigdir/overlay/GameBezels/SG-1000 ]
         then
-            git clone  https://github.com/thebezelproject/bezelproject-SG-1000.git  "/home/$user/RetroPie-Setup/tmp/SG-1000"
+            git clone https://github.com/thebezelproject/bezelproject-SG-1000.git  "/home/$user/RetroPie-Setup/tmp/SG-1000"
             cp -r  /home/$user/RetroPie-Setup/tmp/SG-1000/retroarch/  /home/$user/.config/
-            rm -rf /home/$user/RetroPie-Setup/tmp/SG-1000/
+            rm -rf  /home/$user/RetroPie-Setup/tmp/SG-1000/
             cd /home/$user/.config/retroarch
             chown -R $user:$user ../retroarch
             find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
     fi
     if [ ! -d $raconfigdir/overlay/GameBezels/SegaCD ]
         then
-            git clone  https://github.com/thebezelproject/bezelproject-SegaCD.git  "/home/$user/RetroPie-Setup/tmp/SegaCD"
+            git clone https://github.com/thebezelproject/bezelproject-SegaCD.git  "/home/$user/RetroPie-Setup/tmp/SegaCD"
             cp -r  /home/$user/RetroPie-Setup/tmp/SegaCD/retroarch/  /home/$user/.config/
-            rm -rf /home/$user/RetroPie-Setup/tmp/SegaCD/
+            rm -rf  /home/$user/RetroPie-Setup/tmp/SegaCD/
             cd /home/$user/.config/retroarch
             chown -R $user:$user ../retroarch
             find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
     fi
     if [ ! -d $raconfigdir/overlay/GameBezels/MasterSystem ]
         then
-            git clone  https://github.com/thebezelproject/bezelproject-MasterSystem.git  "/home/$user/RetroPie-Setup/tmp/MasterSystem"
+            git clone https://github.com/thebezelproject/bezelproject-MasterSystem.git  "/home/$user/RetroPie-Setup/tmp/MasterSystem"
             cp -r  /home/$user/RetroPie-Setup/tmp/MasterSystem/retroarch/  /home/$user/.config/
-            rm -rf /home/$user/RetroPie-Setup/tmp/MasterSystem/
+            rm -rf  /home/$user/RetroPie-Setup/tmp/MasterSystem/
             cd /home/$user/.config/retroarch
             chown -R $user:$user ../retroarch
             find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;

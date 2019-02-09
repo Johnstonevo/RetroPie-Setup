@@ -71,7 +71,7 @@ function configure_lr-beetle-pce-fast() {
         fi
         if [ ! -d $raconfigdir/overlay/GameBezels/TG-CD ]
         then
-            git clone  https://github.com/thebezelproject/bezelproject-TG-CD.git  "/home/$user/RetroPie-Setup/tmp/TG-CD"
+            git clone https://github.com/thebezelproject/bezelproject-TG-CD.git  "/home/$user/RetroPie-Setup/tmp/TG-CD"
             cp -r  /home/$user/RetroPie-Setup/tmp/TG-CD/retroarch/  /home/$user/.config/
             rm -rf /home/$user/RetroPie-Setup/tmp/TG-CD/
             ln -s "$raconfigdir/config/Mednafen PCE Fast" "$raconfigdir/config/Beetle PCE Fast"
@@ -81,7 +81,7 @@ function configure_lr-beetle-pce-fast() {
         fi
         if [ ! -d $raconfigdir/overlay/GameBezels/TG16 ]
         then
-            git clone  https://github.com/thebezelproject/bezelproject-TG16.git  "/home/$user/RetroPie-Setup/tmp/TG16"
+            git clone https://github.com/thebezelproject/bezelproject-TG16.git  "/home/$user/RetroPie-Setup/tmp/TG16"
             cp -r  /home/$user/RetroPie-Setup/tmp/TG16/retroarch/  /home/$user/.config/
             rm -rf /home/$user/RetroPie-Setup/tmp/TG16/
             cd /home/$user/.config/retroarch

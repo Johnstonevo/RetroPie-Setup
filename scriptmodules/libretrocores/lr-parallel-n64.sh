@@ -192,7 +192,7 @@ _EOF_
   fi
   if [ ! -d $raconfigdir/overlay/GameBezels/N64 ]
   then
-      git clone  https://github.com/thebezelproject/bezelproject-N64.git  "/home/$user/RetroPie-Setup/tmp/N64"
+      git clone https://github.com/thebezelproject/bezelproject-N64.git  "/home/$user/RetroPie-Setup/tmp/N64"
       cp -r  /home/$user/RetroPie-Setup/tmp/N64/retroarch/  /home/$user/.config/
       rm -rf /home/$user/RetroPie-Setup/tmp/N64/
       cd /home/$user/.config/retroarch/

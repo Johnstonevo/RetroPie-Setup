@@ -68,7 +68,7 @@ function configure_lr-beetle-psx() {
     fi
 if [ ! -d $raconfigdir/overlay/GameBezels/PSX ]
     then 
-        git clone  https://github.com/thebezelproject/bezelproject-PSX.git  "/home/$user/RetroPie-Setup/tmp/PSX"
+        git clone https://github.com/thebezelproject/bezelproject-PSX.git  "/home/$user/RetroPie-Setup/tmp/PSX"
         cp -r  /home/$user/RetroPie-Setup/tmp/PSX/retroarch/  /home/$user/.config/
         rm -rf /home/$user/RetroPie-Setup/tmp/PSX/
         cd /home/$user/.config/retroarch/

@@ -71,7 +71,7 @@ fi
 
 if [ ! -d $raconfigdir/overlay/GameBezels/NES ]
 then
-    git clone  https://github.com/thebezelproject/bezelproject-NES.git  "/home/$user/RetroPie-Setup/tmp/NES"
+    git clone https://github.com/thebezelproject/bezelproject-NES.git  "/home/$user/RetroPie-Setup/tmp/NES"
     cp -r  /home/$user/RetroPie-Setup/tmp/NES/retroarch/  /home/$user/.config/
     rm -rf /home/$user/RetroPie-Setup/tmp/NES/
     cd /home/$user/.config/retroarch/
@@ -80,7 +80,7 @@ then
 fi
 if [ ! -d $raconfigdir/overlay/GameBezels/FDS ]
 then
-    git clone  https://github.com/thebezelproject/bezelproject-FDS.git  "/home/$user/RetroPie-Setup/tmp/FDS"
+    git clone https://github.com/thebezelproject/bezelproject-FDS.git  "/home/$user/RetroPie-Setup/tmp/FDS"
     cp -r  /home/$user/RetroPie-Setup/tmp/FDS/retroarch/  /home/$user/.config/
     rm -rf /home/$user/RetroPie-Setup/tmp/FDS/
     cd /home/$user/.config/retroarch/
@@ -89,7 +89,7 @@ then
 fi
 if [ ! -d $raconfigdir/overlay/GameBezels/Famicom ]
 then
-    git clone  https://github.com/thebezelproject/bezelproject-Famicom.git  "/home/$user/RetroPie-Setup/tmp/Famicom"
+    git clone https://github.com/thebezelproject/bezelproject-Famicom.git  "/home/$user/RetroPie-Setup/tmp/Famicom"
     cp -r  /home/$user/RetroPie-Setup/tmp/Famicom/retroarch/  /home/$user/.config/
     rm -rf /home/$user/RetroPie-Setup/tmp/Famicom/
     cd /home/$user/.config/retroarch/

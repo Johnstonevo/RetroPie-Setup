@@ -55,7 +55,7 @@ function _add_system_attractmode() {
     if [[  "$fullname" =~ MAME*|Final*|Multiple*|Arcade*  ]]; then
       iniSet "system" "Arcade"
       iniSet "info_source"
-      iniSet "import_extras"        "./mame-config/catver.ini;./mame-config/nplayers.ini;./xml/listxml.xml"
+      iniSet "import_extras"        "./mame-config/catver.ini;./mame-config/nplayers.ini"
       iniSet "artwork flyer" "$datadir/roms/arcade/flyer"
       iniSet "artwork marquee" "$datadir/roms/arcade/marquee"
       iniSet "artwork snap" "$datadir/roms/arcade/$snap"
@@ -175,11 +175,11 @@ ${tab}filter              Prototype
 ${tab}${tab}rule                    Title contains prototype
 ${tab}
 _EOF_
-        else
-        cat >>"$config" <<_EOF_
+        elif  [[ -e "$attract_dir/layouts/HP2-Refried-Consoles/borders/$fullname.png" ]]; then
+                  cat >>"$config" <<_EOF_
 ${tab}
 display${tab}$fullname
-${tab}layout               HP2-Sub-Menu
+${tab}layout               HP2-Refried-Consoles
 ${tab}romlist              $fullname
 ${tab}in_cycle             yes
 ${tab}in_menu              yes
@@ -194,6 +194,46 @@ ${tab}${tab}reverse_order        true
 ${tab}${tab}rule                 PlayedCount not_contains 0
 ${tab}
 _EOF_
+
+        elif [[ -e "$attract_dir/layouts/HP2-Refried-Computers/borders/$fullname.png" ]]; then
+                cat >>"$config" <<_EOF_
+${tab}
+display${tab}$fullname
+${tab}layout               HP2-Refried-Computers
+${tab}romlist              $fullname
+${tab}in_cycle             yes
+${tab}in_menu              yes
+${tab}global_filter
+${tab}${tab}rule                 FileIsAvailable equals 1
+${tab}filter               All
+${tab}filter               Favourites
+${tab}${tab}rule                 Favourite equals 1
+${tab}filter               "Most Played Games"
+${tab}${tab}sort_by              PlayedCount
+${tab}${tab}reverse_order        true
+${tab}${tab}rule                 PlayedCount not_contains 0
+${tab}
+_EOF_
+      else
+        cat >>"$config" <<_EOF_
+${tab}
+display${tab}$fullname
+${tab}layout               HP2-Refried-Basic
+${tab}romlist              $fullname
+${tab}in_cycle             yes
+${tab}in_menu              yes
+${tab}global_filter
+${tab}${tab}rule                 FileIsAvailable equals 1
+${tab}filter               All
+${tab}filter               Favourites
+${tab}${tab}rule                 Favourite equals 1
+${tab}filter               "Most Played Games"
+${tab}${tab}sort_by              PlayedCount
+${tab}${tab}reverse_order        true
+${tab}${tab}rule                 PlayedCount not_contains 0
+${tab}
+_EOF_
+
         fi
         chown $user:$user "$config"
     fi

@@ -45,7 +45,7 @@ function configure_lr-stella() {
     fi
     if [ ! -d $raconfigdir/overlay/GameBezels/Atari2600 ]
     then
-        git clone  https://github.com/thebezelproject/bezelproject-Atari2600.git  "/home/$user/RetroPie-Setup/tmp/Atari2600"
+        git clone https://github.com/thebezelproject/bezelproject-Atari2600.git  "/home/$user/RetroPie-Setup/tmp/Atari2600"
         cp -r  /home/$user/RetroPie-Setup/tmp/Atari2600/retroarch/  /home/$user/.config/
         rm -rf /home/$user/RetroPie-Setup/tmp/Atari2600/
         cd /home/$user/.config/retroarch

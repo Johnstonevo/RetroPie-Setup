@@ -77,7 +77,7 @@ function configure_lr-snes9x2002() {
 
     if [ ! -d $raconfigdir/overlay/GameBezels/SNES ]
     then
-        git clone  https://github.com/thebezelproject/bezelproject-SNES.git  "/home/$user/RetroPie-Setup/tmp/SNES"
+        git clone https://github.com/thebezelproject/bezelproject-SNES.git  "/home/$user/RetroPie-Setup/tmp/SNES"
         cp -r  /home/$user/RetroPie-Setup/tmp/SNES/retroarch/  /home/$user/.config/
         rm -rf /home/$user/RetroPie-Setup/tmp/SNES/
         cd /home/$user/.config/retroarch
@@ -87,7 +87,7 @@ function configure_lr-snes9x2002() {
 
     if [ ! -d $raconfigdir/overlay/GameBezels/SFC ]
     then
-        git clone  https://github.com/thebezelproject/bezelproject-SFC.git  "/home/$user/RetroPie-Setup/tmp/SFC"
+        git clone https://github.com/thebezelproject/bezelproject-SFC.git  "/home/$user/RetroPie-Setup/tmp/SFC"
         cp -r  /home/$user/RetroPie-Setup/tmp/SFC/retroarch/  /home/$user/.config/
         rm -rf /home/$user/RetroPie-Setup/tmp/SFC/
         cd /home/$user/.config/retroarch/

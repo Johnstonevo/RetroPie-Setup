@@ -48,7 +48,7 @@ function configure_lr-prosystem() {
     fi
     if [ ! -d $raconfigdir/overlay/GameBezels/Atari7800 ]
     then
-        git clone  https://github.com/thebezelproject/bezelproject-Atari7800.git  "/home/$user/RetroPie-Setup/tmp/Atari7800"
+        git clone https://github.com/thebezelproject/bezelproject-Atari7800.git  "/home/$user/RetroPie-Setup/tmp/Atari7800"
         cp -r  /home/$user/RetroPie-Setup/tmp/Atari7800/retroarch/  /home/$user/.config/
        rm -rf /home/$user/RetroPie-Setup/tmp/Atari7800/
         cd /home/$user/.config/retroarch

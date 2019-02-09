@@ -116,7 +116,7 @@ fi
 
 if [ !  -d $raconfigdir/overlay/ArcadeBezels ]
   then
-    git clone  https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
+    git clone https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
     cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
     rm -rf /home/$user/RetroPie-Setup/tmp/MAME/
     cd /home/$user/.config/retroarch/
