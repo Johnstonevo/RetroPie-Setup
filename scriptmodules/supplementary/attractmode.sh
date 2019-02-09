@@ -92,7 +92,7 @@ function _add_system_attractmode() {
           cat >>"$config" <<_EOF_
 ${tab}
 display${tab}$fullname
-${tab}layout               HP2-Arcade-Menu
+${tab}layout               HP2-Refried-Arcades
 ${tab}romlist              $fullname
 ${tab}in_cycle             no
 ${tab}in_menu              yes
