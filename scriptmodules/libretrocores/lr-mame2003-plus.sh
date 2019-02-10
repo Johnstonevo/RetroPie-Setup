@@ -66,7 +66,7 @@ function configure_lr-mame2003-plus() {
   setRetroArchCoreOption "${dir_name}-samples" "enabled"
 
   local so_name="$(_get_so_name_${md_id})"
-  addEmulator 0 "$md_id" "mame-2003-plus" "$md_inst/${so_name}_libretro.so"
+  addEmulator 1 "$md_id" "mame-2003-plus" "$md_inst/${so_name}_libretro.so"
   addSystem "arcade"
   addSystem "mame-2003-plus"
     if [ ! -d $raconfigdir/overlay/ArcadeBezels ]

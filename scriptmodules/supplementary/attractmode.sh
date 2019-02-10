@@ -52,7 +52,7 @@ function _add_system_attractmode() {
     local snap="snap"
     [[ "$name" == "retropie" ]] && snap="icons"
 
-    if [[  "$fullname" =~ MAME*|Final*|Multiple*|Arcade*  ]]; then
+    if [[  "$platform" == arcade  ]]; then
       iniSet "system" "Arcade"
       iniSet "info_source"
       iniSet "import_extras"        "./mame-config/catver.ini;./mame-config/nplayers.ini"
@@ -88,14 +88,14 @@ function _add_system_attractmode() {
     local tab=$'\t'
     if [[ -f "$config" ]] && ! grep -q "display$tab$fullname" "$config"; then
         cp "$config" "$config.bak"
-        if [[  "$fullname" =~ MAME*|Final*|Multiple*|Arcade*  ]]; then
+        if [[  "$platform" == arcade  ]]; then
           cat >>"$config" <<_EOF_
 ${tab}
 display${tab}$fullname
-${tab}layout               HP2-Refried-Arcades
+${tab}layout               HP2-Arcade-Menu
 ${tab}romlist              $fullname
 ${tab}in_cycle             no
-${tab}in_menu              yes
+${tab}in_menu              no
 ${tab}global_filter
 ${tab}${tab}rule                    FileIsAvailable equals 1
 ${tab}${tab}rule                    Category not_contains Mature
@@ -106,6 +106,7 @@ ${tab}filter              All
 ${tab}${tab}rule                    Name not_contains "(Japan"|"(Brazil"|"(Asia"|Bust-A-Move
 ${tab}${tab}rule                    Title not_contains bootleg|prototype
 ${tab}${tab}rule                    Manufacturer not_contains bootleg
+${tab}${tab}rule                    CloneOf not_equals .*
 ${tab}filter              Favourites
 ${tab}${tab}rule                    Favourite equals 1
 ${tab}filter              "Most Played Games"
@@ -175,14 +176,30 @@ ${tab}filter              Prototype
 ${tab}${tab}rule                    Title contains prototype
 ${tab}
 _EOF_
-        elif  [[ -e "$attract_dir/layouts/HP2-Refried-Consoles/borders/$fullname.png" ]]; then
+          local config="$attract_dir/romlists/Arcades.txt"
+
+    # remove extension
+          path="${path/%.*}"
+
+          if [[ ! -f "$config" ]]; then
+              echo "#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons" >"$config"
+          fi
+
+          # if the entry already exists, remove it
+          if grep -q "^$path;" "$config"; then
+              sed -i "/^$path/d" "$config"
+          fi
+
+          echo "$fullname;$fullname;@;;;;;;;;;;;;;;" >>"$config"
+
+      elif  [[ -e "$attract_dir/layouts/HP2-Refried-Consoles/backgrounds/$fullname.jpg" ]]; then
                   cat >>"$config" <<_EOF_
 ${tab}
 display${tab}$fullname
-${tab}layout               HP2-Refried-Consoles
+${tab}layout               HP2-Systems-Menu
 ${tab}romlist              $fullname
-${tab}in_cycle             yes
-${tab}in_menu              yes
+${tab}in_cycle             no
+${tab}in_menu              no
 ${tab}global_filter
 ${tab}${tab}rule                 FileIsAvailable equals 1
 ${tab}filter               All
@@ -194,15 +211,31 @@ ${tab}${tab}reverse_order        true
 ${tab}${tab}rule                 PlayedCount not_contains 0
 ${tab}
 _EOF_
+          local config="$attract_dir/romlists/Consoles.txt"
 
-        elif [[ -e "$attract_dir/layouts/HP2-Refried-Computers/borders/$fullname.png" ]]; then
+          # remove extension
+          path="${path/%.*}"
+
+          if [[ ! -f "$config" ]]; then
+              echo "#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons" >"$config"
+          fi
+
+          # if the entry already exists, remove it
+          if grep -q "^$path;" "$config"; then
+              sed -i "/^$path/d" "$config"
+          fi
+
+          echo "$fullname;$fullname;@;;;;;;;;;;;;;;" >>"$config"
+
+
+      elif [[ -e "$attract_dir/layouts/HP2-Refried-Computers/borders/$fullname.png" ]]; then
                 cat >>"$config" <<_EOF_
 ${tab}
 display${tab}$fullname
-${tab}layout               HP2-Refried-Computers
+${tab}layout               HP2-Systems-Menu
 ${tab}romlist              $fullname
-${tab}in_cycle             yes
-${tab}in_menu              yes
+${tab}in_cycle             no
+${tab}in_menu              no
 ${tab}global_filter
 ${tab}${tab}rule                 FileIsAvailable equals 1
 ${tab}filter               All
@@ -214,11 +247,27 @@ ${tab}${tab}reverse_order        true
 ${tab}${tab}rule                 PlayedCount not_contains 0
 ${tab}
 _EOF_
+          local config="$attract_dir/romlists/Computers.txt"
+
+          # remove extension
+          path="${path/%.*}"
+
+          if [[ ! -f "$config" ]]; then
+              echo "#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons" >"$config"
+          fi
+
+          # if the entry already exists, remove it
+          if grep -q "^$path;" "$config"; then
+              sed -i "/^$path/d" "$config"
+          fi
+
+          echo "$fullname;$fullname;@;;;;;;;;;;;;;;" >>"$config"
+
       else
-        cat >>"$config" <<_EOF_
+          cat >>"$config" <<_EOF_
 ${tab}
 display${tab}$fullname
-${tab}layout               HP2-Refried-Basic
+${tab}layout               HP2-Systems-Menu
 ${tab}romlist              $fullname
 ${tab}in_cycle             yes
 ${tab}in_menu              yes
