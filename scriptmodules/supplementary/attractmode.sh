@@ -264,7 +264,7 @@ _EOF_
           echo "$fullname;$fullname;@;;;;;;;;;;;;;;" >>"$config"
 
 
-        elif [[  "$fullname" =~ "*Hacks*" ]]; then
+        elif [[  $fullname =~ Hacks ]]; then
                   cat >>"$config" <<_EOF_
 ${tab}
 display${tab}$fullname
