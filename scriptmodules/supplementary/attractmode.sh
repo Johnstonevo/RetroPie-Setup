@@ -192,7 +192,7 @@ _EOF_
 
           echo "$fullname;$fullname;@;;;;;;;;;;;;;;" >>"$config"
 
-      elif  [[ -e "$attract_dir/layouts/HP2-Refried-Consoles/backgrounds/$fullname.jpg" ]]; then
+      elif  [[ -e "$attract_dir/scraper/Consoles/overview/$fullname.txt" ]]; then
                   cat >>"$config" <<_EOF_
 ${tab}
 display${tab}$fullname
@@ -228,8 +228,8 @@ _EOF_
           echo "$fullname;$fullname;@;;;;;;;;;;;;;;" >>"$config"
 
 
-      elif [[ -e "$attract_dir/layouts/HP2-Refried-Computers/borders/$fullname.png" ]]; then
-                cat >>"$config" <<_EOF_
+      elif  [[ -e "$attract_dir/scraper/Handhelds/overview/$fullname.txt" ]]; then
+                  cat >>"$config" <<_EOF_
 ${tab}
 display${tab}$fullname
 ${tab}layout               HP2-Systems-Menu
@@ -247,7 +247,7 @@ ${tab}${tab}reverse_order        true
 ${tab}${tab}rule                 PlayedCount not_contains 0
 ${tab}
 _EOF_
-          local config="$attract_dir/romlists/Computers.txt"
+          local config="$attract_dir/romlists/Handhelds.txt"
 
           # remove extension
           path="${path/%.*}"
@@ -263,14 +263,15 @@ _EOF_
 
           echo "$fullname;$fullname;@;;;;;;;;;;;;;;" >>"$config"
 
-      else
-          cat >>"$config" <<_EOF_
+
+        elif [[  "$fullname" =~ "*Hacks*" ]]; then
+                  cat >>"$config" <<_EOF_
 ${tab}
 display${tab}$fullname
 ${tab}layout               HP2-Systems-Menu
 ${tab}romlist              $fullname
-${tab}in_cycle             yes
-${tab}in_menu              yes
+${tab}in_cycle             no
+${tab}in_menu              no
 ${tab}global_filter
 ${tab}${tab}rule                 FileIsAvailable equals 1
 ${tab}filter               All
@@ -282,6 +283,126 @@ ${tab}${tab}reverse_order        true
 ${tab}${tab}rule                 PlayedCount not_contains 0
 ${tab}
 _EOF_
+          local config="$attract_dir/romlists/Hacks.txt"
+
+          # remove extension
+          path="${path/%.*}"
+
+          if [[ ! -f "$config" ]]; then
+              echo "#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons" >"$config"
+          fi
+
+          # if the entry already exists, remove it
+          if grep -q "^$path;" "$config"; then
+              sed -i "/^$path/d" "$config"
+          fi
+
+          echo "$fullname;$fullname;@;;;;;;;;;;;;;;" >>"$config"
+
+        elif [[ -e "$attract_dir/scraper/Computers/overview/$fullname.txt" ]]; then
+                  cat >>"$config" <<_EOF_
+${tab}
+display${tab}$fullname
+${tab}layout               HP2-Systems-Menu
+${tab}romlist              $fullname
+${tab}in_cycle             no
+${tab}in_menu              no
+${tab}global_filter
+${tab}${tab}rule                 FileIsAvailable equals 1
+${tab}filter               All
+${tab}filter               Favourites
+${tab}${tab}rule                 Favourite equals 1
+${tab}filter               "Most Played Games"
+${tab}${tab}sort_by              PlayedCount
+${tab}${tab}reverse_order        true
+${tab}${tab}rule                 PlayedCount not_contains 0
+${tab}
+_EOF_
+            local config="$attract_dir/romlists/Computers.txt"
+
+            # remove extension
+            path="${path/%.*}"
+
+            if [[ ! -f "$config" ]]; then
+                echo "#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons" >"$config"
+            fi
+
+            # if the entry already exists, remove it
+            if grep -q "^$path;" "$config"; then
+                sed -i "/^$path/d" "$config"
+            fi
+
+            echo "$fullname;$fullname;@;;;;;;;;;;;;;;" >>"$config"
+
+          elif [[ -e "$attract_dir/scraper/Handhelds/overview/$fullname.txt" ]]; then
+                    cat >>"$config" <<_EOF_
+${tab}
+display${tab}$fullname
+${tab}layout               HP2-Systems-Menu
+${tab}romlist              $fullname
+${tab}in_cycle             no
+${tab}in_menu              no
+${tab}global_filter
+${tab}${tab}rule                 FileIsAvailable equals 1
+${tab}filter               All
+${tab}filter               Favourites
+${tab}${tab}rule                 Favourite equals 1
+${tab}filter               "Most Played Games"
+${tab}${tab}sort_by              PlayedCount
+${tab}${tab}reverse_order        true
+${tab}${tab}rule                 PlayedCount not_contains 0
+${tab}
+_EOF_
+              local config="$attract_dir/romlists/Handhelds.txt"
+
+              # remove extension
+              path="${path/%.*}"
+
+              if [[ ! -f "$config" ]]; then
+                  echo "#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons" >"$config"
+              fi
+
+              # if the entry already exists, remove it
+              if grep -q "^$path;" "$config"; then
+                  sed -i "/^$path/d" "$config"
+              fi
+
+              echo "$fullname;$fullname;@;;;;;;;;;;;;;;" >>"$config"
+
+      else
+          cat >>"$config" <<_EOF_
+${tab}
+display${tab}$fullname
+${tab}layout               HP2-Systems-Menu
+${tab}romlist              $fullname
+${tab}in_cycle             no
+${tab}in_menu              no
+${tab}global_filter
+${tab}${tab}rule                 FileIsAvailable equals 1
+${tab}filter               All
+${tab}filter               Favourites
+${tab}${tab}rule                 Favourite equals 1
+${tab}filter               "Most Played Games"
+${tab}${tab}sort_by              PlayedCount
+${tab}${tab}reverse_order        true
+${tab}${tab}rule                 PlayedCount not_contains 0
+${tab}
+_EOF_
+            local config="$attract_dir/romlists/Misc.txt"
+
+            # remove extension
+            path="${path/%.*}"
+
+            if [[ ! -f "$config" ]]; then
+                echo "#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons" >"$config"
+            fi
+
+            # if the entry already exists, remove it
+            if grep -q "^$path;" "$config"; then
+                sed -i "/^$path/d" "$config"
+            fi
+
+echo "$fullname;$fullname;@;;;;;;;;;;;;;;" >>"$config"
 
         fi
         chown $user:$user "$config"
