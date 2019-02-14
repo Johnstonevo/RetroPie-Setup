@@ -12,7 +12,7 @@
 rp_module_id="attractmode"
 rp_module_desc="Attract Mode emulator frontend"
 rp_module_licence="GPL3 https://raw.githubusercontent.com/mickelson/attract/master/License.txt"
-rp_module_section="core"
+rp_module_section="exp"
 rp_module_flags="!mali !kms frontend"
 
 function _get_configdir_attractmode() {
@@ -54,8 +54,8 @@ function _add_system_attractmode() {
 
     if [[  "$platform" == arcade  ]]; then
       iniSet "system" "Arcade"
-      iniSet "info_source"
-      iniSet "import_extras"        "./mame-config/catver.ini;./mame-config/nplayers.ini"
+      iniSet "info_source"    "./mame-config/$fullname.xml"
+      iniSet "import_extras"        "./mame-config/catver.ini;./mame-config/nplayers.ini;./mame-config/category.ini;./mame-config/Catlist.ini;./mame-config/$fullname.xml"
       iniSet "artwork flyer" "$datadir/roms/arcade/flyer"
       iniSet "artwork marquee" "$datadir/roms/arcade/marquee"
       iniSet "artwork snap" "$datadir/roms/arcade/$snap"
@@ -149,7 +149,7 @@ ${tab}${tab}rule                    Title not_contains bootleg|prototype
 ${tab}${tab}rule                    Manufacturer not_contains bootleg
 ${tab}${tab}rule                    CloneOf not_equals .*
 ${tab}filter              Puzzle
-${tab}${tab}rule                    Category contains Puzzlefi
+${tab}${tab}rule                    Category contains Puzzle
 ${tab}${tab}rule                    Title not_contains bootleg|prototype
 ${tab}${tab}rule                    Manufacturer not_contains bootleg
 ${tab}${tab}rule                    CloneOf not_equals .*

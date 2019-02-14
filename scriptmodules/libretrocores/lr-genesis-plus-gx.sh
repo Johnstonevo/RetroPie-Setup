@@ -63,16 +63,16 @@ function configure_lr-genesis-plus-gx() {
   local def=0
   isPlatform "armv6" && def=0
 
-  addEmulator 0 "$md_id" "gamegear" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 0 "$md_id" "ggh" "$md_inst/genesis_plus_gx_libretro.so"
+  addEmulator 1 "$md_id" "gamegear" "$md_inst/genesis_plus_gx_libretro.so"
+  addEmulator 1 "$md_id" "ggh" "$md_inst/genesis_plus_gx_libretro.so"
   addEmulator 0 "$md_id" "mastersystem" "$md_inst/genesis_plus_gx_libretro.so"
   addEmulator 0 "$md_id" "megadrive" "$md_inst/genesis_plus_gx_libretro.so"
   addEmulator 0 "$md_id" "megadrive-japan" "$md_inst/genesis_plus_gx_libretro.so"
   addEmulator 0 "$md_id" "genesis" "$md_inst/genesis_plus_gx_libretro.so"
   addEmulator 0 "$md_id" "genh" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 0 "$md_id" "sg-1000" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 0 "$md_id" "segacd" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 0 "$md_id" "markiii" "$md_inst/genesis_plus_gx_libretro.so"
+  addEmulator 1 "$md_id" "sg-1000" "$md_inst/genesis_plus_gx_libretro.so"
+  addEmulator 1 "$md_id" "segacd" "$md_inst/genesis_plus_gx_libretro.so"
+  addEmulator 1 "$md_id" "markiii" "$md_inst/genesis_plus_gx_libretro.so"
   addEmulator 0 "$md_id" "sega32x" "$md_inst/genesis_plus_gx_libretro.so"
   addEmulator 0 "$md_id" "sc-3000" "$md_inst/genesis_plus_gx_libretro.so"
   addSystem  "gamegear"
@@ -105,16 +105,16 @@ function configure_lr-genesis-plus-gx() {
           local def=0
           isPlatform "armv6" && def=0
 
-          addEmulator 1 "$md_id-ppa" "gamegear" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 1 "$md_id-ppa" "ggh" "$md_instppa/genesis_plus_gx_libretro.so"
+          addEmulator 0 "$md_id-ppa" "gamegear" "$md_instppa/genesis_plus_gx_libretro.so"
+          addEmulator 0 "$md_id-ppa" "ggh" "$md_instppa/genesis_plus_gx_libretro.so"
           addEmulator 0 "$md_id-ppa" "mastersystem" "$md_instppa/genesis_plus_gx_libretro.so"
           addEmulator 0 "$md_id-ppa" "megadrive" "$md_instppa/genesis_plus_gx_libretro.so"
           addEmulator 0 "$md_id-ppa" "megadrive-japan" "$md_instppa/genesis_plus_gx_libretro.so"
           addEmulator 0 "$md_id-ppa" "genesis" "$md_instppa/genesis_plus_gx_libretro.so"
           addEmulator 0 "$md_id-ppa" "genh" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 1 "$md_id-ppa" "sg-1000" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 1 "$md_id-ppa" "segacd" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 1  "$md_id-ppa""markiii" "$md_instppa/genesis_plus_gx_libretro.so"
+          addEmulator 0 "$md_id-ppa" "sg-1000" "$md_instppa/genesis_plus_gx_libretro.so"
+          addEmulator 0 "$md_id-ppa" "segacd" "$md_instppa/genesis_plus_gx_libretro.so"
+          addEmulator 0  "$md_id-ppa""markiii" "$md_instppa/genesis_plus_gx_libretro.so"
           addEmulator 0  "$md_id-ppa""sega32x" "$md_instppa/genesis_plus_gx_libretro.so"
           addEmulator 0 "$md_id-ppa" "sc-3000" "$md_instppa/genesis_plus_gx_libretro.so"
           addSystem  "gamegear"

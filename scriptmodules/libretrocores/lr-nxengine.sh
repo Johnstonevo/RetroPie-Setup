@@ -50,4 +50,23 @@ _EOF_
     chmod +x "$file"
 
     ensureSystemretroconfig "ports/cavestory"
+    if [ -e /usr/lib/libretro/nxengine_libretro.so ]
+        then
+          addEmulator 1 "$md_id-ppa" "ports/cavestory" "$md_instppa/nxengine_libretro.so"
+    fi
+
+    if [  -d $raconfigdir/overlays/tvcs ]
+    then
+                cp /home/$user/.config/RetroPie/ports/cavestory/retroarch.cfg /home/$user/.config/RetroPie/ports/cavestory/retroarch.cfg.bkp
+                local core_config="$configdir/ports/cavestory/retroarch.cfg"
+                iniConfig " = " '"' "$md_conf_root/ports/cavestory/retroarch.cfg"
+                iniSet  "input_overlay" "/home/$user/.config/retroarch/overlays/tvcs/tvcs-clear.cfg" "$core_config"
+                iniSet "input_overlay_opacity" "1.0" "$core_config"
+                iniSet "input_overlay_scale" "1.0" "$core_config"
+                iniSet "video_fullscreen_x" "1920" "$core_config"
+                iniSet "video_fullscreen_y" "1080" "$core_config"
+                iniSet "input_overlay_enable" "true" "$core_config"
+                iniSet "video_smooth" "false" "$core_config"
+      fi
+
 }
