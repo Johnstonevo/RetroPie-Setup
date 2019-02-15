@@ -17,26 +17,31 @@ rp_module_section="exp"
 rp_module_flags="!arm"
 
 function depends_pcsx2() {
-    if isPlatform "64bit"; then
-        iniConfig " = " '"' "$configdir/all/retropie.cfg"
-        iniGet "own_sdl2"
-        if [[ "$ini_value" != "0" ]]; then
-            if dialog --yesno "PCSX2 cannot be installed on a 64bit system with the RetroPie custom version of SDL2 installed due to version conflicts with the multiarch i386 version of SDL2.\n\nDo you want to downgrade to your OS version of SDL2 and continue to install PCSX2?" 22 76 2>&1 >/dev/tty; then
-                chown $user:$user "$configdir/all/retropie.cfg"
-                if rp_callModule sdl2 revert; then
-                    iniSet "own_sdl2" "0"
-                else
-                    md_ret_errors+=("Failed to install $md_desc")
-                fi
-            else
-                md_ret_errors+=("$md_desc install aborted.")
-            fi
-        fi
+    #if isPlatform "64bit"; then
+    #    iniConfig " = " '"' "$configdir/all/retropie.cfg"
+    #    iniGet "own_sdl2"
+    #    if [[ "$ini_value" != "0" ]]; then
+    #        if dialog --yesno "PCSX2 cannot be installed on a 64bit system with the RetroPie custom version of SDL2 installed due to version conflicts with the multiarch i386 version of SDL2.\n\nDo you want to downgrade to your OS version of SDL2 and continue to install PCSX2?" 22 76 2>&1 >/dev/tty; then
+    #            chown $user:$user "$configdir/all/retropie.cfg"
+    #            if rp_callModule sdl2 revert; then
+    #                iniSet "own_sdl2" "0"
+    #            else
+    #                md_ret_errors+=("Failed to install $md_desc")
+    #            fi
+    #        else
+    #            md_ret_errors+=("$md_desc install aborted.")
+    #        fi
+    #    fi
+    #fi
+    if isPlatform "x86" && [[ "$md_mode" == "install" ]]; then
+        apt-add-repository -y ppa:gregory-hainaut/pcsx2.official.ppa
     fi
 }
 
 function install_bin_pcsx2() {
-    aptInstall pcsx2
+  # force aptInstall to get a fresh list before installing
+  __apt_update=0
+  aptInstall pcsx2
 }
 
 function remove_pcsx2() {
@@ -47,6 +52,6 @@ function configure_pcsx2() {
     mkRomDir "ps2"
 
     addEmulator 0 "$md_id-nogui" "ps2" "PCSX2 %ROM% --fullscreen --nogui"
-    addEmulator 0 "$md_id" "ps2" "PCSX2 %ROM% --windowed"
+    addEmulator 1 "$md_id" "ps2" "PCSX2 %ROM% --windowed"
     addSystem "ps2"
 }

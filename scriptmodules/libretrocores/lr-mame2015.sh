@@ -12,17 +12,13 @@
 rp_module_id="lr-mame2015"
 rp_module_desc="Arcade emu - MAME 0.160 port for libretro"
 rp_module_help="ROM Extension: .zip\n\nCopy your MAME roms to either $romdir/mame-libretro or\n$romdir/arcade"
-<<<<<<< HEAD:scriptmodules/libretrocores/lr-mame2014.sh
-rp_module_licence="NONCOM https://raw.githubusercontent.com/libretro/mame2014-libretro/master/docs/license.txt"
-rp_module_section="main"
-=======
 rp_module_licence="NONCOM https://raw.githubusercontent.com/libretro/mame2015-libretro/master/docs/license.txt"
-rp_module_section="exp"
->>>>>>> upstream/master:scriptmodules/libretrocores/lr-mame2015.sh
+rp_module_section="main"
+
 
 function _update_hook_lr-mame2015() {
     # move from old location and update emulators.cfg
-    renameModule "lr-mame2014" "lr-mame2015"
+    renameModule "lr-mame2015" "lr-mame2015"
 }
 
 function sources_lr-mame2015() {
@@ -47,16 +43,16 @@ function install_lr-mame2015() {
 
 function configure_lr-mame2015() {
     local system
-    for system in arcade mame-2014; do
+    for system in arcade mame-2015; do
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
         addEmulator 0 "$md_id" "$system" "$md_inst/mame2015_libretro.so"
         addSystem "$system"
     done
-    if [ -e /usr/lib/libretro/mame2014_libretro.so ]
+    if [ -e /usr/lib/libretro/mame2015_libretro.so ]
     then
-        addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame2014_libretro.so"
-        addEmulator 0 "$md_id-ppa" "mame-2014" "$md_instppa/mame2014_libretro.so"
+        addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame2015_libretro.so"
+        addEmulator 0 "$md_id-ppa" "mame-2015" "$md_instppa/mame2015_libretro.so"
     fi
     if [ !  -d $raconfigdir/overlay/ArcadeBezels ]
     then
@@ -66,7 +62,7 @@ function configure_lr-mame2015() {
       cd /home/$user/.config/retroarch/
       chown -R $user:$user ../retroarch
       find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-      ln -s "$raconfigdir/config/MAME 2010" "$raconfigdir/config/MAME 2014"
+      ln -s "$raconfigdir/config/MAME 2010" "$raconfigdir/config/MAME 2015"
 
     fi
     if [  -d $raconfigdir/overlay/ArcadeBezels ]
@@ -78,9 +74,9 @@ function configure_lr-mame2015() {
         iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
         iniSet "input_overlay_opacity" "1.0"
         iniSet "input_overlay_enable" "true"
-        iniSet "mame2014-skip_disclaimer" "enabled"
-        iniSet "mame2014-dcs-speedhack" "enabled"
-        iniSet "mame2014-samples" "enabled"
+        iniSet "mame2015-skip_disclaimer" "enabled"
+        iniSet "mame2015-dcs-speedhack" "enabled"
+        iniSet "mame2015-samples" "enabled"
     fi
 
 }

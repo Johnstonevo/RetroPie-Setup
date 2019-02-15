@@ -12,7 +12,7 @@
 rp_module_id="attractmode"
 rp_module_desc="Attract Mode emulator frontend"
 rp_module_licence="GPL3 https://raw.githubusercontent.com/mickelson/attract/master/License.txt"
-rp_module_section="exp"
+rp_module_section="opt"
 rp_module_flags="!mali !kms frontend"
 
 function _get_configdir_attractmode() {
@@ -54,15 +54,15 @@ function _add_system_attractmode() {
 
     if [[  "$platform" == arcade  ]]; then
       iniSet "system" "Arcade"
-      iniSet "info_source"    "./mame-config/$fullname.xml"
-      iniSet "import_extras"        "./mame-config/catver.ini;./mame-config/nplayers.ini;./mame-config/category.ini;./mame-config/Catlist.ini;./mame-config/$fullname.xml"
+      iniSet "info_source"            "listxml"
+      iniSet "import_extras"        "$attract_dir/mame-config/Catver.ini;$attract_dir/mame-config/nplayers.ini;$attract_dir/mame-config/category.ini;$attract_dir/mame-config/Catlist.ini"
       iniSet "artwork flyer" "$datadir/roms/arcade/flyer"
       iniSet "artwork marquee" "$datadir/roms/arcade/marquee"
       iniSet "artwork snap" "$datadir/roms/arcade/$snap"
       iniSet "artwork wheel" "$datadir/roms/arcade/wheel"
     else
       iniSet "info_source"
-      iniSet "import_extras"        #"$attract_dir/xml/$fullname.xml"
+      iniSet "import_extras"        "$attract_dir/xml/$fullname.xml"
       iniSet "artwork flyer" "$path/flyer"
       iniSet "artwork marquee" "$path/marquee"
       iniSet "artwork snap" "$path/$snap"
@@ -75,14 +75,14 @@ function _add_system_attractmode() {
     chown $user:$user "$config"
 
     # if no gameslist, generate one
-    if [[ ! -f "$attract_dir/romlists/$fullname.txt" ]]; then
-        #sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
-        if [[ -f "$attract_dir/xml/$fullname.xml" ]]; then
-          sudo -u $user attract --import-romlist "$attract_dir/xml/$fullname.xml" "$fullname"
-        else
-          sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
+        if [[ ! -f "$attract_dir/romlists/$fullname.txt" ]]; then
+            #sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
+              if [[ -f "$attract_dir/xml/$fullname.xml" ]]; then
+                sudo -u $user attract --import-romlist "$attract_dir/xml/$fullname.xml" "$fullname"
+              else
+                sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
+              fi
         fi
-    fi
 
     local config="$attract_dir/attract.cfg"
     local tab=$'\t'
@@ -212,42 +212,6 @@ ${tab}${tab}rule                 PlayedCount not_contains 0
 ${tab}
 _EOF_
           local config="$attract_dir/romlists/Consoles.txt"
-
-          # remove extension
-          path="${path/%.*}"
-
-          if [[ ! -f "$config" ]]; then
-              echo "#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons" >"$config"
-          fi
-
-          # if the entry already exists, remove it
-          if grep -q "^$path;" "$config"; then
-              sed -i "/^$path/d" "$config"
-          fi
-
-          echo "$fullname;$fullname;@;;;;;;;;;;;;;;" >>"$config"
-
-
-      elif  [[ -e "$attract_dir/scraper/Handhelds/overview/$fullname.txt" ]]; then
-                  cat >>"$config" <<_EOF_
-${tab}
-display${tab}$fullname
-${tab}layout               HP2-Systems-Menu
-${tab}romlist              $fullname
-${tab}in_cycle             no
-${tab}in_menu              no
-${tab}global_filter
-${tab}${tab}rule                 FileIsAvailable equals 1
-${tab}filter               All
-${tab}filter               Favourites
-${tab}${tab}rule                 Favourite equals 1
-${tab}filter               "Most Played Games"
-${tab}${tab}sort_by              PlayedCount
-${tab}${tab}reverse_order        true
-${tab}${tab}rule                 PlayedCount not_contains 0
-${tab}
-_EOF_
-          local config="$attract_dir/romlists/Handhelds.txt"
 
           # remove extension
           path="${path/%.*}"
@@ -460,7 +424,10 @@ function depends_attractmode() {
         libfontconfig1-dev
     )
     isPlatform "rpi" && depends+=(libraspberrypi-dev)
-    isPlatform "x11" && depends+=(libsfml-dev)
+    isPlatform "x11" && depends+=(libsfml-dev libsfml-dev libopenal-dev
+                        libavformat-dev libfontconfig1-dev libfreetype6-dev
+                        libswscale-dev libavresample-dev libarchive-dev
+                        libjpeg-dev libglu1-mesa-dev)
     getDepends "${depends[@]}"
 }
 
@@ -507,7 +474,7 @@ function configure_attractmode() {
 
   [[ ! -d "$attract_dir/.git" ]] && rm -rf "$attract_dir"
   gitPullOrClone "$home/.attract" https://github.com/Johnstonevo/config.git
-  #cp -r  "$__builddir/.attract"  /home/$user/
+  #cp -r  "$__builddir/.attract"  $attract_dir/
   chown -R $user:$user $home/.attract
     #moveConfigDir "$home/.attract" "$md_conf_root/all/attractmode"
 

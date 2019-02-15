@@ -9,11 +9,7 @@
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
 
-<<<<<<< HEAD
 __version="0.0.1alpha"
-=======
-__version="4.4.8"
->>>>>>> upstream/master
 
 [[ "$__debug" -eq 1 ]] && set -x
 
@@ -48,10 +44,10 @@ __builddir="$__tmpdir/build"
 __swapdir="$__tmpdir"
 
 # check, if sudo is used
-if [[ "$(id -u)" -ne 0 ]]; then
-    echo "Script must be run under sudo from the user you want to install for. Try 'sudo $0'"
-    exit 1
-fi
+#if [[ "$(id -u)" -ne 0 ]]; then
+  #  echo "Script must be run under sudo from the user you want to install for. Try 'sudo $0'"
+  #  exit 1
+#fi
 
 __backtitle="retropie.org.uk - RetroPie Setup. Installation folder: $rootdir for user $user"
 

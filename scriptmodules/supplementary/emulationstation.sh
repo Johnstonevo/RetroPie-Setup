@@ -125,11 +125,7 @@ function depends_emulationstation() {
     local depends=(
         libfreeimage-dev libfreetype6-dev
         libcurl4-openssl-dev libasound2-dev cmake libsdl2-dev libsm-dev
-<<<<<<< HEAD
         libvlc-dev libvlccore-dev vlc rapidjson-dev libcec-dev
-=======
-        libvlc-dev libvlccore-dev vlc rapidjson-dev
->>>>>>> upstream/master
     )
 
     isPlatform "x11" && depends+=(gnome-terminal)
