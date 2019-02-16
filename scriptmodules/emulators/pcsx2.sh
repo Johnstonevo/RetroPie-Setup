@@ -34,7 +34,8 @@ function depends_pcsx2() {
     #    fi
     #fi
     if isPlatform "x86" && [[ "$md_mode" == "install" ]]; then
-        apt-add-repository -y ppa:gregory-hainaut/pcsx2.official.ppa
+        dpkg --add-architecture i386
+        apt-add-repository -y ppa:pcsx2-team/pcsx2-daily
     fi
 }
 
@@ -51,7 +52,7 @@ function remove_pcsx2() {
 function configure_pcsx2() {
     mkRomDir "ps2"
 
-    addEmulator 0 "$md_id-nogui" "ps2" "PCSX2 %ROM% --fullscreen --nogui"
-    addEmulator 1 "$md_id" "ps2" "PCSX2 %ROM% --windowed"
+    addEmulator 1 "$md_id-nogui" "ps2" "PCSX2 %ROM% --fullscreen --nogui"
+    addEmulator 0 "$md_id" "ps2" "PCSX2 %ROM% --windowed"
     addSystem "ps2"
 }
