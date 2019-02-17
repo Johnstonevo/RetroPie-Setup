@@ -487,6 +487,27 @@ function moveConfigFile() {
     chown -h $user:$user "$from"
 }
 
+function copyConfigDir() {
+    local from="$1"
+    local to="$2"
+
+    # if we are in remove mode - remove the symlink
+    if [[ "$md_mode" == "remove" ]]; then
+        [[ -h "$from" ]] && rm -f "$from"
+        return
+    fi
+
+    mkUserDir "$to"
+    # move any old configs to the new location
+    if [[ -d "$from" && ! -h "$from" ]]; then
+        cp -a "$from/." "$to/"
+        #rm -rf "$from"
+    fi
+    ln -snf "$to" "$from"
+    # set ownership of the actual link to $user
+    chown -h $user:$user "$from"
+}
+
 ## @fn diffFiles()
 ## @param file1 file to compare
 ## @param file2 file to compare

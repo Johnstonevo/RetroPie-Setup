@@ -66,8 +66,15 @@ function configure_mame64() {
     mkRomDir "arcade"
     mkRomDir "arcade/$system"
     mkRomDir "$system"
+    mkRomDir "arcadia"
+    mkRomDir "astrocade"
+    mkRomDir "bbcmicro"
+    mkRomDir "channelf"
+    mkRomDir "electron"
+    mkRomDir "supervision"
 
-    moveConfigDir "$home/.mame" "$md_conf_root/$system"
+
+    copyConfigDir "$home/.mame" "$md_conf_root/$system"
 
     # Create required MAME directories underneath the ROM directory
     if [[ "$md_mode" == "install" ]]; then
@@ -86,7 +93,7 @@ function configure_mame64() {
         "$md_inst/mame64" -createconfig
         popd
 
-        iniConfig " " "" "$md_conf_root/$system/mame.ini"
+        iniConfig " " "" "$md_conf_root/$system/$md_id.ini"
         iniSet "rompath"            "$romdir/$system;$romdir/arcade"
         iniSet "hashpath"           "$md_inst/hash"
         iniSet "samplepath"         "$romdir/$system/samples;$romdir/arcade/samples"
@@ -119,24 +126,15 @@ function configure_mame64() {
         chown -R $user:$user "$md_conf_root/$system"
         chmod a+r "$md_conf_root/$system/mame.ini"
     fi
-    mkRomDir "arcadia"
-    mkRomDir "astrocade"
-    mkRomDir "bbcmicro"
-    mkRomDir "channelf"
-    mkRomDir "electron"
-    mkRomDir "supervision"
-    mkRomDir "arcade"
-    mkRomDir "mame-current"
 
     addEmulator 0 "$md_id" "arcade" "$md_inst/mame64 %BASENAME%"
     addEmulator 0 "$md_id" "$system" "$md_inst/mame64 %BASENAME%"
-    addEmulator 1 "$md_id_arcadia" "arcadia" "$md_inst/mame64 arcadia  -cart %ROM%"
-    addEmulator 1 "$md_id_astrocade" "astrocade" "$md_inst/mame64 astrocade  -cart %ROM%"
-    addEmulator 1 "$md_id_bbcmicro" "bbcmicro" "$md_inst/mame64 bbcb  -floppy %ROM%"
-    addEmulator 1 "$md_id_channelf" "channelf" "$md_inst/mame64 channelf  -cart %ROM%"
-    addEmulator 1 "$md_id_electron" "electron" "$md_inst/mame64 electron  -cass %ROM%"
-    addEmulator 1 "$md_id_supervision" "supervision" "$md_inst/mame64 svision  -cart %ROM%"
-
+    addEmulator 1 "$md_id_arcadia" "arcadia" "$md_inst/mame64  %BASENAME%"
+    addEmulator 1 "$md_id_astrocade" "astrocade" "$md_inst/mame64 astrocade -cart %BASENAME%"
+    addEmulator 1 "$md_id_bbcmicro" "bbcmicro" "$md_inst/mame64 bbcb  -floppy %BASENAME%"
+    addEmulator 1 "$md_id_channelf" "channelf" "$md_inst/mame64 channelf -cart %BASENAME%"
+    addEmulator 1 "$md_id_electron" "electron" "$md_inst/mame64 electron -cass %BASENAME%"
+    addEmulator 1 "$md_id_supervision" "supervision" "$md_inst/mame64 svision  -cart %BASENAME%%"
     addSystem "arcade" "$rp_module_desc" ".zip"
     addSystem "$system" "$rp_module_desc" ".zip"
     addSystem "arcadia" "$rp_module_desc" ".zip"
