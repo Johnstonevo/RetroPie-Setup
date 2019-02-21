@@ -38,6 +38,18 @@ function configure_lr-desmume() {
     mkRomDir "nds"
     ensureSystemretroconfig "nds"
 
-    addEmulator 0 "$md_id" "nds" "$md_inst/desmume_libretro.so"
+    addEmulator 1 "$md_id" "nds" "$md_inst/desmume_libretro.so"
     addSystem "nds"
+    local core_config="$configdir/nds/retroarch.cfg"
+        iniConfig " = " '"' "$md_conf_root/nds/retroarch.cfg"
+        iniSet  "core_options_path" "/home/$user/.config/RetroPie/nds/retroarch.cfg" "$core_config"
+        iniSet  "input_overlay_enable" "true" "$core_config"
+        iniSet  "input_overlay" "/home/$user/.config/retroarch/overlays/handhelds/ds.cfg" "$core_config"
+        iniSet  "input_overlay_opacity" "1.0" "$core_config"
+        iniSet  "input_overlay_scale" "1.0" "$core_config"
+        iniSet  "video_shader_enable"  "false" "$core_config"
+        iniSet  "desmume_screens_gap" "90" "$core_config"
+        iniSet  "desmume_pointer_device_r" "emulated" "$core_config"
+      
+
 }

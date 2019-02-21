@@ -26,10 +26,11 @@ function sources_lr-hatari() {
 }
 
 function build_lr-hatari() {
-    _build_libcapsimage_hatari
+    #_build_libcapsimage_hatari
 
-    cd "$md_build"
-    CFLAGS+=" -D__cdecl='' -DHAVE_CAPSIMAGE=1 -DCAPSIMAGE_VERSION=5" LDFLAGS+="-L./lib -l:libcapsimage.so.5.1" make -f Makefile.libretro
+    #cd "$md_build"
+  #  CFLAGS+=" -D__cdecl='' -DHAVE_CAPSIMAGE=1 -DCAPSIMAGE_VERSION=5" LDFLAGS+="-L./lib -l:libcapsimage.so.5.1" make -f Makefile.libretro
+    make -f Makefile.libretro EXTERNAL_ZLIB=1
     md_ret_require="$md_build/hatari_libretro.so"
 }
 
@@ -49,7 +50,7 @@ function configure_lr-hatari() {
     # move any old configs to new location
     moveConfigDir "$home/.hatari" "$md_conf_root/atarist"
 
-    addEmulator 0 "$md_id" "atarist" "$md_inst/hatari_libretro.so"
+    addEmulator 1 "$md_id" "atarist" "$md_inst/hatari_libretro.so"
     addSystem "atarist"
 
     # add LD_LIBRARY_PATH='$md_inst' to start of launch command

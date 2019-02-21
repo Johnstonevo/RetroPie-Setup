@@ -100,7 +100,7 @@ function configure_lr-pcsx-rearmed() {
         iniSet  "custom_viewport_x" "320" "$core_config"
         iniSet  "custom_viewport_y" "60" "$core_config"
         iniSet  "aspect_ratio_index" "22" "$core_config"
-        iniSet  "input_overlay_enable" "true" "$core_config"
+        iniSet  "input_overlay_enable" "false" "$core_config"
         iniSet  "video_smooth" "true" "$core_config"
         iniSet  "rewind_enable" "false" "$core_config"
         iniSet  "game_specific_options" "true" "$core_config"

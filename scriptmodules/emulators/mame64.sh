@@ -74,7 +74,7 @@ function configure_mame64() {
     mkRomDir "supervision"
 
 
-    copyConfigDir "$home/.mame" "$md_conf_root/$system"
+    #copyConfigDir "$home/.mame" "$md_conf_root/$system"
 
     # Create required MAME directories underneath the ROM directory
     if [[ "$md_mode" == "install" ]]; then
@@ -125,23 +125,24 @@ function configure_mame64() {
 
         chown -R $user:$user "$md_conf_root/$system"
         chmod a+r "$md_conf_root/$system/mame.ini"
+
     fi
 
-    addEmulator 0 "$md_id" "arcade" "$md_inst/mame64 %BASENAME%"
-    addEmulator 0 "$md_id" "$system" "$md_inst/mame64 %BASENAME%"
-    addEmulator 1 "$md_id_arcadia" "arcadia" "$md_inst/mame64  %BASENAME%"
-    addEmulator 1 "$md_id_astrocade" "astrocade" "$md_inst/mame64 astrocade -cart %BASENAME%"
-    addEmulator 1 "$md_id_bbcmicro" "bbcmicro" "$md_inst/mame64 bbcb  -floppy %BASENAME%"
-    addEmulator 1 "$md_id_channelf" "channelf" "$md_inst/mame64 channelf -cart %BASENAME%"
-    addEmulator 1 "$md_id_electron" "electron" "$md_inst/mame64 electron -cass %BASENAME%"
-    addEmulator 1 "$md_id_supervision" "supervision" "$md_inst/mame64 svision  -cart %BASENAME%%"
-    addSystem "arcade" "$rp_module_desc" ".zip"
-    addSystem "$system" "$rp_module_desc" ".zip"
-    addSystem "arcadia" "$rp_module_desc" ".zip"
-    addSystem "astrocade" "$rp_module_desc" ".zip"
-    addSystem "bbcmicro" "$rp_module_desc" ".zip"
-    addSystem "channelf" "$rp_module_desc" ".zip"
-    addSystem "electron" "$rp_module_desc" ".zip"
-    addSystem "supervision" "$rp_module_desc" ".zip"
+    addEmulator 0 "$md_id" "arcade" "$md_inst/mame64 %ROM%"
+    addEmulator 0 "$md_id" "$system" "$md_inst/mame64 %ROM%"
+    addEmulator 1 "$md_id-arcadia" "arcadia" "$md_inst/mame64  arcadia -cfg_directory $configdir/arcadia/   -cart %ROM%"
+    addEmulator 1 "$md_id-astrocade" "astrocade" "$md_inst/mame64 astrocade -cfg_directory $configdir/astrocade/ -cart %ROM%"
+    addEmulator 1 "$md_id-bbcmicro" "bbcmicro" "$md_inst/mame64 bbcb -cfg_directory $configdir/bbcmicro/ -floppy %ROM%"
+    addEmulator 1 "$md_id-channelf" "channelf" "$md_inst/mame64 channelf -cfg_directory $configdir/channelf/ -cart %ROM%"
+    addEmulator 1 "$md_id-electron" "electron" "$md_inst/mame64 electron -cfg_directory $configdir/electron/ -cass %ROM%"
+    addEmulator 1 "$md_id-supervision" "supervision" "$md_inst/mame64 svision -cfg_directory $configdir/supervision/ -cart %ROM%"
+    addSystem "arcade"
+    addSystem "$system"
+    addSystem "arcadia"
+    addSystem "astrocade"
+    addSystem "bbcmicro"
+    addSystem "channelf"
+    addSystem "electron"
+    addSystem "supervision"
 
 }

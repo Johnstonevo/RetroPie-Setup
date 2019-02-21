@@ -12,7 +12,7 @@
 rp_module_id="attractmode"
 rp_module_desc="Attract Mode emulator frontend"
 rp_module_licence="GPL3 https://raw.githubusercontent.com/mickelson/attract/master/License.txt"
-rp_module_section=""
+rp_module_section="exp"
 rp_module_flags="!mali !kms frontend"
 
 function _get_configdir_attractmode() {
@@ -73,16 +73,20 @@ function _add_system_attractmode() {
 
 
     chown $user:$user "$config"
-
+xml_dir="$attract_dir/xml"
+hyperlist="$xml_dir/$fullname.xml"
+romlist_dir="$attract_dir/romlists"
     # if no gameslist, generate one
-        if [[ ! -f "$attract_dir/romlists/$fullname.txt" ]]; then
+        #if [[ ! -f "$attract_dir/romlists/$fullname.txt" ]]; then
             #sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
-              if [[ -f "$attract_dir/xml/$fullname.xml" ]]; then
-                sudo -u $user attract --import-romlist "$attract_dir/xml/$fullname.xml" "$fullname"
-              else
-                sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
-              fi
+        if [[ -f "$hyperlist" ]]; then
+          sudo -u $user attract --build-romlist "$fullname" --import-romlist "$hyperlist" -o "$fullname"
+        elif [[ $fullname == "Arcade" ]]; then
+          sudo -u $user attract --import-romlist "$romlist_dir/AdvMAME.txt" --import-romlist "$romlist_dir/Final Burn Alpha.txt" --import-romlist "$romlist_dir/MAME 2003 PLUS.txt" --import-romlist "$romlist_dir/MAME 2003.txt" --import-romlist "$romlist_dir/MAME 2010.txt" --import-romlist "$romlist_dir/MAME 2015.txt" --import-romlist "$romlist_dir/MAME 2016.txt" --import-romlist "$romlist_dir/MAME CURRENT.txt" --import-romlist "$romlist_dir/MAME Mame4all.txt" -o "$fullname"
+        else
+          sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
         fi
+        #fi
 
     local config="$attract_dir/attract.cfg"
     local tab=$'\t'
@@ -90,7 +94,9 @@ function _add_system_attractmode() {
         cp "$config" "$config.bak"
         if [[  "$platform" == arcade  ]]; then
           cat >>"$config" <<_EOF_
-${tab}
+
+
+
 display${tab}$fullname
 ${tab}layout               HP2-Arcade-Menu
 ${tab}romlist              $fullname
@@ -174,7 +180,9 @@ ${tab}filter              Bootleg
 ${tab}${tab}rule                    Manufacturer contains bootleg
 ${tab}filter              Prototype
 ${tab}${tab}rule                    Title contains prototype
-${tab}
+
+
+
 _EOF_
           local config="$attract_dir/romlists/Arcades.txt"
 
@@ -194,7 +202,9 @@ _EOF_
 
       elif  [[ -e "$attract_dir/scraper/Consoles/overview/$fullname.txt" ]]; then
                   cat >>"$config" <<_EOF_
-${tab}
+
+
+
 display${tab}$fullname
 ${tab}layout               HP2-Systems-Menu
 ${tab}romlist              $fullname
@@ -209,7 +219,9 @@ ${tab}filter               "Most Played Games"
 ${tab}${tab}sort_by              PlayedCount
 ${tab}${tab}reverse_order        true
 ${tab}${tab}rule                 PlayedCount not_contains 0
-${tab}
+
+
+
 _EOF_
           local config="$attract_dir/romlists/Consoles.txt"
 
@@ -230,7 +242,7 @@ _EOF_
 
         elif [[  $fullname =~ Hacks ]]; then
                   cat >>"$config" <<_EOF_
-${tab}
+
 display${tab}$fullname
 ${tab}layout               HP2-Systems-Menu
 ${tab}romlist              $fullname
@@ -245,7 +257,9 @@ ${tab}filter               "Most Played Games"
 ${tab}${tab}sort_by              PlayedCount
 ${tab}${tab}reverse_order        true
 ${tab}${tab}rule                 PlayedCount not_contains 0
-${tab}
+
+
+
 _EOF_
           local config="$attract_dir/romlists/Hacks.txt"
 
@@ -265,7 +279,9 @@ _EOF_
 
         elif [[ -e "$attract_dir/scraper/Computers/overview/$fullname.txt" ]]; then
                   cat >>"$config" <<_EOF_
-${tab}
+
+
+
 display${tab}$fullname
 ${tab}layout               HP2-Systems-Menu
 ${tab}romlist              $fullname
@@ -280,7 +296,9 @@ ${tab}filter               "Most Played Games"
 ${tab}${tab}sort_by              PlayedCount
 ${tab}${tab}reverse_order        true
 ${tab}${tab}rule                 PlayedCount not_contains 0
-${tab}
+
+
+
 _EOF_
             local config="$attract_dir/romlists/Computers.txt"
 
@@ -300,7 +318,9 @@ _EOF_
 
           elif [[ -e "$attract_dir/scraper/Handhelds/overview/$fullname.txt" ]]; then
                     cat >>"$config" <<_EOF_
-${tab}
+
+
+
 display${tab}$fullname
 ${tab}layout               HP2-Systems-Menu
 ${tab}romlist              $fullname
@@ -315,7 +335,9 @@ ${tab}filter               "Most Played Games"
 ${tab}${tab}sort_by              PlayedCount
 ${tab}${tab}reverse_order        true
 ${tab}${tab}rule                 PlayedCount not_contains 0
-${tab}
+
+
+
 _EOF_
               local config="$attract_dir/romlists/Handhelds.txt"
 
@@ -335,7 +357,9 @@ _EOF_
 
       else
           cat >>"$config" <<_EOF_
-${tab}
+
+
+
 display${tab}$fullname
 ${tab}layout               HP2-Systems-Menu
 ${tab}romlist              $fullname
@@ -350,7 +374,9 @@ ${tab}filter               "Most Played Games"
 ${tab}${tab}sort_by              PlayedCount
 ${tab}${tab}reverse_order        true
 ${tab}${tab}rule                 PlayedCount not_contains 0
-${tab}
+
+
+
 _EOF_
             local config="$attract_dir/romlists/Misc.txt"
 

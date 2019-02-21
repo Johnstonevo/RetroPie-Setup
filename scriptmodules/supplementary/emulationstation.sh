@@ -16,7 +16,7 @@ rp_module_section="opt"
 rp_module_flags="frontend"
 
 function _get_input_cfg_emulationstation() {
-    echo "$configdir/all/emulationstation/es_input.cfg"
+    echo "/home/$user/.emulationstation/es_input.cfg"
 }
 
 function _update_hook_emulationstation() {
@@ -92,7 +92,7 @@ function _add_rom_emulationstation() {
     local desc="$5"
     local image="$6"
 
-    local config_dir="$configdir/all/emulationstation"
+    local config_dir="$home/.emulationstation"
 
     mkUserDir "$config_dir"
     mkUserDir "$config_dir/gamelists"
@@ -261,7 +261,7 @@ function remove_emulationstation() {
 
 function configure_emulationstation() {
     # move the $home/emulationstation configuration dir and symlink it
-    moveConfigDir "$home/.emulationstation" "$configdir/all/emulationstation"
+    #moveConfigDir "$home/.emulationstation" "$configdir/all/emulationstation"
 
     [[ "$mode" == "remove" ]] && return
 

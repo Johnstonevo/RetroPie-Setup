@@ -61,7 +61,7 @@ function configure_lr-mess() {
       addEmulator 0 "$md_id" "nes" "$md_inst/$module"
       addEmulator 0 "$md_id" "gb" "$md_inst/$module"
       addEmulator 0 "$md_id" "coleco" "$md_inst/$module"
-      addEmulator 0 "$md_id" "aracdia" "$md_inst/$module"
+      addEmulator 0 "$md_id" "arcadia" "$md_inst/$module"
       addEmulator 0 "$md_id" "crvison" "$md_inst/$module"
       addEmulator 1 "$md_id" "neocdz" "$md_inst/$module"
       addEmulator 1 "$md_id" "cdimono1" "$md_inst/$module"
