@@ -12,7 +12,7 @@
 rp_module_id="attractmode"
 rp_module_desc="Attract Mode emulator frontend"
 rp_module_licence="GPL3 https://raw.githubusercontent.com/mickelson/attract/master/License.txt"
-rp_module_section="exp"
+rp_module_section="core"
 rp_module_flags="!mali !kms frontend"
 
 function _get_configdir_attractmode() {
@@ -54,7 +54,7 @@ function _add_system_attractmode() {
 
     if [[  "$platform" == arcade  ]]; then
       iniSet "system" "Arcade"
-      iniSet "info_source"            "listxml"
+      iniSet "info_source"
       iniSet "import_extras"        "$attract_dir/mame-config/Catver.ini;$attract_dir/mame-config/nplayers.ini;$attract_dir/mame-config/category.ini;$attract_dir/mame-config/Catlist.ini"
       iniSet "artwork flyer" "$datadir/roms/arcade/flyer"
       iniSet "artwork marquee" "$datadir/roms/arcade/marquee"
@@ -79,10 +79,15 @@ romlist_dir="$attract_dir/romlists"
     # if no gameslist, generate one
         #if [[ ! -f "$attract_dir/romlists/$fullname.txt" ]]; then
             #sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
-        if [[ -f "$hyperlist" ]]; then
-          sudo -u $user attract --build-romlist "$fullname" --import-romlist "$hyperlist" -o "$fullname"
-        elif [[ $fullname == "Arcade" ]]; then
-          sudo -u $user attract --import-romlist "$romlist_dir/AdvMAME.txt" --import-romlist "$romlist_dir/Final Burn Alpha.txt" --import-romlist "$romlist_dir/MAME 2003 PLUS.txt" --import-romlist "$romlist_dir/MAME 2003.txt" --import-romlist "$romlist_dir/MAME 2010.txt" --import-romlist "$romlist_dir/MAME 2015.txt" --import-romlist "$romlist_dir/MAME 2016.txt" --import-romlist "$romlist_dir/MAME CURRENT.txt" --import-romlist "$romlist_dir/MAME Mame4all.txt" -o "$fullname"
+        if [[ -f "$hyperlist" ]] && [[ $platform != arcade ]]; then
+          rm "$romlist_dir/$fullname.txt"
+          sudo -u $user attract --import-romlist "$hyperlist" --build-romlist "$fullname" -o "$fullname"
+        elif [[ "$system" == arcade ]]; then
+          rm "$romlist_dir/Arcade.txt"
+          sudo -u $user attract --import-romlist "$xml_dir/MAME (Advance).xml" --import-romlist "$xml_dir/Final Burn Alpha.xml" --import-romlist "$xml_dir/MAME 2003 PLUS.xml" --import-romlist "$xml_dir/MAME 2003.xml" --import-romlist "$xml_dir/MAME 2010.xml" --import-romlist "$xml_dir/MAME 2015.xml" --import-romlist "$xml_dir/MAME 2016.xml" --import-romlist "$xml_dir/MAME CURRENT.xml" --import-romlist "$xml_dir/MAME Mame4all.xml" -o "Arcade"
+        elif [[ $platform == arcade ]]; then
+          rm "$romlist_dir/$fullname.txt"
+          sudo -u $user attract --import-romlist "$hyperlist"
         else
           sudo -u $user attract --build-romlist "$fullname" -o "$fullname"
         fi
