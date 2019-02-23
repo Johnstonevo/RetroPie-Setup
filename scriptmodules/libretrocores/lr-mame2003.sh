@@ -82,6 +82,7 @@ function configure_lr-mame2003() {
     addEmulator 0 "$md_id" "mame-2003-plus" "$md_inst/${so_name}_libretro.so"
     addSystem "arcade"
     addSystem "mame-2003-plus"
+    addSystem "mame-2003"
     if [ -e /usr/lib/libretro/mame2003_libretro.so ]
     then
         addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/${so_name}_libretro.so"

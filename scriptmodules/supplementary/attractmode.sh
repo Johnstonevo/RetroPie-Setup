@@ -84,7 +84,7 @@ romlist_dir="$attract_dir/romlists"
           sudo -u $user attract --import-romlist "$hyperlist" --build-romlist "$fullname" -o "$fullname"
         elif [[ "$system" == arcade ]]; then
           rm "$romlist_dir/Arcade.txt"
-          sudo -u $user attract --import-romlist "$xml_dir/MAME (Advance).xml" --import-romlist "$xml_dir/Final Burn Alpha.xml" --import-romlist "$xml_dir/MAME 2003 PLUS.xml" --import-romlist "$xml_dir/MAME 2003.xml" --import-romlist "$xml_dir/MAME 2010.xml" --import-romlist "$xml_dir/MAME 2015.xml" --import-romlist "$xml_dir/MAME 2016.xml" --import-romlist "$xml_dir/MAME CURRENT.xml" --import-romlist "$xml_dir/MAME Mame4all.xml" -o "Arcade"
+          sudo -u $user attract --import-romlist "$xml_dir/MAME Advance.xml" --import-romlist "$xml_dir/Final Burn Alpha.xml" --import-romlist "$xml_dir/MAME 2003 PLUS.xml" --import-romlist "$xml_dir/MAME 2003.xml" --import-romlist "$xml_dir/MAME 2010.xml" --import-romlist "$xml_dir/MAME 2015.xml" --import-romlist "$xml_dir/MAME 2016.xml" --import-romlist "$xml_dir/MAME CURRENT.xml" --import-romlist "$xml_dir/MAME Mame4all.xml" -o "Arcade"
         elif [[ $platform == arcade ]]; then
           rm "$romlist_dir/$fullname.txt"
           sudo -u $user attract --import-romlist "$hyperlist"
