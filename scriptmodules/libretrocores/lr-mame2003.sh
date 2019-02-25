@@ -102,8 +102,8 @@ function configure_lr-mame2003() {
     fi
     if [  -d $raconfigdir/overlay/ArcadeBezels ]
      then
-        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
-        local core_config="$configdir/$system/retroarch.cfg"
+        cp /home/$user/.config/RetroPie/mame-2003/retroarch.cfg /home/$user/.config/RetroPie/mame-2003/retroarch.cfg.bkp
+        local core_config="$configdir/mame-2003/retroarch.cfg"
          iniConfig " = " '"' "$md_conf_root/$system/retroarch.cfg"
 
         iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
