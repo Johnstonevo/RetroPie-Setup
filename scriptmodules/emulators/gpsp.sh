@@ -43,7 +43,8 @@ function install_gpsp() {
 }
 
 function configure_gpsp() {
-    mkRomDir "gba"
+  mkRomDir "gba"
+  mkRomDir "gbah"
     chown $user:$user -R "$md_inst"
 
     mkUserDir "$md_conf_root/gba"
@@ -52,8 +53,11 @@ function configure_gpsp() {
     ln -sf "$biosdir/gba_bios.bin" "$md_inst/gba_bios.bin"
 
     # move old config
-    moveConfigFile "gpsp.cfg" "$md_conf_root/gba/gpsp.cfg"
+    copyConfigFile "gpsp.cfg" "$md_conf_root/gba/gpsp.cfg"
+    copyConfigFile "gpsp.cfg" "$md_conf_root/gbah/gpsp.cfg"
 
     addEmulator 0 "$md_id" "gba" "$md_inst/gpsp %ROM%"
+    addEmulator 0 "$md_id" "gbah" "$md_inst/gpsp %ROM%"
     addSystem "gba"
+    addSystem "gbah"
 }
