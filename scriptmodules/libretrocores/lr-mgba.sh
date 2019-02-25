@@ -42,7 +42,7 @@ function install_lr-mgba() {
 function configure_lr-mgba() {
     local system
     local def
-    for system in gb gbh gbc gbch gba; do
+    for system in gb gbh gbc gbch gba gbah; do
         def=0
         [[ "$system" == "gba" ]] && ! isPlatform "armv6" && def=1
         mkRomDir "$system"
@@ -57,12 +57,17 @@ function configure_lr-mgba() {
           ensureSystemretroconfig "gbh"
           ensureSystemretroconfig "gbc"
           ensureSystemretroconfig "gbch"
+          ensureSystemretroconfig "gba"
+          ensureSystemretroconfig "gbah"
           addEmulator 0 "$md_id-ppa" "gb" "$md_instppa/mgba_libretro.so"
           addEmulator 0 "$md_id-ppa" "gbc" "$md_instppa/mgba_libretro.so"
-          addEmulator 0 "$md_id-ppa" "gbh" "$md_instppa/mgba_libretro.so"
+          addEmulator 0 "$md_id-ppa" "gbah" "$md_instppa/mgba_libretro.so"
+          addEmulator 0 "$md_id-ppa" "gba" "$md_instppa/mgba_libretro.so"
           addEmulator 0 "$md_id-ppa" "gbch" "$md_instppa/mgba_libretro.so"
           addSystem "gb"
           addSystem "gbh"
+          addSystem "gbah"
+          addSystem "gbah"
           addSystem "gbc"
           addSystem "gbch"
     fi
@@ -115,6 +120,8 @@ function configure_lr-mgba() {
     iniSet  "mgba_use_bios" "ON" "$core_config"
     iniSet  "mgba_sgb_borders" "ON" "$core_config"
 
+###Game Boy Color
+################################################
 
     cp /home/$user/.config/RetroPie/gbc/retroarch.cfg /home/$user/.config/RetroPie/gbc/retroarch.cfg.bkp
     local core_config="$configdir/gbc/retroarch.cfg"
@@ -156,4 +163,48 @@ function configure_lr-mgba() {
     iniSet  "video_smooth" "false" "$core_config"
     iniSet  "mgba_gb_model" "Game Boy Color" $core_config
     iniSet  "mgba_use_bios" "ON" "$core_config"
+
+##Game Boy Advance
+#####################
+    cp /home/$user/.config/RetroPie/gba/retroarch.cfg /home/$user/.config/RetroPie/gba/retroarch.cfg.bkp
+    local core_config="$configdir/gba/retroarch.cfg"
+    iniConfig " = " '"' "$md_conf_root/gba/retroarch.cfg"
+    iniSet  "input_overlay" "/home/$user/.config/retroarch/overlays/1080p_4-3/GameboyAdvance_1080p.cfg" "$core_config"
+    iniSet  "input_overlay_enable" "true" "$core_config"
+    iniSet  "video_fullscreen_x" "1920" "$core_config"
+    iniSet  "video_fullscreen_y" "1080" "$core_config"
+    iniSet  "input_overlay_opacity" "1.0" "$core_config"
+    iniSet  "input_overlay_scale" "1.0" "$core_config"
+    iniSet  "custom_viewport_width"  "960" "$core_config"
+    iniSet  "custom_viewport_height" "640" "$core_config"
+    iniSet  "custom_viewport_x" "480" "$core_config"
+    iniSet  "custom_viewport_y" "220" "$core_config"
+    iniSet  "aspect_ratio_index" "23" "$core_config"
+    iniSet  "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl" "$core_config"
+    iniSet  "video_shader_enable"  "true" "$core_config"
+    iniSet  "video_smooth" "false" "$core_config"
+    iniSet  "mgba_gb_model" "Game Boy Advance" $core_config
+    iniSet  "mgba_use_bios" "ON" "$core_config"
+
+
+    cp /home/$user/.config/RetroPie/gbah/retroarch.cfg /home/$user/.config/RetroPie/gbah/retroarch.cfg.bkp
+    local core_config="$configdir/gbah/retroarch.cfg"
+    iniConfig " = " '"' "$md_conf_root/gbah/retroarch.cfg"
+    iniSet  "input_overlay" "/home/$user/.config/retroarch/overlays/1080p_4-3/GameboyAdvance_1080p.cfg" "$core_config"
+    iniSet  "input_overlay_enable" "true" "$core_config"
+    iniSet  "video_fullscreen_x" "1920" "$core_config"
+    iniSet  "video_fullscreen_y" "1080" "$core_config"
+    iniSet  "input_overlay_opacity" "1.0" "$core_config"
+    iniSet  "input_overlay_scale" "1.0" "$core_config"
+    iniSet  "custom_viewport_width"  "960" "$core_config"
+    iniSet  "custom_viewport_height" "640" "$core_config"
+    iniSet  "custom_viewport_x" "480" "$core_config"
+    iniSet  "custom_viewport_y" "220" "$core_config"
+    iniSet  "aspect_ratio_index" "23" "$core_config"
+    iniSet  "video_shader"  "/home/$user/.config/retroarch/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl" "$core_config"
+    iniSet  "video_shader_enable"  "true" "$core_config"
+    iniSet  "video_smooth" "false" "$core_config"
+    iniSet  "mgba_gb_model" "Game Boy Advance" $core_config
+    iniSet  "mgba_use_bios" "ON" "$core_config"
+
 }
