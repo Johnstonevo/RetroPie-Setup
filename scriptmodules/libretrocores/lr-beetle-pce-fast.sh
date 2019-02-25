@@ -54,7 +54,7 @@ function configure_lr-beetle-pce-fast() {
     addSystem "tg16"
     addSystem "tg-cd"
 
-        if [ -e /usr/lib/libretro/mednafen_pce_fast.so ]
+        if [ -e $md_instppa/mednafen_pce_fast.so ]
         then
         ensureSystemretroconfig "tg16"
         ensureSystemretroconfig "tg-cd"

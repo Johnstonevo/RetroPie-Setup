@@ -45,7 +45,7 @@ function configure_lr-mame2010() {
         addEmulator 0 "$md_id" "$system" "$md_inst/mame2010_libretro.so"
         addSystem "$system"
     done
-    if [ -e /usr/lib/libretro/mame2010_libretro.so ]
+    if [ -e $md_instppa/mame2010_libretro.so ]
     then
         addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame2010_libretro.so"
         addEmulator 0 "$md_id-ppa" "mame-2010" "$md_instppa/mame2010_libretro.so"

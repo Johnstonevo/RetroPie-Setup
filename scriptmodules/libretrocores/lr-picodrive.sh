@@ -95,7 +95,7 @@ function configure_lr-picodrive() {
   addSystem  "sc-3000"
 
 
-        if [ -e /usr/lib/libretro/picodrive_libretro.so ]
+        if [ -e $md_instppa/picodrive_libretro.so ]
             then
               mkRomDir "gamegear"
               mkRomDir "ggh"

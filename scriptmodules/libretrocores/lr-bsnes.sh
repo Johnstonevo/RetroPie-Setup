@@ -64,7 +64,7 @@ then
     find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
 fi
 
-if [ -e /usr/lib/libretro/bsnes_balanced_libretro.so ]
+if [ -e $md_instppa/bsnes_balanced_libretro.so ]
     then
     local system
     local def
@@ -75,7 +75,7 @@ if [ -e /usr/lib/libretro/bsnes_balanced_libretro.so ]
             addSystem "$system"
  done
 fi
-if [ -e /usr/lib/libretro/bsnes_accuracy_libretro.so ]
+if [ -e $md_instppa/bsnes_accuracy_libretro.so ]
     then
     local system
     local def
@@ -86,7 +86,7 @@ if [ -e /usr/lib/libretro/bsnes_accuracy_libretro.so ]
             addSystem "$system"
  done
 fi
-if [ -e /usr/lib/libretro/bsnes_mercury_accuracy_libretro.so ]
+if [ -e $md_instppa/bsnes_mercury_accuracy_libretro.so ]
     then
     local system
     local def
@@ -97,7 +97,7 @@ if [ -e /usr/lib/libretro/bsnes_mercury_accuracy_libretro.so ]
             addSystem "$system"
  done
 fi
-if [ -e /usr/lib/libretro/bsnes_mercury_balanced_libretro.so ]
+if [ -e $md_instppa/bsnes_mercury_balanced_libretro.so ]
     then
     local system
     local def
@@ -108,7 +108,7 @@ if [ -e /usr/lib/libretro/bsnes_mercury_balanced_libretro.so ]
             addSystem "$system"
  done
 fi
-if [ -e /usr/lib/libretro/bsnes_mercury_performance_libretro.so ]
+if [ -e $md_instppa/bsnes_mercury_performance_libretro.so ]
     then
     local system
     local def

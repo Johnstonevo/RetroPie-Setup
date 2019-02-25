@@ -56,7 +56,7 @@ function configure_lr-mame() {
         addSystem "$system"
     done
 
-  if [ -e /usr/lib/libretro/mame_libretro.so ]
+  if [ -e $md_instppa/mame_libretro.so ]
   then
       addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame_libretro.so"
   addEmulator 0 "$md_id-ppa" "mame-current" "$md_instppa/mame_libretro.so"

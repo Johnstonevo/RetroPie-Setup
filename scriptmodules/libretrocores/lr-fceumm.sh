@@ -57,7 +57,7 @@ function configure_lr-fceumm() {
     addSystem "fds"
     addSystem "famicom"
 
-if [ -e /usr/lib/libretro/fceumm_libretro.so ]
+if [ -e $md_instppa/fceumm_libretro.so ]
     then
       addEmulator 0 "$md_id-ppa" "nes" "$md_inst/fceumm_libretro.so"
       addEmulator 0 "$md_id-ppa" "nesh" "$md_inst/fceumm_libretro.so"

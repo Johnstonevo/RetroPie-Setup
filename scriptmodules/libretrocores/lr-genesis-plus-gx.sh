@@ -87,7 +87,7 @@ function configure_lr-genesis-plus-gx() {
   addSystem  "sega32x"
   addSystem  "sc-3000"
 
-    if [ -e /usr/lib/libretro/genesis_plus_gx_libretro.so ]
+    if [ -e $md_instppa/genesis_plus_gx_libretro.so ]
         then
           ensureSystemretroconfig "gamegear"
           ensureSystemretroconfig "ggh"

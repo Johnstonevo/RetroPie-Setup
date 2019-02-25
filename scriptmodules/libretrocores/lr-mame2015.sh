@@ -49,7 +49,7 @@ function configure_lr-mame2015() {
         addEmulator 0 "$md_id" "$system" "$md_inst/mame2015_libretro.so"
         addSystem "$system"
     done
-    if [ -e /usr/lib/libretro/mame2015_libretro.so ]
+    if [ -e $md_instppa/mame2015_libretro.so ]
     then
         addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame2015_libretro.so"
         addEmulator 0 "$md_id-ppa" "mame-2015" "$md_instppa/mame2015_libretro.so"

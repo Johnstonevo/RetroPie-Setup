@@ -70,7 +70,7 @@ function configure_lr-snes9x2010() {
     addSystem "snesmsu1"
     addSystem "satellaview"
     addSystem "sufami"
-    if [ -e /usr/lib/libretro/snes9x2010_libretro.so ]
+    if [ -e $md_instppa/snes9x2010_libretro.so ]
         then
           addEmulator 0 "$md_id-ppa" "snes" "$md_instppa/snes9x2010_libretro.so"
           addEmulator 0 "$md_id-ppa" "snesh" "$md_instppa/snes9x2010_libretro.so"

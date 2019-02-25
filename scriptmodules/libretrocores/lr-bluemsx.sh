@@ -81,7 +81,7 @@ function configure_lr-bluemsx() {
 
     addEmulator 1 "$md_id" "coleco" "$md_inst/bluemsx_libretro.so"
     addSystem "coleco"
-     if [ -e /usr/lib/libretro/bluemsx_libretro.so ]
+     if [ -e $md_instppa/bluemsx_libretro.so ]
                 then
    addEmulator 0 "$md_id-ppa" "msx" "$md_instppa/bluemsx_libretro.so"
     addSystem "msx"

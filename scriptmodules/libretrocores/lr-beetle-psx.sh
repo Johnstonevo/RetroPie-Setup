@@ -50,7 +50,7 @@ function configure_lr-beetle-psx() {
         addEmulator 0 "$md_id" "$system" "$md_inst/mednafen_psx_hw_libretro.so"
         addSystem "$system"
     done
-    if [ -e /usr/lib/libretro/mednafen_psx_hw_libretro.so ]
+    if [ -e $md_instppa/mednafen_psx_hw_libretro.so ]
                     then 
                                 addEmulator 0 "$md_id-mednafen_psx_hw-ppa" "psx" "$md_instppa/mednafen_psx_hw_libretro.so"
                                 addSystem "psx" "$md_instppa/mednafen_psx_hw_libretro.so"
@@ -59,7 +59,7 @@ function configure_lr-beetle-psx() {
                                 
 
     fi
-    if [ -e /usr/lib/libretro/mednafen_psx_libretro.so ]
+    if [ -e $md_instppa/mednafen_psx_libretro.so ]
                     then 
                                 addEmulator 0 "$md_id-mednafen_psx-ppa" "psx" "$md_instppa/mednafen_psx_libretro.so"
                                 addSystem "psx" "$md_instppa/mednafen_psx_libretro.so"

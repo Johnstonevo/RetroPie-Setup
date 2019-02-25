@@ -54,7 +54,7 @@ function configure_lr-fuse() {
     addSystem "zxspectrum"
 
 
-    if [ -e /usr/lib/libretro/fuse_libretro.so ]
+    if [ -e $md_instppa/fuse_libretro.so ]
                     then
                                 addEmulator 0 "$md_id-ppa" "zxspectrum" "$md_instppa/fuse_libretro.so"
                                 addSystem "zxspectrum" "$md_instppa/fuse_libretro.so"

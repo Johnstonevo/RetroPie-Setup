@@ -40,10 +40,10 @@ function configure_lr-mame2003-plus() {
 
   local mame_dir
   local mame_sub_dir
-  for mame_dir in mame-2003-plus ; do
-      mkRomDir "$mame_dir"
+  #for mame_dir in mame-2003-plus ; do
+      mkRomDir "mame-2003-plus"
       mkRomDir "$mame_dir/$dir_name"
-      ensureSystemretroconfig "$mame_dir"
+      ensureSystemretroconfig "mame-2003-plus"
 
       for mame_sub_dir in cfg ctrlr diff hi memcard nvram; do
           mkRomDir "$mame_dir/$dir_name/$mame_sub_dir"
@@ -51,7 +51,7 @@ function configure_lr-mame2003-plus() {
 
       # lr-mame2003-plus also has an artwork folder
       [[ "$md_id" == "lr-mame2003-plus" ]] && mkRomDir "$mame_dir/$dir_name/artwork"
-  done
+
 
   mkUserDir "$biosdir/$dir_name"
   mkUserDir "$biosdir/$dir_name/samples"
@@ -82,9 +82,9 @@ function configure_lr-mame2003-plus() {
     fi
     if [  -d $raconfigdir/overlay/ArcadeBezels ]
      then
-        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
-        local core_config="$configdir/$system/retroarch.cfg"
-         iniConfig " = " '"' "$md_conf_root/$system/retroarch.cfg"
+        cp /home/$user/.config/RetroPie/mame-2003-plus/retroarch.cfg /home/$user/.config/RetroPie/mame-2003-plus/retroarch.cfg.bkp
+        local core_config="$configdir/mame-2003-plus/retroarch.cfg"
+         iniConfig " = " '"' "$md_conf_root/mame-2003-plus/retroarch.cfg"
 
         iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
         iniSet "input_overlay_opacity" "1.0"

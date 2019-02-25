@@ -47,9 +47,22 @@ function configure_lr-desmume() {
         iniSet  "input_overlay" "/home/$user/.config/retroarch/overlays/handhelds/ds.cfg" "$core_config"
         iniSet  "input_overlay_opacity" "1.0" "$core_config"
         iniSet  "input_overlay_scale" "1.0" "$core_config"
-        iniSet  "video_shader_enable"  "false" "$core_config"
+        iniSet  "video_shader_enable"  "true" "$core_config"
+        iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/handheld/nds.cgp" "$core_config"
         iniSet  "desmume_screens_gap" "90" "$core_config"
         iniSet  "desmume_pointer_device_r" "emulated" "$core_config"
-      
+        iniSet  "aspect_ratio_index"  "20" "$core_config"
+        iniSet  "video_scale"  "5.000000" "$core_config"
+        iniSet  "video_scale_integer"  "true" "$core_config"
+        iniSet  "custom_viewport_height"  "768" "$core_config"
+        iniSet  "custom_viewport_width"  "512" "$core_config"
 
+    if [ -e $md_instppa/desmume_libretro.so ]
+        then
+    mkRomDir "nds"
+    ensureSystemretroconfig "nds"
+
+    addEmulator 0 "$md_id-ppa" "nds" "$md_instppa/desmume_libretro.so"
+    addSystem "nds"
+    fi
 }

@@ -38,7 +38,7 @@ function configure_lr-81() {
 
     addEmulator 0 "$md_id" "zx81" "$md_inst/81_libretro.so"
     addSystem "zx81"
-        if [ -e /usr/lib/libretro/81_libretro.so ]
+        if [ -e $md_instppa/81_libretro.so ]
                     then 
                                 addEmulator 0 "$md_id-ppa" "zx81" "$md_instppa/81_libretro.so"
                                 addSystem "zx81" "$md_instppa/81_libretro.so"

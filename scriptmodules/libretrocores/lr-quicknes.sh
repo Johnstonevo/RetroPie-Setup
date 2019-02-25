@@ -52,7 +52,7 @@ function configure_lr-quicknes() {
     addSystem "nesh"
     addSystem "fds"
     addSystem "famicom"
-if [ -e /usr/lib/libretro/quicknes_libretro.so ]
+if [ -e $md_instppa/quicknes_libretro.so ]
 then
   addEmulator 0 "$md_id-ppa" "nes" "$md_inst/quicknes_libretro.so"
   addEmulator 0 "$md_id-ppa" "nesh" "$md_inst/quicknes_libretro.so"

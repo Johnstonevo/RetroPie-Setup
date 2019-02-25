@@ -64,7 +64,7 @@ function configure_lr-atari800() {
 
 
 
-     if [ -e /usr/lib/libretro/atari800_libretro.so ]
+     if [ -e $md_instppa/atari800_libretro.so ]
      then
         addEmulator 2 "lr-atari800-ppa" "atari800" "$md_instppa/atari800_libretro.so"
         addEmulator 2 "lr-atari800-ppa" "atari5200" "$md_instppa/atari800_libretro.so"

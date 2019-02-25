@@ -93,7 +93,7 @@ function configure_lr-fbalpha() {
     addSystem "sg-1000"
 
 
-if [ -e /usr/lib/libretro/fbalpha_libretro.so ]
+if [ -e $md_instppa/fbalpha_libretro.so ]
     then
         addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/fbalpha_libretro.so"
         addEmulator 0 "$md_id-ppa-neocdz" "arcade" "$md_instppa/fbalpha_libretro.so --subsystem neocd"

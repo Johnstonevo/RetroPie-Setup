@@ -177,7 +177,7 @@ _EOF_
     addSystem "n64"
     addSystem "n64-japan"
     addSystem "n64dd"
-    if [ -e /usr/lib/libretro/parallel-n64_libretro.so ]
+    if [ -e $md_instppa/parallel-n64_libretro.so ]
     then
       ensureSystemretroconfig "n64"
       ensureSystemretroconfig "n64-japan"

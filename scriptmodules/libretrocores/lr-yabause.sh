@@ -56,7 +56,7 @@ function configure_lr-yabause() {
   addSystem "saturn-japan"
 
 
-  if [ -e /usr/lib/libretro/yabause_libretro.so ]
+  if [ -e $md_instppa/yabause_libretro.so ]
       then
         addEmulator 0 "$md_id-ppa" "saturn" "$md_instppa/yabause_libretro.so"
 

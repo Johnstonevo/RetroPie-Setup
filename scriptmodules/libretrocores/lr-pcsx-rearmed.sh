@@ -64,7 +64,7 @@ function configure_lr-pcsx-rearmed() {
         setRetroArchCoreOption "pcsx_rearmed_neon_enhancement_enable" "enabled" # Double resolution
         setRetroArchCoreOption "pcsx_rearmed_neon_enhancement_no_main" "enabled" # Speed hack
 
-    if [ -e /usr/lib/libretro/pcsx1_libretro.so ]
+    if [ -e $md_instppa/pcsx1_libretro.so ]
                     then
                                 addEmulator 0 "$md_id-ppa" "psx" "$md_instppa/pcsx1_libretro.so"
                                 addSystem "psx" "$md_instppa/pcsx1_libretro.so"

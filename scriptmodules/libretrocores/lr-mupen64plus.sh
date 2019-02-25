@@ -82,7 +82,7 @@ function configure_lr-mupen64plus() {
   addSystem "n64"
   addSystem "n64-japan"
   addSystem "n64dd"
-  if [ -e /usr/lib/libretro/mupen64plus_libretro.so ]
+  if [ -e $md_instppa/mupen64plus_libretro.so ]
   then
     ensureSystemretroconfig "n64"
     ensureSystemretroconfig "n64-japan"
