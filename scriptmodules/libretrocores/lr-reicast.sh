@@ -51,13 +51,13 @@ function configure_lr-reicast() {
     iniConfig " = " "" "$configdir/dreamcast/retroarch.cfg"
     iniSet "video_shared_context" "true"
   if isPlatform "rpi"; then
-    addEmulator 1 "$md_id" "dreamcast" "$md_inst/reicast_libretro.so" "</dev/null"
-    addEmulator 1 "$md_id" "atomiswave" "$md_inst/reicast_libretro.so" "</dev/null"
-    addEmulator 1 "$md_id" "naomi" "$md_inst/reicast_libretro.so" "</dev/null"
-  else
-    addEmulator 1 "$md_id" "dreamcast" "$md_inst/reicast_libretro.so"
-    addEmulator 1 "$md_id" "atomiswave" "$md_inst/reicast_libretro.so"
-    addEmulator 1 "$md_id" "naomi" "$md_inst/reicast_libretro.so"
+    addEmulator 1 "$md_id" "dreamcast" "$md_inst/reicast_libretro.so --config $configdir/dreamcast/retroarch.cfg </dev/null"
+    addEmulator 1 "$md_id" "atomiswave" "$md_inst/reicast_libretro.so --config $configdir/atomiswave/retroarch.cfg </dev/null"
+    addEmulator 1 "$md_id" "naomi" "$md_inst/reicast_libretro.so --config $configdir/naomi/retroarch.cfg </dev/null"
+    else
+      addEmulator 1 "$md_id" "dreamcast" "$md_inst/reicast_libretro.so"
+      addEmulator 1 "$md_id" "atomiswave" "$md_inst/reicast_libretro.so"
+      addEmulator 1 "$md_id" "naomi" "$md_inst/reicast_libretro.so"
   fi
     addSystem "dreamcast"
     addSystem "atomiswave"
