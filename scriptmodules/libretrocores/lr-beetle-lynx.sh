@@ -37,4 +37,33 @@ function configure_lr-beetle-lynx() {
 
     addEmulator 0 "$md_id" "atarilynx" "$md_inst/mednafen_lynx_libretro.so"
     addSystem "atarilynx"
+
+    if [ -e $md_instppa/mednafen_lynx_libretro.so ]
+        then
+        mkRomDir "atarilynx"
+        ensureSystemretroconfig "atarilynx"
+
+        addEmulator 0 "$md_id-ppa" "atarilynx" "$md_instppa/handy_libretro.so"
+        addSystem "atarilynx"
+  fi
+
+    cp /home/$user/.config/RetroPie/atarilynx/retroarch.cfg /home/$user/.config/RetroPie/atarilynx/retroarch.cfg.bkp
+    local core_config="$configdir/atarilynx/retroarch.cfg"
+    iniConfig " = " '"' "$md_conf_root/atarilynx/retroarch.cfg"
+    iniSet  "input_overlay" "$raconfigdir/overlays/1080p_4-3/Lynx_1080p.cfg" "$core_config"
+    iniSet "input_overlay_enable" "true" "$core_config"
+    iniSet "video_smooth" "false" "$core_config"
+    iniSet "input_overlay_opacity" "1.0" "$core_config"
+    iniSet "input_overlay_scale" "1.0" "$core_config"
+    iniSet "video_fullscreen_x" "1920" "$core_config"
+    iniSet "video_fullscreen_y" "1080" "$core_config"
+    iniSet "aspect_ratio_index" "23" "$core_config"
+    iniSet "custom_viewport_width" "640" "$core_config"
+    iniSet "custom_viewport_height" "408" "$core_config"
+    iniSet "custom_viewport_x" "642" "$core_config"
+    iniSet "custom_viewport_y" "312" "$core_config"
+    iniSet  "video_shader" "$raconfigdir/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl" "$core_config"
+    iniSet  "video_shader_enable"  "true" "$core_config"
+    iniSet  "video_smooth"  "false" "$core_config"
+    chown $user:$user "$core_config"
 }

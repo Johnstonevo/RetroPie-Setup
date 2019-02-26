@@ -97,6 +97,7 @@ function configure_lr-beetle-pce-fast() {
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
+            chown $user:$user "$core_config"
 
             cp /home/$user/.config/RetroPie/pcengine/retroarch.cfg /home/$user/.config/RetroPie/pcengine/retroarch.cfg.bkp
            local core_config="$configdir/pcengine/retroarch.cfg"
@@ -104,7 +105,7 @@ function configure_lr-beetle-pce-fast() {
            iniSet "input_overlay_opacity" "1.0" "$core_config"
            iniSet "input_overlay_scale" "1.0" "$core_config"
            iniSet "input_overlay_enable" "true" "$core_config"
-
+          chown $user:$user "$core_config"
         fi
         if [ ! -d $raconfigdir/overlay/GameBezels/TG-CD ]
             then
@@ -120,7 +121,7 @@ function configure_lr-beetle-pce-fast() {
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
-
+            chown $user:$user "$core_config"
         fi
 
 

@@ -78,12 +78,13 @@ fi
       local core_config="$configdir/mame-current/retroarch.cfg"
        iniConfig " = " '"' "$md_conf_root/mame-current/retroarch.cfg"
 
-      iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
+      iniSet "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
       iniSet "input_overlay_opacity" "1.0"
       iniSet "input_overlay_enable" "true"
       iniSet "mame-skip_disclaimer" "enabled"
       iniSet "mame-dcs-speedhack" "enabled"
       iniSet "mame-samples" "enabled"
+      chown $user:$user "$core_config"
   fi
 
 }

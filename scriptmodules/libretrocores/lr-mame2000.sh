@@ -72,9 +72,10 @@ function configure_lr-mame2000() {
         local core_config="$configdir/$system/retroarch.cfg"
          iniConfig " = " '"' "$md_conf_root/$system/retroarch.cfg"
 
-        iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
+        iniSet "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
         iniSet "input_overlay_opacity" "1.0"
         iniSet "input_overlay_enable" "true"
+        chown $user:$user "$core_config"
     fi
 
 

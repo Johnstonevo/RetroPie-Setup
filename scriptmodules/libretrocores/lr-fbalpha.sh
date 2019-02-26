@@ -61,7 +61,7 @@ function configure_lr-fbalpha() {
     chown $user:$user "$biosdir/fba/hiscore.dat"
 
     # Set core options
-    setRetroArchCoreOption "fba-diagnostic-input" "Hold Start"
+    #setRetroArchCoreOption "fba-diagnostic-input" "Hold Start"
 
     local def=1
     isPlatform "armv6" && def=0
@@ -129,8 +129,9 @@ if [  -d $raconfigdir/overlay/ArcadeBezels ]
     local core_config="$configdir/fba/retroarch.cfg"
      iniConfig " = " '"' "$md_conf_root/fba/retroarch.cfg"
 
-    iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
+    iniSet "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
     iniSet "input_overlay_opacity" "1.0"
     iniSet "fba-diagnostic-input" "Hold Start"
+    chown $user:$user "$core_config"
 fi
 }

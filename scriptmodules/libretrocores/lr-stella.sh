@@ -57,13 +57,14 @@ if [  -d $raconfigdir/overlay/GameBezels/Atari2600 ]
       cp /home/$user/.config/RetroPie/atari2600/retroarch.cfg /home/$user/.config/RetroPie/atari2600/retroarch.cfg.bkp
       local core_config="$configdir/atari2600/retroarch.cfg"
       iniConfig " = " '"' "$md_conf_root/atari2600/retroarch.cfg"
-      iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Atari-2600.cfg" "$core_config"
+      iniSet  "input_overlay" "$raconfigdir/overlay/Atari-2600.cfg" "$core_config"
       iniSet "input_overlay_opacity" "1.0" "$core_config"
       iniSet "input_overlay_scale" "1.0" "$core_config"
       iniSet "video_fullscreen_x" "1920" "$core_config"
       iniSet "video_fullscreen_y" "1080" "$core_config"
       iniSet "input_overlay_enable" "true" "$core_config"
       iniSet "video_smooth" "true" "$core_config"
+      chown $user:$user "$core_config"
 fi
 
 

@@ -200,7 +200,7 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
              cp /home/$user/.config/RetroPie/megadrive/retroarch.cfg /home/$user/.config/RetroPie/megadrive/retroarch.cfg.bkp
             local core_config="$configdir/megadrive/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/megadrive/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Mega-Drive.cfg" "$core_config"
+            iniSet  "input_overlay" "$raconfigdir/overlay/Sega-Mega-Drive.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
@@ -219,13 +219,13 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "picodrive_drc"  "enabled" "$core_config"
             iniSet "picodrive_region" "Auto" "$core_config"
             iniSet "video_smooth" "false" "$core_config"
-            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
             iniSet  "video_shader_enable"  "true" "$core_config"
-
+            chown $user:$user "$core_config"
             cp /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg.bkp
             local core_config="$configdir/megadrive-japan/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/megadrive-japan/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Mega-Drive.cfg" "$core_config"
+            iniSet  "input_overlay" "$raconfigdir/overlay/Sega-Mega-Drive.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
@@ -237,7 +237,7 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
             iniSet "video_smooth" "false" "$core_config"
-            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
             iniSet  "video_shader_enable"  "true" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
@@ -246,11 +246,11 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "picodrive_region"  "Auto" "$core_config"
             iniSet "picodrive_drc"  "enabled" "$core_config"
             iniSet "picodrive_region" "Japan Pal" "$core_config"
-
+            chown $user:$user "$core_config"
             cp /home/$user/.config/RetroPie/genesis/retroarch.cfg /home/$user/.config/RetroPie/genesis/retroarch.cfg.bkp
             local core_config="$configdir/genesis/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/genesis/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Mega-Drive.cfg" "$core_config"
+            iniSet  "input_overlay" "$raconfigdir/overlay/Sega-Mega-Drive.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
@@ -262,7 +262,7 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
             iniSet "video_smooth" "false" "$core_config"
-            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
             iniSet  "video_shader_enable"  "true" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
@@ -270,11 +270,11 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "picodrive_ramcart"  "disabled" "$core_config"
             iniSet "picodrive_region"  "Auto" "$core_config"
             iniSet "picodrive_drc"  "enabled" "$core_config"
-
+            chown $user:$user "$core_config"
             cp /home/$user/.config/RetroPie/genh/retroarch.cfg /home/$user/.config/RetroPie/genh/retroarch.cfg.bkp
             local core_config="$configdir/genh/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/genh/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Mega-Drive.cfg" "$core_config"
+            iniSet  "input_overlay" "$raconfigdir/overlay/Sega-Mega-Drive.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
@@ -286,17 +286,18 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
             iniSet "video_smooth" "false" "$core_config"
-            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
             iniSet  "video_shader_enable"  "true" "$core_config"
             iniSet "input_libretro_device_p1" "513" "$core_config"
             iniSet "input_libretro_device_p2" "513" "$core_config"
+            chown $user:$user "$core_config"
 fi
 if [  -d $raconfigdir/overlay/GameBezels/SegaCD ]
  then
              cp /home/$user/.config/RetroPie/segacd/retroarch.cfg /home/$user/.config/RetroPie/segacd/retroarch.cfg.bkp
             local core_config="$configdir/segacd/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/segacd/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/segacd.cfg" "$core_config"
+            iniSet  "input_overlay" "$raconfigdir/overlay/segacd.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
@@ -308,7 +309,7 @@ if [  -d $raconfigdir/overlay/GameBezels/SegaCD ]
             iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
             iniSet "video_smooth" "false" "$core_config"
-            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
             iniSet  "video_shader_enable"  "true" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
@@ -317,7 +318,7 @@ if [  -d $raconfigdir/overlay/GameBezels/SegaCD ]
             iniSet "picodrive_region"  "Auto" "$core_config"
             iniSet "picodrive_drc"  "enabled" "$core_config"
             iniSet "picodrive_region" "Auto" "$core_config"
-
+            chown $user:$user "$core_config"
 
 fi
 if [  -d $raconfigdir/overlay/GameBezels/MasterSystem ]
@@ -325,16 +326,16 @@ if [  -d $raconfigdir/overlay/GameBezels/MasterSystem ]
              cp /home/$user/.config/RetroPie/mastersystem/retroarch.cfg /home/$user/.config/RetroPie/mastersystem/retroarch.cfg.bkp
             local core_config="$configdir/mastersystem/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/mastersystem/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-Master-System.cfg" "$core_config"
+            iniSet  "input_overlay" "$raconfigdir/overlay/Sega-Master-System.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
             iniSet "video_fullscreen_y" "1080" "$core_config"
             iniSet "picodrive_region" "Auto" "$core_config"
             iniSet "video_smooth" "false" "$core_config"
-            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
             iniSet  "video_shader_enable"  "true" "$core_config"
-
+            chown $user:$user "$core_config"
 
 fi
 if [  -d $raconfigdir/overlay/GameBezels/Sega32X ]
@@ -342,7 +343,7 @@ if [  -d $raconfigdir/overlay/GameBezels/Sega32X ]
              cp /home/$user/.config/RetroPie/sega32x/retroarch.cfg /home/$user/.config/RetroPie/sega32x/retroarch.cfg.bkp
             local core_config="$configdir/sega32x/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/sega32x/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Sega-32X.cfg" "$core_config"
+            iniSet  "input_overlay" "$raconfigdir/overlay/Sega-32X.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
@@ -362,9 +363,9 @@ if [  -d $raconfigdir/overlay/GameBezels/Sega32X ]
             iniSet "picodrive_drc"  "enabled" "$core_config"
             iniSet "picodrive_region" "Auto" "$core_config"
             iniSet "video_smooth" "false" "$core_config"
-            iniSet  "video_shader" "/home/$user/.config/retroarch/shaders/crt/zfast-crt.cgp" "$core_config"
+            iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
             iniSet  "video_shader_enable"  "true" "$core_config"
-
+            chown $user:$user "$core_config"
 
 fi
 }

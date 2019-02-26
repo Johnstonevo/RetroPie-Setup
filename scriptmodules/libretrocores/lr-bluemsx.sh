@@ -111,7 +111,7 @@ function configure_lr-bluemsx() {
           cp /home/$user/.config/RetroPie/coleco/retroarch.cfg /home/$user/.config/RetroPie/coleco/retroarch.cfg.bkp
           local core_config="$configdir/coleco/retroarch.cfg"
           iniConfig " = " '"' "$md_conf_root/coleco/retroarch.cfg"
-          iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Colecovision.cfg" "$core_config"
+          iniSet  "input_overlay" "$raconfigdir/overlay/Colecovision.cfg" "$core_config"
           iniSet "input_overlay_opacity" "1.0" "$core_config"
           iniSet "input_overlay_scale" "1.0" "$core_config"
           iniSet "video_fullscreen_x" "1920" "$core_config"
@@ -121,7 +121,7 @@ function configure_lr-bluemsx() {
           iniSet "input_overlay_enable" "true" "$core_config"
           iniSet "video_smooth" "true" "$core_config"
           iniSet "bluemsx_msxtype" "ColecoVision" "$core_config"
-
+          chown $user:$user "$core_config"
     fi
 
 

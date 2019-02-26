@@ -101,7 +101,7 @@ if [  -d $raconfigdir/overlay/GameBezels/NES ]
              cp /home/$user/.config/RetroPie/nes/retroarch.cfg /home/$user/.config/RetroPie/nes/retroarch.cfg.bkp
             local core_config="$configdir/nes/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/nes/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
+            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0"
             iniSet "input_overlay_scale" "1.0"
             iniSet "video_fullscreen_x" "1920"
@@ -124,7 +124,7 @@ if [  -d $raconfigdir/overlay/GameBezels/NES ]
              cp /home/$user/.config/RetroPie/nesh/retroarch.cfg /home/$user/.config/RetroPie/nesh/retroarch.cfg.bkp
             local core_config="$configdir/nesh/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/nesh/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
+            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0"
             iniSet "input_overlay_scale" "1.0"
             iniSet "video_fullscreen_x" "1920"
@@ -146,7 +146,7 @@ if [  -d $raconfigdir/overlay/GameBezels/fds ]
              cp /home/$user/.config/RetroPie/fds/retroarch.cfg /home/$user/.config/RetroPie/fds/retroarch.cfg.bkp
             local core_config="$configdir/fds/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/fds/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
+            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0"
             iniSet "input_overlay_scale" "1.0"
             iniSet "video_fullscreen_x" "1920"
@@ -168,7 +168,7 @@ if [  -d $raconfigdir/overlay/GameBezels/Famicom ]
              cp /home/$user/.config/RetroPie/famicom/retroarch.cfg /home/$user/.config/RetroPie/famicom/retroarch.cfg.bkp
             local core_config="$configdir/famicom/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/famicom/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
+            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0"
             iniSet "input_overlay_scale" "1.0"
             iniSet "video_fullscreen_x" "1920"

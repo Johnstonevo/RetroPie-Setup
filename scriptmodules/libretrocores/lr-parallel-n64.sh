@@ -204,7 +204,7 @@ _EOF_
                cp /home/$user/.config/RetroPie/n64/retroarch.cfg /home/$user/.config/RetroPie/n64/retroarch.cfg.bkp
               local core_config="$configdir/n64/retroarch.cfg"
               iniConfig " = " '"' "$md_conf_root/n64/retroarch.cfg"
-              iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
+              iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
               iniSet "input_overlay_opacity" "1.0"
               iniSet "input_overlay_scale" "1.0"
               iniSet "input_overlay_enable" "true"
@@ -220,7 +220,7 @@ _EOF_
               cp /home/$user/.config/RetroPie/n64dd/retroarch.cfg /home/$user/.config/RetroPie/n64dd/retroarch.cfg.bkp
               local core_config="$configdir/n64dd/retroarch.cfg"
               iniConfig " = " '"' "$md_conf_root/n64dd/retroarch.cfg"
-              iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
+              iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
               iniSet "input_overlay_opacity" "1.0"
               iniSet "input_overlay_scale" "1.0"
               iniSet "input_overlay_enable" "true"
@@ -237,7 +237,7 @@ _EOF_
               cp /home/$user/.config/RetroPie/n64-japan/retroarch.cfg /home/$user/.config/RetroPie/n64-japan/retroarch.cfg.bkp
               local core_config="$configdir/n64-japan/retroarch.cfg"
               iniConfig " = " '"' "$md_conf_root/n64-japan/retroarch.cfg"
-              iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
+              iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
               iniSet "input_overlay_opacity" "1.0"
               iniSet "input_overlay_scale" "1.0"
               iniSet "input_overlay_enable" "true"

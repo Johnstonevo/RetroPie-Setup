@@ -89,14 +89,14 @@ if [  -d $raconfigdir/overlay/GameBezels/Atari5200 ]
              cp /home/$user/.config/RetroPie/atari5200/retroarch.cfg /home/$user/.config/RetroPie/atari5200/retroarch.cfg.bkp
             local a5200_core_config="$configdir/atari5200/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/atari5200/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Atari-5200.cfg" "$a5200_core_config"
+            iniSet  "input_overlay" "$raconfigdir/overlay/Atari-5200.cfg" "$a5200_core_config"
             iniSet "input_overlay_opacity" "1.0" "$a5200_core_config"
             chown $user:$user "$a5200_core_config"
 
             cp /home/$user/.config/RetroPie/atari800/retroarch.cfg /home/$user/.config/RetroPie/atari800/retroarch.cfg.bkp
             local a800_core_config="$configdir/atari800/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/atari800/retroarch.cfg"
-            iniSet  "input_overlay" "/home/$user/.config/retroarch/overlay/Atari-5200.cfg" "$a800_core_config"
+            iniSet  "input_overlay" "$raconfigdir/overlay/Atari-5200.cfg" "$a800_core_config"
             iniSet "input_overlay_opacity" "1.0" "$a800_core_config"
             chown $user:$user "$a800_core_config"
 fi

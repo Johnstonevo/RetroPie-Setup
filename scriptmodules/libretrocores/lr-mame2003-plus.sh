@@ -61,9 +61,9 @@ function configure_lr-mame2003-plus() {
   chown $user:$user "$biosdir/$dir_name/"{hiscore.dat,cheat.dat}
 
   # Set core options
-  setRetroArchCoreOption "${dir_name}-skip_disclaimer" "enabled"
-  setRetroArchCoreOption "${dir_name}-dcs-speedhack" "enabled"
-  setRetroArchCoreOption "${dir_name}-samples" "enabled"
+  #setRetroArchCoreOption "${dir_name}-skip_disclaimer" "enabled"
+  #setRetroArchCoreOption "${dir_name}-dcs-speedhack" "enabled"
+  #setRetroArchCoreOption "${dir_name}-samples" "enabled"
 
   local so_name="$(_get_so_name_${md_id})"
   addEmulator 1 "$md_id" "mame-2003-plus" "$md_inst/${so_name}_libretro.so"
@@ -86,7 +86,7 @@ function configure_lr-mame2003-plus() {
         local core_config="$configdir/mame-2003-plus/retroarch.cfg"
          iniConfig " = " '"' "$md_conf_root/mame-2003-plus/retroarch.cfg"
 
-        iniSet "input_overlay"  "/home/$user/.config/retroarch/overlay/MAME-Horizontal.cfg"
+        iniSet "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
         iniSet "input_overlay_opacity" "1.0"
         iniSet "input_overlay_enable" "true"
         iniSet  "mame2003-plus_cheat_input ports" "disabled"
@@ -109,6 +109,7 @@ function configure_lr-mame2003-plus() {
         iniSet  "mame2003-plus_tate_mode" "disabled"
         iniSet  "mame2003-plus-dcs-speedhack" "enabled"
         iniSet "mame2003-plus-samples" "enabled"
+        chown $user:$user "$core_config"
     fi
 
 
