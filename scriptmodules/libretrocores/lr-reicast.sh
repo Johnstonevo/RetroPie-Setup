@@ -25,7 +25,7 @@ function build_lr-reicast() {
   if isPlatform "rpi"; then
       make platform=rpi3
     else
-    make
+      make
   fi
     md_ret_require="$md_build/reicast_libretro.so"
 }
