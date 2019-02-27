@@ -63,9 +63,12 @@ function configure_reicast() {
     chmod +x "$md_inst/bin/reicast.sh"
 
     mkRomDir "dreamcast"
-
+    mkRomDir "atomiswave"
+    mkRomDir "naomi"
     # move any old configs to the new location
-    moveConfigDir "$home/.reicast" "$md_conf_root/dreamcast/"
+    copyConfigDir "$home/.reicast" "$md_conf_root/dreamcast/"
+    copyConfigDir "$home/.reicast" "$md_conf_root/naomi/"
+    copyConfigDir "$home/.reicast" "$md_conf_root/atomiswave/"
 
     # Create home VMU, cfg, and data folders. Copy dc_boot.bin and dc_flash.bin to the ~/.reicast/data/ folder.
     mkdir -p "$md_conf_root/dreamcast/"{data,mappings}
@@ -76,6 +79,8 @@ function configure_reicast() {
 
     # copy default mappings
     cp "$md_inst/share/reicast/mappings/"*.cfg "$md_conf_root/dreamcast/mappings/"
+    cp "$md_inst/share/reicast/mappings/"*.cfg "$md_conf_root/atomiswave/mappings/"
+    cp "$md_inst/share/reicast/mappings/"*.cfg "$md_conf_root/naomi/mappings/"
 
     chown -R $user:$user "$md_conf_root/dreamcast"
 
@@ -94,12 +99,27 @@ _EOF_
     if isPlatform "rpi"; then
         addEmulator 0 "${md_id}-audio-omx" "dreamcast" "CON:$md_inst/bin/reicast.sh omx %ROM%"
         addEmulator 0 "${md_id}-audio-oss" "dreamcast" "CON:$md_inst/bin/reicast.sh oss %ROM%"
+        addEmulator 0 "${md_id}-audio-omx" "naomi" "CON:$md_inst/bin/reicast.sh omx %ROM%"
+        addEmulator 0 "${md_id}-audio-oss" "naomi" "CON:$md_inst/bin/reicast.sh oss %ROM%"
+        addEmulator 0 "${md_id}-audio-omx" "atomiswave" "CON:$md_inst/bin/reicast.sh omx %ROM%"
+        addEmulator 0 "${md_id}-audio-oss" "atomiswave" "CON:$md_inst/bin/reicast.sh oss %ROM%"
+
+
     elif isPlatform "vero4k"; then
         addEmulator 0 "$md_id" "dreamcast" "CON:$md_inst/bin/reicast.sh alsa %ROM%"
+        addEmulator 0 "$md_id" "naomi" "CON:$md_inst/bin/reicast.sh alsa %ROM%"
+        addEmulator 0 "$md_id" "atomiswave" "CON:$md_inst/bin/reicast.sh alsa %ROM%"
+
+
     else
         addEmulator 0 "$md_id" "dreamcast" "CON:$md_inst/bin/reicast.sh oss %ROM%"
+        addEmulator 0 "$md_id" "naomi" "CON:$md_inst/bin/reicast.sh oss %ROM%"
+        addEmulator 0 "$md_id" "atomiswave" "CON:$md_inst/bin/reicast.sh oss %ROM%"
+
     fi
     addSystem "dreamcast"
+    addSystem "naomi"
+    addSystem "atomiswave"
 
     addAutoConf reicast_input 1
 }

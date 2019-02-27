@@ -13,7 +13,7 @@ rp_module_id="lr-reicast"
 rp_module_desc="Dreamcast emu - Reicast port for libretro"
 rp_module_help="ROM Extensions: .cdi .gdi\n\nCopy your Dreamcast roms to $romdir/dreamcast\n\nCopy the required BIOS files dc_boot.bin and dc_flash.bin to $biosdir/dc"
 rp_module_licence="GPL2 https://raw.githubusercontent.com/libretro/reicast-emulator/master/LICENSE"
-rp_module_section="exp"
+rp_module_section="main"
 rp_module_flags=""
 
 function sources_lr-reicast() {
@@ -24,7 +24,7 @@ function build_lr-reicast() {
   make clean
   if isPlatform "rpi"; then
       make platform=rpi3
-    else
+  else
       make
   fi
     md_ret_require="$md_build/reicast_libretro.so"
@@ -50,11 +50,17 @@ function configure_lr-reicast() {
     # system-specific
     iniConfig " = " "" "$configdir/dreamcast/retroarch.cfg"
     iniSet "video_shared_context" "true"
+    iniConfig " = " "" "$configdir/atomiswave/retroarch.cfg"
+    iniSet "video_shared_context" "true"
+    iniConfig " = " "" "$configdir/naomi/retroarch.cfg"
+    iniSet "video_shared_context" "true"
+
+
   if isPlatform "rpi"; then
     addEmulator 1 "$md_id" "dreamcast" "$md_inst/reicast_libretro.so --config $configdir/dreamcast/retroarch.cfg </dev/null"
     addEmulator 1 "$md_id" "atomiswave" "$md_inst/reicast_libretro.so --config $configdir/atomiswave/retroarch.cfg </dev/null"
     addEmulator 1 "$md_id" "naomi" "$md_inst/reicast_libretro.so --config $configdir/naomi/retroarch.cfg </dev/null"
-    else
+  else
       addEmulator 1 "$md_id" "dreamcast" "$md_inst/reicast_libretro.so"
       addEmulator 1 "$md_id" "atomiswave" "$md_inst/reicast_libretro.so"
       addEmulator 1 "$md_id" "naomi" "$md_inst/reicast_libretro.so"
@@ -63,5 +69,10 @@ function configure_lr-reicast() {
     addSystem "atomiswave"
     addSystem "naomi"
 
-
+if [ -e $md_instppa/reicast_libretro.so ]
+    then
+      addEmulator 0 "$md_id-ppa" "dreamcast" "$md_instppa/reicast_libretro.so"
+      addEmulator 0 "$md_id-ppa" "atomiswave" "$md_instppa/reicast_libretro.so"
+      addEmulator 0 "$md_id-ppa" "naomi" "$md_instppa/reicast_libretro.so"
+fi
 }

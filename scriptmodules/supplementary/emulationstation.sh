@@ -12,11 +12,11 @@
 rp_module_id="emulationstation"
 rp_module_desc="EmulationStation - Frontend used by RetroPie for launching emulators"
 rp_module_licence="MIT https://raw.githubusercontent.com/RetroPie/EmulationStation/master/LICENSE.md"
-rp_module_section="opt"
+rp_module_section="core"
 rp_module_flags="frontend"
 
 function _get_input_cfg_emulationstation() {
-    echo "/home/$user/.emulationstation/es_input.cfg"
+    echo "$configdir/all/emulationstation/es_input.cfg"
 }
 
 function _update_hook_emulationstation() {
@@ -92,7 +92,7 @@ function _add_rom_emulationstation() {
     local desc="$5"
     local image="$6"
 
-    local config_dir="$home/.emulationstation"
+    local config_dir="$configdir/all/emulationstation"
 
     mkUserDir "$config_dir"
     mkUserDir "$config_dir/gamelists"
@@ -125,7 +125,7 @@ function depends_emulationstation() {
     local depends=(
         libfreeimage-dev libfreetype6-dev
         libcurl4-openssl-dev libasound2-dev cmake libsdl2-dev libsm-dev
-        libvlc-dev libvlccore-dev vlc rapidjson-dev libcec-dev
+        libvlc-dev libvlccore-dev vlc rapidjson-dev
     )
 
     isPlatform "x11" && depends+=(gnome-terminal)
@@ -261,7 +261,7 @@ function remove_emulationstation() {
 
 function configure_emulationstation() {
     # move the $home/emulationstation configuration dir and symlink it
-    #moveConfigDir "$home/.emulationstation" "$configdir/all/emulationstation"
+    moveConfigDir "$home/.emulationstation" "$configdir/all/emulationstation"
 
     [[ "$mode" == "remove" ]] && return
 
