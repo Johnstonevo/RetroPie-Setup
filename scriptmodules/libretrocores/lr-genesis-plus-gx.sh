@@ -88,6 +88,13 @@ function configure_lr-genesis-plus-gx() {
   addSystem  "sc-3000"
   addSystem  "ggh"
 
+  addBezel "megadrive"
+  addBezel "sg-1000"
+  addBezel "segacd"
+  addBezel "mastersystem"
+  addBezel "sega32x
+
+"
     if [ -e $md_instppa/genesis_plus_gx_libretro.so ]
         then
           ensureSystemretroconfig "gamegear"
@@ -129,49 +136,10 @@ function configure_lr-genesis-plus-gx() {
           addSystem  "markiii"
           addSystem  "sega32x"
           addSystem  "sc-3000"
-    fi
 
 
-##beezelsproject##
-###################
+    fi
 
-
-    if [ ! -d $raconfigdir/overlay/GameBezels/Megadrive ]
-        then
-            git clone https://github.com/thebezelproject/bezelproject-MegaDrive.git  "/home/$user/RetroPie-Setup/tmp/MegaDrive"
-            cp -r  /home/$user/RetroPie-Setup/tmp/MegaDrive/retroarch/  /home/$user/.config/
-            rm -rf  /home/$user/RetroPie-Setup/tmp/MegaDrive/
-            cd /home/$user/.config/retroarch
-            chown -R $user:$user ../retroarch
-            find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-    fi
-    if [ ! -d $raconfigdir/overlay/GameBezels/SG-1000 ]
-        then
-            git clone https://github.com/thebezelproject/bezelproject-SG-1000.git  "/home/$user/RetroPie-Setup/tmp/SG-1000"
-            cp -r  /home/$user/RetroPie-Setup/tmp/SG-1000/retroarch/  /home/$user/.config/
-            rm -rf  /home/$user/RetroPie-Setup/tmp/SG-1000/
-            cd /home/$user/.config/retroarch
-            chown -R $user:$user ../retroarch
-            find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-    fi
-    if [ ! -d $raconfigdir/overlay/GameBezels/SegaCD ]
-        then
-            git clone https://github.com/thebezelproject/bezelproject-SegaCD.git  "/home/$user/RetroPie-Setup/tmp/SegaCD"
-            cp -r  /home/$user/RetroPie-Setup/tmp/SegaCD/retroarch/  /home/$user/.config/
-            rm -rf  /home/$user/RetroPie-Setup/tmp/SegaCD/
-            cd /home/$user/.config/retroarch
-            chown -R $user:$user ../retroarch
-            find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-    fi
-    if [ ! -d $raconfigdir/overlay/GameBezels/MasterSystem ]
-        then
-            git clone https://github.com/thebezelproject/bezelproject-MasterSystem.git  "/home/$user/RetroPie-Setup/tmp/MasterSystem"
-            cp -r  /home/$user/RetroPie-Setup/tmp/MasterSystem/retroarch/  /home/$user/.config/
-            rm -rf  /home/$user/RetroPie-Setup/tmp/MasterSystem/
-            cd /home/$user/.config/retroarch
-            chown -R $user:$user ../retroarch
-            find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-    fi
 
 ##retroconfig##
 ###############
@@ -185,13 +153,6 @@ function configure_lr-genesis-plus-gx() {
                 iniSet "input_overlay_scale" "1.0" "$core_config"
                 iniSet "video_fullscreen_x" "1920" "$core_config"
                 iniSet "video_fullscreen_y" "1080" "$core_config"
-                iniSet "custom_viewport_width" "1194" "$core_config"
-                iniSet "custom_viewport_height" "896" "$core_config"
-                iniSet "custom_viewport_x" "363" "$core_config"
-                iniSet "custom_viewport_y" "90" "$core_config"
-                iniSet "aspect_ratio_index" "22" "$core_config"
-                iniSet "input_overlay_enable" "true" "$core_config"
-                iniSet "video_smooth" "false" "$core_config"
                 iniSet "input_libretro_device_p1" "513" "$core_config"
                 iniSet "input_libretro_device_p2" "513" "$core_config"
                 iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
@@ -207,18 +168,11 @@ function configure_lr-genesis-plus-gx() {
                 iniSet "input_overlay_scale" "1.0" "$core_config"
                 iniSet "video_fullscreen_x" "1920" "$core_config"
                 iniSet "video_fullscreen_y" "1080" "$core_config"
-                iniSet "custom_viewport_width" "1194" "$core_config"
-                iniSet "custom_viewport_height" "896" "$core_config"
-                iniSet "custom_viewport_x" "363" "$core_config"
-                iniSet "custom_viewport_y" "90" "$core_config"
-                iniSet "aspect_ratio_index" "22" "$core_config"
-                iniSet "input_overlay_enable" "true" "$core_config"
-                iniSet "video_smooth" "false" "$core_config"
                 iniSet "input_libretro_device_p1" "513" "$core_config"
                 iniSet "input_libretro_device_p2" "513" "$core_config"
                 iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
                 iniSet  "video_shader_enable"  "true" "$core_config"
-                iniSet "genesis_plus_gx_system_hw" "genesis" "$core_config"
+                iniSet "genesis_plus_gx_system_hw" "mega drive" "$core_config"
                 chown $user:$user "$core_config"
 
 
@@ -231,18 +185,11 @@ function configure_lr-genesis-plus-gx() {
                 iniSet "input_overlay_scale" "1.0" "$core_config"
                 iniSet "video_fullscreen_x" "1920" "$core_config"
                 iniSet "video_fullscreen_y" "1080" "$core_config"
-                iniSet "custom_viewport_width" "1194" "$core_config"
-                iniSet "custom_viewport_height" "896" "$core_config"
-                iniSet "custom_viewport_x" "363" "$core_config"
-                iniSet "custom_viewport_y" "90" "$core_config"
-                iniSet "aspect_ratio_index" "22" "$core_config"
-                iniSet "input_overlay_enable" "true" "$core_config"
-                iniSet "video_smooth" "false" "$core_config"
                 iniSet "input_libretro_device_p1" "513" "$core_config"
                 iniSet "input_libretro_device_p2" "513" "$core_config"
                 iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
                 iniSet  "video_shader_enable"  "true" "$core_config"
-                iniSet "genesis_plus_gx_system_hw" "genesis" "$core_config"
+                iniSet "genesis_plus_gx_system_hw" "mega drive" "$core_config"
                 chown $user:$user "$core_config"
 
 
@@ -251,22 +198,16 @@ function configure_lr-genesis-plus-gx() {
                 iniConfig " = " '"' "$md_conf_root/megadrive-japan/retroarch.cfg"
                 iniSet  "input_overlay" "$raconfigdir/overlay/Sega-Mega-Drive.cfg" "$core_config"
                 iniSet "input_overlay_opacity" "1.0" "$core_config"
+                iniSet "input_overlay_opacity" "1.0" "$core_config"
                 iniSet "input_overlay_scale" "1.0" "$core_config"
                 iniSet "video_fullscreen_x" "1920" "$core_config"
                 iniSet "video_fullscreen_y" "1080" "$core_config"
-                iniSet "custom_viewport_width" "1194" "$core_config"
-                iniSet "custom_viewport_height" "896" "$core_config"
-                iniSet "custom_viewport_x" "363" "$core_config"
-                iniSet "custom_viewport_y" "90" "$core_config"
-                iniSet "aspect_ratio_index" "22" "$core_config"
-                iniSet "input_overlay_enable" "true" "$core_config"
-                iniSet "video_smooth" "false" "$core_config"
                 iniSet "input_libretro_device_p1" "513" "$core_config"
                 iniSet "input_libretro_device_p2" "513" "$core_config"
                 iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
                 iniSet  "video_shader_enable"  "true" "$core_config"
                 iniSet "genesis_plus_gx_system_hw" "mega drive" "$core_config"
-              chown $user:$user "$core_config"
+                chown $user:$user "$core_config"
     fi
 
 
@@ -281,17 +222,11 @@ function configure_lr-genesis-plus-gx() {
                 iniSet "input_overlay_scale" "1.0" "$core_config"
                 iniSet "video_fullscreen_x" "1920" "$core_config"
                 iniSet "video_fullscreen_y" "1080" "$core_config"
-                iniSet "custom_viewport_width" "1194" "$core_config"
-                iniSet "custom_viewport_height" "896" "$core_config"
-                iniSet "custom_viewport_x" "363" "$core_config"
-                iniSet "custom_viewport_y" "90" "$core_config"
-                iniSet "aspect_ratio_index" "22" "$core_config"
-                iniSet "input_overlay_enable" "true" "$core_config"
-                iniSet "video_smooth" "false" "$core_config"
                 iniSet "input_libretro_device_p1" "513" "$core_config"
                 iniSet "input_libretro_device_p2" "513" "$core_config"
                 iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
                 iniSet  "video_shader_enable"  "true" "$core_config"
+                iniSet "genesis_plus_gx_system_hw" "mega drive" "$core_config"
                 chown $user:$user "$core_config"
 
     fi
@@ -303,10 +238,7 @@ function configure_lr-genesis-plus-gx() {
                 iniSet  "input_overlay" "$raconfigdir/overlay/Sega-SG-1000.cfg" "$core_config"
                 iniSet "input_overlay_opacity" "1.0" "$core_config"
                 iniSet "input_overlay_scale" "1.0" "$core_config"
-                iniSet "video_fullscreen_x" "1920" "$core_config"
-                iniSet "video_fullscreen_y" "1080" "$core_config"
-                iniSet "video_smooth" "false" "$core_config"
-                iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
+              iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
                 iniSet  "video_shader_enable"  "true" "$core_config"
                 iniSet "genesis_plus_gx_system_hw" "sg-1000 II" "$core_config"
                 chown $user:$user "$core_config"

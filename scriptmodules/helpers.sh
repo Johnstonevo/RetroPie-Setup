@@ -432,7 +432,7 @@ function mkUserDir() {
 ## @brief Creates a directory under $romdir owned by the current user.
 function mkRomDir() {
     mkUserDir "$romdir/$1"
-    #if [[ "$1" == "megadrive" ]]; then
+    #if [[ "$1" == "$bezel" ]]; then
     #    pushd "$romdir"
     #    ln -snf "$1" "genesis"
     #    popd
@@ -1182,6 +1182,20 @@ function delSystem() {
     done
 }
 
+####add bezel project
+function addBezel() {
+    local system="$1"
+    local bezel="$(getPlatformConfig "${system}_bezel")"
+    if [[ ! -d "$raconfigdir/overlay/GameBezels/$bezel" ]]; then
+
+      gitPullOrClone "/home/$user/RetroPie-Setup/tmp/$bezel" https://github.com/thebezelproject/bezelproject-$bezel.git
+      cd "/home/$user/RetroPie-Setup/tmp/$bezel"
+      find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
+
+      cp -r   /home/$user/RetroPie-Setup/tmp/$bezel/retroarch/  /home/$user/.config/
+      chown -R $user:$user "$raconfigdir"
+    fi
+}
 ## @fn addPort()
 ## @param id id of the module / command
 ## @param port name of the port
@@ -1326,6 +1340,10 @@ function delEmulator() {
         done
     fi
 }
+
+
+
+
 
 ## @fn patchVendorGraphics()
 ## @param filename file to patch
