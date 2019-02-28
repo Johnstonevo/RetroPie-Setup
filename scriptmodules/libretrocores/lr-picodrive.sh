@@ -94,6 +94,12 @@ function configure_lr-picodrive() {
   addSystem  "sega32x"
   addSystem  "sc-3000"
 
+  addBezel "megadrive"
+  addBezel "sg-1000"
+  addBezel "segacd"
+  addBezel "mastersystem"
+  addBezel "sega32x"
+
 
         if [ -e $md_instppa/picodrive_libretro.so ]
             then
@@ -127,16 +133,16 @@ function configure_lr-picodrive() {
 
               addEmulator 0 "$md_id-ppa"  "gamegear" "$md_instppa/picodrive_libretro.so"
               addEmulator 0 "$md_id-ppa" "ggh" "$md_instppa/picodrive_libretro.so"
-              addEmulator 1 "$md_id-ppa" "mastersystem" "$md_instppa/picodrive_libretro.so"
-              addEmulator 1 "$md_id-ppa" "megadrive" "$md_instppa/picodrive_libretro.so"
-              addEmulator 1 "$md_id-ppa" "megadrive-japan" "$md_instppa/picodrive_libretro.so"
-              addEmulator 1 "$md_id-ppa" "genesis" "$md_instppa/picodrive_libretro.so"
-              addEmulator 1 "$md_id-ppa" "genh" "$md_instppa/picodrive_libretro.so"
+              addEmulator 0 "$md_id-ppa" "mastersystem" "$md_instppa/picodrive_libretro.so"
+              addEmulator 0 "$md_id-ppa" "megadrive" "$md_instppa/picodrive_libretro.so"
+              addEmulator 0 "$md_id-ppa" "megadrive-japan" "$md_instppa/picodrive_libretro.so"
+              addEmulator 0 "$md_id-ppa" "genesis" "$md_instppa/picodrive_libretro.so"
+              addEmulator 0 "$md_id-ppa" "genh" "$md_instppa/picodrive_libretro.so"
               addEmulator 0 "$md_id-ppa" "sg-1000" "$md_instppa/picodrive_libretro.so"
               addEmulator 0 "$md_id-ppa" "segacd" "$md_instppa/picodrive_libretro.so"
               addEmulator 0 "$md_id-ppa" "markiii" "$md_instppa/picodrive_libretro.so"
-              addEmulator 1 "$md_id-ppa" "sega32x" "$md_instppa/picodrive_libretro.so"
-              addEmulator 1 "$md_id-ppa" "sc-3000" "$md_instppa/picodrive_libretro.so"
+              addEmulator 0 "$md_id-ppa" "sega32x" "$md_instppa/picodrive_libretro.so"
+              addEmulator 0 "$md_id-ppa" "sc-3000" "$md_instppa/picodrive_libretro.so"
               addSystem  "gamegear"
               addSystem  "mastersystem"
               addSystem  "megadrive"
@@ -158,58 +164,17 @@ setRetroArchCoreOption "picodrive_ramcart" "disabled"
 setRetroArchCoreOption "picodrive_region" "Auto"
 setRetroArchCoreOption "picodrive_drc" "enabled"
 
- if [ ! -d $raconfigdir/overlay/GameBezels/Megadrive ]
-    then
-        git clone https://github.com/thebezelproject/bezelproject-MegaDrive.git  "/home/$user/RetroPie-Setup/tmp/MegaDrive"
-        cp -r  /home/$user/RetroPie-Setup/tmp/MegaDrive/retroarch/  /home/$user/.config/
-        rm -rf /home/$user/RetroPie-Setup/tmp/MegaDrive/
-        cd /home/$user/.config/retroarch
-        chown -R $user:$user ../retroarch
-        find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-fi
- if [ ! -d $raconfigdir/overlay/GameBezels/SegaCD ]
-    then
-        git clone https://github.com/thebezelproject/bezelproject-SegaCD.git  "/home/$user/RetroPie-Setup/tmp/SegaCD"
-        cp -r  /home/$user/RetroPie-Setup/tmp/SegaCD/retroarch/  /home/$user/.config/
-        rm -rf /home/$user/RetroPie-Setup/tmp/SegaCD/
-        cd /home/$user/.config/retroarch
-        chown -R $user:$user ../retroarch
-        find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-fi
- if [ ! -d $raconfigdir/overlay/GameBezels/MasterSystem ]
-    then
-        git clone https://github.com/thebezelproject/bezelproject-MasterSystem.git  "/home/$user/RetroPie-Setup/tmp/MasterSystem"
-        cp -r  /home/$user/RetroPie-Setup/tmp/MasterSystem/retroarch/  /home/$user/.config/
-        rm -rf /home/$user/RetroPie-Setup/tmp/MasterSystem/
-        cd /home/$user/.config/retroarch
-        chown -R $user:$user ../retroarch
-        find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-fi
- if [ ! -d $raconfigdir/overlay/GameBezels/Sega32X ]
-    then
-        git clone https://github.com/thebezelproject/bezelproject-Sega32X.git  "/home/$user/RetroPie-Setup/tmp/Sega32X"
-        cp -r  /home/$user/RetroPie-Setup/tmp/Sega32X/retroarch/  /home/$user/.config/
-        rm -rf /home/$user/RetroPie-Setup/tmp/Sega32X/
-        cd /home/$user/.config/retroarch
-        chown -R $user:$user ../retroarch
-        find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-fi
 
-if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
- then
-             cp /home/$user/.config/RetroPie/megadrive/retroarch.cfg /home/$user/.config/RetroPie/megadrive/retroarch.cfg.bkp
-            local core_config="$configdir/megadrive/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/megadrive/retroarch.cfg"
+    if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
+    then
+                cp /home/$user/.config/RetroPie/megadrive/retroarch.cfg /home/$user/.config/RetroPie/megadrive/retroarch.cfg.bkp
+                local core_config="$configdir/megadrive/retroarch.cfg"
+                iniConfig " = " '"' "$md_conf_root/megadrive/retroarch.cfg"
             iniSet  "input_overlay" "$raconfigdir/overlay/Sega-Mega-Drive.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0" "$core_config"
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
             iniSet "video_fullscreen_y" "1080" "$core_config"
-            iniSet "custom_viewport_width" "1194" "$core_config"
-            iniSet "custom_viewport_height" "896" "$core_config"
-            iniSet "custom_viewport_x" "363" "$core_config"
-            iniSet "custom_viewport_y" "90" "$core_config"
-            iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
@@ -222,6 +187,8 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
             iniSet  "video_shader_enable"  "true" "$core_config"
             chown $user:$user "$core_config"
+
+
             cp /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg.bkp
             local core_config="$configdir/megadrive-japan/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/megadrive-japan/retroarch.cfg"
@@ -230,11 +197,6 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
             iniSet "video_fullscreen_y" "1080" "$core_config"
-            iniSet "custom_viewport_width" "1194" "$core_config"
-            iniSet "custom_viewport_height" "896" "$core_config"
-            iniSet "custom_viewport_x" "363" "$core_config"
-            iniSet "custom_viewport_y" "90" "$core_config"
-            iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
             iniSet "video_smooth" "false" "$core_config"
             iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
@@ -247,6 +209,8 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "picodrive_drc"  "enabled" "$core_config"
             iniSet "picodrive_region" "Japan Pal" "$core_config"
             chown $user:$user "$core_config"
+
+
             cp /home/$user/.config/RetroPie/genesis/retroarch.cfg /home/$user/.config/RetroPie/genesis/retroarch.cfg.bkp
             local core_config="$configdir/genesis/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/genesis/retroarch.cfg"
@@ -255,11 +219,6 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
             iniSet "video_fullscreen_y" "1080" "$core_config"
-            iniSet "custom_viewport_width" "1194" "$core_config"
-            iniSet "custom_viewport_height" "896" "$core_config"
-            iniSet "custom_viewport_x" "363" "$core_config"
-            iniSet "custom_viewport_y" "90" "$core_config"
-            iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
             iniSet "video_smooth" "false" "$core_config"
             iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
@@ -271,6 +230,9 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "picodrive_region"  "Auto" "$core_config"
             iniSet "picodrive_drc"  "enabled" "$core_config"
             chown $user:$user "$core_config"
+
+
+
             cp /home/$user/.config/RetroPie/genh/retroarch.cfg /home/$user/.config/RetroPie/genh/retroarch.cfg.bkp
             local core_config="$configdir/genh/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/genh/retroarch.cfg"
@@ -279,11 +241,6 @@ if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
             iniSet "video_fullscreen_y" "1080" "$core_config"
-            iniSet "custom_viewport_width" "1194" "$core_config"
-            iniSet "custom_viewport_height" "896" "$core_config"
-            iniSet "custom_viewport_x" "363" "$core_config"
-            iniSet "custom_viewport_y" "90" "$core_config"
-            iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
             iniSet "video_smooth" "false" "$core_config"
             iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
@@ -302,11 +259,6 @@ if [  -d $raconfigdir/overlay/GameBezels/SegaCD ]
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
             iniSet "video_fullscreen_y" "1080" "$core_config"
-            iniSet "custom_viewport_width" "1194" "$core_config"
-            iniSet "custom_viewport_height" "896" "$core_config"
-            iniSet "custom_viewport_x" "363" "$core_config"
-            iniSet "custom_viewport_y" "90" "$core_config"
-            iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
             iniSet "video_smooth" "false" "$core_config"
             iniSet  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" "$core_config"
@@ -348,11 +300,6 @@ if [  -d $raconfigdir/overlay/GameBezels/Sega32X ]
             iniSet "input_overlay_scale" "1.0" "$core_config"
             iniSet "video_fullscreen_x" "1920" "$core_config"
             iniSet "video_fullscreen_y" "1080" "$core_config"
-            iniSet "custom_viewport_width" "1194" "$core_config"
-            iniSet "custom_viewport_height" "896" "$core_config"
-            iniSet "custom_viewport_x" "363" "$core_config"
-            iniSet "custom_viewport_y" "90" "$core_config"
-            iniSet "aspect_ratio_index" "22" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
             iniSet "video_smooth" "true" "$core_config"
             iniSet "picodrive_input1" "6 button pad" "$core_config"
