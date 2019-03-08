@@ -54,8 +54,13 @@ function configure_lr-fceumm() {
     addEmulator 0 "$md_id" "fds" "$md_inst/fceumm_libretro.so"
     addEmulator 1 "$md_id" "famicom" "$md_inst/fceumm_libretro.so"
     addSystem "nes"
+    addSystem "nesh"
     addSystem "fds"
     addSystem "famicom"
+
+    addBezel "fds"
+    addBezel "nes"
+    addBezel "famicom"
 
 if [ -e $md_instppa/fceumm_libretro.so ]
     then
@@ -69,35 +74,6 @@ if [ -e $md_instppa/fceumm_libretro.so ]
 fi
 
 
-if [ ! -d $raconfigdir/overlay/GameBezels/NES ]
-then
-    git clone https://github.com/thebezelproject/bezelproject-NES.git  "/home/$user/RetroPie-Setup/tmp/NES"
-    cp -r  /home/$user/RetroPie-Setup/tmp/NES/retroarch/  /home/$user/.config/
-    rm -rf /home/$user/RetroPie-Setup/tmp/NES/
-    cd /home/$user/.config/retroarch/
-    chown -R $user:$user ../retroarch
-    find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-fi
-if [ ! -d $raconfigdir/overlay/GameBezels/FDS ]
-then
-    git clone https://github.com/thebezelproject/bezelproject-FDS.git  "/home/$user/RetroPie-Setup/tmp/FDS"
-    cp -r  /home/$user/RetroPie-Setup/tmp/FDS/retroarch/  /home/$user/.config/
-    rm -rf /home/$user/RetroPie-Setup/tmp/FDS/
-    cd /home/$user/.config/retroarch/
-    chown -R $user:$user ../retroarch
-    find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-fi
-if [ ! -d $raconfigdir/overlay/GameBezels/Famicom ]
-then
-    git clone https://github.com/thebezelproject/bezelproject-Famicom.git  "/home/$user/RetroPie-Setup/tmp/Famicom"
-    cp -r  /home/$user/RetroPie-Setup/tmp/Famicom/retroarch/  /home/$user/.config/
-    rm -rf /home/$user/RetroPie-Setup/tmp/Famicom/
-    cd /home/$user/.config/retroarch/
-    chown -R $user:$user ../retroarch
-    find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-fi
-if [  -d $raconfigdir/overlay/GameBezels/NES ]
- then
              cp /home/$user/.config/RetroPie/nes/retroarch.cfg /home/$user/.config/RetroPie/nes/retroarch.cfg.bkp
             local core_config="$configdir/nes/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/nes/retroarch.cfg"
@@ -106,21 +82,12 @@ if [  -d $raconfigdir/overlay/GameBezels/NES ]
             iniSet "input_overlay_scale" "1.0"
             iniSet "video_fullscreen_x" "1920"
             iniSet "video_fullscreen_y" "1080"
-            iniSet "custom_viewport_width" "1280"
-            iniSet "custom_viewport_height" "960"
-            iniSet "custom_viewport_x" "78"
-            iniSet "custom_viewport_y" "57"
-            iniSet "aspect_ratio_index" "22"
             iniSet "input_overlay_enable" "true"
             iniSet "video_force_aspect" "true"
-            iniSet "video_aspect_ratio" "1.0"
             iniSet "video_smooth" "false"
             iniSet "fceumm_region" "PAL"
            chown $user:$user "$core_config"
 
-fi
-if [  -d $raconfigdir/overlay/GameBezels/NES ]
- then
              cp /home/$user/.config/RetroPie/nesh/retroarch.cfg /home/$user/.config/RetroPie/nesh/retroarch.cfg.bkp
             local core_config="$configdir/nesh/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/nesh/retroarch.cfg"
@@ -129,20 +96,11 @@ if [  -d $raconfigdir/overlay/GameBezels/NES ]
             iniSet "input_overlay_scale" "1.0"
             iniSet "video_fullscreen_x" "1920"
             iniSet "video_fullscreen_y" "1080"
-            iniSet "custom_viewport_width" "1280"
-            iniSet "custom_viewport_height" "960"
-            iniSet "custom_viewport_x" "78"
-            iniSet "custom_viewport_y" "57"
-            iniSet "aspect_ratio_index" "22"
             iniSet "input_overlay_enable" "true"
             iniSet "video_force_aspect" "true"
-            iniSet "video_aspect_ratio" "1.0"
             iniSet "video_smooth" "false"
            chown $user:$user "$core_config"
 
-fi
-if [  -d $raconfigdir/overlay/GameBezels/fds ]
- then
              cp /home/$user/.config/RetroPie/fds/retroarch.cfg /home/$user/.config/RetroPie/fds/retroarch.cfg.bkp
             local core_config="$configdir/fds/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/fds/retroarch.cfg"
@@ -151,20 +109,11 @@ if [  -d $raconfigdir/overlay/GameBezels/fds ]
             iniSet "input_overlay_scale" "1.0"
             iniSet "video_fullscreen_x" "1920"
             iniSet "video_fullscreen_y" "1080"
-            iniSet "custom_viewport_width" "1280"
-            iniSet "custom_viewport_height" "960"
-            iniSet "custom_viewport_x" "78"
-            iniSet "custom_viewport_y" "57"
-            iniSet "aspect_ratio_index" "22"
             iniSet "input_overlay_enable" "true"
             iniSet "video_force_aspect" "true"
-            iniSet "video_aspect_ratio" "1.0"
             iniSet "video_smooth" "false"
            chown $user:$user "$core_config"
 
-fi
-if [  -d $raconfigdir/overlay/GameBezels/Famicom ]
- then
              cp /home/$user/.config/RetroPie/famicom/retroarch.cfg /home/$user/.config/RetroPie/famicom/retroarch.cfg.bkp
             local core_config="$configdir/famicom/retroarch.cfg"
             iniConfig " = " '"' "$md_conf_root/famicom/retroarch.cfg"
@@ -173,15 +122,8 @@ if [  -d $raconfigdir/overlay/GameBezels/Famicom ]
             iniSet "input_overlay_scale" "1.0"
             iniSet "video_fullscreen_x" "1920"
             iniSet "video_fullscreen_y" "1080"
-            iniSet "custom_viewport_width" "1280"
-            iniSet "custom_viewport_height" "960"
-            iniSet "custom_viewport_x" "78"
-            iniSet "custom_viewport_y" "57"
-            iniSet "aspect_ratio_index" "22"
             iniSet "input_overlay_enable" "true"
             iniSet "video_force_aspect" "true"
-            iniSet "video_aspect_ratio" "1.0"
             iniSet "video_smooth" "false"
            chown $user:$user "$core_config"
-fi
 }

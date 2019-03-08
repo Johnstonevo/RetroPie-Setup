@@ -48,23 +48,14 @@ function configure_lr-vecx() {
 
     addEmulator 0 "$md_id" "vectrex" "$md_inst/vecx_libretro.so"
     addSystem "vectrex"
+    addBezel "vectrex"
     if [ -e $md_instppa/vecx_libretro.so ]
         then
           addEmulator 0 "$md_id-ppa" "vectrex" "$md_instppa/vecx_libretro.so"
           addSystem "vectrex"
     fi
-    if [ ! -d $raconfigdir/overlay/GameBezels/GCEVectrex ]
-    then
-        git clone https://github.com/thebezelproject/bezelproject-GCEVectrex.git  "/home/$user/RetroPie-Setup/tmp/GCEVectrex"
-        cp -r  /home/$user/RetroPie-Setup/tmp/GCEVectrex/retroarch/  /home/$user/.config/
-        rm -rf /home/$user/RetroPie-Setup/tmp/GCEVectrex/
-        cd /home/$user/.config/retroarch
-        chown -R $user:$user overlay config
-        find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
 
-    fi
-    if [  -d $raconfigdir/overlay/GameBezels/GCEVectrex ]
-      then
+
           cp /home/$user/.config/RetroPie/vectrex/retroarch.cfg /home/$user/.config/RetroPie/vectrex/retroarch.cfg.bkp
           local core_config="$configdir/vectrex/retroarch.cfg"
           iniConfig " = " '"' "$md_conf_root/vectrex/retroarch.cfg"
@@ -76,6 +67,5 @@ function configure_lr-vecx() {
           iniSet "input_overlay_enable" "true" "$core_config"
           iniSet "video_smooth" "true" "$core_config"
           chown $user:$user "$core_config"
-    fi
 
 }

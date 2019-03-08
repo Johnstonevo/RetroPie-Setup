@@ -492,9 +492,9 @@ function install_attractmode() {
     make -C sfml-pi install
     mkdir -p "$md_inst"/{bin,share,share/attract}
     cp -v attract/attract "$md_inst/bin/"
-    cp -Rv attract/config/* "$md_inst/share/attract"
-    #cd attract
-    #make install
+    #cp -Rv attract/config/* "$md_inst/share/attract"
+    cd attract
+    make install
 }
 
 #function remove_attractmode() {

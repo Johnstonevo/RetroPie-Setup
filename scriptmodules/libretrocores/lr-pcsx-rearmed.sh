@@ -55,7 +55,7 @@ function configure_lr-pcsx-rearmed() {
         ensureSystemretroconfig "psx"
         addEmulator 1 "$md_id" "psx" "$md_inst/libretro.so"
         addSystem "psx"
-
+        addBezel "psx"
         mkRomDir "psx-japan"
         ensureSystemretroconfig "psx-japan"
         addEmulator 1 "$md_id" "psx-japan" "$md_inst/libretro.so"
@@ -74,19 +74,8 @@ function configure_lr-pcsx-rearmed() {
 
     fi
 
-    if [ ! -d $raconfigdir/overlay/GameBezels/PSX ]
-        then
-            git clone https://github.com/thebezelproject/bezelproject-PSX.git  "/home/$user/RetroPie-Setup/tmp/PSX"
-            cp -r  /home/$user/RetroPie-Setup/tmp/PSX/retroarch/  /home/$user/.config/
-            rm -rf /home/$user/RetroPie-Setup/tmp/PSX/
-            cd /home/$user/.config/retroarch/
-            chown -R $user:$user ../retroarch
-            ln -s $raconfigdir/config/PCSX-ReARMed  $raconfigdir/config/Beetle\ PSX
+        ln -s $raconfigdir/config/PCSX-ReARMed  $raconfigdir/config/Beetle\ PSX
 
-            find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-    fi
-    if [ -d $raconfigdir/overlay/GameBezels/PSX ]
-    then
         local core_config="$configdir/psx/retroarch.cfg"
         iniConfig " = " '"' "$md_conf_root/psx/retroarch.cfg"
         iniSet  "core_options_path" "/home/$user/.config/RetroPie/psx/retroarch.cfg" "$core_config"
@@ -95,12 +84,7 @@ function configure_lr-pcsx-rearmed() {
         iniSet  "input_overlay_scale" "1.0" "$core_config"
         iniSet  "video_fullscreen_x" "1920" "$core_config"
         iniSet  "video_fullscreen_y" "1080" "$core_config"
-        iniSet  "custom_viewport_width" "1280" "$core_config"
-        iniSet  "custom_viewport_height" "960" "$core_config"
-        iniSet  "custom_viewport_x" "320" "$core_config"
-        iniSet  "custom_viewport_y" "60" "$core_config"
-        iniSet  "aspect_ratio_index" "22" "$core_config"
-        iniSet  "input_overlay_enable" "false" "$core_config"
+        iniSet  "input_overlay_enable" "true" "$core_config"
         iniSet  "video_smooth" "true" "$core_config"
         iniSet  "rewind_enable" "false" "$core_config"
         iniSet  "game_specific_options" "true" "$core_config"
@@ -110,9 +94,8 @@ function configure_lr-pcsx-rearmed() {
         iniSet  "pcsx_rearmed_neon_enhancement_no_main" "enabled" "$core_config"
         iniSet  "pcsx_rearmed_show_bios_bootlogo" "enabled" "$core_config"
         chown $user:$user "$core_config"
-    fi
-    if [ -d $raconfigdir/overlay/GameBezels/PSX ]
-    then
+
+
         local core_config="$configdir/psx-japan/retroarch.cfg"
         iniConfig " = " '"' "$md_conf_root/psx-japan/retroarch.cfg"
         iniSet  "core_options_path" "/home/$user/.config/RetroPie/psx-japan/retroarch.cfg" "$core_config"
@@ -121,28 +104,20 @@ function configure_lr-pcsx-rearmed() {
         iniSet  "input_overlay_scale" "1.0" "$core_config"
         iniSet  "video_fullscreen_x" "1920" "$core_config"
         iniSet  "video_fullscreen_y" "1080" "$core_config"
-        iniSet  "custom_viewport_width" "1280" "$core_config"
-        iniSet  "custom_viewport_height" "960" "$core_config"
-        iniSet  "custom_viewport_x" "320" "$core_config"
-        iniSet  "custom_viewport_y" "60" "$core_config"
-        iniSet  "aspect_ratio_index" "22" "$core_config"
         iniSet  "input_overlay_enable" "true" "$core_config"
         iniSet  "video_smooth" "true" "$core_config"
         iniSet  "rewind_enable" "false" "$core_config"
         iniSet  "game_specific_options" "true" "$core_config"
         iniSet  "input_player1_analog_dpad_mode" "0" "$core_config"
         iniSet  "input_player2_analog_dpad_mode" "0" "$core_config"
-    # iniSet  "beetle_psx_hw_pgxp_texture" "On" "$core_config"
         iniSet  "pcsx_rearmed_neon_enhancement_enable" "enabled" "$core_config"
         iniSet  "pcsx_rearmed_neon_enhancement_no_main" "enabled" "$core_config"
         iniSet  "pcsx_rearmed_pad1type" "analog" "$core_config"
         iniSet  "pcsx_rearmed_pad2type" "analog" "$core_config"
         iniSet "pcsx_rearmed_show_bios_bootlogo" "enabled" "$core_config"
-        iniSet  "beetle_psx_widescreen_hack" "on" "$core_config"
-        iniSet  "beetle_psx_internal_resolution" "4x" "$core_config"
 
         chown $user:$user "$core_config"
 
-    fi
+    
 
 }

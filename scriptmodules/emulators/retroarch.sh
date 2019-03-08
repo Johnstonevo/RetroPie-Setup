@@ -224,7 +224,7 @@ function configure_retroarch() {
     iniSet "video_aspect_ratio_auto" "true"
     iniSet "video_smooth" "false"
     iniSet "rgui_show_start_screen" "false"
-
+    iniSet "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
     if ! isPlatform "x86"; then
         iniSet "video_threaded" "true"
     fi

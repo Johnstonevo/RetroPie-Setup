@@ -92,6 +92,7 @@ function configure_lr-fbalpha() {
     addSystem "megadrive-japan"
     addSystem "sg-1000"
 
+    addBezel "fba"
 
 if [ -e $md_instppa/fbalpha_libretro.so ]
     then
@@ -114,15 +115,7 @@ if [ -e $md_instppa/fbalpha_libretro.so ]
 
 fi
 
-if [ !  -d $raconfigdir/overlay/ArcadeBezels ]
-  then
-    git clone https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
-    cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
-    rm -rf /home/$user/RetroPie-Setup/tmp/MAME/
-    cd /home/$user/.config/retroarch/
-    chown -R $user:$user ../retroarch
-    find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-fi
+
 if [  -d $raconfigdir/overlay/ArcadeBezels ]
  then
     cp /home/$user/.config/RetroPie/fba/retroarch.cfg /home/$user/.config/RetroPie/fba/retroarch.cfg.bkp

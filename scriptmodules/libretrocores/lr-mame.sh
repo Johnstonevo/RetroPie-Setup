@@ -54,6 +54,8 @@ function configure_lr-mame() {
         ensureSystemretroconfig "$system"
         addEmulator 0 "$md_id" "$system" "$md_inst/mamearcade_libretro.so"
         addSystem "$system"
+
+        addBezel "mame-current"
     done
 
   if [ -e $md_instppa/mame_libretro.so ]
@@ -61,19 +63,6 @@ function configure_lr-mame() {
       addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame_libretro.so"
   addEmulator 0 "$md_id-ppa" "mame-current" "$md_instppa/mame_libretro.so"
   fi
-if [ !  -d $raconfigdir/overlay/ArcadeBezels ]
-then
-  git clone https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
-  cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
-  rm -rf /home/$user/RetroPie-Setup/tmp/MAME/
-  cd /home/$user/.config/retroarch/
-  chown -R $user:$user ../retroarch
-  find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-  ln -s "$raconfigdir/config/MAME 2010" "$raconfigdir/config/MAME"
-
-fi
-  if [  -d $raconfigdir/overlay/ArcadeBezels ]
-   then
       cp /home/$user/.config/RetroPie/mame-current/retroarch.cfg /home/$user/.config/RetroPie/mame-current/retroarch.cfg.bkp
       local core_config="$configdir/mame-current/retroarch.cfg"
        iniConfig " = " '"' "$md_conf_root/mame-current/retroarch.cfg"
@@ -85,6 +74,5 @@ fi
       iniSet "mame-dcs-speedhack" "enabled"
       iniSet "mame-samples" "enabled"
       chown $user:$user "$core_config"
-  fi
 
 }

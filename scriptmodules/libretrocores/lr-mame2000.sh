@@ -48,6 +48,8 @@ function configure_lr-mame2000() {
         ensureSystemretroconfig "$system"
         addEmulator 0 "$md_id" "$system" "$md_inst/mame2000_libretro.so"
         addSystem "$system"
+
+        addBezel "mame-mame4all"
     done
     if [ -e $md_instppa/mame2000_libretro.so ]
     then
@@ -55,19 +57,6 @@ function configure_lr-mame2000() {
     addEmulator 0 "$md_id-ppa" "mame-mame4all" "$md_instppa/${so_name}_libretro.so"
     fi
 
-    if [ !  -d $raconfigdir/overlay/ArcadeBezels ]
-    then
-      git clone https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
-      cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
-      rm -rf /home/$user/RetroPie-Setup/tmp/MAME/
-      cd /home/$user/.config/retroarch/
-      chown -R $user:$user ../retroarch
-      find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-      ln -s "$raconfigdir/config/MAME 2003" "$raconfigdir/config/MAME 2000"
-
-    fi
-    if [  -d $raconfigdir/overlay/ArcadeBezels ]
-     then
         cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
         local core_config="$configdir/$system/retroarch.cfg"
          iniConfig " = " '"' "$md_conf_root/$system/retroarch.cfg"
@@ -75,8 +64,7 @@ function configure_lr-mame2000() {
         iniSet "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
         iniSet "input_overlay_opacity" "1.0"
         iniSet "input_overlay_enable" "true"
-        chown $user:$user "$core_config"
-    fi
+    
 
 
 }

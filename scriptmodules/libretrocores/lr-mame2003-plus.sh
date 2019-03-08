@@ -69,22 +69,14 @@ function configure_lr-mame2003-plus() {
   addEmulator 1 "$md_id" "mame-2003-plus" "$md_inst/${so_name}_libretro.so"
   addSystem "arcade"
   addSystem "mame-2003-plus"
-    if [ ! -d $raconfigdir/overlay/ArcadeBezels ]
-    then
-      git clone https://github.com/thebezelproject/bezelproject-MAME.git  "/home/$user/RetroPie-Setup/tmp/MAME"
-      cp -r  /home/$user/RetroPie-Setup/tmp/MAME/retroarch/  /home/$user/.config/
-      rm -rf /home/$user/RetroPie-Setup/tmp/MAME/
-      cd /home/$user/.config/retroarch/
-      chown -R $user:$user ../retroarch
-      find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-      ln -s "$raconfigdir/config/MAME 2003" "$raconfigdir/config/MAME 2003-Plus"
 
-    fi
-    if [  -d $raconfigdir/overlay/ArcadeBezels ]
-     then
-        cp /home/$user/.config/RetroPie/mame-2003-plus/retroarch.cfg /home/$user/.config/RetroPie/mame-2003-plus/retroarch.cfg.bkp
-        local core_config="$configdir/mame-2003-plus/retroarch.cfg"
-         iniConfig " = " '"' "$md_conf_root/mame-2003-plus/retroarch.cfg"
+    addBezel "mame-2003-plus"
+    
+    ln -s "$raconfigdir/config/MAME 2003" "$raconfigdir/config/MAME 2003-Plus"
+
+    cp /home/$user/.config/RetroPie/mame-2003-plus/retroarch.cfg /home/$user/.config/RetroPie/mame-2003-plus/retroarch.cfg.bkp
+    local core_config="$configdir/mame-2003-plus/retroarch.cfg"
+        iniConfig " = " '"' "$md_conf_root/mame-2003-plus/retroarch.cfg"
 
         iniSet "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
         iniSet "input_overlay_opacity" "1.0"
@@ -110,7 +102,6 @@ function configure_lr-mame2003-plus() {
         iniSet  "mame2003-plus-dcs-speedhack" "enabled"
         iniSet "mame2003-plus-samples" "enabled"
         chown $user:$user "$core_config"
-    fi
 
 
 }

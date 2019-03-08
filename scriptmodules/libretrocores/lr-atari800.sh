@@ -47,6 +47,9 @@ function configure_lr-atari800() {
     addSystem "atari800"
     addSystem "atari5200"
 
+    addBezel "atari5200"
+
+    
  # force 800 system
     local a800_core_config="$configdir/atari800/retroarch.cfg"
     iniConfig " = " '"' "$md_conf_root/atari800/retroarch.cfg"
@@ -73,15 +76,6 @@ function configure_lr-atari800() {
     fi
 
 
-if [ ! -d $raconfigdir/overlay/GameBezels/Atari5200 ]
-then
-    git clone https://github.com/thebezelproject/bezelproject-Atari5200.git  "/home/$user/RetroPie-Setup/tmp/Atari5200"
-    cp -r  /home/$user/RetroPie-Setup/tmp/Atari5200/retroarch/  /home/$user/.config/
-   rm -rf /home/$user/RetroPie-Setup/tmp/Atari5200/
-    cd /home/$user/.config/retroarch/
-    chown -R $user:$user ../retroarch
-    find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-fi
 
 
 if [  -d $raconfigdir/overlay/GameBezels/Atari5200 ]
@@ -91,6 +85,8 @@ if [  -d $raconfigdir/overlay/GameBezels/Atari5200 ]
             iniConfig " = " '"' "$md_conf_root/atari5200/retroarch.cfg"
             iniSet  "input_overlay" "$raconfigdir/overlay/Atari-5200.cfg" "$a5200_core_config"
             iniSet "input_overlay_opacity" "1.0" "$a5200_core_config"
+            iniSet "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie" "$core_config"
+
             chown $user:$user "$a5200_core_config"
 
             cp /home/$user/.config/RetroPie/atari800/retroarch.cfg /home/$user/.config/RetroPie/atari800/retroarch.cfg.bkp
@@ -98,6 +94,8 @@ if [  -d $raconfigdir/overlay/GameBezels/Atari5200 ]
             iniConfig " = " '"' "$md_conf_root/atari800/retroarch.cfg"
             iniSet  "input_overlay" "$raconfigdir/overlay/Atari-5200.cfg" "$a800_core_config"
             iniSet "input_overlay_opacity" "1.0" "$a800_core_config"
+            iniSet "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie" "$core_config"
+
             chown $user:$user "$a800_core_config"
 fi
 }

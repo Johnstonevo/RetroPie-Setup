@@ -45,6 +45,8 @@ function configure_lr-bluemsx() {
 
     mkRomDir "coleco"
     ensureSystemretroconfig "coleco"
+    addBezel "coleco"
+
 
     # force colecovision system
     local cv_core_config="$configdir/coleco/retroarch.cfg"
@@ -81,9 +83,12 @@ function configure_lr-bluemsx() {
 
     addEmulator 1 "$md_id" "coleco" "$md_inst/bluemsx_libretro.so"
     addSystem "coleco"
+    addBezel "coleco"
+
+    
      if [ -e $md_instppa/bluemsx_libretro.so ]
                 then
-   addEmulator 0 "$md_id-ppa" "msx" "$md_instppa/bluemsx_libretro.so"
+    addEmulator 0 "$md_id-ppa" "msx" "$md_instppa/bluemsx_libretro.so"
     addSystem "msx"
 
     addEmulator 0 "$md_id-ppa" "msx2" "$md_inst/bluemsx_libretro.so"
@@ -96,16 +101,6 @@ function configure_lr-bluemsx() {
     addSystem "coleco"
     fi
 
-    if [ ! -d $raconfigdir/overlay/GameBezels/ColecoVision ]
-        then
-            git clone  --depth 1 https://github.com/thebezelproject/bezelproject-ColecoVision.git  "/home/$user/RetroPie-Setup/tmp/ColecoVision"
-            cp -r  /home/$user/RetroPie-Setup/tmp/ColecoVision/retroarch/  /home/$user/.config/
-            rm -rf /home/$user/RetroPie-Setup/tmp/ColecoVision/
-            ln -s /home/$user/.config/retroarch/config/BlueMSX /home/$user/.config/retroarch/config/blueMSX
-            cd /home/$user/.config/retroarch
-            chown -R $user:$user ../retroarch
-            find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-    fi
     if [  -d $raconfigdir/overlay/GameBezels/ColecoVision ]
     then
           cp /home/$user/.config/RetroPie/coleco/retroarch.cfg /home/$user/.config/RetroPie/coleco/retroarch.cfg.bkp

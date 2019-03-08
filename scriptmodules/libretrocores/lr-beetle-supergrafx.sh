@@ -43,15 +43,9 @@ function configure_lr-beetle-supergrafx() {
 
     addEmulator 1 "$md_id" "supergrafx" "$md_inst/mednafen_supergrafx_libretro.so"
     addSystem "supergrafx"
-        if [ ! -d $raconfigdir/overlay/GameBezels/SuperGrafx ]
-        then
-            git clone https://github.com/thebezelproject/bezelproject-SuperGrafx.git  "/home/$user/RetroPie-Setup/tmp/SuperGrafx"
-            cp -r  /home/$user/RetroPie-Setup/tmp/SuperGrafx/retroarch/  /home/$user/.config/
-            rm -rf /home/$user/RetroPie-Setup/tmp/SuperGrafx/
-            cd /home/$user/.config/retroarch
-            chown -R $user:$user ../retroarch
-            find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-        fi
+
+    addBezel "supergrafx"
+
         if [ ! -d $raconfigdir/overlay/GameBezels/SuperGrafx ]
             then
              cp /home/$user/.config/RetroPie/supergrafx/retroarch.cfg /home/$user/.config/RetroPie/supergrafx/retroarch.cfg.bkp
@@ -64,6 +58,7 @@ function configure_lr-beetle-supergrafx() {
             iniSet  "video_fullscreen_x" "1920" "$core_config"
             iniSet  "video_fullscreen_y" "1080" "$core_config"
             iniSet "input_overlay_enable" "true" "$core_config"
+            iniSet "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie" "$core_config"
             chown $user:$user "$core_config"
         fi
 
