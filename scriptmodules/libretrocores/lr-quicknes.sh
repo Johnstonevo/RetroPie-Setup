@@ -55,8 +55,7 @@ function configure_lr-quicknes() {
 
     addBezel "nes"
     addBezel "fds"
-    addBezel "famicom
-    "
+    addBezel "famicom"
 if [ -e $md_instppa/quicknes_libretro.so ]
 then
   addEmulator 0 "$md_id-ppa" "nes" "$md_inst/quicknes_libretro.so"
