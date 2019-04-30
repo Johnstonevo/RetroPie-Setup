@@ -13,34 +13,20 @@ rp_module_id="lr-reicast"
 rp_module_desc="Dreamcast emu - Reicast port for libretro"
 rp_module_help="ROM Extensions: .cdi .gdi\n\nCopy your Dreamcast roms to $romdir/dreamcast\n\nCopy the required BIOS files dc_boot.bin and dc_flash.bin to $biosdir/dc"
 rp_module_licence="GPL2 https://raw.githubusercontent.com/libretro/reicast-emulator/master/LICENSE"
-<<<<<<< HEAD
-rp_module_section="main"
-rp_module_flags=""
-=======
 rp_module_section="exp"
 rp_module_flags="!mali"
->>>>>>> upstream/master
 
 function sources_lr-reicast() {
     gitPullOrClone "$md_build" https://github.com/libretro/reicast-emulator.git
 }
 
 function build_lr-reicast() {
-<<<<<<< HEAD
-  make clean
-  if isPlatform "rpi"; then
-      make platform=rpi3
-  else
-      make
-  fi
-=======
     make clean
     if isPlatform "rpi"; then
         make platform="$__platform"
     else
         make
     fi
->>>>>>> upstream/master
     md_ret_require="$md_build/reicast_libretro.so"
 }
 

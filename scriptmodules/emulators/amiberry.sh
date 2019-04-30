@@ -32,6 +32,7 @@ function depends_amiberry() {
 
 function sources_amiberry() {
     gitPullOrClone "$md_build" https://github.com/midwan/amiberry/
+    applyPatch "$md_data/01_remove_cflags.diff"
 }
 
 function build_amiberry() {
@@ -80,6 +81,9 @@ function install_amiberry() {
 
 function configure_amiberry() {
     configure_uae4arm
+
+    [[ "$md_mode" == "remove" ]] && return
+
     # symlink the retroarch config / autoconfigs for amiberry to use
     ln -sf "$configdir/all/retroarch/autoconfig" "$md_inst/controllers"
     ln -sf "$configdir/all/retroarch.cfg" "$md_inst/conf/retroarch.cfg"
