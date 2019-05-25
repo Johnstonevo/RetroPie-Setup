@@ -188,6 +188,12 @@ function gui_esthemes() {
         'RetroHursty69 heychromey_aspectratio54'
         'RetroHursty69 mariobrosiii'
         'RetroHursty69 vertical_limit_verticaltheme'
+        'RetroHursty69 CapcomColorHorizontal'
+        'RetroHursty69 CapcomColorSpin'
+        'RetroHursty69 CapcomColorVertical'
+        'RetroHursty69 bluesteel'
+        'RetroHursty69 blueprism'
+        'RetroHursty69 bluesmooth'
         'Saracade scv720'
         'chicueloarcade Chicuelo'
         'SuperMagicom nostalgic'
@@ -200,6 +206,7 @@ function gui_esthemes() {
         'waweedman Venom'
         'waweedman Spider-Man'
         'blowfinger77 locomotion'
+        'justincaseurskynet Arcade1up-5x4-Horizontal'
     )
     while true; do
         local theme

@@ -29,11 +29,11 @@ function _update_hook_emulationstation() {
 
 function _sort_systems_emulationstation() {
     local field="$1"
-    cp "/etc/emulationstation/es_systems.cfg" "/etc/emulationstation/es_systems.cfg.bak"
+    cp "$configdir/all/emulationstation/es_systems.cfg" "$configdir/all/emulationstation/es_systems.cfg.bak"
     xmlstarlet sel -D -I \
         -t -m "/" -e "systemList" \
         -m "//system" -s A:T:U "$1" -c "." \
-        "/etc/emulationstation/es_systems.cfg.bak" >"/etc/emulationstation/es_systems.cfg"
+        "$configdir/all/emulationstation/es_systems.cfg.bak" >"$configdir/all/emulationstation/es_systems.cfg"
 }
 
 function _add_system_emulationstation() {
@@ -45,7 +45,7 @@ function _add_system_emulationstation() {
     local platform="$6"
     local theme="$7"
 
-    local conf="/etc/emulationstation/es_systems.cfg"
+    local conf="$configdir/all/emulationstation/es_systems.cfg"
     mkdir -p "/etc/emulationstation"
     if [[ ! -f "$conf" ]]; then
         echo "<systemList />" >"$conf"
@@ -79,8 +79,8 @@ function _add_system_emulationstation() {
 function _del_system_emulationstation() {
     local fullname="$1"
     local name="$2"
-    if [[ -f /etc/emulationstation/es_systems.cfg ]]; then
-        xmlstarlet ed -L -P -d "/systemList/system[name='$name']" /etc/emulationstation/es_systems.cfg
+    if [[ -f $configdir/all/emulationstation/es_systems.cfg ]]; then
+        xmlstarlet ed -L -P -d "/systemList/system[name='$name']" $configdir/all/emulationstation/es_systems.cfg
     fi
 }
 
