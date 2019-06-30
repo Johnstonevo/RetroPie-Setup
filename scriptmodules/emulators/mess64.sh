@@ -9,14 +9,14 @@
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
 
-rp_module_id="mame64"
+rp_module_id="mess64"
 rp_module_desc="MAME emulator"
 rp_module_help="ROM Extension: .zip\n\nCopy your MAME roms to either $romdir/mame or\n$romdir/arcade"
 rp_module_licence="GPL2 https://github.com/mamedev/mame/blob/master/LICENSE.md"
 rp_module_section="exp"
 rp_module_flags="!arm"
 
-function depends_mame64() {
+function depends_mess64() {
     if compareVersions $__gcc_version lt 6.0.0; then
         md_ret_errors+=("Sorry, you need an OS with gcc 6.0 or newer to compile mame")
         return 1
@@ -26,22 +26,22 @@ function depends_mame64() {
     getDepends libsdl2-ttf-2.0-0
 
     # Additional libraries required for compilation
-    getDepends libfontconfig1-dev qt5-default libsdl2-ttf-dev libxinerama-dev
+    getDepends libfontconfig1-dev qt5-default libsdl2-ttf-dev libxinerama-dev  libsdl2-dev  
 }
 
-function sources_mame64() {
+function sources_mess64() {
     gitPullOrClone "$md_build" https://github.com/mamedev/mame.git
 }
 
-function build_mame64() {
+function build_mess64() {
     rpSwap on 2048
     make clean
-    make
+    make SUBTARGET=mess
     rpSwap off
-    md_ret_require="$md_build/mame64"
+    md_ret_require="$md_build/mess64"
 }
 
-function install_mame64() {
+function install_mess64() {
     md_ret_files=(
         'artwork'
         'bgfx'
@@ -51,7 +51,7 @@ function install_mame64() {
         'hlsl'
         'ini'
         'language'
-        'mame64'
+        'mess64'
         'nl_examples'
         'plugins'
         'roms'
@@ -61,10 +61,10 @@ function install_mame64() {
     )
 }
 
-function configure_mame64() {
-    local system="mame-current"
-    mkRomDir "arcade"
-    mkRomDir "arcade/$system"
+function configure_mess64() {
+    local system="mess-current"
+    #mkRomDir "arcade"
+    #mkRomDir "arcade/$system"
     mkRomDir "$system"
     mkRomDir "arcadia"
     mkRomDir "astrocade"
@@ -90,7 +90,7 @@ function configure_mame64() {
      # Create a new INI file if one does not already exist
      if [[ "$md_mode" == "install" && ! -f "$md_conf_root/$system/mame.ini" ]]; then
         pushd "$md_conf_root/$system/"
-        "$md_inst/mame64" -createconfig
+        "$md_inst/mess64" -createconfig
         popd
 
         iniConfig " " "" "$md_conf_root/$system/$md_id.ini"
@@ -128,15 +128,15 @@ function configure_mame64() {
 
     fi
 
-    addEmulator 0 "$md_id" "arcade" "$md_inst/mame64 %ROM%"
-    addEmulator 0 "$md_id" "$system" "$md_inst/mame64 %ROM%"
-    addEmulator 1 "$md_id-arcadia" "arcadia" "$md_inst/mame64  arcadia -cfg_directory $configdir/arcadia/   -cart %ROM%"
-    addEmulator 1 "$md_id-astrocade" "astrocade" "$md_inst/mame64 astrocade -cfg_directory $configdir/astrocade/ -cart %ROM%"
-    addEmulator 1 "$md_id-bbcmicro" "bbcmicro" "$md_inst/mame64 bbcb -cfg_directory $configdir/bbcmicro/ -floppy %ROM%"
-    addEmulator 1 "$md_id-channelf" "channelf" "$md_inst/mame64 channelf -cfg_directory $configdir/channelf/ -cart %ROM%"
-    addEmulator 1 "$md_id-electron" "electron" "$md_inst/mame64 electron -cfg_directory $configdir/electron/ -cass %ROM%"
-    addEmulator 1 "$md_id-supervision" "supervision" "$md_inst/mame64 svision -cfg_directory $configdir/supervision/ -cart %ROM%"
-    addSystem "arcade"
+   # addEmulator 0 "$md_id" "arcade" "$md_inst/mess64 %ROM%"
+    addEmulator 0 "$md_id" "$system" "$md_inst/mess64 %ROM%"
+    addEmulator 1 "$md_id-arcadia" "arcadia" "$md_inst/mess64  arcadia -cfg_directory $configdir/arcadia/   -cart %ROM%"
+    addEmulator 1 "$md_id-astrocade" "astrocade" "$md_inst/mess64 astrocade -cfg_directory $configdir/astrocade/ -cart %ROM%"
+    addEmulator 1 "$md_id-bbcmicro" "bbcmicro" "$md_inst/mess64 bbcb -cfg_directory $configdir/bbcmicro/ -floppy %ROM%"
+    addEmulator 1 "$md_id-channelf" "channelf" "$md_inst/mess64 channelf -cfg_directory $configdir/channelf/ -cart %ROM%"
+    addEmulator 1 "$md_id-electron" "electron" "$md_inst/mess64 electron -cfg_directory $configdir/electron/ -cass %ROM%"
+    addEmulator 1 "$md_id-supervision" "supervision" "$md_inst/mess64 svision -cfg_directory $configdir/supervision/ -cart %ROM%"
+    #addSystem "arcade"
     addSystem "$system"
     addSystem "arcadia"
     addSystem "astrocade"
