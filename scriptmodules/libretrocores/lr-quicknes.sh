@@ -74,11 +74,7 @@ fi
             iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0"
             iniSet "input_overlay_scale" "1.0"
-            iniSet "video_fullscreen_x" "1920"
-            iniSet "video_fullscreen_y" "1080"
             iniSet "input_overlay_enable" "true"
-            iniSet "video_force_aspect" "true"
-            iniSet "video_aspect_ratio" "1.0"
             iniSet "video_smooth" "false"
             chown $user:$user "$core_config"
 
@@ -88,11 +84,8 @@ fi
             iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0"
             iniSet "input_overlay_scale" "1.0"
-            iniSet "video_fullscreen_x" "1920"
-            iniSet "video_fullscreen_y" "1080"
+
             iniSet "input_overlay_enable" "true"
-            iniSet "video_force_aspect" "true"
-            iniSet "video_aspect_ratio" "1.0"
             iniSet "video_smooth" "false"
             chown $user:$user "$core_config"
 
@@ -102,11 +95,8 @@ fi
             iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0"
             iniSet "input_overlay_scale" "1.0"
-            iniSet "video_fullscreen_x" "1920"
-            iniSet "video_fullscreen_y" "1080"
+
             iniSet "input_overlay_enable" "true"
-            iniSet "video_force_aspect" "true"
-            iniSet "video_aspect_ratio" "1.0"
             iniSet "video_smooth" "false"
             chown $user:$user "$core_config"
 
@@ -116,11 +106,8 @@ fi
             iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
             iniSet "input_overlay_opacity" "1.0"
             iniSet "input_overlay_scale" "1.0"
-            iniSet "video_fullscreen_x" "1920"
-            iniSet "video_fullscreen_y" "1080"
+
             iniSet "input_overlay_enable" "true"
-            iniSet "video_force_aspect" "true"
-            iniSet "video_aspect_ratio" "1.0"
             iniSet "video_smooth" "false"
             chown $user:$user "$core_config"
 

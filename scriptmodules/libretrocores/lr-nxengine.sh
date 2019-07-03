@@ -63,8 +63,6 @@ _EOF_
                 iniSet  "input_overlay" "$raconfigdir/overlays/tvcs/tvcs-clear.cfg" "$core_config"
                 iniSet "input_overlay_opacity" "1.0" "$core_config"
                 iniSet "input_overlay_scale" "1.0" "$core_config"
-                iniSet "video_fullscreen_x" "1920" "$core_config"
-                iniSet "video_fullscreen_y" "1080" "$core_config"
                 iniSet "input_overlay_enable" "true" "$core_config"
                 iniSet "video_smooth" "false" "$core_config"
                 chown $user:$user "$core_config"

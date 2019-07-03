@@ -21,15 +21,16 @@ function depends_stratagus() {
 }
 
 function sources_stratagus() {
-    gitPullOrClone "$md_build" https://github.com/Wargus/stratagus.git
+    
+gitPullOrClone "$md_build" https://github.com/Wargus/stratagus.git
 }
 
 function build_stratagus() {
-    mkdir build
-    cd build
-    cmake -DENABLE_STRIP=ON ..
-    make
-    md_ret_require="$md_build/build/stratagus"
+mkdir build
+cd build
+cmake -DENABLE_STRIP=ON ..
+make
+md_ret_require="$md_build/build/stratagus"
 }
 
 function install_stratagus() {

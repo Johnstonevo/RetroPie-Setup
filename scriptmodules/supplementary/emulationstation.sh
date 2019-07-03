@@ -238,7 +238,7 @@ _EOF_
         cat > /usr/local/share/applications/retropie.desktop << _EOF_
 [Desktop Entry]
 Type=Application
-Exec=gnome-terminal --full-screen --hide-menubar -e emulationstation
+Exec=gnome-terminal  --hide-menubar -e emulationstation --windowed
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
@@ -284,7 +284,7 @@ function configure_emulationstation() {
 
     install_launch_emulationstation
 
-    mkdir -p "/etc/emulationstation"
+    #mkdir -p "/etc/emulationstation"
 
     # ensure we have a default theme
     rp_callModule esthemes install_theme

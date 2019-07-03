@@ -108,8 +108,7 @@ function configure_amiberry() {
 
     mkRomDir "amiga"
     mkRomDir "amigacd32"
-    ensureSystemretroconfig "amiga"
-    ensureSystemretroconfig "amigacd32"
+
     addEmulator 1 "$md_id" "amiga" "$md_inst/amiberry.sh"
     addEmulator 1 "$md_id" "amigacd32" "$md_inst/amiberry.sh"
     addEmulator 0 "$md_id-a500" "amigacd32" "$md_inst/$md_id.sh rp-a500.uae %ROM%"

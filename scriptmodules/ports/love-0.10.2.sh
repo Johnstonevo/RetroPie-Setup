@@ -21,7 +21,7 @@ function depends_love-0.10.2() {
 }
 
 function sources_love-0.10.2() {
-    hg clone https://bitbucket.org/rude/love 0.10.2 "$md_build"
+    hg clone https://bitbucket.org/rude/love/src/0.10.2/ "$md_build"
 }
 
 function build_love-0.10.2() {

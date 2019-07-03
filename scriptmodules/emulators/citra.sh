@@ -48,9 +48,6 @@ function configure_citra() {
 
     mkRomDir "3ds"
 
-    ensureSystemretroconfig "3ds"
-
-
 
     addEmulator 0 "$md_id" "3ds" "$md_inst/citra %ROM%"
     addEmulator 1 "$md_id-qt" "3ds" "$md_inst/citra-qt %ROM%"

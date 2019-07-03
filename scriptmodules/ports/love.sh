@@ -52,6 +52,21 @@ function game_data_love() {
         wget "https://github.com/radgeRayden/future-mari0/releases/download/v0.2/mari0.love" -O "$romdir/love/mari0.love"
         chown $user:$user "$romdir/love/mari0.love"
     fi
+    # get mrrescue-1.02e.love (freeware game data)
+    if [[ ! -f "$romdir/love/mrrescue-1.02e.love" ]]; then
+        wget "https://github.com/SimonLarsen/mrrescue/releases/download/1.02e/mrrescue1.02e.love" -O "$romdir/love/mrrescue-1.02e.love"
+        chown $user:$user "$romdir/love/mrrescue-1.02e.love"
+    fi
+    # get sienna-1.0c.love (freeware game data)
+    if [[ ! -f "$romdir/love/sienna-1.0c.love" ]]; then
+        wget "https://github.com/SimonLarsen/sienna/releases/download/v1.0c/sienna-1.0c.love" -O "$romdir/love/sienna-1.0c.love"
+        chown $user:$user "$romdir/love/sienna-1.0c.love"
+    fi
+     # get 90secondportraits-1.01b.love (freeware game data)
+    if [[ ! -f "$romdir/love/90secondportraits-1.01b.love" ]]; then
+        wget "https://github.com/SimonLarsen/90-Second-Portraits/releases/download/1.01b/90secondportraits-1.01b.love" -O "$romdir/love/90secondportraits-1.01b.love"
+        chown $user:$user "$romdir/love/90secondportraits-1.01b.love"
+     fi
 }
 
 function configure_love() {
@@ -59,7 +74,7 @@ function configure_love() {
 
     mkRomDir "love"
 
-    addEmulator 0 "$md_id" "love" "$md_inst/bin/love %ROM%"
+    addEmulator 1 "$md_id" "love" "$md_inst/bin/love %ROM%"
     addSystem "love"
 
     [[ "$md_mode" == "install" ]] && game_data_love
