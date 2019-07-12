@@ -57,7 +57,8 @@ function configure_lr-gambatte() {
     addSystem "gbh"
     addSystem "gbc"
     addSystem "gbch"
-
+    addBezel "gbc"
+    addBezel "gb"
     if [ -e $md_instppa/gambatte_libretro.so ]
         then
           ensureSystemretroconfig "gb"

@@ -29,7 +29,7 @@ else
 fi
 
 home="$(eval echo ~$user)"
-datadir="/home/public/RetroPie"
+datadir="/home/$user/RetroPie"
 biosdir="$datadir/BIOS"
 romdir="$datadir/roms"
 emudir="$rootdir/emulators"
