@@ -1,0 +1,990 @@
+[
+  {
+    "code": 200,
+    "status": "Success",
+    "data": {
+      "count": 109,
+      "platforms": {
+        "1": {
+          "id": 1,
+          "name": "PC",
+          "alias": "pc",
+          "icon": "pc-1336524756.png",
+          "console": "1.png",
+          "controller": "",
+          "developer": "IBM"
+        },
+        "2": {
+          "id": 2,
+          "name": "Nintendo GameCube",
+          "alias": "nintendo-gamecube",
+          "icon": "nintendo-gamecube-1336524714.png",
+          "console": "2.png",
+          "controller": "2.png",
+          "developer": "Nintendo"
+        },
+        "3": {
+          "id": 3,
+          "name": "Nintendo 64",
+          "alias": "nintendo-64",
+          "icon": "nintendo-64-1336524631.png",
+          "console": "3.png",
+          "controller": "3.png",
+          "developer": "Nintendo"
+        },
+        "4": {
+          "id": 4,
+          "name": "Nintendo Game Boy",
+          "alias": "nintendo-gameboy",
+          "icon": "nintendo-gameboy-1336524703.png",
+          "console": "4.png",
+          "controller": "",
+          "developer": "Nintendo"
+        },
+        "5": {
+          "id": 5,
+          "name": "Nintendo Game Boy Advance",
+          "alias": "nintendo-gameboy-advance",
+          "icon": "nintendo-gameboy-advance-1336524672.png",
+          "console": "5.png",
+          "controller": "",
+          "developer": "Nintendo"
+        },
+        "6": {
+          "id": 6,
+          "name": "Super Nintendo (SNES)",
+          "alias": "super-nintendo-snes",
+          "icon": "super-nintendo-snes-1448530937.png",
+          "console": "6.png",
+          "controller": "6.png",
+          "developer": "Nintendo"
+        },
+        "7": {
+          "id": 7,
+          "name": "Nintendo Entertainment System (NES)",
+          "alias": "nintendo-entertainment-system-nes",
+          "icon": "nintendo-entertainment-system-nes-1336524652.png",
+          "console": "7.png",
+          "controller": "7.png",
+          "developer": "Nintendo"
+        },
+        "8": {
+          "id": 8,
+          "name": "Nintendo DS",
+          "alias": "nintendo-ds",
+          "icon": "nintendo-ds-1336524642.png",
+          "console": "8.png",
+          "controller": "",
+          "developer": "Nintendo"
+        },
+        "9": {
+          "id": 9,
+          "name": "Nintendo Wii",
+          "alias": "nintendo-wii",
+          "icon": "nintendo-wii-1336524734.png",
+          "console": "9.png",
+          "controller": "9.png",
+          "developer": "Nintendo"
+        },
+        "10": {
+          "id": 10,
+          "name": "Sony Playstation",
+          "alias": "sony-playstation",
+          "icon": "sony-playstation-1336524956.png",
+          "console": "10.png",
+          "controller": "10.png",
+          "developer": "Sony"
+        },
+        "11": {
+          "id": 11,
+          "name": "Sony Playstation 2",
+          "alias": "sony-playstation-2",
+          "icon": "sony-playstation-2-1336524968.png",
+          "console": "11.png",
+          "controller": "11.png",
+          "developer": "Sony"
+        },
+        "12": {
+          "id": 12,
+          "name": "Sony Playstation 3",
+          "alias": "sony-playstation-3",
+          "icon": "sony-playstation-3-1336524977.png",
+          "console": "12.png",
+          "controller": "12.png",
+          "developer": "Sony"
+        },
+        "13": {
+          "id": 13,
+          "name": "Sony Playstation Portable",
+          "alias": "sony-psp",
+          "icon": "sony-psp-1336525006.png",
+          "console": "13.png",
+          "controller": "13.png",
+          "developer": "Sony"
+        },
+        "14": {
+          "id": 14,
+          "name": "Microsoft Xbox",
+          "alias": "microsoft-xbox",
+          "icon": "microsoft-xbox-1336524486.png",
+          "console": "14.png",
+          "controller": "14.png",
+          "developer": "Microsoft"
+        },
+        "15": {
+          "id": 15,
+          "name": "Microsoft Xbox 360",
+          "alias": "microsoft-xbox-360",
+          "icon": "microsoft-xbox-360-1336524497.png",
+          "console": "15.png",
+          "controller": "15.png",
+          "developer": "Microsoft"
+        },
+        "16": {
+          "id": 16,
+          "name": "Sega Dreamcast",
+          "alias": "sega-dreamcast",
+          "icon": "sega-dreamcast-1336524794.png",
+          "console": "16.png",
+          "controller": "16.png",
+          "developer": "Sega"
+        },
+        "17": {
+          "id": 17,
+          "name": "Sega Saturn",
+          "alias": "sega-saturn",
+          "icon": "sega-saturn-1336524946.png",
+          "console": "17.png",
+          "controller": "17.png",
+          "developer": "Sega"
+        },
+        "18": {
+          "id": 18,
+          "name": "Sega Genesis",
+          "alias": "sega-genesis",
+          "icon": "sega-genesis-1336524897.png",
+          "console": "18.png",
+          "controller": "18.png",
+          "developer": "Sega"
+        },
+        "20": {
+          "id": 20,
+          "name": "Sega Game Gear",
+          "alias": "sega-game-gear",
+          "icon": "sega-game-gear-1336524808.png",
+          "console": "20.png",
+          "controller": "",
+          "developer": "Sega"
+        },
+        "21": {
+          "id": 21,
+          "name": "Sega CD",
+          "alias": "sega-cd",
+          "icon": "sega-cd-1336524786.png",
+          "console": "21.png",
+          "controller": "",
+          "developer": "Sega"
+        },
+        "22": {
+          "id": 22,
+          "name": "Atari 2600",
+          "alias": "atari-2600",
+          "icon": "atari-2600-1336524261.png",
+          "console": "22.png",
+          "controller": "",
+          "developer": "Atari"
+        },
+        "23": {
+          "id": 23,
+          "name": "Arcade",
+          "alias": "arcade",
+          "icon": "arcade-1336524196.png",
+          "console": "23.png",
+          "controller": "",
+          "developer": ""
+        },
+        "24": {
+          "id": 24,
+          "name": "Neo Geo",
+          "alias": "neogeo",
+          "icon": "neogeo-1336524621.png",
+          "console": "24.png",
+          "controller": "24.png",
+          "developer": "SNK"
+        },
+        "25": {
+          "id": 25,
+          "name": "3DO",
+          "alias": "3do",
+          "icon": "3do-1336524121.png",
+          "console": "25.png",
+          "controller": "",
+          "developer": "The 3DO Company"
+        },
+        "26": {
+          "id": 26,
+          "name": "Atari 5200",
+          "alias": "atari-5200",
+          "icon": "atari-5200-1393096687.png",
+          "console": "26.png",
+          "controller": "",
+          "developer": "Atari"
+        },
+        "27": {
+          "id": 27,
+          "name": "Atari 7800",
+          "alias": "atari-7800",
+          "icon": "atari-7800-1393096747.png",
+          "console": "27.png",
+          "controller": "",
+          "developer": "Atari"
+        },
+        "28": {
+          "id": 28,
+          "name": "Atari Jaguar",
+          "alias": "atari-jaguar",
+          "icon": "atari-jaguar-1336524288.png",
+          "console": "28.png",
+          "controller": "",
+          "developer": "Atari"
+        },
+        "29": {
+          "id": 29,
+          "name": "Atari Jaguar CD",
+          "alias": "atari-jaguar-cd",
+          "icon": "atari-jaguar-cd-1336524356.png",
+          "console": "29.png",
+          "controller": "",
+          "developer": "Atari"
+        },
+        "30": {
+          "id": 30,
+          "name": "Atari XE",
+          "alias": "atari-xe",
+          "icon": "atari-xe-1393098372.png",
+          "console": "30.png",
+          "controller": "",
+          "developer": "Atari"
+        },
+        "31": {
+          "id": 31,
+          "name": "Colecovision",
+          "alias": "colecovision",
+          "icon": "colecovision-1393096902.png",
+          "console": "31.png",
+          "controller": "",
+          "developer": "Coleco"
+        },
+        "32": {
+          "id": 32,
+          "name": "Intellivision",
+          "alias": "intellivision",
+          "icon": "intellivision-1336524468.png",
+          "console": "32.png",
+          "controller": "",
+          "developer": "Mattel"
+        },
+        "33": {
+          "id": 33,
+          "name": "Sega 32X",
+          "alias": "sega-32x",
+          "icon": "sega-32x-1336524764.png",
+          "console": "33.png",
+          "controller": "",
+          "developer": "Sega"
+        },
+        "34": {
+          "id": 34,
+          "name": "TurboGrafx 16",
+          "alias": "turbografx-16",
+          "icon": "turbografx-16-1336525037.png",
+          "console": "34.png",
+          "controller": "34.png",
+          "developer": "Hudson Soft"
+        },
+        "35": {
+          "id": 35,
+          "name": "Sega Master System",
+          "alias": "sega-master-system",
+          "icon": "sega-master-system-1336524915.png",
+          "console": "35.png",
+          "controller": "35.png",
+          "developer": "Sega"
+        },
+        "36": {
+          "id": 36,
+          "name": "Sega Mega Drive",
+          "alias": "sega-mega-drive",
+          "icon": "sega-mega-drive-1336524932.png",
+          "console": "",
+          "controller": "36.png",
+          "developer": "Sega"
+        },
+        "37": {
+          "id": 37,
+          "name": "Mac OS",
+          "alias": "mac-os",
+          "icon": "mac-os-1340244009.png",
+          "console": "37.png",
+          "controller": "",
+          "developer": "Apple"
+        },
+        "38": {
+          "id": 38,
+          "name": "Nintendo Wii U",
+          "alias": "nintendo-wii-u",
+          "icon": "nintendo-wii-u-1336524744.png",
+          "console": "38.png",
+          "controller": "",
+          "developer": "Nintendo"
+        },
+        "39": {
+          "id": 39,
+          "name": "Sony Playstation Vita",
+          "alias": "sony-playstation-vita",
+          "icon": "sony-playstation-vita-1336524991.png",
+          "console": "39.png",
+          "controller": "",
+          "developer": "Sony"
+        },
+        "40": {
+          "id": 40,
+          "name": "Commodore 64",
+          "alias": "commodore-64",
+          "icon": "commodore-64-1393096937.png",
+          "console": "40.png",
+          "controller": "",
+          "developer": "Commodore International"
+        },
+        "41": {
+          "id": 41,
+          "name": "Nintendo Game Boy Color",
+          "alias": "nintendo-gameboy-color",
+          "icon": "nintendo-gameboy-color-1336524685.png",
+          "console": "41.png",
+          "controller": "",
+          "developer": "Nintendo"
+        },
+        "4911": {
+          "id": 4911,
+          "name": "Amiga",
+          "alias": "amiga",
+          "icon": "amiga-1336524133.png",
+          "console": "4911.png",
+          "controller": "",
+          "developer": "Commodore"
+        },
+        "4912": {
+          "id": 4912,
+          "name": "Nintendo 3DS",
+          "alias": "nintendo-3ds",
+          "icon": "nintendo-3ds-1344286647.png",
+          "console": "4912.png",
+          "controller": "",
+          "developer": "Nintendo"
+        },
+        "4913": {
+          "id": 4913,
+          "name": "Sinclair ZX Spectrum",
+          "alias": "sinclair-zx-spectrum",
+          "icon": "sinclair-zx-spectrum-1393098451.png",
+          "console": "4913.png",
+          "controller": "",
+          "developer": "Sinclair Research Ltd."
+        },
+        "4914": {
+          "id": 4914,
+          "name": "Amstrad CPC",
+          "alias": "amstrad-cpc",
+          "icon": "amstrad-cpc-1393097665.png",
+          "console": "4914.png",
+          "controller": "",
+          "developer": "Amstrad"
+        },
+        "4915": {
+          "id": 4915,
+          "name": "iOS",
+          "alias": "ios",
+          "icon": "4915-1393096970.png",
+          "console": "",
+          "controller": "",
+          "developer": "Apple"
+        },
+        "4916": {
+          "id": 4916,
+          "name": "Android",
+          "alias": "android",
+          "icon": "4916-1393096477.png",
+          "console": "",
+          "controller": "",
+          "developer": "Google, Android Inc."
+        },
+        "4917": {
+          "id": 4917,
+          "name": "Philips CD-i",
+          "alias": "philips-cd-i",
+          "icon": "philips-cd-i-1393098199.png",
+          "console": "4917.png",
+          "controller": "",
+          "developer": "Philips"
+        },
+        "4918": {
+          "id": 4918,
+          "name": "Nintendo Virtual Boy",
+          "alias": "nintendo-virtual-boy",
+          "icon": "nintendo-virtual-boy-1447139594.png",
+          "console": "4918.png",
+          "controller": "4918.png",
+          "developer": "Nintendo"
+        },
+        "4919": {
+          "id": 4919,
+          "name": "Sony Playstation 4",
+          "alias": "sony-playstation-4",
+          "icon": "sony-playstation-4-1393097424.png",
+          "console": "4919.png",
+          "controller": "",
+          "developer": "Sony"
+        },
+        "4920": {
+          "id": 4920,
+          "name": "Microsoft Xbox One",
+          "alias": "microsoft-xbox-one",
+          "icon": "microsoft-xbox-one-1393097041.png",
+          "console": "4920.png",
+          "controller": "",
+          "developer": "Microsoft"
+        },
+        "4921": {
+          "id": 4921,
+          "name": "Ouya",
+          "alias": "ouya",
+          "icon": "ouya-1393097891.png",
+          "console": "",
+          "controller": "",
+          "developer": "Ouya, Inc."
+        },
+        "4922": {
+          "id": 4922,
+          "name": "Neo Geo Pocket",
+          "alias": "neo-geo-pocket",
+          "icon": "neo-geo-pocket-1393097137.png",
+          "console": "4922.png",
+          "controller": "",
+          "developer": "SNK"
+        },
+        "4923": {
+          "id": 4923,
+          "name": "Neo Geo Pocket Color",
+          "alias": "neo-geo-pocket-color",
+          "icon": "neo-geo-pocket-color-1393097242.png",
+          "console": "4923.png",
+          "controller": "",
+          "developer": "SNK"
+        },
+        "4924": {
+          "id": 4924,
+          "name": "Atari Lynx",
+          "alias": "atari-lynx",
+          "icon": "atari-lynx-1393097977.png",
+          "console": "4924.png",
+          "controller": "",
+          "developer": "Epyx / Atari"
+        },
+        "4925": {
+          "id": 4925,
+          "name": "WonderSwan",
+          "alias": "wonderswan",
+          "icon": "wonderswan-1393097485.png",
+          "console": "4925.png",
+          "controller": "",
+          "developer": "Bandai"
+        },
+        "4926": {
+          "id": 4926,
+          "name": "WonderSwan Color",
+          "alias": "wonderswan-color",
+          "icon": "wonderswan-color-1393097500.png",
+          "console": "4926.png",
+          "controller": "",
+          "developer": "Bandai"
+        },
+        "4927": {
+          "id": 4927,
+          "name": "Magnavox Odyssey 2",
+          "alias": "magnavox-odyssey-2",
+          "icon": "magnavox-odyssey-2-1447143561.png",
+          "console": "4927.png",
+          "controller": "4927.png",
+          "developer": "Magnavox / Philips"
+        },
+        "4928": {
+          "id": 4928,
+          "name": "Fairchild Channel F",
+          "alias": "fairchild",
+          "icon": "fairchild-1445261469.png",
+          "console": "4928.png",
+          "controller": "",
+          "developer": ""
+        },
+        "4929": {
+          "id": 4929,
+          "name": "MSX",
+          "alias": "msx",
+          "icon": "msx-1444085603.png",
+          "console": "4929.png",
+          "controller": "",
+          "developer": "ASCII Corporation"
+        },
+        "4930": {
+          "id": 4930,
+          "name": "PC-FX",
+          "alias": "pcfx",
+          "icon": "pcfx-1444080539.png",
+          "console": "4930.png",
+          "controller": "",
+          "developer": "NEC"
+        },
+        "4931": {
+          "id": 4931,
+          "name": "Sharp X68000",
+          "alias": "x68",
+          "icon": "x68000-1444590873.png",
+          "console": "4931.png",
+          "controller": "",
+          "developer": "Sharp Corporation"
+        },
+        "4932": {
+          "id": 4932,
+          "name": "FM Towns Marty",
+          "alias": "fmtowns",
+          "icon": "fmtowns-1444085037.png",
+          "console": "4932.png",
+          "controller": "",
+          "developer": "Fujitsu"
+        },
+        "4933": {
+          "id": 4933,
+          "name": "PC-88",
+          "alias": "pc88",
+          "icon": "pc88-1444092490.png",
+          "console": "4933.png",
+          "controller": "",
+          "developer": "NEC"
+        },
+        "4934": {
+          "id": 4934,
+          "name": "PC-98",
+          "alias": "pc98",
+          "icon": "4934-1444591291.png",
+          "console": "4934.png",
+          "controller": "",
+          "developer": "NEC"
+        },
+        "4935": {
+          "id": 4935,
+          "name": "Nuon",
+          "alias": "nuon",
+          "icon": "nuon-1445250489.png",
+          "console": "4935.png",
+          "controller": "",
+          "developer": "VM Labs"
+        },
+        "4936": {
+          "id": 4936,
+          "name": "Famicom Disk System",
+          "alias": "fds",
+          "icon": "fds-1445251188.png",
+          "console": "4936.png",
+          "controller": "",
+          "developer": "Nintendo"
+        },
+        "4937": {
+          "id": 4937,
+          "name": "Atari ST",
+          "alias": "atari-st",
+          "icon": "atari-st-1445259571.png",
+          "console": "4937.png",
+          "controller": "",
+          "developer": "Atari Corporation"
+        },
+        "4938": {
+          "id": 4938,
+          "name": "N-Gage",
+          "alias": "ngage",
+          "icon": "4938-1445259918.png",
+          "console": "4938.png",
+          "controller": "",
+          "developer": "Nokia"
+        },
+        "4939": {
+          "id": 4939,
+          "name": "Vectrex",
+          "alias": "vectrex",
+          "icon": "vectrex-1445285621.png",
+          "console": "4939.png",
+          "controller": "",
+          "developer": "Western Technologies / Smith Engineering"
+        },
+        "4940": {
+          "id": 4940,
+          "name": "Game.com",
+          "alias": "game-com",
+          "icon": "game-com-1445286056.png",
+          "console": "4940.png",
+          "controller": "",
+          "developer": "Tiger Electronics"
+        },
+        "4941": {
+          "id": 4941,
+          "name": "TRS-80 Color Computer",
+          "alias": "trs80-color",
+          "icon": "trs80-color-1446589658.png",
+          "console": "4941.png",
+          "controller": "",
+          "developer": "Tandy Corporation"
+        },
+        "4942": {
+          "id": 4942,
+          "name": "Apple II",
+          "alias": "apple2",
+          "icon": "apple2-1446583849.png",
+          "console": "4942.png",
+          "controller": "",
+          "developer": "Apple"
+        },
+        "4943": {
+          "id": 4943,
+          "name": "Atari 800",
+          "alias": "atari800",
+          "icon": "atari800-1446587367.png",
+          "console": "4943.png",
+          "controller": "",
+          "developer": "Atari Corporation"
+        },
+        "4944": {
+          "id": 4944,
+          "name": "Acorn Archimedes",
+          "alias": "acorn-archimedes",
+          "icon": "acorn-archimedes-1446690349.png",
+          "console": "4944.png",
+          "controller": "",
+          "developer": "Acorn Computers"
+        },
+        "4945": {
+          "id": 4945,
+          "name": "Commodore VIC-20",
+          "alias": "commodore-vic20",
+          "icon": "commodore-vic20-1446691509.png",
+          "console": "4945.png",
+          "controller": "",
+          "developer": "Commodore International"
+        },
+        "4946": {
+          "id": 4946,
+          "name": "Commodore 128",
+          "alias": "c128",
+          "icon": "c128-1446691445.png",
+          "console": "4946.png",
+          "controller": "",
+          "developer": "Commodore International"
+        },
+        "4947": {
+          "id": 4947,
+          "name": "Amiga CD32",
+          "alias": "amiga-cd32",
+          "icon": "amiga-cd32-1447024303.png",
+          "console": "4947.png",
+          "controller": "",
+          "developer": "Commodore"
+        },
+        "4948": {
+          "id": 4948,
+          "name": "Mega Duck",
+          "alias": "megaduck",
+          "icon": "megaduck-1447489202.png",
+          "console": "4948.png",
+          "controller": "",
+          "developer": "Welback Holdings"
+        },
+        "4949": {
+          "id": 4949,
+          "name": "SEGA SG-1000",
+          "alias": "sg1000",
+          "icon": "sg1000-1448530019.png",
+          "console": "4949.png",
+          "controller": "",
+          "developer": "SEGA"
+        },
+        "4950": {
+          "id": 4950,
+          "name": "Game & Watch",
+          "alias": "game-and-watch",
+          "icon": "game-and-watch-1448906321.png",
+          "console": "4950.png",
+          "controller": "",
+          "developer": "Nintendo"
+        },
+        "4951": {
+          "id": 4951,
+          "name": "Handheld Electronic Games (LCD)",
+          "alias": "lcd",
+          "icon": "lcd-1448986915.png",
+          "console": "",
+          "controller": "",
+          "developer": "Tiger Electronics, V-Tech, Coleco, Bandai, Konami"
+        },
+        "4952": {
+          "id": 4952,
+          "name": "Dragon 32/64",
+          "alias": "dragon32-64",
+          "icon": "dragon32-64-1449254358.png",
+          "console": "4952.png",
+          "controller": "",
+          "developer": "Dragon Data"
+        },
+        "4953": {
+          "id": 4953,
+          "name": "Texas Instruments TI-99/4A",
+          "alias": "texas-instruments-ti-99-4a",
+          "icon": "texas-instruments-ti-99-4a-1468138361.png",
+          "console": "4953.png",
+          "controller": "",
+          "developer": "Texas Instruments"
+        },
+        "4954": {
+          "id": 4954,
+          "name": "Acorn Electron",
+          "alias": "acorn-electron",
+          "icon": "acorn-electron-1468269141.png",
+          "console": "4954.png",
+          "controller": "",
+          "developer": "Acorn Computers"
+        },
+        "4955": {
+          "id": 4955,
+          "name": "TurboGrafx CD",
+          "alias": "turbo-grafx-cd",
+          "icon": "4955-1455648164.png",
+          "console": "4955.png",
+          "controller": "",
+          "developer": "Nec"
+        },
+        "4956": {
+          "id": 4956,
+          "name": "Neo Geo CD",
+          "alias": "neo-geo-cd",
+          "icon": "neo-geo-cd-1468269031.png",
+          "console": "4956.png",
+          "controller": "",
+          "developer": "SNK"
+        },
+        "4957": {
+          "id": 4957,
+          "name": "Nintendo Pokémon Mini",
+          "alias": "nintendo-pokmon-mini",
+          "icon": "4957-1468268912.png",
+          "console": "4957.png",
+          "controller": "",
+          "developer": "Nintendo"
+        },
+        "4958": {
+          "id": 4958,
+          "name": "Sega Pico",
+          "alias": "sega-pico",
+          "icon": "4958-1468268712.png",
+          "console": "4958.png",
+          "controller": "",
+          "developer": "Sega"
+        },
+        "4959": {
+          "id": 4959,
+          "name": "Watara Supervision",
+          "alias": "watara-supervision",
+          "icon": "console_default.png",
+          "console": "4959.png",
+          "controller": "",
+          "developer": ""
+        },
+        "4960": {
+          "id": 4960,
+          "name": "Tomy Tutor",
+          "alias": "tomy-pyta",
+          "icon": "console_default.png",
+          "console": "4960.png",
+          "controller": "",
+          "developer": "Tomy"
+        },
+        "4961": {
+          "id": 4961,
+          "name": "Magnavox Odyssey 1",
+          "alias": "magnavox-odyssey",
+          "icon": "console_default.png",
+          "console": "4961.png",
+          "controller": "",
+          "developer": "Magnavox"
+        },
+        "4962": {
+          "id": 4962,
+          "name": "Gakken Compact Vision",
+          "alias": "gakken-compact-vision",
+          "icon": "console_default.png",
+          "console": "4962.png",
+          "controller": "",
+          "developer": "Gakken Co., Ltd"
+        },
+        "4963": {
+          "id": 4963,
+          "name": "Emerson Arcadia 2001",
+          "alias": "emerson-arcadia-2001",
+          "icon": "console_default.png",
+          "console": "4963.png",
+          "controller": "",
+          "developer": "Emerson Radio"
+        },
+        "4964": {
+          "id": 4964,
+          "name": "Casio PV-1000",
+          "alias": "casio-pv-1000",
+          "icon": "console_default.png",
+          "console": "4964.png",
+          "controller": "",
+          "developer": "Casio"
+        },
+        "4965": {
+          "id": 4965,
+          "name": "Epoch Cassette Vision",
+          "alias": "epoch-cassette-vision",
+          "icon": "console_default.png",
+          "console": "4965.png",
+          "controller": "",
+          "developer": "Epoch Co."
+        },
+        "4966": {
+          "id": 4966,
+          "name": "Epoch Super Cassette Vision",
+          "alias": "epoch-super-cassette-vision",
+          "icon": "console_default.png",
+          "console": "4966.png",
+          "controller": "",
+          "developer": "Epoch Co."
+        },
+        "4967": {
+          "id": 4967,
+          "name": "RCA Studio II",
+          "alias": "rca-studio-ii",
+          "icon": "console_default.png",
+          "console": "4967.png",
+          "controller": "",
+          "developer": "RCA"
+        },
+        "4968": {
+          "id": 4968,
+          "name": "Bally Astrocade",
+          "alias": "bally-astrocade",
+          "icon": "console_default.png",
+          "console": "4968.png",
+          "controller": "",
+          "developer": "Bally Manufacturing"
+        },
+        "4969": {
+          "id": 4969,
+          "name": "APF MP-1000",
+          "alias": "apf-mp-1000",
+          "icon": "console_default.png",
+          "console": "4969.png",
+          "controller": "",
+          "developer": "APF Electronics Inc"
+        },
+        "4970": {
+          "id": 4970,
+          "name": "Coleco Telstar Arcade",
+          "alias": "coleco-telstar-arcade",
+          "icon": "console_default.png",
+          "console": "4970.png",
+          "controller": "",
+          "developer": "Coleco"
+        },
+        "4971": {
+          "id": 4971,
+          "name": "Nintendo Switch",
+          "alias": "nintendo-switch",
+          "icon": "nintendo-switch-1489508941.png",
+          "console": "4971.png",
+          "controller": "",
+          "developer": "Nintendo"
+        },
+        "4972": {
+          "id": 4972,
+          "name": "Milton Bradley Microvision",
+          "alias": "milton-bradley-microvision",
+          "icon": "console_default.png",
+          "console": "",
+          "controller": "",
+          "developer": "Milton Bradley"
+        },
+        "4973": {
+          "id": 4973,
+          "name": "Entex Select-a-Game",
+          "alias": "entex-select-a-game",
+          "icon": "console_default.png",
+          "console": "",
+          "controller": "",
+          "developer": "Entex Industries"
+        },
+        "4974": {
+          "id": 4974,
+          "name": "Entex Adventure Vision",
+          "alias": "entex-adventure-vision",
+          "icon": "console_default.png",
+          "console": "",
+          "controller": "",
+          "developer": "Entex Industries"
+        },
+        "4975": {
+          "id": 4975,
+          "name": "Pioneer LaserActive",
+          "alias": "",
+          "icon": "console_default.png",
+          "console": "4975.png",
+          "controller": "",
+          "developer": "Pioneer"
+        },
+        "4976": {
+          "id": 4976,
+          "name": "Action Max",
+          "alias": "action-max",
+          "icon": "console_default.png",
+          "console": "4976.png",
+          "controller": "",
+          "developer": ""
+        },
+        "4977": {
+          "id": 4977,
+          "name": "Sharp X1",
+          "alias": "sharp-x1",
+          "icon": "console_default.png",
+          "console": "",
+          "controller": "",
+          "developer": "Sharp"
+        },
+        "4978": {
+          "id": 4978,
+          "name": "Fujitsu FM-7",
+          "alias": "fujitsu-fm-7",
+          "icon": "console_default.png",
+          "console": "",
+          "controller": "",
+          "developer": "Fujitsu"
+        },
+        "4979": {
+          "id": 4979,
+          "name": "SAM Coupé",
+          "alias": "",
+          "icon": "console_default.png",
+          "console": "",
+          "controller": "",
+          "developer": "Miles Gordon Technology"
+        }
+      }
+    },

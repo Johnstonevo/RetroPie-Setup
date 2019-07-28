@@ -46,7 +46,7 @@ function _add_system_emulationstation() {
     local theme="$7"
 
     local conf="$configdir/all/emulationstation/es_systems.cfg"
-    mkdir -p "/etc/emulationstation"
+    mkdir -p "/home/"
     if [[ ! -f "$conf" ]]; then
         echo "<systemList />" >"$conf"
     fi
@@ -238,7 +238,7 @@ _EOF_
         cat > /usr/local/share/applications/retropie.desktop << _EOF_
 [Desktop Entry]
 Type=Application
-Exec=gnome-terminal  --hide-menubar -e emulationstation --windowed
+Exec=gnome-terminal  --hide-menubar -e emulationstation
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
@@ -267,6 +267,7 @@ function remove_emulationstation() {
 function configure_emulationstation() {
     # move the $home/emulationstation configuration dir and symlink it
     moveConfigDir "$home/.emulationstation" "$configdir/all/emulationstation"
+    chown -R $user:$user "$configdir/all/emulationstation"
 
     [[ "$mode" == "remove" ]] && return
 

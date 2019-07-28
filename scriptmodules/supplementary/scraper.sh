@@ -98,11 +98,11 @@ function scrape_scraper() {
             params+=(-console_img "s,b,3b,l,f")
         fi
     fi
-    if [[ "$download_videos" -eq 1 ]]; then
-        params+=(-download_videos)
+    if [[ "$download_snap" -eq 1 ]]; then
+        params+=(-download_snap)
     fi
-    if [[ "$download_marquees" -eq 1 ]]; then
-        params+=(-download_marquees)
+    if [[ "$download_marquee" -eq 1 ]]; then
+        params+=(-download_marquee)
     fi
     if [[ -n "$max_width" ]]; then
         params+=(-max_width "$max_width")
@@ -185,8 +185,8 @@ function _load_config_scraper() {
         'rom_name=0' \
         'append_only=0' \
         'use_rom_folder=0' \
-        'download_videos=0' \
-        'download_marquees=0' \
+        'download_snap=0' \
+        'download_marquee=0' \
     )"
 }
 
@@ -258,16 +258,16 @@ function gui_scraper() {
             options+=(9 "Use rom folder for gamelist & images (Disabled)")
         fi
 
-        if [[ "$download_videos" -eq 1 ]]; then
-            options+=(V "Download Videos (Enabled)")
+        if [[ "$download_snap" -eq 1 ]]; then
+            options+=(V "Download snap (Enabled)")
         else
-            options+=(V "Download Videos (Disabled)")
+            options+=(V "Download snap (Disabled)")
         fi
 
-        if [[ "$download_marquees" -eq 1 ]]; then
-            options+=(M "Download Marquees (Enabled)")
+        if [[ "$download_marquee" -eq 1 ]]; then
+            options+=(M "Download Marquee (Enabled)")
         else
-            options+=(M "Download Marquees (Disabled)")
+            options+=(M "Download Marquee (Disabled)")
         fi
 
         options+=(W "Max image width ($max_width)")
@@ -321,12 +321,12 @@ function gui_scraper() {
                     iniSet "use_rom_folder" "$use_rom_folder"
                     ;;
                 V)
-                    download_videos="$((download_videos ^ 1))"
-                    iniSet "download_videos" "$download_videos"
+                    download_snap="$((download_snap ^ 1))"
+                    iniSet "download_snap" "$download_snap"
                     ;;
                 M)
-                    download_marquees="$((download_marquees ^ 1))"
-                    iniSet "download_marquees" "$download_marquees"
+                    download_marquee="$((download_marquee ^ 1))"
+                    iniSet "download_marquee" "$download_marquee"
                     ;;
                 H)
                     cmd=(dialog --backtitle "$__backtitle" --inputbox "Please enter the max image height in pixels" 10 60 "$max_height")

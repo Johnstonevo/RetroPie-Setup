@@ -227,7 +227,7 @@ function _init_config_skyscraper() {
 
     # Create the import folders and add the sample files.
     local folder
-    for folder in covers marquees screenshots textual videos wheels; do
+    for folder in boxart marquee screenshots textual snap wheel; do
         mkUserDir "$md_conf_dir/import/$folder"
     done
     cp -rf "$md_inst/import" "$md_conf_dir"
@@ -246,7 +246,7 @@ function _scrape_skyscraper() {
 
     if [[ "$use_rom_folder" -eq 1 ]]; then
         params+=(-g "$romdir/$system")
-        params+=(-o "$romdir/$system/media")
+        params+=(-o "$romdir/$system")
         # If we're saving to the ROM folder, then use relative paths in the gamelist
         params+=(--relative)
     else
@@ -263,15 +263,15 @@ function _scrape_skyscraper() {
 
     params+=(-p "$system")
 
-    [[ "$download_videos" -eq 1 ]] && params+=(--videos)
+    [[ "$download_snap" -eq 1 ]] && params+=(--snap)
 
     [[ "$cache_marquees" -eq 0 ]] && params+=(--nomarquees)
 
-    [[ "$cache_covers" -eq 0 ]] && params+=(--nocovers)
+    [[ "$cache_boxart" -eq 0 ]] && params+=(--noboxart)
 
     [[ "$cache_screenshots" -eq 0 ]] && params+=(--noscreenshots)
 
-    [[ "$cache_wheels" -eq 0 ]] && params+=(--nowheels)
+    [[ "$cache_wheel" -eq 0 ]] && params+=(--nowheel)
 
     [[ "$rom_name" -eq 1 ]] && params+=(--forcefilename)
 
@@ -359,10 +359,10 @@ function _load_config_skyscraper() {
     echo "$(loadModuleConfig \
         'rom_name=0' \
         'use_rom_folder=0' \
-        'download_videos=0' \
+        'download_snap=0' \
         'cache_marquees=1' \
-        'cache_covers=1' \
-        'cache_wheels=1' \
+        'cache_boxart=1' \
+        'cache_wheel=1' \
         'cache_screenshots=1' \
         'scrape_source=screenscraper' \
         'remove_brackets=0' \
@@ -483,7 +483,7 @@ function gui_skyscraper() {
         [3]="Options for resource gathering and caching sub-menu.\nClick to open it."
         [4]="Generate EmulationStation game lists.\nRuns the scraper to incorporate downloaded information and media from the local cache and write them to \Zbgamelist.xml\Zn files to be used by EmulationStation."
         [5]="Options for EmulationStation game list generation sub-menu.\nClick to open it and change the options."
-        [V]="Toggle the download and caching of videos.\nThis also toggles whether the videos will be included in the resulting gamelist.\n\nSkyscraper option: \Zb--videos\Zn"
+        [V]="Toggle the download and caching of snap.\nThis also toggles whether the snap will be included in the resulting gamelist.\n\nSkyscraper option: \Zb--snap\Zn"
         [A]="Advanced options sub-menu."
         [U]="Check for an update to Skyscraper\nIf there is a new release, you'll have the option to update."
     )
@@ -529,10 +529,10 @@ function gui_skyscraper() {
 
         options+=("-" "OTHER options")
 
-        if [[ "$download_videos" -eq 1 ]]; then
-            options+=(V "Download videos (Enabled)")
+        if [[ "$download_snap" -eq 1 ]]; then
+            options+=(V "Download snap (Enabled)")
         else
-            options+=(V "Download videos (Disabled)")
+            options+=(V "Download snap (Disabled)")
         fi
 
         options+=(A "Advanced options -->")
@@ -616,8 +616,8 @@ function gui_skyscraper() {
                     ;;
 
                 V)
-                    download_videos="$((download_videos ^ 1))"
-                    iniSet "download_videos" "$download_videos"
+                    download_snap="$((download_snap ^ 1))"
+                    iniSet "download_snap" "$download_snap"
                     ;;
 
                 A)
@@ -658,8 +658,8 @@ function _gui_cache_skyscraper() {
 
     help_strings_cache=(
         [1]="Toggle whether screenshots are cached locally when scraping.\n\nSkyscraper option: \Zb--noscreenshots\Zn"
-        [2]="Toggle whether covers are cached locally when scraping.\n\nSkyscraper option: \Zb--nocovers\Zn"
-        [3]="Toggle whether wheels are cached locally when scraping.\n\nSkyscraper option: \Zb--nowheels\Zn"
+        [2]="Toggle whether boxart are cached locally when scraping.\n\nSkyscraper option: \Zb--noboxart\Zn"
+        [3]="Toggle whether wheel are cached locally when scraping.\n\nSkyscraper option: \Zb--nowheel\Zn"
         [4]="Toggle whether marquees are cached locally when scraping.\n\nSkyscraper option: \Zb--nomarquees\Zn"
         [5]="Force the refresh of resources in the local cache when scraping.\n\nSkyscraper option: \Zb--cache refresh\Zn"
         [P]="Purge \ZbALL\Zn all cached resources for all platforms."
@@ -681,16 +681,16 @@ function _gui_cache_skyscraper() {
             options+=(1 "Cache screenshots (Disabled)")
         fi
 
-        if [[ "$cache_covers" -eq 1 ]]; then
-            options+=(2 "Cache covers (Enabled)")
+        if [[ "$cache_boxart" -eq 1 ]]; then
+            options+=(2 "Cache boxart (Enabled)")
         else
-            options+=(2 "Cache covers (Disabled)")
+            options+=(2 "Cache boxart (Disabled)")
         fi
 
-        if [[ "$cache_wheels" -eq 1 ]]; then
-            options+=(3 "Cache wheels (Enabled)")
+        if [[ "$cache_wheel" -eq 1 ]]; then
+            options+=(3 "Cache wheel (Enabled)")
         else
-            options+=(3 "Cache wheels (Disabled)")
+            options+=(3 "Cache wheel (Disabled)")
         fi
 
         if [[ "$cache_marquees" -eq 1 ]]; then
@@ -723,13 +723,13 @@ function _gui_cache_skyscraper() {
                     ;;
 
                 2)
-                    cache_covers="$((cache_covers ^ 1))"
-                    iniSet "cache_covers" "$cache_covers"
+                    cache_boxart="$((cache_boxart ^ 1))"
+                    iniSet "cache_boxart" "$cache_boxart"
                     ;;
 
                 3)
-                    cache_wheels="$((cache_wheels ^ 1))"
-                    iniSet "cache_wheels" "$cache_wheels"
+                    cache_wheel="$((cache_wheel ^ 1))"
+                    iniSet "cache_wheel" "$cache_wheel"
                     ;;
 
                 4)
