@@ -71,16 +71,23 @@ _EOF_
     chmod +x "$md_inst/bin/vice.sh"
 
     mkRomDir "c64"
+    mkRomDir "c128"
+    mkRomDir "pet"
+    mkRomDir "plus4"
+    mkRomDir "vic20"
 
     addEmulator 0 "$md_id-x64" "c64" "$md_inst/bin/vice.sh x64 %ROM%"
     addEmulator 0 "$md_id-x64sc" "c64" "$md_inst/bin/vice.sh x64sc %ROM%"
-    addEmulator 0 "$md_id-x128" "c64" "$md_inst/bin/vice.sh x128 %ROM%"
-    addEmulator 0 "$md_id-xpet" "c64" "$md_inst/bin/vice.sh xpet %ROM%"
-    addEmulator 0 "$md_id-xplus4" "c64" "$md_inst/bin/vice.sh xplus4 %ROM%"
-    addEmulator 0 "$md_id-xvic" "c64" "$md_inst/bin/vice.sh xvic %ROM%"
-    addEmulator 0 "$md_id-xvic-cart" "c64" "$md_inst/bin/vice.sh xvic %ROM% -cartgeneric"
+    addEmulator 0 "$md_id-x128" "c128" "$md_inst/bin/vice.sh x128 %ROM%"
+    addEmulator 0 "$md_id-xpet" "pet" "$md_inst/bin/vice.sh xpet %ROM%"
+    addEmulator 0 "$md_id-xplus4" "plus4" "$md_inst/bin/vice.sh xplus4 %ROM%"
+    addEmulator 0 "$md_id-xvic" "vic20" "$md_inst/bin/vice.sh xvic %ROM%"
+    addEmulator 0 "$md_id-xvic-cart" "vic20" "$md_inst/bin/vice.sh xvic %ROM% -cartgeneric"
     addSystem "c64"
-
+    addSystem "c128"
+    addSystem "pet"
+    addSystem "plus4"
+    addSystem "vic20"
     [[ "$md_mode" == "remove" ]] && return
 
     # copy configs and symlink the old and new config folders to $md_conf_root/c64/

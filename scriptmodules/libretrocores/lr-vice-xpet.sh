@@ -9,38 +9,38 @@
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
 
-rp_module_id="lr-vice-x128"
-rp_module_desc="128 emulator - port of VICE for libretro"
-rp_module_help="ROM Extensions: .crt .d64 .g64 .prg .t64 .tap .x64 .zip .vsf\n\nCopy your Commodore 128 games to $romdir/128"
+rp_module_id="lr-vice-xpet"
+rp_module_desc="pet emulator - port of VICE for libretro"
+rp_module_help="ROM Extensions: .crt .d64 .g64 .prg .t64 .tap .x64 .zip .vsf\n\nCopy your Commodore 128 games to $romdir/pet"
 rp_module_licence="GPL2 https://raw.githubusercontent.com/libretro/vice-libretro/master/vice/COPYING"
 rp_module_section="exp"
 rp_module_flags=""
 
-function sources_lr-vice-x128() {
+function sources_lr-vice-xpet() {
     gitPullOrClone "$md_build" https://github.com/libretro/vice-libretro.git
 }
 
-function build_lr-vice-x128() {
+function build_lr-vice-xpet() {
     make -f Makefile.libretro clean
-    make EMUTYPE=x128
-    md_ret_require="$md_build/vice_x128_libretro.so"
+    make EMUTYPE=xpet
+    md_ret_require="$md_build/vice_xpet_libretro.so"
 }
 
-function install_lr-vice-x128() {
+function install_lr-vice-xpet() {
     md_ret_files=(
         'vice/data'
         'vice/COPYING'
-        'vice_x128_libretro.so'
+        'vice_xpet_libretro.so'
     )
 }
 
-function configure_lr-vice-x128() {
-    mkRomDir "c128"
-    ensureSystemretroconfig "c128"
+function configure_lr-vice-xpet() {
+    mkRomDir "pet"
+    ensureSystemretroconfig "pet"
 
     cp -R "$md_inst/data" "$biosdir"
     chown -R $user:$user "$biosdir/data"
 
-    addEmulator 0 "$md_id" "128" "$md_inst/vice_x128_libretro.so"
-    addSystem "c128"
+    addEmulator 0 "$md_id" "pet" "$md_inst/vice_xpet_libretro.so"
+    addSystem "pet"
 }
