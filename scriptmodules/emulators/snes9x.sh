@@ -43,9 +43,27 @@ function install_snes9x() {
 
 function configure_snes9x() {
     mkRomDir "snes"
+    mkRomDir "snesh"
+    mkRomDir "sfc"
+    mkRomDir "satellaview"
+    mkRomDir "sufami"
+    mkRomDir "smwhacks"
+    mkRomDir "snesmsu1"
 
     setDispmanx "$md_id" 1
 
     addEmulator 0 "$md_id" "snes" "$md_inst/snes9x %ROM%"
+    addEmulator 0 "$md_id" "snesh" "$md_inst/snes9x %ROM%"
+    addEmulator 0 "$md_id" "sfc" "$md_inst/snes9x %ROM%"
+    addEmulator 0 "$md_id" "satellaview" "$md_inst/snes9x %ROM%"
+    addEmulator 0 "$md_id" "sufami" "$md_inst/snes9x %ROM%"
+    addEmulator 0 "$md_id" "smwhacks" "$md_inst/snes9x %ROM%"
+    addEmulator 0 "$md_id" "snesmsu1" "$md_inst/snes9x %ROM%"
     addSystem "snes"
+    addSystem "snesh"
+    addSystem "sfc"
+    addSystem "satellaview"
+    addSystem "sufami"
+    addSystem "smwhacks"
+    addSystem "snesmsu1"
 }

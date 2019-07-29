@@ -47,11 +47,26 @@ function install_pisnes() {
 
 function configure_pisnes() {
     mkRomDir "snes"
-
+    mkRomdDir "smwhacks"
+    mkRomDir "snesh"
+    mkRomDir "sfc"
+    mkRomDir "satellaview"
+    mkRomDir "sufami"
     moveConfigFile "$md_inst/snes9x.cfg" "$md_conf_root/snes/snes9x.cfg"
 
     copyDefaultConfig "$md_inst/snes9x.cfg.template" "$md_conf_root/snes/snes9x.cfg"
 
     addEmulator 0 "$md_id" "snes" "$md_inst/snes9x %ROM%"
+    addEmulator 0 "$md_id" "snesh" "$md_inst/snes9x %ROM%"
+    addEmulator 0 "$md_id" "sfc" "$md_inst/snes9x %ROM%"
+    addEmulator 0 "$md_id" "satellaview" "$md_inst/snes9x %ROM%"
+    addEmulator 0 "$md_id" "sufami" "$md_inst/snes9x %ROM%"
+    addEmulator 0 "$md_id" "sufami" "$md_inst/snes9x %ROM%"
+    addEmulator 0 "$md_id" "smwhacks" "$md_inst/snes9x %ROM%"
     addSystem "snes"
+    addSystem "snesh"
+    addSystem "sfc"
+    addSystem "satellaview"
+    addSystem "sufami"
+    addSystem "smwhacks"
 }

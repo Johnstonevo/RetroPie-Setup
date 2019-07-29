@@ -41,6 +41,7 @@ function install_lr-mesen-s() {
 
 function configure_lr-mesen-s() {
     mkRomDir "snes"
+    mkRomdDir "smwhacks"
     mkRomDir "snesh"
     mkRomDir "sfc"
     mkRomDir "satellaview"
@@ -50,17 +51,21 @@ function configure_lr-mesen-s() {
     ensureSystemretroconfig "sfc"
     ensureSystemretroconfig "satellaview"
     ensureSystemretroconfig "sufami"
+    ensureSystemretroconfig "smwhacks"
+
 
     addEmulator 0 "$md_id" "snes" "$md_inst/mesens_libretro.x64.so"
     addEmulator 0 "$md_id" "snesh" "$md_inst/mesens_libretro.x64.so"
     addEmulator 0 "$md_id" "sfc" "$md_inst/mesens_libretro.x64.so"
     addEmulator 0 "$md_id" "satellaview" "$md_inst/mesens_libretro.x64.so"
     addEmulator 0 "$md_id" "sufami" "$md_inst/mesens_libretro.x64.so"
+    addEmulator 0 "$md_id" "smwhacks" "$md_inst/mesens_libretro.x64.so"
     addSystem "snes"
     addSystem "snesh"
     addSystem "sfc"
     addSystem "satellaview"
     addSystem "sufami"
+    addSystem "smwhacks"
 
     addBezel "snes"
     addBezel "sfc"

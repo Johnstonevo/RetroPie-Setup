@@ -40,6 +40,7 @@ function install_lr-snes9x2002() {
 
 function configure_lr-snes9x2002() {
     mkRomDir "snes"
+    mkRomdDir "smwhacks"
     mkRomDir "snesh"
     mkRomDir "sfc"
     mkRomDir "satellaview"
@@ -49,17 +50,21 @@ function configure_lr-snes9x2002() {
     ensureSystemretroconfig "sfc"
     ensureSystemretroconfig "satellaview"
     ensureSystemretroconfig "sufami"
+    ensureSystemretroconfig "smwhacks"
+
 
     addEmulator 0 "$md_id" "snes" "$md_inst/snes9x2002_libretro.so"
     addEmulator 0 "$md_id" "snesh" "$md_inst/snes9x2002_libretro.so"
     addEmulator 0 "$md_id" "sfc" "$md_inst/snes9x2002_libretro.so"
     addEmulator 0 "$md_id" "satellaview" "$md_inst/snes9x2002_libretro.so"
     addEmulator 0 "$md_id" "sufami" "$md_inst/snes9x2002_libretro.so"
+    addEmulator 0 "$md_id" "smwhacks" "$md_inst/snes9x2002_libretro.so"
     addSystem "snes"
     addSystem "snesh"
     addSystem "sfc"
     addSystem "satellaview"
     addSystem "sufami"
+    addSystem "smwhacks"
 
 
     addBezel "snes"
@@ -73,6 +78,7 @@ function configure_lr-snes9x2002() {
           addEmulator 0 "$md_id-ppa" "sfc" "$md_instppa/snes9x2002_libretro.so"
           addEmulator 0 "$md_id-ppa" "satellaview" "$md_instppa/snes9x2002_libretro.so"
           addEmulator 0 "$md_id-ppa" "sufami" "$md_instppa/snes9x2002_libretro.so"
+          addEmulator 0 "$md_id-ppa" "smwhacks" "$md_instppa/snes9x2002_libretro.so"
     fi
 
 
@@ -138,6 +144,20 @@ function configure_lr-snes9x2002() {
             cp /home/$user/.config/RetroPie/sufami/retroarch.cfg /home/$user/.config/RetroPie/sufami/retroarch.cfg.bkp
         local core_config="$configdir/sufami/retroarch.cfg"
         iniConfig " = " '"' "$md_conf_root/sufami/retroarch.cfg"
+        iniSet  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg" "$core_config"
+        iniSet "input_overlay_opacity" "1.0" "$core_config"
+        iniSet "input_overlay_scale" "1.0" "$core_config"
+        iniSet "input_overlay_enable" "true" "$core_config"
+        iniSet "video_smooth" "false" "$core_config"
+        iniSet "video_shader"  "$raconfigdir/shaders/rpi/retropie/snes_scanline.glslp" "$core_config"
+        iniSet "video_shader_enable"  "true" "$core_config" 
+        iniSet "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie" "$core_config"
+
+        chown $user:$user "$core_config"
+        ln -s $raconfigdir/config/Snes9x "$raconfigdir/config/Snes9x 2002"
+        cp /home/$user/.config/RetroPie/smwhacks/retroarch.cfg /home/$user/.config/RetroPie/smwhacks/retroarch.cfg.bkp
+        local core_config="$configdir/smwhacks/retroarch.cfg"
+        iniConfig " = " '"' "$md_conf_root/smwhacks/retroarch.cfg"
         iniSet  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg" "$core_config"
         iniSet "input_overlay_opacity" "1.0" "$core_config"
         iniSet "input_overlay_scale" "1.0" "$core_config"
