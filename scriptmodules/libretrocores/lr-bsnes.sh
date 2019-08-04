@@ -36,7 +36,7 @@ function install_lr-bsnes() {
 function configure_lr-bsnes() {
     local system
     local def
-    for system in snes sfc snesh satellaview sufami smwhacks do
+    for system in snes sfc snesh satellaview sufami smwhacks; do
         def=0
         [[ "$system" == "snes" || "$system" == "sfc"  || "$system" == "snesh"  || "$system" == "satellaview" || "$system" == "sufami" || "$system" == "smwhacks" ]] && def=1
         mkRomDir "$system"
@@ -53,7 +53,7 @@ if [ -e $md_instppa/bsnes_balanced_libretro.so ]
     then
     local system
     local def
-    for system in snes sfc snesh satellaview sufami smwhacks do
+    for system in snes sfc snesh satellaview sufami smwhacks; do
         def=0
         [[ "$system" == "snes" || "$system" == "sfc"  || "$system" == "snesh"  || "$system" == "satellaview" || "$system" == "sufami" || "$system" == "smwhacks" ]] && def=1
             addEmulator 0 "$md_id-balanced-ppa" "$system" "$md_instppa/bsnes_balanced_libretro.so"
@@ -64,7 +64,7 @@ if [ -e $md_instppa/bsnes_accuracy_libretro.so ]
     then
     local system
     local def
-    for system in snes sfc snesh satellaview sufami smwhacks do
+    for system in snes sfc snesh satellaview sufami smwhacks; do
         def=0
         [[ "$system" == "snes" || "$system" == "sfc"  || "$system" == "snesh"  || "$system" == "satellaview" || "$system" == "sufami" || "$system" == "smwhacks" ]] && def=1
             addEmulator 0 "$md_id-ppa" "$system" "$md_instppa/bsnes_accuracy_libretro.so"
@@ -75,7 +75,7 @@ if [ -e $md_instppa/bsnes_mercury_accuracy_libretro.so ]
     then
     local system
     local def
-    for system in snes sfc snesh satellaview sufami smwhacks do
+    for system in snes sfc snesh satellaview sufami smwhacks; do
         def=0
         [[ "$system" == "snes" || "$system" == "sfc"  || "$system" == "snesh"  || "$system" == "satellaview" || "$system" == "sufami" || "$system" == "smwhacks" ]] && def=1
             addEmulator 0 "$md_id-mercury_accuracy-ppa" "$system" "$md_instppa/bsnes_mercury_accuracy_libretro.so"
@@ -86,7 +86,7 @@ if [ -e $md_instppa/bsnes_mercury_balanced_libretro.so ]
     then
     local system
     local def
-    for system in snes sfc snesh satellaview sufami smwhacks do
+    for system in snes sfc snesh satellaview sufami smwhacks; do
         def=0
         [[ "$system" == "snes" || "$system" == "sfc"  || "$system" == "snesh"  || "$system" == "satellaview" || "$system" == "sufami" || "$system" == "smwhacks" ]] && def=1
             addEmulator 0 "$md_id-mercury_balanced-ppa" "$system" "$md_instppa/bsnes_mercury_balanced_libretro.so"
@@ -97,7 +97,7 @@ if [ -e $md_instppa/bsnes_mercury_performance_libretro.so ]
     then
     local system
     local def
-    for system in snes sfc snesh satellaview sufami smwhacks do
+    for system in snes sfc snesh satellaview sufami smwhacks; do
         def=0
         [[ "$system" == "snes" || "$system" == "sfc"  || "$system" == "snesh"  || "$system" == "satellaview" || "$system" == "sufami" || "$system" == "smwhacks" ]] && def=1
             addEmulator 0 "$md_id-mercury_performance-ppa" "$system" "$md_instppa/bsnes_mercury_performance_libretro.so"

@@ -81,6 +81,7 @@ function configure_lr-fbneo() {
     addEmulator 0 "$md_id-gg" "gamegear" "$md_inst/fbneo_libretro.so --subsystem gg"
     addEmulator 0 "$md_id-sms" "mastersystem" "$md_inst/fbneo_libretro.so --subsystem sms"
     addEmulator 0 "$md_id-md" "megadrive" "$md_inst/fbneo_libretro.so --subsystem md"
+    addEmulator 0 "$md_id-md" "genesis" "$md_inst/fbneo_libretro.so --subsystem md"
     addEmulator 0 "$md_id-md" "megadrive-japan" "$md_inst/fbneo_libretro.so --subsystem md"
     addEmulator 0 "$md_id-sg1k" "sg-1000" "$md_inst/fbneo_libretro.so --subsystem sg1k"
     addEmulator 0 "$md_id-cv" "coleco" "$md_inst/fbneo_libretro.so --subsystem cv"
