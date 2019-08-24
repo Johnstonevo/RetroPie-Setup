@@ -9,80 +9,126 @@
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
 
-AUDIO="$1"
-ROM="$2"
-rootdir="/opt/retropie"
-configdir="$rootdir/configs"
+rp_module_id="reicast"
+rp_module_desc="Dreamcast emulator Reicast"
+rp_module_help="ROM Extensions: .cdi .gdi\n\nCopy your Dreamcast roms to $romdir/dreamcast\n\nCopy the required BIOS files dc_boot.bin and dc_flash.bin to $biosdir/dc"
+rp_module_licence="GPL2 https://raw.githubusercontent.com/reicast/reicast-emulator/master/LICENSE"
+rp_module_section="opt"
+rp_module_flags="!armv6 !mali"
 
-source "$rootdir/lib/inifuncs.sh"
-
-function mapInput() {
-    local js_device
-    local js_device_num
-    local ev_device
-    local ev_devices
-    local ev_device_num
-    local device_counter
-    local conf="$configdir/dreamcast/emu.cfg"
-    local params=""
-
-    # get a list of all present js device numbers and device names
-    # and device count
-    for js_device in /dev/input/js*; do
-        js_device_num=${js_device/\/dev\/input\/js/}
-        for ev_device in /dev/input/event*; do
-            ev_device_num=${ev_device/\/dev\/input\/event/}
-            if [[ -d "/sys/class/input/event${ev_device_num}/device/js${js_device_num}" ]]; then
-                file[$ev_device_num]=$(grep --exclude=*.bak -rl -m 1 "$configdir/dreamcast/mappings/" -e "= $(</sys/class/input/event${ev_device_num}/device/name)" | tail -n 1)
-                if [[ -f "${file[$ev_device_num]}" ]]; then
-                    #file[$ev_device_num]="${file[$ev_device_num]##*/}"
-                    ev_devices[$ev_device_num]=$(</sys/class/input/event${ev_device_num}/device/name)
-                    device_counter=$(($device_counter+1))
-                fi
-            fi
-        done
-    done
-
-    # emu.cfg: store up to four event devices and mapping files
-    if [[ "$device_counter" -gt "0" ]]; then
-        # reicast supports max 4 event devices
-        if [[ "$device_counter" -gt "4" ]]; then
-            device_counter="4"
-        fi
-        local counter=0
-        for ev_device_num in "${!ev_devices[@]}"; do
-            if [[ "$counter" -lt "$device_counter" ]]; then
-                counter=$(($counter+1))
-                params+="-config input:evdev_device_id_$counter=$ev_device_num "
-                params+="-config input:evdev_mapping_$counter=${file[$ev_device_num]} "
-            fi
-        done
-        while [[ "$counter" -lt "4" ]]; do
-            counter=$(($counter+1))
-            params+="-config input:evdev_device_id_$counter=-1 "
-            params+="-config input:evdev_mapping_$counter=-1 "
-        done
-    else
-        # fallback to keyboard setup
-        params+="-config input:evdev_device_id_1=0 "
-        device_counter=1
-    fi
-    params+="-config input:joystick_device_id=-1 "
-    params+="-config players:nb=$device_counter "
-    echo "$params"
+function depends_reicast() {
+    local depends=(libsdl2-dev python-dev python-pip alsa-oss python-setuptools libevdev-dev libasound2-dev libudev-dev)
+    isPlatform "vero4k" && depends+=(vero3-userland-dev-osmc)
+    getDepends "${depends[@]}"
+    isPlatform "vero4k" && pip install wheel
+    pip install evdev
 }
 
-if [[ ! -f "/home/$user/RetroPie/BIOS/dc/dc_boot.bin" ]]; then
-    dialog --no-cancel --pause "You need to copy the Dreamcast BIOS files (dc_boot.bin and dc_flash.bin) to the folder $biosdir to boot the Dreamcast emulator." 22 76 15
-    exit 1
-fi
+function sources_reicast() {
+    gitPullOrClone "$md_build" https://github.com/reicast/reicast-emulator.git master
+}
 
-params=(-config config:homedir=$HOME -config x11:fullscreen=1)
-getAutoConf reicast_input && params+=($(mapInput))
-[[ -n "$AUDIO" ]] && params+=(-config audio:backend=$AUDIO -config audio:disable=0)
-[[ -n "$ROM" ]] && params+=(-config config:image="$ROM")
-if [[ "$AUDIO" == "oss" ]]; then
-    aoss "$rootdir/emulators/reicast/bin/reicast" "${params[@]}" >/dev/null
-else
-    "$rootdir/emulators/reicast/bin/reicast" "${params[@]}" >/dev/null
-fi
+function build_reicast() {
+    cd shell/linux
+    if isPlatform "rpi"; then
+        make platform=rpi2 clean
+        make platform=rpi2
+    elif isPlatform "tinker"; then
+        make USE_GLES=1 USE_SDL=1 clean
+        make USE_GLES=1 USE_SDL=1
+    else
+        make clean
+        make
+    fi
+    md_ret_require="$md_build/shell/linux/reicast.elf"
+}
+
+function install_reicast() {
+    cd shell/linux
+    if isPlatform "rpi"; then
+        make platform=rpi2 PREFIX="$md_inst" install
+    elif isPlatform "tinker"; then
+        make USE_GLES=1 USE_SDL=1 PREFIX="$md_inst" install
+    else
+        make PREFIX="$md_inst" install
+    fi
+    md_ret_files=(
+        'LICENSE'
+        'README.md'
+    )
+}
+
+function configure_reicast() {
+    # copy hotkey remapping start script
+    cp "$md_data/reicast.sh" "$md_inst/bin/"
+    chmod +x "$md_inst/bin/reicast.sh"
+
+    mkRomDir "dreamcast"
+
+    # move any old configs to the new location
+    moveConfigDir "$home/.reicast" "$md_conf_root/dreamcast/"
+
+    # Create home VMU, cfg, and data folders. Copy dc_boot.bin and dc_flash.bin to the ~/.reicast/data/ folder.
+    mkdir -p "$md_conf_root/dreamcast/"{data,mappings}
+
+    # symlink bios
+    mkUserDir "$biosdir/dc"
+    ln -sf "$biosdir/dc/"{dc_boot.bin,dc_flash.bin} "$md_conf_root/dreamcast/data"
+
+    # copy default mappings
+    cp "$md_inst/share/reicast/mappings/"*.cfg "$md_conf_root/dreamcast/mappings/"
+
+    chown -R $user:$user "$md_conf_root/dreamcast"
+
+    cat > "$romdir/dreamcast/+Start Reicast.sh" << _EOF_
+#!/bin/bash
+$md_inst/bin/reicast.sh
+_EOF_
+    chmod a+x "$romdir/dreamcast/+Start Reicast.sh"
+    chown $user:$user "$romdir/dreamcast/+Start Reicast.sh"
+
+    # remove old systemManager.cdi symlink
+    rm -f "$romdir/dreamcast/systemManager.cdi"
+
+    # add system
+    # possible audio backends: alsa, oss, omx
+    if isPlatform "rpi"; then
+        addEmulator 1 "${md_id}-audio-omx" "dreamcast" "CON:$md_inst/bin/reicast.sh omx %ROM%"
+        addEmulator 0 "${md_id}-audio-oss" "dreamcast" "CON:$md_inst/bin/reicast.sh oss %ROM%"
+    elif isPlatform "vero4k"; then
+        addEmulator 1 "$md_id" "dreamcast" "CON:$md_inst/bin/reicast.sh alsa %ROM%"
+    else
+        addEmulator 1 "$md_id" "dreamcast" "CON:$md_inst/bin/reicast.sh oss %ROM%"
+    fi
+    addSystem "dreamcast"
+
+    addAutoConf reicast_input 1
+}
+
+function input_reicast() {
+    local temp_file="$(mktemp)"
+    cd "$md_inst/bin"
+    ./reicast-joyconfig -f "$temp_file" >/dev/tty
+    iniConfig " = " "" "$temp_file"
+    iniGet "mapping_name"
+    local mapping_file="$configdir/dreamcast/mappings/controller_${ini_value// /}.cfg"
+    mv "$temp_file" "$mapping_file"
+    chown $user:$user "$mapping_file"
+}
+
+function gui_reicast() {
+    while true; do
+        local options=(
+            1 "Configure input devices for Reicast"
+        )
+        local cmd=(dialog --backtitle "$__backtitle" --menu "Choose an option" 22 76 16)
+        local choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+        [[ -z "$choice" ]] && break
+        case "$choice" in
+            1)
+                clear
+                input_reicast
+                ;;
+        esac
+    done
+}
