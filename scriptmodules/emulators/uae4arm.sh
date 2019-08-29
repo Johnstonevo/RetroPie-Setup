@@ -43,6 +43,7 @@ function install_uae4arm() {
 
 function configure_uae4arm() {
     mkRomDir "amiga"
+    
 
     if [[ "$md_mode" == "install" ]]; then
         mkUserDir "$md_conf_root/amiga"
@@ -105,4 +106,5 @@ _EOF_
     addEmulator 0 "$md_id-a500" "amiga" "$md_inst/$md_id.sh rp-a500.uae %ROM%"
     addEmulator 0 "$md_id-a1200" "amiga" "$md_inst/$md_id.sh rp-a1200.uae %ROM%"
     addSystem "amiga"
+    
 }

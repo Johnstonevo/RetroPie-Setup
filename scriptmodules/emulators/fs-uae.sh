@@ -47,6 +47,7 @@ function remove_fs-uae() {
 
 function configure_fs-uae() {
     mkRomDir "amiga"
+    
 
     # copy configuring start script
     mkdir "$md_inst/bin"
@@ -72,4 +73,5 @@ function configure_fs-uae() {
 
     addEmulator 0 "$md_id" "amiga" "CON:bash $md_inst/bin/fs-uae.sh %ROM%"
     addSystem "amiga"
+    
 }

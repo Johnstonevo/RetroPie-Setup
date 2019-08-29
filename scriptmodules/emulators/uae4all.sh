@@ -58,6 +58,7 @@ function install_uae4all() {
 
 function configure_uae4all() {
     mkRomDir "amiga"
+     
 
     mkUserDir "$md_conf_root/amiga"
     mkUserDir "$md_conf_root/amiga/$md_id"
@@ -100,4 +101,5 @@ _EOF_
 
     addEmulator 0 "$md_id" "amiga" "bash $romdir/amiga/+Start\ UAE4All.sh"
     addSystem "amiga"
+    
 }
