@@ -38,4 +38,9 @@ function configure_lr-o2em() {
 
     addEmulator 0 "$md_id" "videopac" "$md_inst/o2em_libretro.so"
     addSystem "videopac"
+    mkRomDir "videopac+"
+    ensureSystemretroconfig "videopac+"
+
+    addEmulator 0 "$md_id" "videopac+" "$md_inst/o2em_libretro.so"
+    addSystem "videopac+"
 }

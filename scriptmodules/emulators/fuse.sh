@@ -48,8 +48,10 @@ function install_fuse() {
 
 function configure_fuse() {
     mkRomDir "zxspectrum"
+    mkRomDir "zxspectrum+3"
 
     mkUserDir "$md_conf_root/zxspectrum"
+    mkUserDir "$md_conf_root/zxspectrum+3"
 
     moveConfigFile "$home/.fuserc" "$md_conf_root/zxspectrum/.fuserc"
 
@@ -60,10 +62,17 @@ function configure_fuse() {
 #!/bin/bash
 $md_inst/bin/fuse --machine 128 --full-screen
 _EOF_
+        cat > "$romdir/zxspectrum+3/+Start Fuse.sh" << _EOF_
+#!/bin/bash
+$md_inst/bin/fuse --machine 128 --full-screen
+_EOF_
 
     addEmulator 0 "$md_id-48k" "zxspectrum" "$md_inst/bin/fuse --machine 48 --full-screen %ROM%"
     addEmulator 0 "$md_id-128k" "zxspectrum" "$md_inst/bin/fuse --machine 128 --full-screen %ROM%"
+    addEmulator 0 "$md_id-48k" "zxspectrum+3" "$md_inst/bin/fuse --machine 48 --full-screen %ROM%"
+    addEmulator 0 "$md_id-128k" "zxspectrum+3" "$md_inst/bin/fuse --machine 128 --full-screen %ROM%"
     addSystem "zxspectrum"
+    addSystem "zxspectrum+3"
 }
 
 function configure_dispmanx_on_fuse() {

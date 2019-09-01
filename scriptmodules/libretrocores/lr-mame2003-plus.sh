@@ -16,7 +16,7 @@ rp_module_licence="NONCOM https://raw.githubusercontent.com/libretro/mame2003-pl
 rp_module_section="main"
 
 function _get_dir_name_lr-mame2003-plus() {
-    echo "mame2003-plus"
+    echo "mame-2003-plus"
 }
 
 function _get_so_name_lr-mame2003-plus() {

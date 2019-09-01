@@ -35,7 +35,9 @@ function install_lr-fuse() {
 
 function configure_lr-fuse() {
     mkRomDir "zxspectrum"
+    mkRomDir "zxspectrum+3"
     ensureSystemretroconfig "zxspectrum"
+    ensureSystemretroconfig "zxspectrum+3"
 
     #local core_config="$configdir/zxspectrum/retroarch.cfg"
     #iniConfig " = " '"' "$md_conf_root/zxspectrum/retroarch.cfg"
@@ -52,11 +54,15 @@ function configure_lr-fuse() {
     chown $user:$user "$core_config"
     addEmulator 0 "$md_id" "zxspectrum" "$md_inst/fuse_libretro.so"
     addSystem "zxspectrum"
+    addEmulator 0 "$md_id" "zxspectrum+3" "$md_inst/fuse_libretro.so"
+    addSystem "zxspectrum+3"
 
 
     if [ -e $md_instppa/fuse_libretro.so ]
                     then
                                 addEmulator 0 "$md_id-ppa" "zxspectrum" "$md_instppa/fuse_libretro.so"
                                 addSystem "zxspectrum" "$md_instppa/fuse_libretro.so"
+                                addEmulator 0 "$md_id-ppa" "zxspectrum+3" "$md_instppa/fuse_libretro.so"
+                                addSystem "zxspectrum+3" "$md_instppa/fuse_libretro.so"
     fi
 }
