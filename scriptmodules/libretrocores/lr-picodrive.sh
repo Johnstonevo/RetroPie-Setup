@@ -54,6 +54,7 @@ function configure_lr-picodrive() {
   mkRomDir "markiii"
   mkRomDir "sega32x"
   mkRomDir "sc-3000"
+  mkRomDir "sor"
   ensureSystemretroconfig "gamegear"
   ensureSystemretroconfig "ggh"
   ensureSystemretroconfig "mastersystem"
@@ -66,6 +67,7 @@ function configure_lr-picodrive() {
   ensureSystemretroconfig "markiii"
   ensureSystemretroconfig "sega32x"
   ensureSystemretroconfig "sc-3000"
+  ensureSystemretroconfig "sor"
 
   local def=0
   isPlatform "armv6" && def=0
@@ -82,6 +84,7 @@ function configure_lr-picodrive() {
   addEmulator 0 "$md_id"  "markiii" "$md_inst/picodrive_libretro.so"
   addEmulator 1 "$md_id"  "sega32x" "$md_inst/picodrive_libretro.so"
   addEmulator 1 "$md_id"  "sc-3000" "$md_inst/picodrive_libretro.so"
+  addEmulator 1 "$md_id"  "sor" "$md_inst/picodrive_libretro.so"
   addSystem  "gamegear"
   addSystem  "mastersystem"
   addSystem  "megadrive"
@@ -93,6 +96,7 @@ function configure_lr-picodrive() {
   addSystem  "markiii"
   addSystem  "sega32x"
   addSystem  "sc-3000"
+  addSystem  "sor"
 
   addBezel "megadrive"
   addBezel "sg-1000"
@@ -103,31 +107,6 @@ function configure_lr-picodrive() {
 
         if [ -e $md_instppa/picodrive_libretro.so ]
             then
-              mkRomDir "gamegear"
-              mkRomDir "ggh"
-              mkRomDir "mastersystem"
-              mkRomDir "megadrive"
-              mkRomDir "megadrive-japan"
-              mkRomDir "genesis"
-              mkRomDir "genh"
-              mkRomDir "sg-1000"
-              mkRomDir "segacd"
-              mkRomDir "markiii"
-              mkRomDir "sega32x"
-              mkRomDir "sc-3000"
-              ensureSystemretroconfig "gamegear"
-              ensureSystemretroconfig "ggh"
-              ensureSystemretroconfig "mastersystem"
-              ensureSystemretroconfig "megadrive"
-              ensureSystemretroconfig "megadrive-japan"
-              ensureSystemretroconfig "genesis"
-              ensureSystemretroconfig "genh"
-              ensureSystemretroconfig "sg-1000"
-              ensureSystemretroconfig "segacd"
-              ensureSystemretroconfig "markiii"
-              ensureSystemretroconfig "sega32x"
-              ensureSystemretroconfig "sc-3000"
-
               local def=0
               isPlatform "armv6" && def=0
 
@@ -143,6 +122,7 @@ function configure_lr-picodrive() {
               addEmulator 0 "$md_id-ppa" "markiii" "$md_instppa/picodrive_libretro.so"
               addEmulator 0 "$md_id-ppa" "sega32x" "$md_instppa/picodrive_libretro.so"
               addEmulator 0 "$md_id-ppa" "sc-3000" "$md_instppa/picodrive_libretro.so"
+              addEmulator 0 "$md_id-ppa" "sor" "$md_instppa/picodrive_libretro.so"
               addSystem  "gamegear"
               addSystem  "mastersystem"
               addSystem  "megadrive"

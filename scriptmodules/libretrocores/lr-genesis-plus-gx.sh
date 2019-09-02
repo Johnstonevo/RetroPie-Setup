@@ -48,6 +48,7 @@ function configure_lr-genesis-plus-gx() {
   mkRomDir "markiii"
   mkRomDir "sega32x"
   mkRomDir "sc-3000"
+  mkRomDir "sor"
   ensureSystemretroconfig "gamegear"
   ensureSystemretroconfig "ggh"
   ensureSystemretroconfig "mastersystem"
@@ -61,6 +62,7 @@ function configure_lr-genesis-plus-gx() {
   ensureSystemretroconfig "markiii"
   ensureSystemretroconfig "sega32x"
   ensureSystemretroconfig "sc-3000"
+  ensureSystemretroconfig "sor"
 
   local def=0
   isPlatform "armv6" && def=0
@@ -78,6 +80,7 @@ function configure_lr-genesis-plus-gx() {
   addEmulator 1 "$md_id" "markiii" "$md_inst/genesis_plus_gx_libretro.so"
   addEmulator 0 "$md_id" "sega32x" "$md_inst/genesis_plus_gx_libretro.so"
   addEmulator 0 "$md_id" "sc-3000" "$md_inst/genesis_plus_gx_libretro.so"
+  addEmulator 0 "$md_id" "sor" "$md_inst/genesis_plus_gx_libretro.so"
   addSystem  "gamegear"
   addSystem  "mastersystem"
   addSystem  "megadrive"
@@ -91,6 +94,7 @@ function configure_lr-genesis-plus-gx() {
   addSystem  "sega32x"
   addSystem  "sc-3000"
   addSystem  "ggh"
+  addSystem  "sor"
 
   addBezel "megadrive"
   addBezel "sg-1000"
@@ -101,19 +105,7 @@ function configure_lr-genesis-plus-gx() {
 "
     if [ -e $md_instppa/genesis_plus_gx_libretro.so ]
         then
-          ensureSystemretroconfig "gamegear"
-          ensureSystemretroconfig "ggh"
-          ensureSystemretroconfig "mastersystem"
-          ensureSystemretroconfig "megadrive"
-          ensureSystemretroconfig "genesis"
-          ensureSystemretroconfig "megadrive-japan"
-          ensureSystemretroconfig "genesis"
-          ensureSystemretroconfig "genh"
-          ensureSystemretroconfig "sg-1000"
-          ensureSystemretroconfig "segacd"
-          ensureSystemretroconfig "markiii"
-          ensureSystemretroconfig "sega32x"
-          ensureSystemretroconfig "sc-3000"
+
 
           local def=0
           isPlatform "armv6" && def=0
