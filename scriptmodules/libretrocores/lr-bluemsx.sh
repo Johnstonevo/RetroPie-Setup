@@ -49,27 +49,22 @@ function configure_lr-bluemsx() {
 
 
     # force colecovision system
-    local cv_core_config="$configdir/coleco/retroarch.cfg"
-    iniConfig " = " '"' "$md_conf_root/coleco/retroarch.cfg"
-    iniSet "bluemsx_msxtype" "ColecoVision" "$core_config"
-    chown $user:$user "$cv_core_config"
+    local core_config="coleco"
+    setRetroArchCoreOption "bluemsx_msxtype" "ColecoVision"
 
 # force msx system
-    local msx_core_config="$configdir/msx/retroarch.cfg"
-    iniConfig " = " '"' "$md_conf_root/msx/retroarch.cfg"
-    iniSet "bluemsx_msxtype" "MSX" "$msx_core_config"
-    iniSet "msx_video_mode" "PAL" "$msx_core_config"
-    iniSet "bluemsx_nospritelimits" "ON" "$msx_core_config"
+    local core_config="msx"
+    setRetroArchCoreOption "bluemsx_msxtype" "MSX"
+    setRetroArchCoreOption "msx_video_mode" "PAL"
+    setRetroArchCoreOption "bluemsx_nospritelimits" "ON"
 
-    chown $user:$user "$msx_core_config"
 
 # force msx2 system
-    local msx2_core_config="$configdir/msx2/retroarch.cfg"
-    iniConfig " = " '"' "$md_conf_root/msx2/retroarch.cfg"
-    iniSet "bluemsx_msxtype" "MSX2+" "$msx2_core_config"
-    iniSet "msx_video_mode" "PAL" "$msx_core_config"
-    iniSet "bluemsx_nospritelimits" "ON" "$msx_core_config"
-    chown $user:$user "$msx2_core_config"
+    local core_config="msx2"
+    setRetroArchCoreOption "bluemsx_msxtype" "MSX2+"
+    setRetroArchCoreOption "msx_video_mode" "PAL"
+    setRetroArchCoreOption "bluemsx_nospritelimits" "ON"
+    
 
     cp -rv "$md_inst/"{Databases,Machines} "$biosdir/"
     chown -R $user:$user "$biosdir/"{Databases,Machines}
@@ -104,15 +99,13 @@ function configure_lr-bluemsx() {
     if [  -d $raconfigdir/overlay/GameBezels/ColecoVision ]
     then
           cp /home/$user/.config/RetroPie/coleco/retroarch.cfg /home/$user/.config/RetroPie/coleco/retroarch.cfg.bkp
-          local core_config="$configdir/coleco/retroarch.cfg"
-          iniConfig " = " '"' "$md_conf_root/coleco/retroarch.cfg"
-          iniSet  "input_overlay" "$raconfigdir/overlay/Colecovision.cfg" "$core_config"
-          iniSet "input_overlay_opacity" "1.0" "$core_config"
-          iniSet "input_overlay_scale" "1.0" "$core_config"
-          iniSet "input_overlay_enable" "true" "$core_config"
-          iniSet "video_smooth" "true" "$core_config"
-          iniSet "bluemsx_msxtype" "ColecoVision" "$core_config"
-          chown $user:$user "$core_config"
+          local core_config="coleco"
+          setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Colecovision.cfg"
+          setRetroArchCoreOption "input_overlay_opacity" "1.0"
+          setRetroArchCoreOption "input_overlay_scale" "1.0"
+          setRetroArchCoreOption "input_overlay_enable" "true"
+          setRetroArchCoreOption "video_smooth" "true"
+          setRetroArchCoreOption "bluemsx_msxtype" "ColecoVision"
     fi
 
 

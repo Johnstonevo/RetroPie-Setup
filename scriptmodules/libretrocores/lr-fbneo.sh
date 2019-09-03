@@ -129,13 +129,11 @@ fi
 if [  -d $raconfigdir/overlay/ArcadeBezels ]
  then
     cp /home/$user/.config/RetroPie/fba/retroarch.cfg /home/$user/.config/RetroPie/fba/retroarch.cfg.bkp
-    local core_config="$configdir/fba/retroarch.cfg"
-     iniConfig " = " '"' "$md_conf_root/fba/retroarch.cfg"
+    local core_config="fba"
 
-    iniSet "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
-    iniSet "input_overlay_opacity" "1.0"
-    iniSet "fbneo-diagnostic-input" "Hold Start"
-    chown $user:$user "$core_config"
+    setRetroArchCoreOption "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
+    setRetroArchCoreOption "input_overlay_opacity" "1.0"
+    setRetroArchCoreOption "fbneo-diagnostic-input" "Hold Start"
 fi
 
 }

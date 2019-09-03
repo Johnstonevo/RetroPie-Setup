@@ -114,43 +114,36 @@ then
     find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
     ln -s "$raconfigdir/config/Mupen64Plus GLES2" "$raconfigdir/config/Mupen64Plus OpenGL"
 fi
-if [  -d $raconfigdir/overlay/GameBezels/N64 ]
- then
-             cp /home/$user/.config/RetroPie/n64/retroarch.cfg /home/$user/.config/RetroPie/n64/retroarch.cfg.bkp
-            local core_config="$configdir/n64/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/n64/retroarch.cfg"
-            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-            iniSet "input_overlay_opacity" "1.0"
-            iniSet "input_overlay_scale" "1.0"
-            iniSet "input_overlay_enable" "true"
-            iniSet "video_aspect_ratio" "1.0"
-            iniSet "video_smooth" "true"
-            chown $user:$user "$core_config"
 
-            cp /home/$user/.config/RetroPie/n64dd/retroarch.cfg /home/$user/.config/RetroPie/n64dd/retroarch.cfg.bkp
-            local core_config="$configdir/n64dd/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/n64dd/retroarch.cfg"
-            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-            iniSet "input_overlay_opacity" "1.0"
-            iniSet "input_overlay_scale" "1.0"
-            iniSet "input_overlay_enable" "true"
-            iniSet "video_aspect_ratio" "1.0"
-            iniSet "video_smooth" "true"
-            chown $user:$user "$core_config"
+        cp /home/$user/.config/RetroPie/n64/retroarch.cfg /home/$user/.config/RetroPie/n64/retroarch.cfg.bkp
+    local core_config="n64"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
+    setRetroArchCoreOption "input_overlay_opacity" "1.0"
+    setRetroArchCoreOption "input_overlay_scale" "1.0"
+    setRetroArchCoreOption "input_overlay_enable" "true"
+    setRetroArchCoreOption "video_aspect_ratio" "1.0"
+    setRetroArchCoreOption "video_smooth" "true"
+
+    cp /home/$user/.config/RetroPie/n64dd/retroarch.cfg /home/$user/.config/RetroPie/n64dd/retroarch.cfg.bkp
+    local core_config="n64dd"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
+    setRetroArchCoreOption "input_overlay_opacity" "1.0"
+    setRetroArchCoreOption "input_overlay_scale" "1.0"
+    setRetroArchCoreOption "input_overlay_enable" "true"
+    setRetroArchCoreOption "video_aspect_ratio" "1.0"
+    setRetroArchCoreOption "video_smooth" "true"
 
 
-            cp /home/$user/.config/RetroPie/n64-japan/retroarch.cfg /home/$user/.config/RetroPie/n64-japan/retroarch.cfg.bkp
-            local core_config="$configdir/n64-japan/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/n64-japan/retroarch.cfg"
-            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-            iniSet "input_overlay_opacity" "1.0"
-            iniSet "input_overlay_scale" "1.0"
-            iniSet "input_overlay_enable" "true"
-            iniSet "video_aspect_ratio" "1.0"
-            iniSet "video_smooth" "true"
-            chown $user:$user "$core_config"
+    cp /home/$user/.config/RetroPie/n64-japan/retroarch.cfg /home/$user/.config/RetroPie/n64-japan/retroarch.cfg.bkp
+    local core_config="n64-japan"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
+    setRetroArchCoreOption "input_overlay_opacity" "1.0"
+    setRetroArchCoreOption "input_overlay_scale" "1.0"
+    setRetroArchCoreOption "input_overlay_enable" "true"
+    setRetroArchCoreOption "video_aspect_ratio" "1.0"
+    setRetroArchCoreOption "video_smooth" "true"
 
 
-fi
+
 
 }

@@ -47,16 +47,14 @@ function configure_lr-beetle-lynx() {
         addSystem "atarilynx"
   fi
 
-    cp /home/$user/.config/RetroPie/atarilynx/retroarch.cfg /home/$user/.config/RetroPie/atarilynx/retroarch.cfg.bkp
-    local core_config="$configdir/atarilynx/retroarch.cfg"
-    iniConfig " = " '"' "$md_conf_root/atarilynx/retroarch.cfg"
-    iniSet  "input_overlay" "$raconfigdir/overlays/1080p_4-3/Lynx_1080p.cfg" "$core_config"
-    iniSet "input_overlay_enable" "true" "$core_config"
-    iniSet "video_smooth" "false" "$core_config"
-    iniSet "input_overlay_opacity" "1.0" "$core_config"
-    iniSet "input_overlay_scale" "1.0" "$core_config"
-    iniSet  "video_shader" "$raconfigdir/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl" "$core_config"
-    iniSet  "video_shader_enable"  "true" "$core_config"
-    iniSet  "video_smooth"  "false" "$core_config"
-    chown $user:$user "$core_config"
+    local core_config="atarilynx"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/Lynx_1080p.cfg" 
+    setRetroArchCoreOption "input_overlay_enable" "true" 
+    setRetroArchCoreOption "video_smooth" "false" 
+    setRetroArchCoreOption "input_overlay_opacity" "1.0" 
+    setRetroArchCoreOption "input_overlay_scale" "1.0" 
+    setRetroArchCoreOption  "video_shader" "$raconfigdir/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl" 
+    setRetroArchCoreOption  "video_shader_enable"  "true" 
+    setRetroArchCoreOption  "video_smooth"  "false" 
+  
 }

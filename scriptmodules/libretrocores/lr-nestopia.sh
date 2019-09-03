@@ -32,40 +32,52 @@ function install_lr-nestopia() {
     md_ret_files=(
         'libretro/nestopia_libretro.so'
         'NstDatabase.xml'
-        'README.md'
-        'ChangeLog'
-        'readme.html'
-        'COPYING'
-        'AUTHORS'
+        #'README.md'
+        #'ChangeLog'
+        #'readme.html'
+        #'COPYING'
+        #'AUTHORS'
     )
 }
 
 function configure_lr-nestopia() {
-  mkRomDir "nes"
-  mkRomDir "nesh"
-    mkRomDir "fds"
-    mkRomDir "famicom"
-    ensureSystemretroconfig "nes"
-    ensureSystemretroconfig "nesh"
-    ensureSystemretroconfig "fds"
-    ensureSystemretroconfig "famicom"
+    local system
+    local def
+    for system in nes nesh fds famicom ; do
+        def=0
+        [[ "$system" == "nes" || "$system" == "nesh"  || "$system" == "fds"  || "$system" == "famicom"  ]] && def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator 0 "$md_id" "$system" "$md_inst/nestopia_libretro.so"
+        addSystem "$system"
+
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg"
+        setRetroArchCoreOption "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption "input_overlay_scale" "1.0"
+        setRetroArchCoreOption "input_overlay_enable" "true"
+        setRetroArchCoreOption "video_smooth" "false"
+        setRetroArchCoreOption "nestopia_palette" "pal"
+        setRetroArchCoreOption "nestopia_nospritelimie" "enabled"
+
+    done
 
     addBezel "fds"
     addBezel "nes"
     addBezel "famicom"
 
 
+    local core_config="famicom"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Famicom.cfg"
+
+    local core_config="fds"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Famicom-Disk-System"
+
+
     cp NstDatabase.xml "$biosdir/"
     chown $user:$user "$biosdir/NstDatabase.xml"
 
-    addEmulator 0 "$md_id" "nes" "$md_inst/nestopia_libretro.so"
-    addEmulator 0 "$md_id" "nesh" "$md_inst/nestopia_libretro.so"
-    addEmulator 1 "$md_id" "fds" "$md_inst/nestopia_libretro.so"
-    addEmulator 0 "$md_id" "famicom" "$md_inst/nestopia_libretro.so"
-    addSystem "nes"
-    addSystem "nesh"
-    addSystem "fds"
-    addSystem "famicom"
 
 
     cp NstDatabase.xml "$biosdir/"
@@ -73,61 +85,21 @@ function configure_lr-nestopia() {
     #setRetroArchCoreOption "nestopia_palette" "canonical"
 
 
-if [ -e $md_instppa/nestopia_libretro.so ]
-then
-    addEmulator 0 "$md_id-ppa" "nes" "$md_inst/nestopia_libretro.so"
-    addEmulator 0 "$md_id-ppa" "nesh" "$md_inst/nestopia_libretro.so"
-    addEmulator 0 "$md_id-ppa" "fds" "$md_inst/nestopia_libretro.so"
-    addEmulator 0 "$md_id-ppa" "famicom" "$md_inst/nestopia_libretro.so"
-    addSystem "nes"
-    addSystem "nesh"
-    addSystem "fds"
-    addSystem "famicom"
-fi
+        if [ -e $md_instppa/nestopia_libretro.so ]
+        then
+            local system
+            local def
+            for system in nes nesh fds famicom ; do
+                def=0
+                [[ "$system" == "nes" || "$system" == "nesh"  || "$system" == "fds"  || "$system" == "famicom"  ]] && def=1
+                mkRomDir "$system"
+                ensureSystemretroconfig "$system"
+                addEmulator 0 "$md_id-ppa" "$system" "$md_instppa/nestopia_libretro.so"
+                addSystem "$system"
+            done
+        fi
 
-             cp /home/$user/.config/RetroPie/nes/retroarch.cfg /home/$user/.config/RetroPie/nes/retroarch.cfg.bkp
-            local core_config="$configdir/nes/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/nes/retroarch.cfg"
-            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-            iniSet "input_overlay_opacity" "1.0"
-            iniSet "input_overlay_scale" "1.0"
-            iniSet "input_overlay_enable" "true"
-            iniSet "video_smooth" "false"
-            chown $user:$user "$core_config"
 
-             cp /home/$user/.config/RetroPie/nesh/retroarch.cfg /home/$user/.config/RetroPie/nesh/retroarch.cfg.bkp
-            local core_config="$configdir/nesh/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/nesh/retroarch.cfg"
-            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-            iniSet "input_overlay_opacity" "1.0"
-            iniSet "input_overlay_scale" "1.0"
-            iniSet "input_overlay_enable" "true"
-            iniSet "video_smooth" "false"
-            iniSet "nestopia_palette" "pal"
-            iniSet "nestopia_nospritelimie" "enabled"
-            chown $user:$user "$core_config"
 
-             cp /home/$user/.config/RetroPie/fds/retroarch.cfg /home/$user/.config/RetroPie/fds/retroarch.cfg.bkp
-            local core_config="$configdir/fds/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/fds/retroarch.cfg"
-            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-            iniSet "input_overlay_opacity" "1.0"
-            iniSet "input_overlay_scale" "1.0"
-            iniSet "input_overlay_enable" "true"
-            iniSet "video_smooth" "false"
-            iniSet "nestopia_palette" "pal"
-            iniSet "nestopia_nospritelimie" "enabled"
-            chown $user:$user "$core_config"
 
-             cp /home/$user/.config/RetroPie/famicom/retroarch.cfg /home/$user/.config/RetroPie/famicom/retroarch.cfg.bkp
-            local core_config="$configdir/famicom/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/famicom/retroarch.cfg"
-            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-            iniSet "input_overlay_opacity" "1.0"
-            iniSet "input_overlay_enable" "true"
-            iniSet "input_overlay_scale" "1.0"
-            iniSet "video_smooth" "false"
-            iniSet "nestopia_palette" "pal"
-            iniSet "nestopia_nospritelimie" "enabled"
-            chown $user:$user "$core_config"
 }

@@ -32,6 +32,8 @@ function install_lr-caprice32() {
 }
 
 function configure_lr-caprice32() {
+    local core_config="amstradcpc"
+
     mkRomDir "amstradcpc"
     ensureSystemretroconfig "amstradcpc"
 

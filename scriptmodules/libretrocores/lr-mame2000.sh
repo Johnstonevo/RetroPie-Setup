@@ -49,8 +49,14 @@ function configure_lr-mame2000() {
         addEmulator 0 "$md_id" "$system" "$md_inst/mame2000_libretro.so"
         addSystem "$system"
 
-        addBezel "mame-mame4all"
+        local core_config="$system"
+
+        setRetroarchCoreOption "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
+        setRetroarchCoreOption "input_overlay_opacity" "1.0"
+        setRetroarchCoreOption "input_overlay_enable" "true"
+        
     done
+    
     if [ -e $md_instppa/mame2000_libretro.so ]
     then
         addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/${so_name}_libretro.so"
@@ -58,13 +64,7 @@ function configure_lr-mame2000() {
     fi
 
         cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
-        local core_config="$configdir/$system/retroarch.cfg"
-         iniConfig " = " '"' "$md_conf_root/$system/retroarch.cfg"
-
-        iniSet "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
-        iniSet "input_overlay_opacity" "1.0"
-        iniSet "input_overlay_enable" "true"
     
-
+        addBezel "mame-mame4all"
 
 }

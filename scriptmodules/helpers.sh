@@ -885,14 +885,15 @@ function ensureSystemretroconfig() {
 ## @param value value to set
 ## @brief Sets a retroarch core option in `$raconfigdir/config/retroarch-core-options.cfg`.
 function setRetroArchCoreOption() {
+    local system="$1"
     local option="$1"
     local value="$2"
-    iniConfig " = " "\"" "$raconfigdir/config/retroarch-core-options.cfg"
+    iniConfig " = " "\"" "$configdir/$core_config/retroarch.cfg"
     iniGet "$option"
     if [[ -z "$ini_value" ]]; then
         iniSet "$option" "$value"
     fi
-    chown $user:$user "$raconfigdir/config/retroarch-core-options.cfg"
+    chown $user:$user "$configdir/$core_config/retroarch.cfg"
 }
 
 ## @fn setConfigRoot()
@@ -1296,7 +1297,6 @@ function addEmulator() {
     if [[ "$id" == lr-* && "$cmd" != "$emudir/retroarch/bin/retroarch"* ]]; then
         cmd="$emudir/retroarch/bin/retroarch -L $cmd --config $md_conf_root/$system/retroarch.cfg %ROM%"
     fi
-
     # create a config folder for the system / port
     mkUserDir "$md_conf_root/$system"
 

@@ -55,17 +55,13 @@ _EOF_
           addEmulator 1 "$md_id-ppa" "ports/cavestory" "$md_instppa/nxengine_libretro.so"
     fi
 
-    if [  -d $raconfigdir/overlays/tvcs ]
-    then
-                cp /home/$user/.config/RetroPie/ports/cavestory/retroarch.cfg /home/$user/.config/RetroPie/ports/cavestory/retroarch.cfg.bkp
-                local core_config="$configdir/ports/cavestory/retroarch.cfg"
-                iniConfig " = " '"' "$md_conf_root/ports/cavestory/retroarch.cfg"
-                iniSet  "input_overlay" "$raconfigdir/overlays/tvcs/tvcs-clear.cfg" "$core_config"
-                iniSet "input_overlay_opacity" "1.0" "$core_config"
-                iniSet "input_overlay_scale" "1.0" "$core_config"
-                iniSet "input_overlay_enable" "true" "$core_config"
-                iniSet "video_smooth" "false" "$core_config"
-                chown $user:$user "$core_config"
-      fi
+    cp /home/$user/.config/RetroPie/ports/cavestory/retroarch.cfg /home/$user/.config/RetroPie/ports/cavestory/retroarch.cfg.bkp
+    local core_config="ports/cavestory"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlays/tvcs/tvcs-clear.cfg"
+    setRetroArchCoreOption "input_overlay_opacity" "1.0"
+    setRetroArchCoreOption "input_overlay_scale" "1.0"
+    setRetroArchCoreOption "input_overlay_enable" "true"
+    setRetroArchCoreOption "video_smooth" "false"
+ 
 
 }

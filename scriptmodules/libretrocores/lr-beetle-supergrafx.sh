@@ -32,6 +32,8 @@ function install_lr-beetle-supergrafx() {
 }
 
 function configure_lr-beetle-supergrafx() {
+    local core_config="$configdir/supergrafx/retroarch.cfg"
+
     mkRomDir "pcengine"
     ensureSystemretroconfig "pcengine"
 
@@ -49,17 +51,15 @@ function configure_lr-beetle-supergrafx() {
         if [ ! -d $raconfigdir/overlay/GameBezels/SuperGrafx ]
             then
              cp /home/$user/.config/RetroPie/supergrafx/retroarch.cfg /home/$user/.config/RetroPie/supergrafx/retroarch.cfg.bkp
-            local core_config="$configdir/supergrafx/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/supergrafx/retroarch.cfg"
-            iniSet  "core_options_path" "/home/$user/.config/RetroPie/sfgx/retroarch.cfg" "$core_config"
-            iniSet  "input_overlay" "$raconfigdir/overlay/NEC-SuperGrafx.cfg" "$core_config"
-            iniSet  "input_overlay_opacity" "1.0" "$core_config"
-            iniSet  "input_overlay_scale" "1.0" "$core_config"
-            iniSet  "video_fullscreen_x" "1920" "$core_config"
-            iniSet  "video_fullscreen_y" "1080" "$core_config"
-            iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie" "$core_config"
-            chown $user:$user "$core_config"
+            setRetroArchCoreOption  "core_options_path" "/home/$user/.config/RetroPie/sfgx/retroarch.cfg"
+            setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-SuperGrafx.cfg"
+            setRetroArchCoreOption  "input_overlay_opacity" "1.0"
+            setRetroArchCoreOption  "input_overlay_scale" "1.0"
+            setRetroArchCoreOption  "video_fullscreen_x" "1920"
+            setRetroArchCoreOption  "video_fullscreen_y" "1080"
+            setRetroArchCoreOption "input_overlay_enable" "true"
+            setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
+            
         fi
 
 }

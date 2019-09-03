@@ -64,15 +64,12 @@ function configure_lr-mame() {
   addEmulator 0 "$md_id-ppa" "mame-current" "$md_instppa/mame_libretro.so"
   fi
       cp /home/$user/.config/RetroPie/mame-current/retroarch.cfg /home/$user/.config/RetroPie/mame-current/retroarch.cfg.bkp
-      local core_config="$configdir/mame-current/retroarch.cfg"
-       iniConfig " = " '"' "$md_conf_root/mame-current/retroarch.cfg"
-
-      iniSet "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
-      iniSet "input_overlay_opacity" "1.0"
-      iniSet "input_overlay_enable" "true"
-      iniSet "mame-skip_disclaimer" "enabled"
-      iniSet "mame-dcs-speedhack" "enabled"
-      iniSet "mame-samples" "enabled"
-      chown $user:$user "$core_config"
+      local core_config="mame-current"
+      setRetroArchCoreOption "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
+      setRetroArchCoreOption "input_overlay_opacity" "1.0"
+      setRetroArchCoreOption "input_overlay_enable" "true"
+      setRetroArchCoreOption "mame-skip_disclaimer" "enabled"
+      setRetroArchCoreOption "mame-dcs-speedhack" "enabled"
+      setRetroArchCoreOption "mame-samples" "enabled"
 
 }

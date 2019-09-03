@@ -37,7 +37,7 @@ function install_lr-mame2003-plus() {
 
 function configure_lr-mame2003-plus() {
   local dir_name="$(_get_dir_name_${md_id})"
-
+  local core_config=mame-2003-plus
   local mame_dir
   local mame_sub_dir
   #for mame_dir in mame-2003-plus ; do
@@ -61,47 +61,44 @@ function configure_lr-mame2003-plus() {
   chown $user:$user "$biosdir/$dir_name/"{hiscore.dat,cheat.dat}
 
   # Set core options
-  #setRetroArchCoreOption "${dir_name}-skip_disclaimer" "enabled"
-  #setRetroArchCoreOption "${dir_name}-dcs-speedhack" "enabled"
-  #setRetroArchCoreOption "${dir_name}-samples" "enabled"
+
 
   local so_name="$(_get_so_name_${md_id})"
   addEmulator 1 "$md_id" "mame-2003-plus" "$md_inst/${so_name}_libretro.so"
   addSystem "arcade"
   addSystem "mame-2003-plus"
+  addBezel "mame-2003-plus"
+  
+  #ln -s "$raconfigdir/config/MAME 2003" "$raconfigdir/config/MAME 2003-Plus"
+  
+  setRetroArchCoreOption "mame2003-plus_skip_disclaimer" "enabled"
+  setRetroArchCoreOption "mame2003-plus_dcs-speedhack" "enabled"
+  setRetroArchCoreOption "mame2003-plus_samples" "enabled"
+  setRetroArchCoreOption "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
+  setRetroArchCoreOption "input_overlay_opacity" "1.0"
+  setRetroArchCoreOption "input_overlay_enable" "true"
+  setRetroArchCoreOption  "mame2003-plus_core_save_subfolder" "enabled"
+  setRetroArchCoreOption  "mame2003-plus_core_sys_subfolder" "enabled"
+  setRetroArchCoreOption  "mame2003-plus_dcs_speedhack" "enabled"
+  setRetroArchCoreOption  "mame2003-plus_display_artwork" "enabled"
+  setRetroArchCoreOption  "mame2003-plus_display_setup" "disabled"
+  setRetroArchCoreOption  "mame2003-plus_dual_joysticks" "disabled"
+  setRetroArchCoreOption  "mame2003-plus_frameskip" "0"
+  setRetroArchCoreOption  "mame2003-plus_gamma" "1.2"
+  setRetroArchCoreOption  "mame2003-plus_input_interface" "retroarch"
+  setRetroArchCoreOption  "mame2003-plus_machine_timing" "enabled"
+  setRetroArchCoreOption  "mame2003-plus_mame_remapping" "disabled"
+  setRetroArchCoreOption  "mame2003-plus_mouse_device" "mouse"
+  setRetroArchCoreOption  "mame2003-plus_rstick_to_btns" "enabled"
+  setRetroArchCoreOption  "mame2003-plus_sample_rate" "48000"
+  setRetroArchCoreOption  "mame2003-plus_skip_disclaimer" "enabled"
+  setRetroArchCoreOption  "mame2003-plus_skip_warnings" "enabled"
+  setRetroArchCoreOption  "mame2003-plus_tate_mode" "disabled"
+  setRetroArchCoreOption  "mame2003-plus-dcs-speedhack" "enabled"
+  setRetroArchCoreOption "mame2003-plus-samples" "enabled"
 
-    addBezel "mame-2003-plus"
-    
-    ln -s "$raconfigdir/config/MAME 2003" "$raconfigdir/config/MAME 2003-Plus"
 
-    cp /home/$user/.config/RetroPie/mame-2003-plus/retroarch.cfg /home/$user/.config/RetroPie/mame-2003-plus/retroarch.cfg.bkp
-    local core_config="$configdir/mame-2003-plus/retroarch.cfg"
-        iniConfig " = " '"' "$md_conf_root/mame-2003-plus/retroarch.cfg"
 
-        iniSet "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
-        iniSet "input_overlay_opacity" "1.0"
-        iniSet "input_overlay_enable" "true"
-        iniSet  "mame2003-plus_cheat_input ports" "disabled"
-        iniSet  "mame2003-plus_core_save_subfolder" "enabled"
-        iniSet  "mame2003-plus_core_sys_subfolder" "enabled"
-        iniSet  "mame2003-plus_dcs_speedhack" "enabled"
-        iniSet  "mame2003-plus_display_artwork" "enabled"
-        iniSet  "mame2003-plus_display_setup" "disabled"
-        iniSet  "mame2003-plus_dual_joysticks" "disabled"
-        iniSet  "mame2003-plus_frameskip" "0"
-        iniSet  "mame2003-plus_gamma" "1.2"
-        iniSet  "mame2003-plus_input_interface" "retroarch"
-        iniSet  "mame2003-plus_machine_timing" "enabled"
-        iniSet  "mame2003-plus_mame_remapping" "disabled"
-        iniSet  "mame2003-plus_mouse_device" "mouse"
-        iniSet  "mame2003-plus_rstick_to_btns" "enabled"
-        iniSet  "mame2003-plus_sample_rate" "48000"
-        iniSet  "mame2003-plus_skip_disclaimer" "enabled"
-        iniSet  "mame2003-plus_skip_warnings" "enabled"
-        iniSet  "mame2003-plus_tate_mode" "disabled"
-        iniSet  "mame2003-plus-dcs-speedhack" "enabled"
-        iniSet "mame2003-plus-samples" "enabled"
-        chown $user:$user "$core_config"
 
 
 }

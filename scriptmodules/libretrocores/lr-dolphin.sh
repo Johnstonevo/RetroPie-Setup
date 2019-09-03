@@ -40,6 +40,7 @@ function install_lr-dolphin() {
 }
 
 function configure_lr-dolphin() {
+    
     mkRomDir "gc"
     mkRomDir "wii"
 

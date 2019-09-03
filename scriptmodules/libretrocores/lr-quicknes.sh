@@ -68,47 +68,40 @@ then
 fi
 
 
-             cp /home/$user/.config/RetroPie/nes/retroarch.cfg /home/$user/.config/RetroPie/nes/retroarch.cfg.bkp
-            local core_config="$configdir/nes/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/nes/retroarch.cfg"
-            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-            iniSet "input_overlay_opacity" "1.0"
-            iniSet "input_overlay_scale" "1.0"
-            iniSet "input_overlay_enable" "true"
-            iniSet "video_smooth" "false"
-            chown $user:$user "$core_config"
+    cp /home/$user/.config/RetroPie/nes/retroarch.cfg /home/$user/.config/RetroPie/nes/retroarch.cfg.bkp
+    local core_config="nes"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg"
+    setRetroArchCoreOption "input_overlay_opacity" "1.0"
+    setRetroArchCoreOption "input_overlay_scale" "1.0"
+    setRetroArchCoreOption "input_overlay_enable" "true"
+    setRetroArchCoreOption "video_smooth" "false"
 
-             cp /home/$user/.config/RetroPie/nesh/retroarch.cfg /home/$user/.config/RetroPie/nesh/retroarch.cfg.bkp
-            local core_config="$configdir/nesh/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/nesh/retroarch.cfg"
-            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-            iniSet "input_overlay_opacity" "1.0"
-            iniSet "input_overlay_scale" "1.0"
 
-            iniSet "input_overlay_enable" "true"
-            iniSet "video_smooth" "false"
-            chown $user:$user "$core_config"
+    cp /home/$user/.config/RetroPie/nesh/retroarch.cfg /home/$user/.config/RetroPie/nesh/retroarch.cfg.bkp
+    local core_config="nesh"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg"
+    setRetroArchCoreOption "input_overlay_opacity" "1.0"
+    setRetroArchCoreOption "input_overlay_scale" "1.0"
+    setRetroArchCoreOption "input_overlay_enable" "true"
+    setRetroArchCoreOption "video_smooth" "false"
 
-             cp /home/$user/.config/RetroPie/fds/retroarch.cfg /home/$user/.config/RetroPie/fds/retroarch.cfg.bkp
-            local core_config="$configdir/fds/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/fds/retroarch.cfg"
-            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-            iniSet "input_overlay_opacity" "1.0"
-            iniSet "input_overlay_scale" "1.0"
 
-            iniSet "input_overlay_enable" "true"
-            iniSet "video_smooth" "false"
-            chown $user:$user "$core_config"
+    cp /home/$user/.config/RetroPie/fds/retroarch.cfg /home/$user/.config/RetroPie/fds/retroarch.cfg.bkp
+    local core_config="fds"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg"
+    setRetroArchCoreOption "input_overlay_opacity" "1.0"
+    setRetroArchCoreOption "input_overlay_scale" "1.0"
+    setRetroArchCoreOption "input_overlay_enable" "true"
+    setRetroArchCoreOption "video_smooth" "false"
 
-             cp /home/$user/.config/RetroPie/famicom/retroarch.cfg /home/$user/.config/RetroPie/famicom/retroarch.cfg.bkp
-            local core_config="$configdir/famicom/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/famicom/retroarch.cfg"
-            iniSet  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-            iniSet "input_overlay_opacity" "1.0"
-            iniSet "input_overlay_scale" "1.0"
 
-            iniSet "input_overlay_enable" "true"
-            iniSet "video_smooth" "false"
-            chown $user:$user "$core_config"
+    cp /home/$user/.config/RetroPie/famicom/retroarch.cfg /home/$user/.config/RetroPie/famicom/retroarch.cfg.bkp
+    local core_config="famicom"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg"
+    setRetroArchCoreOption "input_overlay_opacity" "1.0"
+    setRetroArchCoreOption "input_overlay_scale" "1.0"
+    setRetroArchCoreOption "input_overlay_enable" "true"
+    setRetroArchCoreOption "video_smooth" "false"
+
 
 }

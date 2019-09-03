@@ -71,22 +71,17 @@ function configure_lr-fmsx() {
     addSystem "msx2+"
 
  # force msx system
-    local msx_core_config="$configdir/msx/retroarch.cfg"
-    iniConfig " = " '"' "$md_conf_root/msx/retroarch.cfg"
-    iniSet  "fmsx_mode" "MSX1" "$msx_core_config"
-    iniSet "fmsx_video_mode" "PAL" "$msx_core_config"
-    chown $user:$user "$msx_core_config"
+    local core_config="msx"
+    setRetroArchCoreOption  "fmsx_mode" "MSX1"
+    setRetroArchCoreOption "fmsx_video_mode" "PAL"
 
-    # force msx2 system
-        local msx2_core_config="$configdir/msx2/retroarch.cfg"
-        iniConfig " = " '"' "$md_conf_root/msx2/retroarch.cfg"
-        iniSet  "fmsx_mode" "MSX2+" "$msx2_core_config"
-        iniSet "fmsx_video_mode" "PAL" "$msx2_core_config"
-        chown $user:$user "$msx2_core_config"
-        # force msx2 system
-            local msx2+_core_config="$configdir/msx2+/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/msx2+/retroarch.cfg"
-            iniSet  "fmsx_mode" "MSX2+" "$msx2+_core_config"
-            iniSet "fmsx_video_mode" "PAL" "$msx2+_core_config"
-            chown $user:$user "$msx2+_core_config"
+# force msx2 system
+    iniConfig " = " '"' "$md_conf_root/msx2"
+    setRetroArchCoreOption  "fmsx_mode" "MSX2+"
+    setRetroArchCoreOption "fmsx_video_mode" "PAL" 
+    
+# force msx2 system
+    iniConfig " = " '"' "$md_conf_root/msx2+"
+    setRetroArchCoreOption  "fmsx_mode" "MSX2+"
+    setRetroArchCoreOption "fmsx_video_mode" "PAL"
 }

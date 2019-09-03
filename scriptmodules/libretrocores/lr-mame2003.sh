@@ -48,8 +48,7 @@ function install_lr-mame2003() {
 
 function configure_lr-mame2003() {
     local dir_name="$(_get_dir_name_${md_id})"
-
-    local mame_dir
+  local core_config=mame-2003    local mame_dir
     local mame_sub_dir
     for mame_dir in arcade mame-2003 mame-2003-plus ; do
         mkRomDir "$mame_dir"
@@ -72,9 +71,6 @@ function configure_lr-mame2003() {
     chown $user:$user "$biosdir/$dir_name/"{hiscore.dat,cheat.dat}
 
     # Set core options
-  #  setRetroArchCoreOption "${dir_name}-skip_disclaimer" "enabled"
-  #  setRetroArchCoreOption "${dir_name}-dcs-speedhack" "enabled"
-  #  setRetroArchCoreOption "${dir_name}-samples" "enabled"
 
     local so_name="$(_get_so_name_${md_id})"
     addEmulator 0 "$md_id" "arcade" "$md_inst/${so_name}_libretro.so"
@@ -82,6 +78,31 @@ function configure_lr-mame2003() {
     addSystem "arcade"
     addSystem "mame-2003"
     addBezel "mame-2003"
+
+    setRetroArchCoreOption "mame2003_skip_disclaimer" "enabled"
+    setRetroArchCoreOption "mame2003_dcs-speedhack" "enabled"
+    setRetroArchCoreOption "mame2003_samples" "enabled"
+    setRetroArchCoreOption "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
+    setRetroArchCoreOption "input_overlay_opacity" "1.0"
+    setRetroArchCoreOption "input_overlay_enable" "true"
+    setRetroArchCoreOption  "mame2003_core_save_subfolder" "enabled"
+    setRetroArchCoreOption  "mame2003_core_sys_subfolder" "enabled"
+    setRetroArchCoreOption  "mame2003_dcs_speedhack" "enabled"
+    setRetroArchCoreOption  "mame2003_display_artwork" "enabled"
+    setRetroArchCoreOption  "mame2003_display_setup" "disabled"
+    setRetroArchCoreOption  "mame2003_dual_joysticks" "disabled"
+    setRetroArchCoreOption  "mame2003_frameskip" "0"
+    setRetroArchCoreOption  "mame2003_gamma" "1.2"
+    setRetroArchCoreOption  "mame2003_input_interface" "retroarch"
+    setRetroArchCoreOption  "mame2003_machine_timing" "enabled"
+    setRetroArchCoreOption  "mame2003_mame_remapping" "disabled"
+    setRetroArchCoreOption  "mame2003_mouse_device" "mouse"
+    setRetroArchCoreOption  "mame2003_rstick_to_btns" "enabled"
+    setRetroArchCoreOption  "mame2003_sample_rate" "48000"
+    setRetroArchCoreOption  "mame2003_skip_disclaimer" "enabled"
+    setRetroArchCoreOption  "mame2003_skip_warnings" "enabled"
+    setRetroArchCoreOption  "mame2003_tate_mode" "disabled"
+
 
     if [ -e $md_instppa/mame2003_libretro.so ]
     then
@@ -92,16 +113,7 @@ function configure_lr-mame2003() {
         ln -s "$raconfigdir/config/MAME 2003" "$raconfigdir/config/MAME 2003 (0.78)"
         ln -s "$raconfigdir/config/MAME 2003" "$raconfigdir/config/MAME 2003-Plus"
 
-        cp /home/$user/.config/RetroPie/mame-2003/retroarch.cfg /home/$user/.config/RetroPie/mame-2003/retroarch.cfg.bkp
-        local core_config="$configdir/mame-2003/retroarch.cfg"
-         iniConfig " = " '"' "$md_conf_root/mame-2003/retroarch.cfg"
 
-        iniSet "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
-        iniSet "input_overlay_opacity" "1.0"
-        iniSet "input_overlay_enable" "true"
-        iniSet "mame2003-skip_disclaimer" "enabled"
-        iniSet "mame2003-dcs-speedhack" "enabled"
-        iniSet "mame2003-samples" "enabled"
         chown $user:$user "$core_config"
     
 }

@@ -38,87 +38,56 @@ function install_lr-beetle-pce-fast() {
 }
 
 function configure_lr-beetle-pce-fast() {
-    mkRomDir "tg16"
-    mkRomDir "tg-cd"
-    mkRomDir "pcengine"
-    mkRomDir "pce-cd"
-    ensureSystemretroconfig "tg16"
-    ensureSystemretroconfig "tg-cd"
-    ensureSystemretroconfig "pcengine"
-    ensureSystemretroconfig "pce-cd"
+    local system
+    local def
+    for system in tg16 tg-cd pcengine pce-cd ; do
+        def=0
+        [[ "$system" == "tg16" || "$system" == "tg-cd"  || "$system" == "pcengine"  || "$system" == "pce-cd"  ]] && def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator 0 "$md_id" "$system" "$md_inst/mednafen_pce_fast_libretro.so"
+        addSystem "$system"
+        addBezel "$system"
 
-    addEmulator 1 "$md_id" "pcengine" "$md_inst/mednafen_pce_fast_libretro.so"
-    addEmulator 1 "$md_id" "pce-cd" "$md_inst/mednafen_pce_fast_libretro.so"
-    addEmulator 1 "$md_id" "tg16" "$md_inst/mednafen_pce_fast_libretro.so"
-    addEmulator 1 "$md_id" "tg-cd" "$md_inst/mednafen_pce_fast_libretro.so"
-    addSystem "pcengine"
-    addSystem "pce-cd"
-    addSystem "tg16"
-    addSystem "tg-cd"
+        local core_config="$system"
+        setRetroArchCoreOption "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption "input_overlay_scale" "1.0"
+        setRetroArchCoreOption "input_overlay_enable" "true"
+        setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
+
+ done
+
+    local core_config="tg16"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-TurboGrafx-16.cfg"
+
+    local core_config="tg-cd"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-TurboGrafx-CD.cfg"
+
+    local core_config="pcengine"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-PC-Engine.cfg"
+
+    local core_config="pce-cd"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-PC-Engine-CD.cfg"
 
 
-    addBezel "pcengine"
-    addBezel "pce-cd"
-    addBezel "tg16"
-    addBezel "tg-cd"
-
-        if [ -e $md_instppa/mednafen_pce_fast.so ]
+    if [ -e $md_instppa/mednafen_pce_fast_libretro.so ]
         then
-        ensureSystemretroconfig "tg16"
-        ensureSystemretroconfig "tg-cd"
-        ensureSystemretroconfig "pcengine"
-        ensureSystemretroconfig "pce-cd"
+            local system
+            local def
+            for system in tg16 tg-cd pcengine pce-cd ; do
+                def=0
+                [[ "$system" == "tg16" || "$system" == "tg-cd"  || "$system" == "pcengine"  || "$system" == "pce-cd"  ]] && def=1
+                mkRomDir "$system"
+                addEmulator 0 "$md_id-ppa" "$system" "$md_instppa/mednafen_pce_fast_libretro.so"
 
-        addEmulator 0 "$md_id" "pcengine" "$md_inst/mednafen_pce_fast_libretro.so"
-        addEmulator 0 "$md_id" "pce-cd" "$md_inst/mednafen_pce_fast_libretro.so"
-        addEmulator 0 "$md_id" "tg16" "$md_inst/mednafen_pce_fast_libretro.so"
-        addEmulator 0 "$md_id" "tg-cd" "$md_inst/mednafen_pce_fast_libretro.so"
-        addSystem "pcengine"
-        addSystem "pce-cd"
-        addSystem "tg16"
-        addSystem "tg-cd"
-        fi
+        done
+
+    fi
+
+
 
 
         
-             cp /home/$user/.config/RetroPie/tg16/retroarch.cfg /home/$user/.config/RetroPie/tg16/retroarch.cfg.bkp
-            local core_config="$configdir/tg16/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/tg16/retroarch.cfg"
-            iniSet "input_overlay_opacity" "1.0" "$core_config"
-            iniSet "input_overlay_scale" "1.0" "$core_config"
-            iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie" "$core_config"
-           chown $user:$user "$core_config"
-
-            cp /home/$user/.config/RetroPie/pcengine/retroarch.cfg /home/$user/.config/RetroPie/pcengine/retroarch.cfg.bkp
-            local core_config="$configdir/pcengine/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/pcengine/retroarch.cfg"
-            iniSet "input_overlay_opacity" "1.0" "$core_config"
-            iniSet "input_overlay_scale" "1.0" "$core_config"
-            iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie" "$core_config"
-            chown $user:$user "$core_config"
-      
-             cp /home/$user/.config/RetroPie/tg-cd/retroarch.cfg /home/$user/.config/RetroPie/tg-cd/retroarch.cfg.bkp
-            local core_config="$configdir/tg-cd/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/tg-cd/retroarch.cfg"
-            iniSet "input_overlay_opacity" "1.0" "$core_config"
-            iniSet "input_overlay_scale" "1.0" "$core_config"
-            iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie" "$core_config"
-            chown $user:$user "$core_config"
-
-            
-            cp /home/$user/.config/RetroPie/pce-cd/retroarch.cfg /home/$user/.config/RetroPie/pce-cd/retroarch.cfg.bkp
-            local core_config="$configdir/pce-cd/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/pce-cd/retroarch.cfg"
-            iniSet "input_overlay_opacity" "1.0" "$core_config"
-            iniSet "input_overlay_scale" "1.0" "$core_config"
-            iniSet "input_overlay_enable" "true" "$core_config"
-            iniSet "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie" "$core_config"
-            chown $user:$user "$core_config"
-        
-
 
 
 }

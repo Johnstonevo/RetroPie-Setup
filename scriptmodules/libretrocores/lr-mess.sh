@@ -72,12 +72,14 @@ function configure_lr-mess() {
       addSystem "crvision"
       addSystem "neocdz"
       addSystem "cdimono1"
+    
+    
+        local core_config="mess"
+        setRetroArchCoreOption "mame_softlists_enable" "enabled"
+        setRetroArchCoreOption "mame_softlists_auto_media" "enabled"
+        setRetroArchCoreOption "mame_boot_from_cli" "enabled"
 
-    setRetroArchCoreOption "mame_softlists_enable" "enabled"
-    setRetroArchCoreOption "mame_softlists_auto_media" "enabled"
-    setRetroArchCoreOption "mame_boot_from_cli" "enabled"
-
-    mkdir "$biosdir/mame"
-    cp -rv "$md_build/hash" "$biosdir/mame/"
-    chown -R $user:$user "$biosdir/mame"
+        mkdir "$biosdir/mame"
+        cp -rv "$md_build/hash" "$biosdir/mame/"
+        chown -R $user:$user "$biosdir/mame"
 }

@@ -57,16 +57,20 @@ function configure_lr-flycast() {
     mkUserDir "$biosdir/dc"
 
     # system-specific
-    iniConfig " = " "" "$configdir/dreamcast/retroarch.cfg"
-    iniSet "video_shared_context" "true"
-    iniConfig " = " "" "$configdir/atomiswave/retroarch.cfg"
-    iniSet "video_shared_context" "true"
-    iniConfig " = " "" "$configdir/naomi/retroarch.cfg"
-    iniSet "video_shared_context" "true"
+    local core_config="dreamcast"
+    setRetroArchCoreOption "video_shared_context" "true"
+    local core_config="atomiswave"
+    setRetroArchCoreOption "video_shared_context" "true"
+    local core_config="naomi"
+    setRetroArchCoreOption "video_shared_context" "true"
 
 
     # segfaults on the rpi without redirecting stdin from </dev/null
-    addEmulator 0 "$md_id" "dreamcast" "$md_inst/flycast_libretro.so </dev/null"
+    addEmulator 1 "$md_id" "dreamcast" "$md_inst/flycast_libretro.so </dev/null"
+    addEmulator 1 "$md_id" "atomiswave" "$md_inst/flycast_libretro.so </dev/null"
+    addEmulator 1 "$md_id" "naomi" "$md_inst/flycast_libretro.so </dev/null"
+
+
     addSystem "dreamcast"
     addSystem "atomiswave"
     addSystem "naomi"

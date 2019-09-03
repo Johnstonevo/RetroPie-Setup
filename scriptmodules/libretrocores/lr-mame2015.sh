@@ -48,26 +48,22 @@ function configure_lr-mame2015() {
         ensureSystemretroconfig "$system"
         addEmulator 0 "$md_id" "$system" "$md_inst/mame2015_libretro.so"
         addSystem "$system"
-        addBezel "mame-2015"
+        setRetroarchCoreOption "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
+        setRetroarchCoreOption "input_overlay_opacity" "1.0"
+        setRetroarchCoreOption "input_overlay_enable" "true"
+        setRetroarchCoreOption "mame2015-skip_disclaimer" "enabled"
+        setRetroarchCoreOption "mame2015-dcs-speedhack" "enabled"
+        setRetroarchCoreOption "mame2015-samples" "enabled"
+
     done
     if [ -e $md_instppa/mame2015_libretro.so ]
     then
         addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame2015_libretro.so"
         addEmulator 0 "$md_id-ppa" "mame-2015" "$md_instppa/mame2015_libretro.so"
     fi
+        addBezel "mame-2015"
         ln -s "$raconfigdir/config/MAME 2010" "$raconfigdir/config/MAME 2015"
 
-        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
-        local core_config="$configdir/$system/retroarch.cfg"
-         iniConfig " = " '"' "$md_conf_root/$system/retroarch.cfg"
 
-        iniSet "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
-        iniSet "input_overlay_opacity" "1.0"
-        iniSet "input_overlay_enable" "true"
-        iniSet "mame2015-skip_disclaimer" "enabled"
-        iniSet "mame2015-dcs-speedhack" "enabled"
-        iniSet "mame2015-samples" "enabled"
-        chown $user:$user "$core_config"
-    
 
 }

@@ -49,20 +49,14 @@ function configure_lr-atari800() {
 
     addBezel "atari5200"
 
-    
- # force 800 system
-    local a800_core_config="$configdir/atari800/retroarch.cfg"
-    iniConfig " = " '"' "$md_conf_root/atari800/retroarch.cfg"
-    iniSet  "atari800_system" "800" "$atari800_core_config"
-    iniSet "atari800_ntscpal" "PAL" "$atari800_core_config"
-    chown $user:$user "$a800_core_config"
-
-# force 5200 system
+    local core_config=atari800
+    setRetroArchCoreOption "atari800_system" "800"
+    setRetroArchCoreOption "atari800_ntscpal" "PAL"
+ 
+    local core_config=atari5200
     local a5200_core_config="$configdir/atari5200/retroarch.cfg"
-    iniConfig " = " '"' "$md_conf_root/atari5200/retroarch.cfg"
-    iniSet  "atari800_system" "5200" "$a5200_core_config"
-    iniSet "atari800_ntscpal" "PAL" "$a5200_core_config"
-    chown $user:$user "$a5200_core_config"
+    setRetroArchCoreOption  "atari800_system" "5200"
+    setRetroArchCoreOption  "atari800_ntscpal" "PAL"
 
 
 
