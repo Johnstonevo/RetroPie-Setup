@@ -55,6 +55,7 @@ function configure_lr-prosystem() {
     setRetroArchCoreOption "input_overlay_scale" "1.0"
     setRetroArchCoreOption "input_overlay_enable" "true"
     setRetroArchCoreOption "video_smooth" "true"
+    setRetroArchCoreOption "system_directory" "$datadir/BIOS/atari/"
 
     addBezel "atari7800"
   

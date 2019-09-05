@@ -46,6 +46,7 @@ function configure_lr-atari800() {
         setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Atari-5200.cfg"
         setRetroArchCoreOption "input_overlay_opacity" "1.0"
         setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
+        setRetroArchCoreOption "system_directory" "$datadir/BIOS/atari/"
 
     done
 
@@ -57,12 +58,19 @@ function configure_lr-atari800() {
     local core_config="atari800"
     setRetroArchCoreOption "atari800_system" "800"
     setRetroArchCoreOption "atari800_ntscpal" "PAL"
- 
+    
     local core_config="atari5200"
     local a5200_core_config="$configdir/atari5200/retroarch.cfg"
     setRetroArchCoreOption  "atari800_system" "5200"
-    setRetroArchCoreOption  "atari800_ntscpal" "PAL"
-
+    setRetroArchCoreOption  "atari800_artifacting"  "enabled"
+    setRetroArchCoreOption  "atari800_cassboot"  "disabled"
+    setRetroArchCoreOption  "atari800_internalbasic"  "disabled"
+    setRetroArchCoreOption  "atari800_keyboard"  "poll"
+    setRetroArchCoreOption  "atari800_ntscpal"  "NTSC"
+    setRetroArchCoreOption  "atari800_opt1"  "disabled"
+    setRetroArchCoreOption  "atari800_opt2"  "disabled"
+    setRetroArchCoreOption  "atari800_resolution"  "336x240"
+    setRetroArchCoreOption  "atari800_sioaccel"  "enabled"
 
 
 

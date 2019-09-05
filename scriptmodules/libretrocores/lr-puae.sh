@@ -36,4 +36,6 @@ function configure_lr-puae() {
     ensureSystemretroconfig "amiga"
     addEmulator 0 "$md_id" "amiga" "$md_inst/puae_libretro.so"
     addSystem "amiga"
+    local core_config="amiga"
+    setRetroArchCoreOption "system_directory" "$datadir/BIOS/amiga/"
 }
