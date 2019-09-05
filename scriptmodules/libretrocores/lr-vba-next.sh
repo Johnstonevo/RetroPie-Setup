@@ -37,69 +37,45 @@ function install_lr-vba-next() {
 }
 
 function configure_lr-vba-next() {
-  mkRomDir "gba"
-  ensureSystemretroconfig "gba"
-  mkRomDir "gbah"
-  ensureSystemretroconfig "gbah"
+    local system
+    local def
+    for system in gba gbah ; do
+        def=0
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/vba_next_libretro.so"
+        addSystem "$system"
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOption "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyAdvance_1080p.cfg"
+        setRetroArchCoreOption "input_overlay_enable" "true"
+        setRetroArchCoreOption "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption "input_overlay_scale" "1.0"
+        setRetroArchCoreOption "video_shader"  "$raconfigdir/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl"
+        setRetroArchCoreOption "video_shader_enable"  "true"
+        setRetroArchCoreOption "video_smooth" "false"
+    done
 
-  addEmulator 0 "$md_id" "gba" "$md_inst/vba_next_libretro.so"
-  addEmulator 0 "$md_id" "gbah" "$md_inst/vba_next_libretro.so"
-  addSystem "gba"
-  addSystem "gbah"
+
 
     if [ -e $md_instppa/vba_next_libretro.so ]
         then
 
+            for system in gba gbah ; do
+                def=0
+                mkRomDir "$system"
+                ensureSystemretroconfig "$system"
+                addEmulator def "$md_id-ppa" "$system" "$md_instppa/vba_next_libretro.so"
+                addSystem "$system"
+            done
 
-          mkRomDir "gba"
-          ensureSystemretroconfig "gba"
-          mkRomDir "gbah"
-          ensureSystemretroconfig "gbah"
-
-          addEmulator 0 "$md_id-ppa" "gba" "$md_instppa/vba_next_libretro.so"
-          addEmulator 0 "$md_id-ppa" "gbah" "$md_instppa/vba_next_libretro.so"
-          addSystem "gba"
-          addSystem "gbah"
     fi
 
-##configure retroarch##
-########################
-
-    cp /home/$user/.config/RetroPie/gba/retroarch.cfg /home/$user/.config/RetroPie/gba/retroarch.cfg.bkp
-    local core_config="gba"
-    setRetroArchCoreOption "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyAdvance_1080p.cfg"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_fullscreen_x" "1920"
-    setRetroArchCoreOption "video_fullscreen_y" "1080"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "custom_viewport_width"  "960"
-    setRetroArchCoreOption "custom_viewport_height" "640"
-    setRetroArchCoreOption "custom_viewport_x" "480"
-    setRetroArchCoreOption "custom_viewport_y" "220"
-    setRetroArchCoreOption "aspect_ratio_index" "23"
-    setRetroArchCoreOption "video_shader"  "$raconfigdir/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl"
-    setRetroArchCoreOption "video_shader_enable"  "true"
-    setRetroArchCoreOption "video_smooth" "false"
 
 
 
-    cp /home/$user/.config/RetroPie/gbah/retroarch.cfg /home/$user/.config/RetroPie/gbah/retroarch.cfg.bkp
-    local core_config="gbah"
-    setRetroArchCoreOption "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyAdvance_1080p.cfg"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_fullscreen_x" "1920"
-    setRetroArchCoreOption "video_fullscreen_y" "1080"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "custom_viewport_width"  "960"
-    setRetroArchCoreOption "custom_viewport_height" "640"
-    setRetroArchCoreOption "custom_viewport_x" "480"
-    setRetroArchCoreOption "custom_viewport_y" "220"
-    setRetroArchCoreOption "aspect_ratio_index" "23"
-    setRetroArchCoreOption "video_shader"  "$raconfigdir/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl"
-    setRetroArchCoreOption "video_shader_enable"  "true"
-    setRetroArchCoreOption "video_smooth" "false"
+
+
 
 
 }

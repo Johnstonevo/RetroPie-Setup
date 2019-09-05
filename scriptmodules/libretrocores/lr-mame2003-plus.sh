@@ -69,7 +69,7 @@ function configure_lr-mame2003-plus() {
   addSystem "mame-2003-plus"
   addBezel "mame-2003-plus"
   
-  #ln -s "$raconfigdir/config/MAME 2003" "$raconfigdir/config/MAME 2003-Plus"
+  ln -s "$raconfigdir/config/MAME 2003" "$raconfigdir/config/MAME 2003-Plus"
   
   setRetroArchCoreOption "mame2003-plus_skip_disclaimer" "enabled"
   setRetroArchCoreOption "mame2003-plus_dcs-speedhack" "enabled"

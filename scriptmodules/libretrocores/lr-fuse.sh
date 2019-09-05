@@ -34,34 +34,36 @@ function install_lr-fuse() {
 }
 
 function configure_lr-fuse() {
-    mkRomDir "zxspectrum"
-    mkRomDir "zxspectrum+3"
-    ensureSystemretroconfig "zxspectrum"
-    ensureSystemretroconfig "zxspectrum+3"
 
-    #local core_config="$configdir/zxspectrum/retroarch.cfg"
-    #iniConfig " = " '"' "$md_conf_root/zxspectrum/retroarch.cfg"
-    #setRetroArchCoreOption "core_options_path" "$core_config"
-    #setRetroArchCoreOption "fuse_machine" "Spectrum 128K"  "$core_config"
-    #chown $user:$user "$core_config"
+    local system
+    local def
+    for system in zxspectrum zxspectrum+3 ; do
+        def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/fuse_libretro.so"
+        addSystem "$system"
+        local core_config="$system"
+        setRetroArchCoreOption "fuse_load_sound" "off"
+        setRetroArchCoreOption "input_libretro_device_p1" "513"
+        setRetroArchCoreOption "fuse_fast_load" "on"
+    done
 
-    setRetroArchCoreOption "fuse_machine" "Spectrum 128K"
+
     local core_config="zxspectrum"
-    setRetroArchCoreOption  "fuse_machine" "Spectrum 128K"
-    setRetroArchCoreOption "fuse_load_sound" "on"
-    setRetroArchCoreOption "input_libretro_device_p1" "513"  
+    setRetroArchCoreOption  "fuse_machine" "Spectrum 128k"
 
-    addEmulator 0 "$md_id" "zxspectrum" "$md_inst/fuse_libretro.so"
-    addSystem "zxspectrum"
-    addEmulator 0 "$md_id" "zxspectrum+3" "$md_inst/fuse_libretro.so"
-    addSystem "zxspectrum+3"
+    local core_config="zxspectrum+3"
+    setRetroArchCoreOption  "fuse_machine" "Spectrum +3k"
 
 
     if [ -e $md_instppa/fuse_libretro.so ]
                     then
-                                addEmulator 0 "$md_id-ppa" "zxspectrum" "$md_instppa/fuse_libretro.so"
-                                addSystem "zxspectrum" "$md_instppa/fuse_libretro.so"
-                                addEmulator 0 "$md_id-ppa" "zxspectrum+3" "$md_instppa/fuse_libretro.so"
-                                addSystem "zxspectrum+3" "$md_instppa/fuse_libretro.so"
+                        local system
+                        local def
+                        for system in zxspectrum zxspectrum+3 ; do
+                            def=0
+                            addEmulator def "$md_id-ppa" "$system" "$md_instppa/fuse_libretro.so"
+                        done
     fi
 }

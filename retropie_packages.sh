@@ -37,6 +37,8 @@ configdir="$home/.config/RetroPie"
 raconfigdir="$home/.config/retroarch"
 scriptdir="$(dirname "$0")"
 scriptdir="$(cd "$scriptdir" && pwd)"
+R_Arch=/usr/bin/retroarch
+
 
 __logdir="$scriptdir/logs"
 __tmpdir="$scriptdir/tmp"

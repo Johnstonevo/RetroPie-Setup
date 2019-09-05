@@ -32,34 +32,58 @@ function install_lr-beetle-supergrafx() {
 }
 
 function configure_lr-beetle-supergrafx() {
-    local core_config="$configdir/supergrafx/retroarch.cfg"
 
-    mkRomDir "pcengine"
-    ensureSystemretroconfig "pcengine"
+    local system
+    local def
+    for system in tg16 tg-cd pcengine pce-cd supergrafx ; do
+        def=0
+        [[ "$system" == "tg16" || "$system" == "tg-cd"  || "$system" == "pcengine"  || "$system" == "pce-cd" || "$system" == "supergrafx"  ]] && def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator 0 "$md_id" "$system" "$md_inst/mednafen_supergrafx_libretro.so"
+        addSystem "$system"
+        addBezel "$system"
+        
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
 
-    addEmulator 0 "$md_id" "pcengine" "$md_inst/mednafen_supergrafx_libretro.so"
-    addSystem "pcengine"
+        local core_config="$system"
+        setRetroArchCoreOption  "core_options_path" "/home/$user/.config/RetroPie/$system/retroarch.cfg"
+        setRetroArchCoreOption  "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption  "input_overlay_scale" "1.0"
+        setRetroArchCoreOption  "input_overlay_enable" "true"
+        setRetroArchCoreOption  "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
 
-    mkRomDir "supergrafx"
-    ensureSystemretroconfig "supergrafx"
+    done 
+    
+    addEmulator  1   "$md_id" "supergrafx" "$md_inst/mednafen_supergrafx_libretro.so"
 
-    addEmulator 1 "$md_id" "supergrafx" "$md_inst/mednafen_supergrafx_libretro.so"
-    addSystem "supergrafx"
 
-    addBezel "supergrafx"
+    local core_config="tg16"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-TurboGrafx-16.cfg"
 
-        if [ ! -d $raconfigdir/overlay/GameBezels/SuperGrafx ]
-            then
-             cp /home/$user/.config/RetroPie/supergrafx/retroarch.cfg /home/$user/.config/RetroPie/supergrafx/retroarch.cfg.bkp
-            setRetroArchCoreOption  "core_options_path" "/home/$user/.config/RetroPie/sfgx/retroarch.cfg"
-            setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-SuperGrafx.cfg"
-            setRetroArchCoreOption  "input_overlay_opacity" "1.0"
-            setRetroArchCoreOption  "input_overlay_scale" "1.0"
-            setRetroArchCoreOption  "video_fullscreen_x" "1920"
-            setRetroArchCoreOption  "video_fullscreen_y" "1080"
-            setRetroArchCoreOption "input_overlay_enable" "true"
-            setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
-            
-        fi
+    local core_config="tg-cd"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-TurboGrafx-CD.cfg"
+
+    local core_config="pcengine"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-PC-Engine.cfg"
+
+    local core_config="pce-cd"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-PC-Engine-CD.cfg"
+    
+    local core_config="supergrafx"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-SuperGrafx.cfg"
+           
+    if [ -e $md_instppa/mednafen_supergrafx_libretro.so ]
+        then
+            local system
+            local def
+            for system in tg16 tg-cd pcengine pce-cd supergrafx ; do
+                def=0
+                [[ "$system" == "tg16" || "$system" == "tg-cd"  || "$system" == "pcengine"  || "$system" == "pce-cd"  ||"$system" == "supergrafx" ]] && def=1
+                addEmulator 0 "$md_id-ppa" "$system" "$md_instppa/mednafen_supergrafx_libretro.so"
+        done
+
+    fi
+
 
 }

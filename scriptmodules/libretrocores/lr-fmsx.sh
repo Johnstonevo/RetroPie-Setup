@@ -48,27 +48,22 @@ function install_lr-fmsx() {
 }
 
 function configure_lr-fmsx() {
-  mkRomDir "msx"
-  mkRomDir "msx2"
-  mkRomDir "msx2+"
 
-  ensureSystemretroconfig "msx"
-  ensureSystemretroconfig "msx2"
-  ensureSystemretroconfig "msx2+"
+    local system
+    local def
+    for system in msx msx2 msx2+ ; do
+        def=0
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/fmsx_libretro.so"
+        addSystem "$system"
+    done
 
-    # default to MSX2+ core
-    setRetroArchCoreOption "fmsx_mode" "MSX2+"
+
 
     # Copy bios files
     cp "$md_inst/"{*.ROM,*.FNT,*.SHA} "$biosdir/"
     chown $user:$user "$biosdir/"{*.ROM,*.FNT,*.SHA}
-
-    addEmulator 1 "$md_id" "msx" "$md_inst/fmsx_libretro.so"
-    addSystem "msx"
-    addEmulator 1 "$md_id" "msx2" "$md_inst/fmsx_libretro.so"
-    addSystem "msx2"
-    addEmulator 1 "$md_id" "msx2+" "$md_inst/fmsx_libretro.so"
-    addSystem "msx2+"
 
  # force msx system
     local core_config="msx"
@@ -76,12 +71,13 @@ function configure_lr-fmsx() {
     setRetroArchCoreOption "fmsx_video_mode" "PAL"
 
 # force msx2 system
-    iniConfig " = " '"' "$md_conf_root/msx2"
+    local core_config="msx2"
     setRetroArchCoreOption  "fmsx_mode" "MSX2+"
     setRetroArchCoreOption "fmsx_video_mode" "PAL" 
     
 # force msx2 system
-    iniConfig " = " '"' "$md_conf_root/msx2+"
+    local core_config="msx2+"
     setRetroArchCoreOption  "fmsx_mode" "MSX2+"
     setRetroArchCoreOption "fmsx_video_mode" "PAL"
+
 }

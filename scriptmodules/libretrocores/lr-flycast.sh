@@ -46,42 +46,42 @@ function install_lr-flycast() {
 }
 
 function configure_lr-flycast() {
-    mkRomDir "dreamcast"
-    ensureSystemretroconfig "dreamcast"
-    mkRomDir "atomiswave"
-    ensureSystemretroconfig "atomiswave"
-    mkRomDir "naomi"
-    ensureSystemretroconfig "naomi"
+
+    local system
+    local def
+    for system in dreamcast atomiswave naomi ; do
+        def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/flycast_libretro.so </dev/null"
+        addSystem "$system"
+        local core_config="$system"
+        setRetroArchCoreOption "video_shared_context" "true"
+        addBezel "$system"
+    done
+
 
 
     mkUserDir "$biosdir/dc"
 
     # system-specific
-    local core_config="dreamcast"
-    setRetroArchCoreOption "video_shared_context" "true"
-    local core_config="atomiswave"
-    setRetroArchCoreOption "video_shared_context" "true"
-    local core_config="naomi"
-    setRetroArchCoreOption "video_shared_context" "true"
 
 
-    # segfaults on the rpi without redirecting stdin from </dev/null
-    addEmulator 1 "$md_id" "dreamcast" "$md_inst/flycast_libretro.so </dev/null"
-    addEmulator 1 "$md_id" "atomiswave" "$md_inst/flycast_libretro.so </dev/null"
-    addEmulator 1 "$md_id" "naomi" "$md_inst/flycast_libretro.so </dev/null"
-
-
-    addSystem "dreamcast"
-    addSystem "atomiswave"
-    addSystem "naomi"
 
 if [ -e $md_instppa/reicast_libretro.so ]
     then
-      addEmulator 0 "$md_id-ppa" "dreamcast" "$md_instppa/reicast_libretro.so"
-      addEmulator 0 "$md_id-ppa" "atomiswave" "$md_instppa/reicast_libretro.so"
-      addEmulator 0 "$md_id-ppa" "naomi" "$md_instppa/reicast_libretro.so"
+        local system
+        local def
+        for system in dreamcast atomiswave naomi ; do
+            def=0
+            [[ "$system" == "dreamcast" || "$system" == "atomiswave"  || "$system" == "naomi" ]] && def=1
+            mkRomDir "$system"
+            ensureSystemretroconfig "$system"
+            addEmulator 0 "$md_id-ppa" "$system" "$md_instppa/flycast_libretro.so </dev/null"
+            addSystem "$system"
+
+    done
+
 fi
 
-addBezel "dreamcast"
-addBezel  "atomiswave"
 }

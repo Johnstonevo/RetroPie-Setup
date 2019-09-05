@@ -38,5 +38,27 @@ function install_lr-mess2016() {
 }
 
 function configure_lr-mess2016() {
-    configure_lr-mess "mess2016_libretro.so"
+    local module="$1"
+    [[ -z "$module" ]] && module="mess2016_libretro.so"
+    local system
+    local def
+    for system in nes gb coleco arcadia crvision neocdz cdimonoi ; do
+        def=0
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/mess2016_libretro.so"
+        addSystem "$system"
+            
+        local core_config="$system"
+        setRetroArchCoreOption "mame2016_softlists_enable" "enabled"
+        setRetroArchCoreOption "mame2016_softlists_auto_media" "enabled"
+        setRetroArchCoreOption "mame2016_boot_from_cli" "enabled"
+
+    done
+
+    
+
+        mkdir "$biosdir/mame"
+        cp -rv "$md_build/hash" "$biosdir/mame/"
+        chown -R $user:$user "$biosdir/mame"
 }

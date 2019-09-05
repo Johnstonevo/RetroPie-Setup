@@ -43,41 +43,23 @@ function install_lr-mess() {
 function configure_lr-mess() {
     local module="$1"
     [[ -z "$module" ]] && module="mess_libretro.so"
-
-      mkRomDir "nes"
-      mkRomDir "gb"
-      mkRomDir "coleco"
-      mkRomDir "arcadia"
-      mkRomDir "crvision"
-      mkRomDir "neocdz"
-      mkRomDir "cdimono1"
-      ensureSystemretroconfig "nes"
-      ensureSystemretroconfig "gb"
-      ensureSystemretroconfig "coleco"
-      ensureSystemretroconfig "arcadia"
-      ensureSystemretroconfig "crvision"
-      ensureSystemretroconfig "neocdz"
-      ensureSystemretroconfig "cdimono1"
-      addEmulator 0 "$md_id" "nes" "$md_inst/$module"
-      addEmulator 0 "$md_id" "gb" "$md_inst/$module"
-      addEmulator 0 "$md_id" "coleco" "$md_inst/$module"
-      addEmulator 0 "$md_id" "arcadia" "$md_inst/$module"
-      addEmulator 0 "$md_id" "crvison" "$md_inst/$module"
-      addEmulator 1 "$md_id" "neocdz" "$md_inst/$module"
-      addEmulator 1 "$md_id" "cdimono1" "$md_inst/$module"
-      addSystem "nes"
-      addSystem "gb"
-      addSystem "coleco"
-      addSystem "arcadia"
-      addSystem "crvision"
-      addSystem "neocdz"
-      addSystem "cdimono1"
-    
-    
-        local core_config="mess"
+    local system
+    local def
+    for system in nes gb coleco arcadia crvision neocdz cdimonoi ; do
+        def=0
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/mess_libretro.so"
+        addSystem "$system"
+            
+        local core_config="$system"
         setRetroArchCoreOption "mame_softlists_enable" "enabled"
         setRetroArchCoreOption "mame_softlists_auto_media" "enabled"
         setRetroArchCoreOption "mame_boot_from_cli" "enabled"
+
+    done
+
+    
 
         mkdir "$biosdir/mame"
         cp -rv "$md_build/hash" "$biosdir/mame/"

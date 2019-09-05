@@ -33,27 +33,32 @@ function install_lr-atari800() {
 }
 
 function configure_lr-atari800() {
-    mkRomDir "atari800"
-    mkRomDir "atari5200"
+    local system
+    local def
+    for system in atari800 atari5200; do
+        def=0
+        [[ "$system" == "atari800" || "$system" == "atari5200" ]] && def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/atari800_libretro.so"
+        addSystem "$system"
+        local core_config="$system"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Atari-5200.cfg"
+        setRetroArchCoreOption "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
 
-    ensureSystemretroconfig "atari800"
-    ensureSystemretroconfig "atari5200"
+    done
 
     mkUserDir "$md_conf_root/atari800"
     moveConfigFile "$home/.atari800.cfg" "$md_conf_root/atari800/atari800.cfg"
 
-    addEmulator 0 "lr-atari800" "atari800" "$md_inst/atari800_libretro.so"
-    addEmulator 0 "lr-atari800" "atari5200" "$md_inst/atari800_libretro.so"
-    addSystem "atari800"
-    addSystem "atari5200"
-
     addBezel "atari5200"
 
-    local core_config=atari800
+    local core_config="atari800"
     setRetroArchCoreOption "atari800_system" "800"
     setRetroArchCoreOption "atari800_ntscpal" "PAL"
  
-    local core_config=atari5200
+    local core_config="atari5200"
     local a5200_core_config="$configdir/atari5200/retroarch.cfg"
     setRetroArchCoreOption  "atari800_system" "5200"
     setRetroArchCoreOption  "atari800_ntscpal" "PAL"
@@ -63,33 +68,11 @@ function configure_lr-atari800() {
 
      if [ -e $md_instppa/atari800_libretro.so ]
      then
-        addEmulator 2 "lr-atari800-ppa" "atari800" "$md_instppa/atari800_libretro.so"
-        addEmulator 2 "lr-atari800-ppa" "atari5200" "$md_instppa/atari800_libretro.so"
-        addSystem "atari800"
-        addSystem "atari5200"
+        addEmulator 0 "lr-atari800-ppa" "atari800" "$md_instppa/atari800_libretro.so"
+        addEmulator 0 "lr-atari800-ppa" "atari5200" "$md_instppa/atari800_libretro.so"
     fi
 
 
 
 
-if [  -d $raconfigdir/overlay/GameBezels/Atari5200 ]
- then
-             cp /home/$user/.config/RetroPie/atari5200/retroarch.cfg /home/$user/.config/RetroPie/atari5200/retroarch.cfg.bkp
-            local a5200_core_config="$configdir/atari5200/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/atari5200/retroarch.cfg"
-            iniSet  "input_overlay" "$raconfigdir/overlay/Atari-5200.cfg" "$a5200_core_config"
-            iniSet "input_overlay_opacity" "1.0" "$a5200_core_config"
-            iniSet "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie" "$core_config"
-
-            chown $user:$user "$a5200_core_config"
-
-            cp /home/$user/.config/RetroPie/atari800/retroarch.cfg /home/$user/.config/RetroPie/atari800/retroarch.cfg.bkp
-            local a800_core_config="$configdir/atari800/retroarch.cfg"
-            iniConfig " = " '"' "$md_conf_root/atari800/retroarch.cfg"
-            iniSet  "input_overlay" "$raconfigdir/overlay/Atari-5200.cfg" "$a800_core_config"
-            iniSet "input_overlay_opacity" "1.0" "$a800_core_config"
-            iniSet "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie" "$core_config"
-
-            chown $user:$user "$a800_core_config"
-fi
 }

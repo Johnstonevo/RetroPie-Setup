@@ -40,88 +40,65 @@ function configure_lr-gambatte() {
     cp "$md_data/default.pal" "$biosdir/palettes/"
     chown $user:$user "$biosdir/palettes/default.pal"
 
+    local system
+    local def
+    for system in gbc gbch gb gbh ; do
+        def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/gambatte_libretro.so"
+        addSystem "$system"
+    done
 
-    mkRomDir "gbc"
-    mkRomDir "gbch"
-    mkRomDir "gb"
-    mkRomDir "gbh"
-    ensureSystemretroconfig "gb"
-    ensureSystemretroconfig "gbh"
-    ensureSystemretroconfig "gbc"
-    ensureSystemretroconfig "gbch"
-    addEmulator 1 "$md_id" "gb" "$md_inst/gambatte_libretro.so"
-    addEmulator 1 "$md_id" "gbc" "$md_inst/gambatte_libretro.so"
-    addEmulator 1 "$md_id" "gbch" "$md_inst/gambatte_libretro.so"
-    addEmulator 1 "$md_id" "gbh" "$md_inst/gambatte_libretro.so"
-    addSystem "gb"
-    addSystem "gbh"
-    addSystem "gbc"
-    addSystem "gbch"
     addBezel "gbc"
     addBezel "gb"
+
     if [ -e $md_instppa/gambatte_libretro.so ]
         then
-          ensureSystemretroconfig "gb"
-          ensureSystemretroconfig "gbh"
-          ensureSystemretroconfig "gbc"
-          ensureSystemretroconfig "gbch"
-          addEmulator 0 "$md_id-ppa" "gb" "$md_instppa/gambatte_libretro.so"
-          addEmulator 0 "$md_id-ppa" "gbc" "$md_instppa/gambatte_libretro.so"
-          addEmulator 0 "$md_id-ppa" "gbch" "$md_instppa/gambatte_libretro.so"
-          addEmulator 0 "$md_id-ppa" "gbh" "$md_instppa/gambatte_libretro.so"
-          addSystem "gb"
-          addSystem "gbh"
-          addSystem "gbc"
-          addSystem "gbch"
+            local system
+            local def
+            for system in gbc gbch gb gbh ; do
+                def=0
+                mkRomDir "$system"
+                ensureSystemretroconfig "$system"
+                addEmulator def "$md_id-ppa" "$system" "$md_instppa/gambatte_libretro.so"
+                addSystem "$system"
+            done
     fi
 
 #configure retroarcg cfg
-    cp /home/$user/.config/RetroPie/gb/retroarch.cfg /home/$user/.config/RetroPie/gb/retroarch.cfg.bkp
-    local core_config="gb"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/Gameboy_1080p.cfg"
-    setRetroArchCoreOption  "input_overlay_enable" "true"
-    setRetroArchCoreOption  "input_overlay_opacity" "0.8"
-    setRetroArchCoreOption  "input_overlay_scale" "1.0"
-    setRetroArchCoreOption  "video_shader"  "$raconfigdir/shaders/rpi/handheld/gameboy/gb-shader.glslp"
-    setRetroArchCoreOption  "video_shader_enable"  "true"
-    setRetroArchCoreOption  "video_smooth" "false"
-    setRetroArchCoreOption  "gambatte_gb_colorization" "disabled"
-    setRetroArchCoreOption  "gambatte_gb_internal_palette" "GB - DMG"
-    setRetroArchCoreOption  "gambatte_gb_hwmode" "GB" 
+
+            local system
+            local def
+            for system in gb gbh ; do
+            
+                cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+                local core_config="gb"
+                setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/Gameboy_1080p.cfg"
+                setRetroArchCoreOption  "input_overlay_enable" "true"
+                setRetroArchCoreOption  "input_overlay_opacity" "0.8"
+                setRetroArchCoreOption  "input_overlay_scale" "1.0"
+                setRetroArchCoreOption  "video_shader"  "$raconfigdir/shaders/rpi/handheld/gameboy/gb-shader.glslp"
+                setRetroArchCoreOption  "video_shader_enable"  "true"
+                setRetroArchCoreOption  "video_smooth" "false"
+                setRetroArchCoreOption  "gambatte_gb_colorization" "disabled"
+                setRetroArchCoreOption  "gambatte_gb_internal_palette" "GB - DMG"
+                setRetroArchCoreOption  "gambatte_gb_hwmode" "GB" 
+
+            done
+
+            for system in gbc gbch ; do
 
 
-    cp /home/$user/.config/RetroPie/gbh/retroarch.cfg /home/$user/.config/RetroPie/gbh/retroarch.cfg.bkp
-    local core_config="gbh"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/Gameboy_1080p.cfg"
-    setRetroArchCoreOption  "input_overlay_enable" "true"
-    setRetroArchCoreOption  "input_overlay_opacity" "0.8"
-    setRetroArchCoreOption  "input_overlay_scale" "1.0"
-    setRetroArchCoreOption  "video_shader"  "$raconfigdir/shaders/rpi/handheld/gameboy/gb-shader.glslp"
-    setRetroArchCoreOption  "video_shader_enable"  "true"
-    setRetroArchCoreOption  "video_smooth" "false"
-    setRetroArchCoreOption  "gambatte_gb_colorization" "disabled"
-    setRetroArchCoreOption  "gambatte_gb_internal_palette" "GB - DMG"
-    setRetroArchCoreOption  "gambatte_gb_hwmode" "GB" 
-
-    cp /home/$user/.config/RetroPie/gbc/retroarch.cfg /home/$user/.config/RetroPie/gbc/retroarch.cfg.bkp
-    local core_config="gbc"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyColor_1080p.cfg"
-    setRetroArchCoreOption  "input_overlay_enable" "true"
-    setRetroArchCoreOption  "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption  "input_overlay_scale" "1.0"
-    setRetroArchCoreOption  "video_shader"  "$raconfigdir/shaders/rpi/hqx/hq4x.glslp"
-    setRetroArchCoreOption  "video_shader_enable"  "true"
-    setRetroArchCoreOption  "video_smooth" "false"
-    setRetroArchCoreOption  "gambatte_gb_hwmode" "GBC" 
-
-    cp /home/$user/.config/RetroPie/gbch/retroarch.cfg /home/$user/.config/RetroPie/gbh/retroarch.cfg.bkp
-    local core_config="gbch"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyColor_1080p.cfg"
-    setRetroArchCoreOption  "input_overlay_enable" "true"
-    setRetroArchCoreOption  "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption  "input_overlay_scale" "1.0"
-    setRetroArchCoreOption  "video_shader"  "$raconfigdir/shaders/rpi/hqx/hq4x.glslp"
-    setRetroArchCoreOption  "video_shader_enable"  "true"
-    setRetroArchCoreOption  "video_smooth" "false"
-    setRetroArchCoreOption  "gambatte_gb_hwmode" "GBC" 
+                cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+                local core_config="gbc"
+                setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyColor_1080p.cfg"
+                setRetroArchCoreOption  "input_overlay_enable" "true"
+                setRetroArchCoreOption  "input_overlay_opacity" "1.0"
+                setRetroArchCoreOption  "input_overlay_scale" "1.0"
+                setRetroArchCoreOption  "video_shader"  "$raconfigdir/shaders/rpi/hqx/hq4x.glslp"
+                setRetroArchCoreOption  "video_shader_enable"  "true"
+                setRetroArchCoreOption  "video_smooth" "false"
+                setRetroArchCoreOption  "gambatte_gb_hwmode" "GBC" 
+            done
 }

@@ -47,73 +47,57 @@ function configure_lr-beetle-psx() {
         [[ "$system" == "psx" || "$system" == "psx-japan" ]] && def=1
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
-        addEmulator 0 "$md_id" "$system" "$md_inst/mednafen_psx_hw_libretro.so"
+        addEmulator 1 "$md_id" "$system" "$md_inst/mednafen_psx_hw_libretro.so"
         addSystem "$system"
-        addBezel "psx0"
+
+
+        local core_config="$system"
+        setRetroArchCoreOption  "core_options_path" "/home/$user/.config/RetroPie/psx/retroarch.cfg"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sony-PlayStation.cfg"
+        setRetroArchCoreOption  "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption  "input_overlay_scale" "1.0"
+        setRetroArchCoreOption  "input_overlay_enable" "true"
+        setRetroArchCoreOption  "video_smooth" "true"
+        setRetroArchCoreOption  "rewind_enable" "false"
+        setRetroArchCoreOption  "game_specific_options" "true"
+        setRetroArchCoreOption  "input_player1_analog_dpad_mode" "0"
+        setRetroArchCoreOption  "input_player2_analog_dpad_mode" "0"
+        setRetroArchCoreOption  "beetle_psx_hw_pgxp_texture" "On"
+        setRetroArchCoreOption  "beetle_psx_internal_resolution" "1x(native)"
+        setRetroArchCoreOption  "beetle_psx_widescreen_hack" "off"
+        setRetroArchCoreOption  "beetle_psx_cd_access_method" "async"
+        setRetroArchCoreOption  "beetle_psx_skip_bios"  "on"
+        setRetroArchCoreOption  "beetle_psx_skipbios" "enabled"
+        setRetroArchCoreOption  "beetle_psx_cd_fastload"  "2x (native)"
+        setRetroArchCoreOption  "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
+
     done
+
+
+    addBezel "psx"
+
     if [ -e $md_instppa/mednafen_psx_hw_libretro.so ]
                     then
-                                addEmulator 0 "$md_id-mednafen_psx_hw-ppa" "psx" "$md_instppa/mednafen_psx_hw_libretro.so"
-                                addSystem "psx" "$md_instppa/mednafen_psx_hw_libretro.so"
-                                addEmulator 0 "$md_id-mednafen_psx_hw-ppa" "psx-japan" "$md_instppa/mednafen_psx_hw_libretro.so"
-                                addSystem "psx-japan" "$md_instppa/mednafen_psx_hw_libretro.so"
-
-
+                        for system in psx psx-japan; do
+                            def=0
+                            [[ "$system" == "psx" || "$system" == "psx-japan" ]] && def=1
+                            addEmulator 0 "$md_id-mednafen_psx_hw-ppa" "$system" "$md_instppa/mednafen_psx_hw_libretro.so"
+                        done
     fi
+
     if [ -e $md_instppa/mednafen_psx_libretro.so ]
                     then
-                                addEmulator 0 "$md_id-mednafen_psx-ppa" "psx" "$md_instppa/mednafen_psx_libretro.so"
-                                addSystem "psx" "$md_instppa/mednafen_psx_libretro.so"
-                                addEmulator 0 "$md_id-mednafen_psx-ppa" "psx-japan" "$md_instppa/mednafen_psx_libretro.so"
-                                addSystem "psx-japan" "$md_instppa/mednafen_psx_libretro.so"
+                        for system in psx psx-japan; do
+                            def=0
+                            [[ "$system" == "psx" || "$system" == "psx-japan" ]] && def=1
+                            addEmulator 0 "$md_id-mednafen_psx-ppa" "$system" "$md_instppa/mednafen_psx_libretro.so"
+                        done
     fi
 
 
-    local core_config="psx"
-    setRetroArchCoreOption  "core_options_path" "/home/$user/.config/RetroPie/psx/retroarch.cfg"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sony-PlayStation.cfg"
-    setRetroArchCoreOption  "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption  "input_overlay_scale" "1.0"
-    setRetroArchCoreOption  "video_fullscreen_x" "1920"
-    setRetroArchCoreOption  "video_fullscreen_y" "1080"
-    setRetroArchCoreOption  "input_overlay_enable" "true"
-    setRetroArchCoreOption  "video_smooth" "true"
-    setRetroArchCoreOption  "rewind_enable" "false"
-    setRetroArchCoreOption  "game_specific_options" "true"
-    setRetroArchCoreOption  "input_player1_analog_dpad_mode" "0"
-    setRetroArchCoreOption  "input_player2_analog_dpad_mode" "0"
-    setRetroArchCoreOption  "beetle_psx_hw_pgxp_texture" "On"
-    setRetroArchCoreOption "beetle_psx_internal_resolution" "1x(native)"
-    setRetroArchCoreOption "beetle_psx_widescreen_hack" "off"
-    setRetroArchCoreOption "beetle_psx_cd_access_method" "async"
-    setRetroArchCoreOption "beetle_psx_skip_bios"  "on"
-    setRetroArchCoreOption "beetle_psx_skipbios" "enabled"
-    setRetroArchCoreOption "beetle_psx_cd_fastload"  "2x (native)"
-    setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
  
 
 
-    local core_config="psx-japan"
-    setRetroArchCoreOption  "core_options_path" "/home/$user/.config/RetroPie/psx-japan/retroarch.cfg"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sony-PlayStation.cfg"
-    setRetroArchCoreOption  "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption  "input_overlay_scale" "1.0"
-    setRetroArchCoreOption  "video_fullscreen_x" "1920"
-    setRetroArchCoreOption  "video_fullscreen_y" "1080"
-    setRetroArchCoreOption  "input_overlay_enable" "true"
-    setRetroArchCoreOption  "video_smooth" "true"
-    setRetroArchCoreOption  "rewind_enable" "false"
-    setRetroArchCoreOption  "game_specific_options" "true"
-    setRetroArchCoreOption  "input_player1_analog_dpad_mode" "0"
-    setRetroArchCoreOption  "input_player2_analog_dpad_mode" "0"
-    setRetroArchCoreOption  "beetle_psx_hw_pgxp_texture" "On"
-    setRetroArchCoreOption "beetle_psx_internal_resolution" "1x(native)"
-    setRetroArchCoreOption "beetle_psx_widescreen_hack" "disabled"
-    setRetroArchCoreOption "beetle_psx_cd_access_method" "async"
-    setRetroArchCoreOption "beetle_psx_skip_bios"  "enabled"
-    setRetroArchCoreOption "beetle_psx_skipbios" "enabled"
-    setRetroArchCoreOption "beetle_psx_cd_fastload"  "2x (native)"
-    setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
 
 
 }

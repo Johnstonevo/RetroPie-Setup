@@ -35,22 +35,33 @@ function install_lr-bluemsx() {
 }
 
 function configure_lr-bluemsx() {
-    mkRomDir "msx"
-    ensureSystemretroconfig "msx"
 
-    mkRomDir "msx2"
-    ensureSystemretroconfig "msx2"
-    mkRomDir "msx2+"
-    ensureSystemretroconfig "msx2+"
+    local system
+    local def
+    for system in msx msx2 msx2+ coleco ; do
+        def=0
+        [[ "$system" == "msx" || "$system" == "msx2"  || "$system" == "msx2+"  || "$system" == "coleco"  ]] && def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator 0 "$md_id" "$system" "$md_inst/bluemsx_libretro.so"
+        addSystem "$system"
+        local core_config="$system"
+        setRetroArchCoreOption "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption "input_overlay_scale" "1.0"
+        setRetroArchCoreOption "input_overlay_enable" "true"
+        setRetroArchCoreOption "video_smooth" "true"
+        setRetroArchCoreOption "input_libretro_device_p2" "3"
 
-    mkRomDir "coleco"
-    ensureSystemretroconfig "coleco"
+    done    
+
+
     addBezel "coleco"
 
-
-    # force colecovision system
+# force colecovision system
     local core_config="coleco"
     setRetroArchCoreOption "bluemsx_msxtype" "ColecoVision"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Colecovision.cfg"
+     setRetroArchCoreOption "bluemsx_msxtype" "ColecoVision"
 
 # force msx system
     local core_config="msx"
@@ -58,55 +69,36 @@ function configure_lr-bluemsx() {
     setRetroArchCoreOption "msx_video_mode" "PAL"
     setRetroArchCoreOption "bluemsx_nospritelimits" "ON"
 
-
 # force msx2 system
     local core_config="msx2"
     setRetroArchCoreOption "bluemsx_msxtype" "MSX2+"
     setRetroArchCoreOption "msx_video_mode" "PAL"
     setRetroArchCoreOption "bluemsx_nospritelimits" "ON"
-    
 
     cp -rv "$md_inst/"{Databases,Machines} "$biosdir/"
     chown -R $user:$user "$biosdir/"{Databases,Machines}
 
 
-    addEmulator 0 "$md_id" "msx2" "$md_inst/bluemsx_libretro.so"
-    addSystem "msx2"
-    addEmulator 0 "$md_id" "msx2+" "$md_inst/bluemsx_libretro.so"
-    addSystem "msx2+"
-
-
-    addEmulator 1 "$md_id" "coleco" "$md_inst/bluemsx_libretro.so"
-    addSystem "coleco"
-    addBezel "coleco"
 
     
      if [ -e $md_instppa/bluemsx_libretro.so ]
                 then
-    addEmulator 0 "$md_id-ppa" "msx" "$md_instppa/bluemsx_libretro.so"
-    addSystem "msx"
 
-    addEmulator 0 "$md_id-ppa" "msx2" "$md_inst/bluemsx_libretro.so"
-    addSystem "msx2"
-    addEmulator 0 "$md_id-ppa" "msx2+" "$md_inst/bluemsx_libretro.so"
-    addSystem "msx2+"
+                for system in msx msx2 msx2+ coleco ; do
+                    def=0
+                    [[ "$system" == "msx" || "$system" == "msx2"  || "$system" == "msx2+"  || "$system" == "coleco"  ]] && def=1
+                    mkRomDir "$system"
+                    ensureSystemretroconfig "$system"
+                    addEmulator 0 "$md_id" "$system" "$md_instppa/bluemsx_libretro.so"
+                    addSystem "$system"
+                    local core_config="$system"
 
 
-    addEmulator 0 "$md_id-ppa" "coleco" "$md_instppa/bluemsx_libretro.so"
-    addSystem "coleco"
+                done    
+
     fi
 
-    if [  -d $raconfigdir/overlay/GameBezels/ColecoVision ]
-    then
-          cp /home/$user/.config/RetroPie/coleco/retroarch.cfg /home/$user/.config/RetroPie/coleco/retroarch.cfg.bkp
-          local core_config="coleco"
-          setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Colecovision.cfg"
-          setRetroArchCoreOption "input_overlay_opacity" "1.0"
-          setRetroArchCoreOption "input_overlay_scale" "1.0"
-          setRetroArchCoreOption "input_overlay_enable" "true"
-          setRetroArchCoreOption "video_smooth" "true"
-          setRetroArchCoreOption "bluemsx_msxtype" "ColecoVision"
-    fi
+
 
 
 }

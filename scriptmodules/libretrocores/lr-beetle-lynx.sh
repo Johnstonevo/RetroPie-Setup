@@ -40,11 +40,7 @@ function configure_lr-beetle-lynx() {
 
     if [ -e $md_instppa/mednafen_lynx_libretro.so ]
         then
-        mkRomDir "atarilynx"
-        ensureSystemretroconfig "atarilynx"
-
         addEmulator 0 "$md_id-ppa" "atarilynx" "$md_instppa/handy_libretro.so"
-        addSystem "atarilynx"
   fi
 
     local core_config="atarilynx"

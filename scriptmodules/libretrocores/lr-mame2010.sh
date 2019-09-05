@@ -42,7 +42,7 @@ function configure_lr-mame2010() {
     for system in arcade mame-2010; do
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
-        addEmulator 0 "$md_id" "$system" "$md_inst/mame2010_libretro.so"
+        addEmulator 1 "$md_id" "$system" "$md_inst/mame2010_libretro.so"
         addSystem "$system"
         
         cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp

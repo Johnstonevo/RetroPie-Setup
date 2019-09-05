@@ -42,13 +42,14 @@ function install_lr-nestopia() {
 
 function configure_lr-nestopia() {
     local system
-    local def
+    local def=0
     for system in nes nesh fds famicom ; do
         def=0
         [[ "$system" == "nes" || "$system" == "nesh"  || "$system" == "fds"  || "$system" == "famicom"  ]] && def=1
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
-        addEmulator 0 "$md_id" "$system" "$md_inst/nestopia_libretro.so"
+        addEmulator def "$md_id" "$system" "$md_inst/nestopia_libretro.so"
+        
         addSystem "$system"
 
         cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp

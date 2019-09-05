@@ -57,108 +57,77 @@ function configure_lr-mgba() {
 
     if [ -e $md_instppa/mgba_libretro.so ]
         then
-          ensureSystemretroconfig "gb"
-          ensureSystemretroconfig "gbh"
-          ensureSystemretroconfig "gbc"
-          ensureSystemretroconfig "gbch"
-          ensureSystemretroconfig "gba"
-          ensureSystemretroconfig "gbah"
-          addEmulator 0 "$md_id-ppa" "gb" "$md_instppa/mgba_libretro.so"
-          addEmulator 0 "$md_id-ppa" "gbc" "$md_instppa/mgba_libretro.so"
-          addEmulator 0 "$md_id-ppa" "gbah" "$md_instppa/mgba_libretro.so"
-          addEmulator 0 "$md_id-ppa" "gba" "$md_instppa/mgba_libretro.so"
-          addEmulator 0 "$md_id-ppa" "gbch" "$md_instppa/mgba_libretro.so"
-          addSystem "gb"
-          addSystem "gbh"
-          addSystem "gbah"
-          addSystem "gbah"
-          addSystem "gbc"
-          addSystem "gbch"
+
+    local system
+    local def
+    for system in gb gbh gbc gbch gba gbah; do
+        def=0
+        [[ "$system" == "gba" ]] && ! isPlatform "armv6" && def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator 1 "$md_id-ppa" "$system" "$md_instppa/mgba_libretro.so"
+        addSystem "$system"
+
+
+
+
+    done
+
     fi
 
-    cp /home/$user/.config/RetroPie/gb/retroarch.cfg /home/$user/.config/RetroPie/gb/retroarch.cfg.bkp
-    local core_config="gb"
-    setRetroArchcoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/Gameboy_1080p.cfg"
-    setRetroArchcoreOption  "input_overlay_enable" "true"
-    setRetroArchcoreOption  "input_overlay_opacity" "0.8"
-    setRetroArchcoreOption  "input_overlay_scale" "1.0"
-    setRetroArchcoreOption  "video_shader"  "$raconfigdir/shaders/rpi/handheld/gameboy/gb-shader.glslp"
-    setRetroArchcoreOption  "video_shader_enable"  "true"
-    setRetroArchcoreOption  "video_smooth" "false"
-    setRetroArchcoreOption  "mgba_gb_colorization" "disabled"
-    setRetroArchcoreOption  "mgba_gb_internal_palette" "GB - DMG"
-    setRetroArchcoreOption  "mgba_gb_model" "Game Boy"
-    setRetroArchcoreOption  "mgba_use_bios" "ON"
-    setRetroArchcoreOption  "mgba_sgb_borders" "ON"
-
-
-    cp /home/$user/.config/RetroPie/gbh/retroarch.cfg /home/$user/.config/RetroPie/gbh/retroarch.cfg.bkp
-    local core_config="gbh"
-    setRetroArchcoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/Gameboy_1080p.cfg"
-    setRetroArchcoreOption  "input_overlay_enable" "true"
-    setRetroArchcoreOption  "input_overlay_opacity" "0.8"
-    setRetroArchcoreOption  "input_overlay_scale" "1.0"
-    setRetroArchcoreOption  "video_shader"  "$raconfigdir/shaders/rpi/handheld/gameboy/gb-shader.glslp"
-    setRetroArchcoreOption  "video_shader_enable"  "true"
-    setRetroArchcoreOption  "video_smooth" "false"
-    setRetroArchcoreOption  "mgba_gb_colorization" "disabled"
-    setRetroArchcoreOption  "mgba_gb_internal_palette" "GB - DMG"
-    setRetroArchcoreOption  "mgba_gb_model" "Game Boy"
-    setRetroArchcoreOption  "mgba_use_bios" "ON"
-    setRetroArchcoreOption  "mgba_sgb_borders" "ON"
+    for system in gb gbh ; do
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/Gameboy_1080p.cfg"
+        setRetroArchCoreOption  "input_overlay_enable" "true"
+        setRetroArchCoreOption  "input_overlay_opacity" "0.8"
+        setRetroArchCoreOption  "input_overlay_scale" "1.0"
+        setRetroArchCoreOption  "video_shader"  "$raconfigdir/shaders/rpi/handheld/gameboy/gb-shader.glslp"
+        setRetroArchCoreOption  "video_shader_enable"  "true"
+        setRetroArchCoreOption  "video_smooth" "false"
+        setRetroArchCoreOption  "mgba_gb_colorization" "disabled"
+        setRetroArchCoreOption  "mgba_gb_internal_palette" "GB - DMG"
+        setRetroArchCoreOption  "mgba_gb_model" "Game Boy"
+        setRetroArchCoreOption  "mgba_use_bios" "ON"
+        setRetroArchCoreOption  "mgba_sgb_borders" "ON"
+    done
 
 
 ###Game Boy Color
 ################################################
+    for system in gbc gbc ; do
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyColor_1080p.cfg"
+        setRetroArchCoreOption  "input_overlay_enable" "true"
+        setRetroArchCoreOption  "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption  "input_overlay_scale" "1.0"
+        setRetroArchCoreOption  "video_shader"  "$raconfigdir/shaders/rpi/hqx/hq4x.glslp"
+        setRetroArchCoreOption  "video_shader_enable"  "true"
+        setRetroArchCoreOption  "video_smooth" "false"
+        setRetroArchCoreOption  "mgba_gb_model" "Game Boy Color"
+        setRetroArchCoreOption  "mgba_use_bios" "ON"
 
-    cp /home/$user/.config/RetroPie/gbc/retroarch.cfg /home/$user/.config/RetroPie/gbc/retroarch.cfg.bkp
-    local core_config="gbc"
-    setRetroArchcoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyColor_1080p.cfg"
-    setRetroArchcoreOption  "input_overlay_enable" "true"
-    setRetroArchcoreOption  "input_overlay_opacity" "1.0"
-    setRetroArchcoreOption  "input_overlay_scale" "1.0"
-    setRetroArchcoreOption  "video_shader"  "$raconfigdir/shaders/rpi/hqx/hq4x.glslp"
-    setRetroArchcoreOption  "video_shader_enable"  "true"
-    setRetroArchcoreOption  "video_smooth" "false"
-    setRetroArchcoreOption  "mgba_gb_model" "Game Boy Color"
-    setRetroArchcoreOption  "mgba_use_bios" "ON"
+    done
 
-    cp /home/$user/.config/RetroPie/gbch/retroarch.cfg /home/$user/.config/RetroPie/gbh/retroarch.cfg.bkp
-    local core_config="gbch"
-    setRetroArchcoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyColor_1080p.cfg"
-    setRetroArchcoreOption  "input_overlay_enable" "true"
-    setRetroArchcoreOption  "input_overlay_opacity" "1.0"
-    setRetroArchcoreOption  "input_overlay_scale" "1.0"
-    setRetroArchcoreOption  "video_shader"  "$raconfigdir/shaders/rpi/hqx/hq4x.glslp"
-    setRetroArchcoreOption  "video_shader_enable"  "true"
-    setRetroArchcoreOption  "video_smooth" "false"
-    setRetroArchcoreOption  "mgba_gb_model" "Game Boy Color"
-    setRetroArchcoreOption  "mgba_use_bios" "ON"
 
 
 ##Game Boy Advance
 #####################
-    cp /home/$user/.config/RetroPie/gba/retroarch.cfg /home/$user/.config/RetroPie/gba/retroarch.cfg.bkp
-    local core_config="gba"
-    setRetroArchcoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyAdvance_1080p.cfg"
-    setRetroArchcoreOption  "input_overlay_enable" "true"
-    setRetroArchcoreOption  "input_overlay_opacity" "1.0"
-    setRetroArchcoreOption  "input_overlay_scale" "1.0"
-    setRetroArchcoreOption  "video_shader"  "$raconfigdir/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl"
-    setRetroArchcoreOption  "video_shader_enable"  "true"
-    setRetroArchcoreOption  "video_smooth" "false"
-    setRetroArchcoreOption  "mgba_gb_model" "Game Boy Advance"
-    setRetroArchcoreOption  "mgba_use_bios" "ON"
 
-    cp /home/$user/.config/RetroPie/gbah/retroarch.cfg /home/$user/.config/RetroPie/gbah/retroarch.cfg.bkp
-    local core_config="gbah"
-    setRetroArchcoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyAdvance_1080p.cfg"
-    setRetroArchcoreOption  "input_overlay_enable" "true"
-    setRetroArchcoreOption  "input_overlay_opacity" "1.0"
-    setRetroArchcoreOption  "input_overlay_scale" "1.0"
-    setRetroArchcoreOption  "video_shader"  "$raconfigdir/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl"
-    setRetroArchcoreOption  "video_shader_enable"  "true"
-    setRetroArchcoreOption  "video_smooth" "false"
-    setRetroArchcoreOption  "mgba_gb_model" "Game Boy Advance"
-    setRetroArchcoreOption  "mgba_use_bios" "ON"
+    for system in gba gbah ; do
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyAdvance_1080p.cfg"
+        setRetroArchCoreOption  "input_overlay_enable" "true"
+        setRetroArchCoreOption  "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption  "input_overlay_scale" "1.0"
+        setRetroArchCoreOption  "video_shader"  "$raconfigdir/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl"
+        setRetroArchCoreOption  "video_shader_enable"  "true"
+        setRetroArchCoreOption  "video_smooth" "false"
+        setRetroArchCoreOption  "mgba_gb_model" "Game Boy Advance"
+        setRetroArchCoreOption  "mgba_use_bios" "ON"
+
+    done
+
 }

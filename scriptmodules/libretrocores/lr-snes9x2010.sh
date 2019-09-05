@@ -45,115 +45,53 @@ function install_lr-snes9x2010() {
 }
 
 function configure_lr-snes9x2010() {
-    mkRomDir "snes"
-    mkRomDir "snesh"
-    mkRomDir "sfc"
-    mkRomDir "satellaview"
-    mkRomDir "sufami"
-    mkRomDir "smwhacks"
-    ensureSystemretroconfig "snes"
-    ensureSystemretroconfig "snesh"
-    ensureSystemretroconfig "sfc"
-    ensureSystemretroconfig "satellaview"
-    ensureSystemretroconfig "sufami"
-    ensureSystemretroconfig "smwhacks"
+    local system
+    local def
+    for system in snes smwhacks snesh sfc satellaview sufami ; do
+        def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/snes9x2010_libretro.so"
+        addSystem "$system"
+        local core_config="$system"
+        setRetroArchCoreOption "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption "input_overlay_scale" "1.0"
+        setRetroArchCoreOption "input_overlay_enable" "true"
+        setRetroArchCoreOption "video_shader"  "$raconfigdir/shaders/rpi/retropie/snes_scanline.glslp"
+        setRetroArchCoreOption "video_shader_enable"  "true" 
+        setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
 
+    done
 
-    addEmulator 1 "$md_id" "snes" "$md_inst/snes9x2010_libretro.so"
-    addEmulator 0 "$md_id" "snesh" "$md_inst/snes9x2010_libretro.so"
-    addEmulator 0 "$md_id" "smwhacks" "$md_inst/snes9x2010_libretro.so"
-    addEmulator 1 "$md_id" "sfc" "$md_inst/snes9x2010_libretro.so"
-    addEmulator 1 "$md_id" "satellaview" "$md_inst/snes9x2010_libretro.so"
-    addEmulator 1 "$md_id" "sufami" "$md_inst/snes9x2010_libretro.so"
-    addSystem "snes"
-    addSystem "snesh"
-    addSystem "sfc"
-    addSystem "satellaview"
-    addSystem "sufami"
-    addSystem "smwhacks"
-
+    
     addBezel "snes"
     addBezel "sfc"
 
-
-
     if [ -e $md_instppa/snes9x2010_libretro.so ]
         then
-          addEmulator 0 "$md_id-ppa" "snes" "$md_instppa/snes9x2010_libretro.so"
-          addEmulator 0 "$md_id-ppa" "snesh" "$md_instppa/snes9x2010_libretro.so"
-          addEmulator 0 "$md_id-ppa" "sfc" "$md_instppa/snes9x2010_libretro.so"
-          addEmulator 0 "$md_id-ppa" "satellaview" "$md_instppa/snes9x2010_libretro.so"
-          addEmulator 0 "$md_id-ppa" "sufami" "$md_instppa/snes9x2010_libretro.so"
-          addEmulator 0 "$md_id-ppa" "smwhacks" "$md_instppa/snes9x2010_libretro.so"
+            local system
+            local def
+            for system in snes smwhacks snesh sfc satellaview sufami ; do
+                def=0
+                addEmulator def "$md_id-ppa" "$system" "$md_instppa/snes9x2010_libretro.so"
+            done
     fi
 
 
-    cp /home/$user/.config/RetroPie/snes/retroarch.cfg /home/$user/.config/RetroPie/snes/retroarch.cfg.bkp
-    local core_config="snes"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_smooth" "false"
-    setRetroArchCoreOption "video_shader"  "$raconfigdir/shaders/rpi/retropie/snes_scanline.glslp"
-    setRetroArchCoreOption "video_shader_enable"  "true" 
-    setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
+    for system in snes smwhacks snesh ; do
 
-    cp /home/$user/.config/RetroPie/snesh/retroarch.cfg /home/$user/.config/RetroPie/snesh/retroarch.cfg.bkp
-    local core_config="snesh"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_smooth" "false"
-    setRetroArchCoreOption "video_shader"  "$raconfigdir/shaders/rpi/retropie/snes_scanline.glslp"
-    setRetroArchCoreOption "video_shader_enable"  "true" 
-    setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
+            cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+            local core_config="$system"
+            setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg"
+    done
+           
+           
+    for system in  sfc satellaview sufami ; do
 
+            cp /home/$user/.config/RetroPie/sfc/retroarch.cfg /home/$user/.config/RetroPie/sfc/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg"
+    done
 
-    cp /home/$user/.config/RetroPie/sfc/retroarch.cfg /home/$user/.config/RetroPie/sfc/retroarch.cfg.bkp
-    local core_config="sfc"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_smooth" "false"
-    setRetroArchCoreOption "video_shader"  "$raconfigdir/shaders/rpi/retropie/snes_scanline.glslp"
-    setRetroArchCoreOption "video_shader_enable"  "true" 
-    setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
-
-    cp /home/$user/.config/RetroPie/satellaview/retroarch.cfg /home/$user/.config/RetroPie/satellaview/retroarch.cfg.bkp
-    local core_config="satellaview"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_smooth" "false"
-    setRetroArchCoreOption "video_shader"  "$raconfigdir/shaders/rpi/retropie/snes_scanline.glslp"
-    setRetroArchCoreOption "video_shader_enable"  "true" 
-    setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
-
-    cp /home/$user/.config/RetroPie/sufami/retroarch.cfg /home/$user/.config/RetroPie/sufami/retroarch.cfg.bkp
-    local core_config="sufami"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_smooth" "false"
-    setRetroArchCoreOption "video_shader"  "$raconfigdir/shaders/rpi/retropie/snes_scanline.glslp"
-    setRetroArchCoreOption "video_shader_enable"  "true" 
-    setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
-
-
-    cp /home/$user/.config/RetroPie/smwhacks/retroarch.cfg /home/$user/.config/RetroPie/smwhacks/retroarch.cfg.bkp
-    local core_config="smwhacks"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_smooth" "false"
-    setRetroArchCoreOption "video_shader"  "$raconfigdir/shaders/rpi/retropie/snes_scanline.glslp"
-    setRetroArchCoreOption "video_shader_enable"  "true" 
-    setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
 
 }

@@ -57,64 +57,48 @@ function install_lr-pcsx-rearmed() {
 function configure_lr-pcsx-rearmed() {
     local def
         def=1
-        mkRomDir "psx"
-        ensureSystemretroconfig "psx"
-        addEmulator 1 "$md_id" "psx" "$md_inst/libretro.so"
-        addSystem "psx"
-        mkRomDir "psx-japan"
-        ensureSystemretroconfig "psx-japan"
-        addEmulator 1 "$md_id" "psx-japan" "$md_inst/libretro.so"
-        addSystem "psx-japan"
 
+    local system
+    local def=1
+    for system in psx psx-japan  ; do
+        def=0
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/pcsx_rearmed_libretro.so"
+        addSystem "$system"
+        local core_config="$system"
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
         setRetroArchCoreOption "pcsx_rearmed_neon_enhancement_enable" "enabled" # Double resolution
         setRetroArchCoreOption "pcsx_rearmed_neon_enhancement_no_main" "enabled" # Speed hack
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sony-PlayStation.cfg"
+        setRetroArchCoreOption  "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption  "input_overlay_scale" "1.0"
+        setRetroArchCoreOption  "input_overlay_enable" "true"
+        setRetroArchCoreOption  "video_smooth" "true"
+        setRetroArchCoreOption  "rewind_enable" "false"
+        setRetroArchCoreOption  "game_specific_options" "true"
+        setRetroArchCoreOption  "input_player1_analog_dpad_mode" "0"
+        setRetroArchCoreOption  "input_player2_analog_dpad_mode" "0"
+        setRetroArchCoreOption  "pcsx_rearmed_neon_enhancement_enable" "enabled"
+        setRetroArchCoreOption  "pcsx_rearmed_neon_enhancement_no_main" "enabled"
+        setRetroArchCoreOption  "pcsx_rearmed_show_bios_bootlogo" "enabled"
+    done
+
 
     if [ -e $md_instppa/pcsx1_libretro.so ]
                     then
-                                addEmulator 0 "$md_id-ppa" "psx" "$md_instppa/pcsx1_libretro.so"
-                                addSystem "psx" "$md_instppa/pcsx1_libretro.so"
-                                addEmulator 0 "$md_id-ppa" "psx-japan" "$md_instppa/pcsx1_libretro.so"
-                                addSystem "psx-japan" "$md_instppa/pcsx1_libretro.so"
+                        for system in psx psx-japan  ; do
+                        def=0
+                        mkRomDir "$system"
+                        ensureSystemretroconfig "$system"
+                        addEmulator def "$md_id-ppa" "$system" "$md_instppa/pcsx_rearmed_libretro.so"
+                        addSystem "$system"
+                    done
+
 
 
     fi
         addBezel "psx"
-        ln -s $raconfigdir/config/PCSX-ReARMed  $raconfigdir/config/Beetle\ PSX
-
-        local core_config="psx"
-        setRetroArchcoreOption  "core_options_path" "/home/$user/.config/RetroPie/psx/retroarch.cfg"
-        setRetroArchcoreOption  "input_overlay" "$raconfigdir/overlay/Sony-PlayStation.cfg"
-        setRetroArchcoreOption  "input_overlay_opacity" "1.0"
-        setRetroArchcoreOption  "input_overlay_scale" "1.0"
-        setRetroArchcoreOption  "input_overlay_enable" "true"
-        setRetroArchcoreOption  "video_smooth" "true"
-        setRetroArchcoreOption  "rewind_enable" "false"
-        setRetroArchcoreOption  "game_specific_options" "true"
-        setRetroArchcoreOption  "input_player1_analog_dpad_mode" "0"
-        setRetroArchcoreOption  "input_player2_analog_dpad_mode" "0"
-        setRetroArchcoreOption  "pcsx_rearmed_neon_enhancement_enable" "enabled"
-        setRetroArchcoreOption  "pcsx_rearmed_neon_enhancement_no_main" "enabled"
-        setRetroArchcoreOption  "pcsx_rearmed_show_bios_bootlogo" "enabled"
-
-
-
-        local core_config="psx-japan"
-        setRetroArchcoreOption  "core_options_path" "/home/$user/.config/RetroPie/psx-japan/retroarch.cfg"
-        setRetroArchcoreOption  "input_overlay" "$raconfigdir/overlay/Sony-PlayStation.cfg"
-        setRetroArchcoreOption  "input_overlay_opacity" "1.0"
-        setRetroArchcoreOption  "input_overlay_scale" "1.0"
-        setRetroArchcoreOption  "input_overlay_enable" "true"
-        setRetroArchcoreOption  "video_smooth" "true"
-        setRetroArchcoreOption  "rewind_enable" "false"
-        setRetroArchcoreOption  "game_specific_options" "true"
-        setRetroArchcoreOption  "input_player1_analog_dpad_mode" "0"
-        setRetroArchcoreOption  "input_player2_analog_dpad_mode" "0"
-        setRetroArchcoreOption  "pcsx_rearmed_neon_enhancement_enable" "enabled"
-        setRetroArchcoreOption  "pcsx_rearmed_neon_enhancement_no_main" "enabled"
-        setRetroArchcoreOption  "pcsx_rearmed_pad1type" "analog"
-        setRetroArchcoreOption  "pcsx_rearmed_pad2type" "analog"
-        setRetroArchcoreOption "pcsx_rearmed_show_bios_bootlogo" "enabled"
-
 
 
     

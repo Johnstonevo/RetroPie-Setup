@@ -33,22 +33,34 @@ function install_lr-beetle-saturn() {
 }
 
 function configure_lr-beetle-saturn() {
-    mkRomDir "saturn"
-    ensureSystemretroconfig "saturn"
 
-    addEmulator 0 "$md_id" "saturn" "$md_inst/mednafen_saturn_libretro.so"
-    addSystem "saturn"
 
-    mkRomDir "saturn-japan"
-    ensureSystemretroconfig "saturn-japan"
+    local system
+    local def
+    for system in saturn ; do
+        def=0
+        [[ "$system" == "saturn" || "$system" == "saturn-japan"    ]] && def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator 1 "$md_id" "$system" "$md_inst/mednafen_saturn_libretro.so"
+        addSystem "$system"
+     done
 
-    addEmulator 0 "$md_id" "saturn-japan" "$md_inst/mednafen_saturn-japan-japan_libretro.so"
-    addSystem "saturn-japan"
+    
 
     if [ -e $md_instppa/mednafen_saturn_libretro.so ]
                     then
-    addEmulator 0 "$md_id-ppa" "saturn" "$md_instppa/mednafen_saturn_libretro.so"
 
-    addEmulator 0 "$md_id-ppa" "saturn-japan" "$md_instppa/mednafen_saturn-japan-japan_libretro.so"
+                        local system
+    local def
+    for system in saturn saturn-japan ; do
+        def=0
+        [[ "$system" == "saturn" || "$system" == "saturn-japan"    ]] && def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator 0 "$md_id-ppa" "$system" "$md_instppa/mednafen_saturn_libretro.so"
+        addSystem "$system"
+     done
+
     fi
 }

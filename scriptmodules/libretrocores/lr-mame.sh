@@ -54,6 +54,14 @@ function configure_lr-mame() {
         ensureSystemretroconfig "$system"
         addEmulator 0 "$md_id" "$system" "$md_inst/mamearcade_libretro.so"
         addSystem "$system"
+        cp /home/$user/.config/RetroPie/%system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOption "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
+        setRetroArchCoreOption "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption "input_overlay_enable" "true"
+        setRetroArchCoreOption "mame-skip_disclaimer" "enabled"
+        setRetroArchCoreOption "mame-dcs-speedhack" "enabled"
+        setRetroArchCoreOption "mame-samples" "enabled"
 
         addBezel "mame-current"
     done
@@ -61,15 +69,7 @@ function configure_lr-mame() {
   if [ -e $md_instppa/mame_libretro.so ]
   then
       addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame_libretro.so"
-  addEmulator 0 "$md_id-ppa" "mame-current" "$md_instppa/mame_libretro.so"
+      addEmulator 0 "$md_id-ppa" "mame-current" "$md_instppa/mame_libretro.so"
   fi
-      cp /home/$user/.config/RetroPie/mame-current/retroarch.cfg /home/$user/.config/RetroPie/mame-current/retroarch.cfg.bkp
-      local core_config="mame-current"
-      setRetroArchCoreOption "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
-      setRetroArchCoreOption "input_overlay_opacity" "1.0"
-      setRetroArchCoreOption "input_overlay_enable" "true"
-      setRetroArchCoreOption "mame-skip_disclaimer" "enabled"
-      setRetroArchCoreOption "mame-dcs-speedhack" "enabled"
-      setRetroArchCoreOption "mame-samples" "enabled"
 
 }

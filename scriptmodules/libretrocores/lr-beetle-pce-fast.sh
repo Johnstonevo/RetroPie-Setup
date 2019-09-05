@@ -45,9 +45,11 @@ function configure_lr-beetle-pce-fast() {
         [[ "$system" == "tg16" || "$system" == "tg-cd"  || "$system" == "pcengine"  || "$system" == "pce-cd"  ]] && def=1
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
-        addEmulator 0 "$md_id" "$system" "$md_inst/mednafen_pce_fast_libretro.so"
+        addEmulator def "$md_id" "$system" "$md_inst/mednafen_pce_fast_libretro.so"
         addSystem "$system"
         addBezel "$system"
+
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
 
         local core_config="$system"
         setRetroArchCoreOption "input_overlay_opacity" "1.0"
@@ -77,9 +79,7 @@ function configure_lr-beetle-pce-fast() {
             for system in tg16 tg-cd pcengine pce-cd ; do
                 def=0
                 [[ "$system" == "tg16" || "$system" == "tg-cd"  || "$system" == "pcengine"  || "$system" == "pce-cd"  ]] && def=1
-                mkRomDir "$system"
                 addEmulator 0 "$md_id-ppa" "$system" "$md_instppa/mednafen_pce_fast_libretro.so"
-
         done
 
     fi

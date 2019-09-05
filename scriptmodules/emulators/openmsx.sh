@@ -44,8 +44,15 @@ function install_openmsx() {
 }
 
 function configure_openmsx() {
-    mkRomDir "msx"
 
-    addEmulator 0 "$md_id" "msx" "$md_inst/bin/openmsx %ROM%"
-    addSystem "msx"
+    local system
+    local def
+    for system in msx msx2 msx2+ ; do
+        def=0
+        [[ "$system" == "msxturbor"  ]] && def=1
+        mkRomDir "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/bin/openmsx %ROM%"
+        addSystem "system"
+    done
+
 }

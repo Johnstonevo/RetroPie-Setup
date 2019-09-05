@@ -32,76 +32,58 @@ function install_lr-quicknes() {
 }
 
 function configure_lr-quicknes() {
-    mkRomDir "nes"
-    mkRomDir "nesh"
-    mkRomDir "fds"
-    mkRomDir "famicom"
-    ensureSystemretroconfig "nes"
-    ensureSystemretroconfig "nesh"
-    ensureSystemretroconfig "fds"
-    ensureSystemretroconfig "famicom"
-
-    local def=0
-    isPlatform "armv6" && def=0
-
-    addEmulator 0 "$md_id" "nes" "$md_inst/quicknes_libretro.so"
-    addEmulator 0 "$md_id" "nesh" "$md_inst/quicknes_libretro.so"
-    addEmulator 0 "$md_id" "fds" "$md_inst/quicknes_libretro.so"
-    addEmulator 0 "$md_id" "famicom" "$md_inst/quicknes_libretro.so"
-    addSystem "nes"
-    addSystem "nesh"
-    addSystem "fds"
-    addSystem "famicom"
+    local system
+    local def
+    for system in nes nesh fds famicom ; do
+        def=0
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/quicknes_libretro.so"
+        addSystem "$system"
+        local core_config="$system"
+        setRetroArchCoreOption "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption "input_overlay_scale" "1.0"
+        setRetroArchCoreOption "input_overlay_enable" "true"
+        setRetroArchCoreOption "video_smooth" "false"
+    done
 
     addBezel "nes"
     addBezel "fds"
     addBezel "famicom"
+
+    
 if [ -e $md_instppa/quicknes_libretro.so ]
 then
-  addEmulator 0 "$md_id-ppa" "nes" "$md_inst/quicknes_libretro.so"
-  addEmulator 0 "$md_id-ppa" "nesh" "$md_inst/quicknes_libretro.so"
-    addEmulator 0 "$md_id-ppa" "fds" "$md_inst/quicknes_libretro.so"
-    addEmulator 0 "$md_id-ppa" "famicom" "$md_inst/quicknes_libretro.so"
-    addSystem "nes"
-    addSystem "fds"
-    addSystem "famicom"
+    local system
+    local def
+    for system in nes nesh fds famicom ; do
+        def=0
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id-ppa" "$system" "$md_instppa/quicknes_libretro.so"
+        addSystem "$system"
+
+    done
+
 fi
 
+    for system in nes nesh ; do
 
-    cp /home/$user/.config/RetroPie/nes/retroarch.cfg /home/$user/.config/RetroPie/nes/retroarch.cfg.bkp
-    local core_config="nes"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_smooth" "false"
+        cp /home/$user/.config/RetroPie/nes/retroarch.cfg /home/$user/.config/RetroPie/nes/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg"
+    done
 
-
-    cp /home/$user/.config/RetroPie/nesh/retroarch.cfg /home/$user/.config/RetroPie/nesh/retroarch.cfg.bkp
-    local core_config="nesh"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_smooth" "false"
 
 
     cp /home/$user/.config/RetroPie/fds/retroarch.cfg /home/$user/.config/RetroPie/fds/retroarch.cfg.bkp
     local core_config="fds"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_smooth" "false"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Famicom-Disk-System.cfg"
 
 
     cp /home/$user/.config/RetroPie/famicom/retroarch.cfg /home/$user/.config/RetroPie/famicom/retroarch.cfg.bkp
     local core_config="famicom"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_smooth" "false"
+    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Famicom.cfg"
 
 
 }

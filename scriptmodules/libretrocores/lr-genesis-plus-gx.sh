@@ -35,66 +35,23 @@ function install_lr-genesis-plus-gx() {
 }
 
 function configure_lr-genesis-plus-gx() {
-  mkRomDir "gamegear"
-  mkRomDir "ggh"
-  mkRomDir "mastersystem"
-  mkRomDir "megadrive"
-  mkRomDir "genesis"
-  mkRomDir "megadrive-japan"
-  mkRomDir "genesis"
-  mkRomDir "genh"
-  mkRomDir "sg-1000"
-  mkRomDir "segacd"
-  mkRomDir "markiii"
-  mkRomDir "sega32x"
-  mkRomDir "sc-3000"
-  mkRomDir "sor"
-  ensureSystemretroconfig "gamegear"
-  ensureSystemretroconfig "ggh"
-  ensureSystemretroconfig "mastersystem"
-  ensureSystemretroconfig "megadrive"
-  ensureSystemretroconfig "genesis"
-  ensureSystemretroconfig "megadrive-japan"
-  ensureSystemretroconfig "genesis"
-  ensureSystemretroconfig "genh"
-  ensureSystemretroconfig "sg-1000"
-  ensureSystemretroconfig "segacd"
-  ensureSystemretroconfig "markiii"
-  ensureSystemretroconfig "sega32x"
-  ensureSystemretroconfig "sc-3000"
-  ensureSystemretroconfig "sor"
+            local system
+            local def
+            isPlatform "armv6" && def=0
 
-  local def=0
-  isPlatform "armv6" && def=0
+            for system in gamegear ggh mastersystem megadrive megadrive-japan genesis genh sg-1000  segacd markiii seag32x sc-3000 sor  ; do
+                def=0
+                [[ "$system" == "gamegear" || "$system" == "ggh"  || "$system" == "mastersystem"  || "$system" == "sg-1000"  || "$system" == "segacd"  || "$system" == "markiii"  || "$system" == "sc-1000"  ]] && def=1
+                mkRomDir "$system"
+                ensureSystemretroconfig "$system"
+                addEmulator def "$md_id" "$system" "$md_inst/genesis_plus_gx_libretro.so"
+                addSystem "$system"
+            done
 
-  addEmulator 1 "$md_id" "gamegear" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 1 "$md_id" "ggh" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 1 "$md_id" "mastersystem" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 0 "$md_id" "megadrive" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 0 "$md_id" "genesis" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 0 "$md_id" "megadrive-japan" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 0 "$md_id" "genesis" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 0 "$md_id" "genh" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 1 "$md_id" "sg-1000" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 1 "$md_id" "segacd" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 1 "$md_id" "markiii" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 0 "$md_id" "sega32x" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 0 "$md_id" "sc-3000" "$md_inst/genesis_plus_gx_libretro.so"
-  addEmulator 0 "$md_id" "sor" "$md_inst/genesis_plus_gx_libretro.so"
-  addSystem  "gamegear"
-  addSystem  "mastersystem"
-  addSystem  "megadrive"
-  addSystem  "genesis"
-  addSystem  "megadrive-japan"
-  addSystem  "genesis"
-  addSystem  "genh"
-  addSystem  "sg-1000"
-  addSystem  "segacd"
-  addSystem  "markiii"
-  addSystem  "sega32x"
-  addSystem  "sc-3000"
-  addSystem  "ggh"
-  addSystem  "sor"
+
+
+
+
 
   addBezel "megadrive"
   addBezel "sg-1000"
@@ -105,138 +62,75 @@ function configure_lr-genesis-plus-gx() {
 "
     if [ -e $md_instppa/genesis_plus_gx_libretro.so ]
         then
-
-
-          local def=0
-          isPlatform "armv6" && def=0
-
-          addEmulator 0 "$md_id-ppa" "gamegear" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 0 "$md_id-ppa" "ggh" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 0 "$md_id-ppa" "mastersystem" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 0 "$md_id-ppa" "megadrive" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 0 "$md_id-ppa" "genesis" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 0 "$md_id-ppa" "megadrive-japan" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 0 "$md_id-ppa" "genesis" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 0 "$md_id-ppa" "genh" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 0 "$md_id-ppa" "sg-1000" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 0 "$md_id-ppa" "segacd" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 0  "$md_id-ppa""markiii" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 0  "$md_id-ppa""sega32x" "$md_instppa/genesis_plus_gx_libretro.so"
-          addEmulator 0 "$md_id-ppa" "sc-3000" "$md_instppa/genesis_plus_gx_libretro.so"
-          addSystem  "gamegear"
-          addSystem  "mastersystem"
-          addSystem  "megadrive"
-          addSystem  "megadrive-japan"
-          addSystem  "genesis"
-          addSystem  "genh"
-          addSystem  "sg-1000"
-          addSystem  "segacd"
-          addSystem  "markiii"
-          addSystem  "sega32x"
-          addSystem  "sc-3000"
+            local system
+            local def
+            for system in gamegear ggh mastersystem megadrive megadrive-japan genesis genh sg-1000  segacd markiii seag32x sc-3000 sor  ; do
+                def=0
+                mkRomDir "$system"
+                ensureSystemretroconfig "$system"
+                addEmulator def "$md_id-ppa" "$system" "$md_instppa/genesis_plus_gx_libretro.so"
+                addSystem "$system"
+            done
 
 
     fi
 
+            for system in megadrive megadrive-japan genesis genh  sor  ; do
+            local core_config="$system"
+                cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+                setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sega-Mega-Drive.cfg"
+                setRetroArchCoreOption  "input_overlay_opacity" "1.0"
+                setRetroArchCoreOption  "input_overlay_scale" "1.0"
+                setRetroArchCoreOption  "input_libretro_device_p1" "513"
+                setRetroArchCoreOption  "input_libretro_device_p2" "513"
+                setRetroArchCoreOption  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp"
+                setRetroArchCoreOption  "video_shader_enable"  "true"
+                setRetroArchCoreOption  "genesis_plus_gx_system_hw" "mega drive"
+
+            done
 
 ##retroconfig##
 ###############
-    if [  -d $raconfigdir/overlay/GameBezels/Megadrive ]
-    then
-                cp /home/$user/.config/RetroPie/megadrive/retroarch.cfg /home/$user/.config/RetroPie/megadrive/retroarch.cfg.bkp
-                local core_config="megadrive"
-                setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sega-Mega-Drive.cfg"
-                setRetroArchCoreOption "input_overlay_opacity" "1.0"
-                setRetroArchCoreOption "input_overlay_scale" "1.0"
-                setRetroArchCoreOption "input_libretro_device_p1" "513"
-                setRetroArchCoreOption "input_libretro_device_p2" "513"
-                setRetroArchCoreOption  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp"
-                setRetroArchCoreOption  "video_shader_enable"  "true"
-                setRetroArchCoreOption "genesis_plus_gx_system_hw" "mega drive"
-
-                cp /home/$user/.config/RetroPie/genesis/retroarch.cfg /home/$user/.config/RetroPie/genesis/retroarch.cfg.bkp
-                local core_config="genesis"
-                setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sega-Mega-Drive.cfg"
-                setRetroArchCoreOption "input_overlay_opacity" "1.0"
-                setRetroArchCoreOption "input_overlay_scale" "1.0"
-                setRetroArchCoreOption "input_libretro_device_p1" "513"
-                setRetroArchCoreOption "input_libretro_device_p2" "513"
-                setRetroArchCoreOption  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp"
-                setRetroArchCoreOption  "video_shader_enable"  "true"
-                setRetroArchCoreOption "genesis_plus_gx_system_hw" "mega drive"
 
 
 
-                cp /home/$user/.config/RetroPie/genh/retroarch.cfg /home/$user/.config/RetroPie/genh/retroarch.cfg.bkp
-                local core_config="enh"
-                setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sega-Mega-Drive.cfg"
-                setRetroArchCoreOption "input_overlay_opacity" "1.0"
-                setRetroArchCoreOption "input_overlay_scale" "1.0"
-                setRetroArchCoreOption "input_libretro_device_p1" "513"
-                setRetroArchCoreOption "input_libretro_device_p2" "513"
-                setRetroArchCoreOption  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp"
-                setRetroArchCoreOption  "video_shader_enable"  "true"
-                setRetroArchCoreOption "genesis_plus_gx_system_hw" "mega drive"
+        cp /home/$user/.config/RetroPie/segacd/retroarch.cfg /home/$user/.config/RetroPie/segacd/retroarch.cfg.bkp
+        local core_config="segacd"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sega-CD.cfg"
+        setRetroArchCoreOption "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption "input_overlay_scale" "1.0"
+        setRetroArchCoreOption "input_libretro_device_p1" "513"
+        setRetroArchCoreOption "input_libretro_device_p2" "513"
+        setRetroArchCoreOption  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp"
+        setRetroArchCoreOption  "video_shader_enable"  "true"
 
 
-                cp /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg /home/$user/.config/RetroPie/megadrive-japan/retroarch.cfg.bkp
-                local core_config="megadrive-japan"
-                setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sega-Mega-Drive.cfg"
-                setRetroArchCoreOption "input_overlay_opacity" "1.0"
-                setRetroArchCoreOption "input_overlay_scale" "1.0"
-                setRetroArchCoreOption "input_libretro_device_p1" "513"
-                setRetroArchCoreOption "input_libretro_device_p2" "513"
-                setRetroArchCoreOption  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp"
-                setRetroArchCoreOption  "video_shader_enable"  "true"
-                setRetroArchCoreOption "genesis_plus_gx_system_hw" "mega drive"
-    fi
+        cp /home/$user/.config/RetroPie/sg-1000/retroarch.cfg /home/$user/.config/RetroPie/sg-1000/retroarch.cfg.bkp
+        local core_config="sg-1000"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sega-SG-1000.cfg"
+        setRetroArchCoreOption  "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption  "input_overlay_scale" "1.0"
+        setRetroArchCoreOption  "custom_viewport_width" "1280"
+        setRetroArchCoreOption  "custom_viewport_height" "960"
+        setRetroArchCoreOption  "custom_viewport_x" "300"
+        setRetroArchCoreOption  "custom_viewport_y" "65"
+        setRetroArchCoreOption  "aspect_ratio_index" "22"
+        setRetroArchCoreOption  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp"
+        setRetroArchCoreOption  "video_shader_enable"  "true"
+        setRetroArchCoreOption  "genesis_plus_gx_system_hw" "sg-1000 II"
+
+        cp /home/$user/.config/RetroPie/mastersystem/retroarch.cfg /home/$user/.config/RetroPie/mastersystem/retroarch.cfg.bkp
+        local core_config="mastersystem"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sega-Master-System.cfg"
+        setRetroArchCoreOption  "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption  "input_overlay_scale" "1.0"
+        setRetroArchCoreOption  "video_smooth" "false"
+        setRetroArchCoreOption  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp"
+        setRetroArchCoreOption  "video_shader_enable"  "true"
+        setRetroArchCoreOption  "genesis_plus_gx_system_hw" "master system II"
 
 
-
-    if [  -d $raconfigdir/overlay/GameBezels/SegaCD ]
-    then
-                cp /home/$user/.config/RetroPie/segacd/retroarch.cfg /home/$user/.config/RetroPie/segacd/retroarch.cfg.bkp
-                local core_config="segacd"
-                setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/segacd.cfg"
-                setRetroArchCoreOption "input_overlay_opacity" "1.0"
-                setRetroArchCoreOption "input_overlay_scale" "1.0"
-                setRetroArchCoreOption "input_libretro_device_p1" "513"
-                setRetroArchCoreOption "input_libretro_device_p2" "513"
-                setRetroArchCoreOption  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp"
-                setRetroArchCoreOption  "video_shader_enable"  "true"
-                setRetroArchCoreOption "genesis_plus_gx_system_hw" "mega drive"
-
-    fi
-    if [  -d $raconfigdir/overlay/GameBezels/SG-1000 ]
-    then
-                cp /home/$user/.config/RetroPie/sg-1000/retroarch.cfg /home/$user/.config/RetroPie/sg-1000/retroarch.cfg.bkp
-                local core_config="sg-1000"
-                setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sega-SG-1000.cfg"
-                setRetroArchCoreOption "input_overlay_opacity" "1.0"
-                setRetroArchCoreOption "input_overlay_scale" "1.0"
-                setRetroArchCoreOption "custom_viewport_width" "1280"
-                setRetroArchCoreOption "custom_viewport_height" "960"
-                setRetroArchCoreOption "custom_viewport_x" "300"
-                setRetroArchCoreOption "custom_viewport_y" "65"
-                setRetroArchCoreOption "aspect_ratio_index" "22"
-                setRetroArchCoreOption  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp"
-                setRetroArchCoreOption  "video_shader_enable"  "true"
-                setRetroArchCoreOption "genesis_plus_gx_system_hw" "sg-1000 II"
-    fi
-    if [  -d $raconfigdir/overlay/GameBezels/MasterSystem ]
-    then
-                cp /home/$user/.config/RetroPie/mastersystem/retroarch.cfg /home/$user/.config/RetroPie/mastersystem/retroarch.cfg.bkp
-                local core_config="mastersystem"
-                setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Sega-Master-System.cfg"
-                setRetroArchCoreOption "input_overlay_opacity" "1.0"
-                setRetroArchCoreOption "input_overlay_scale" "1.0"
-                setRetroArchCoreOption "video_smooth" "false"
-                setRetroArchCoreOption  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp"
-                setRetroArchCoreOption  "video_shader_enable"  "true"
-                setRetroArchCoreOption "genesis_plus_gx_system_hw" "master system II"
-
-
-    fi
+ 
     cp /home/$user/.config/RetroPie/gamegear/retroarch.cfg /home/$user/.config/RetroPie/gamegear/retroarch.cfg.bkp
     local core_config="gamegear"
     setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlays/handhelds/gg.cfg"

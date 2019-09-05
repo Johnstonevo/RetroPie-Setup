@@ -62,9 +62,25 @@ function install_lr-mupen64plus-next() {
 }
 
 function configure_lr-mupen64plus-next() {
-    mkRomDir "n64"
-    ensureSystemretroconfig "n64"
+    
+    local system
+    local def
+    for system in n64 n64-japan n64dd ; do
+        def=0
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/mupen64plus_next_libretro.so"
+        addSystem "$system"
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-64.cfg" "$core_config"
+        setRetroArchCoreOption "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption "input_overlay_scale" "1.0"
+        setRetroArchCoreOption "input_overlay_enable" "true"
+        setRetroArchCoreOption "video_aspect_ratio" "1.0"
+        setRetroArchCoreOption "video_smooth" "true"
 
-    addEmulator 0 "$md_id" "n64" "$md_inst/mupen64plus_next_libretro.so"
-    addSystem "n64"
+    done
+    
+    addBezel "n64"
 }

@@ -37,13 +37,16 @@ function install_lr-beetle-wswan() {
 }
 
 function configure_lr-beetle-wswan() {
-    mkRomDir "wonderswan"
-    mkRomDir "wonderswancolor"
-    ensureSystemretroconfig "wonderswan"
-    ensureSystemretroconfig "wonderswancolor"
 
-    addEmulator 1 "$md_id" "wonderswan" "$md_inst/mednafen_wswan_libretro.so"
-    addEmulator 1 "$md_id" "wonderswancolor" "$md_inst/mednafen_wswan_libretro.so"
-    addSystem "wonderswan"
-    addSystem "wonderswancolor"
+    local system
+    local def
+    for system in wonderswan wonderswancolor ; do
+        def=0
+        [[ "$system" == "wonderswan" || "$system" == "wonderswancolor"  || "$system" == ""  || "$system" == ""  ]] && def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator 1 "$md_id" "$system" "$md_inst/mednafen_wswan_libretro.so"
+        addSystem "$system"
+    done
+
 }

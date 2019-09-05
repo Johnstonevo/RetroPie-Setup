@@ -32,113 +32,57 @@ function install_lr-tgbdual() {
 }
 
 function configure_lr-tgbdual() {
-    mkRomDir "gbc"
-    mkRomDir "gbch"
-    mkRomDir "gb"
-    mkRomDir "gbh"
-    ensureSystemretroconfig "gb"
-    ensureSystemretroconfig "gbh"
-    ensureSystemretroconfig "gbc"
-    ensureSystemretroconfig "gbch"
+    local system
+    local def
+    for system in gbc gbch gb gbh  ; do
+        def=0
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/tgbdual_libretro.so"
+        addSystem "$system"
+        
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOptiom  "input_overlay_enable" "true"
+        setRetroArchCoreOptiom  "input_overlay_opacity" "1.0"
+        setRetroArchCoreOptiom  "input_overlay_scale" "1.0"
+        setRetroArchCoreOptiom  "tgbdual_gb_colorization" "disabled"
+        setRetroArchCoreOptiom  "tgbdual_gb_internal_palette" "GB - DMG"
 
-
-
-    addEmulator 0 "$md_id" "gb" "$md_inst/tgbdual_libretro.so"
-    addEmulator 0 "$md_id" "gbh" "$md_inst/tgbdual_libretro.so"
-    addEmulator 0 "$md_id" "gbc" "$md_inst/tgbdual_libretro.so"
-    addEmulator 0 "$md_id" "gbch" "$md_inst/tgbdual_libretro.so"
-    addSystem "gb"
-    addSystem "gbh"
-    addSystem "gbc"
-    addSystem "gbch"
+    done
 
     if [ -e $md_instppa/tgbdual_libretro.so ]
         then
-          ensureSystemretroconfig "gb"
-          ensureSystemretroconfig "gbh"
-          ensureSystemretroconfig "gbc"
-          ensureSystemretroconfig "gbch"
-          addEmulator 0 "$md_id-ppa" "gb" "$md_instppa/tgbdual_libretro.so"
-          addEmulator 0 "$md_id-ppa" "gbc" "$md_instppa/tgbdual_libretro.so"
-          addEmulator 0 "$md_id-ppa" "gbch" "$md_instppa/tgbdual_libretro.so"
-          addEmulator 0 "$md_id-ppa" "gbh" "$md_instppa/tgbdual_libretro.so"
-          addSystem "gb"
-          addSystem "gbh"
-          addSystem "gbc"
-          addSystem "gbch"
+            local system
+            local def
+            for system in gbc gbch gb gbh  ; do
+                def=0
+                mkRomDir "$system"
+                ensureSystemretroconfig "$system"
+                addEmulator def "$md_id-ppa" "$system" "$md_instppa/tgbdual_libretro.so"
+                addSystem "$system"
+            done
     fi
 
-    cp /home/$user/.config/RetroPie/gb/retroarch.cfg /home/$user/.config/RetroPie/gb/retroarch.cfg.bkp
-    local core_config="gbg"
-    setRetroArchCoreOptiom  "input_overlay" "$raconfigdir/overlays/1080p_4-3/Gameboy_1080p.cfg"
-    setRetroArchCoreOptiom  "input_overlay_enable" "true"
-    setRetroArchCoreOptiom  "video_fullscreen_x" "1920"
-    setRetroArchCoreOptiom  "video_fullscreen_y" "1080"
-    setRetroArchCoreOptiom  "custom_viewport_width"  "640"
-    setRetroArchCoreOptiom  "custom_viewport_height" "576"
-    setRetroArchCoreOptiom  "custom_viewport_x" "640"
-    setRetroArchCoreOptiom  "custom_viewport_y"  "257"
-    setRetroArchCoreOptiom  "aspect_ratio_index" "23"
-    setRetroArchCoreOptiom  "input_overlay_opacity" "0.8"
-    setRetroArchCoreOptiom  "input_overlay_scale" "1.0"
-    setRetroArchCoreOptiom  "video_shader"  "$raconfigdir/shaders/rpi/handheld/gameboy/gb-shader.glslp"
-    setRetroArchCoreOptiom  "video_shader_enable"  "true"
-    setRetroArchCoreOptiom  "video_smooth" "false"
-    setRetroArchCoreOptiom  "tgbdual_gb_colorization" "disabled"
-    setRetroArchCoreOptiom  "tgbdual_gb_internal_palette" "GB - DMG"
+    for system in gb gbh  ; do
 
-    cp /home/$user/.config/RetroPie/gbh/retroarch.cfg /home/$user/.config/RetroPie/gbh/retroarch.cfg.bkp
-    local core_config="gbh"
-    setRetroArchCoreOptiom  "input_overlay" "$raconfigdir/overlays/1080p_4-3/Gameboy_1080p.cfg"
-    setRetroArchCoreOptiom  "input_overlay_enable" "true"
-    setRetroArchCoreOptiom  "video_fullscreen_x" "1920"
-    setRetroArchCoreOptiom  "video_fullscreen_y" "1080"
-    setRetroArchCoreOptiom  "custom_viewport_width"  "640"
-    setRetroArchCoreOptiom  "custom_viewport_height" "576"
-    setRetroArchCoreOptiom  "custom_viewport_x" "640"
-    setRetroArchCoreOptiom  "custom_viewport_y"  "257"
-    setRetroArchCoreOptiom  "aspect_ratio_index" "23"
-    setRetroArchCoreOptiom  "input_overlay_opacity" "0.8"
-    setRetroArchCoreOptiom  "input_overlay_scale" "1.0"
-    setRetroArchCoreOptiom  "video_shader"  "$raconfigdir/shaders/rpi/handheld/gameboy/gb-shader.glslp"
-    setRetroArchCoreOptiom  "video_shader_enable"  "true"
-    setRetroArchCoreOptiom  "video_smooth" "false"
-    setRetroArchCoreOptiom  "tgbdual_gblink_enable" "enabled"
-    setRetroArchCoreOptiom  "tgbdual_gb_internal_palette" "GB - DMG"
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOptiom  "input_overlay" "$raconfigdir/overlays/1080p_4-3/Gameboy_1080p.cfg"
+        setRetroArchCoreOptiom  "video_shader"  "$raconfigdir/shaders/rpi/handheld/gameboy/gb-shader.glslp"
+        setRetroArchCoreOptiom  "video_shader_enable"  "true"
+        setRetroArchCoreOptiom  "video_smooth" "false"
+    done
 
 
+    for system in gbc gbch  ; do
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOptiom  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyColor_1080p.cfg"
+        setRetroArchCoreOptiom  "video_shader"  "$raconfigdir/shaders/rpi/hqx/hq4x.glslp"
+        setRetroArchCoreOptiom  "video_shader_enable"  "true"
+        setRetroArchCoreOptiom  "video_smooth" "false"
+    done
 
-    cp /home/$user/.config/RetroPie/gbc/retroarch.cfg /home/$user/.config/RetroPie/gbc/retroarch.cfg.bkp
-    local core_config="gbc"
-    setRetroArchCoreOptiom  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyColor_1080p.cfg"
-    setRetroArchCoreOptiom  "input_overlay_enable" "true"
-    setRetroArchCoreOptiom  "video_fullscreen_x" "1920"
-    setRetroArchCoreOptiom  "video_fullscreen_y" "1080"
-    setRetroArchCoreOptiom  "custom_viewport_width"  "640"
-    setRetroArchCoreOptiom  "custom_viewport_height" "576"
-    setRetroArchCoreOptiom  "custom_viewport_x" "640"
-    setRetroArchCoreOptiom  "custom_viewport_y"  "191"
-    setRetroArchCoreOptiom  "aspect_ratio_index" "23"
-    setRetroArchCoreOptiom  "input_overlay_opacity" "1.0"
-    setRetroArchCoreOptiom  "input_overlay_scale" "1.0"
-    setRetroArchCoreOptiom  "video_shader"  "$raconfigdir/shaders/rpi/hqx/hq4x.glslp"
-    setRetroArchCoreOptiom  "video_shader_enable"  "true"
-    setRetroArchCoreOptiom  "video_smooth" "false"
 
-    cp /home/$user/.config/RetroPie/gbch/retroarch.cfg /home/$user/.config/RetroPie/gbh/retroarch.cfg.bkp
-    local core_config="gbch"
-    setRetroArchCoreOptiom  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyColor_1080p.cfg"
-    setRetroArchCoreOptiom  "input_overlay_enable" "true"
-    setRetroArchCoreOptiom  "video_fullscreen_x" "1920"
-    setRetroArchCoreOptiom  "video_fullscreen_y" "1080"
-    setRetroArchCoreOptiom  "custom_viewport_width"  "640"
-    setRetroArchCoreOptiom  "custom_viewport_height" "576"
-    setRetroArchCoreOptiom  "custom_viewport_x" "640"
-    setRetroArchCoreOptiom  "custom_viewport_y"  "191"
-    setRetroArchCoreOptiom  "aspect_ratio_index" "23"
-    setRetroArchCoreOptiom  "input_overlay_opacity" "1.0"
-    setRetroArchCoreOptiom  "input_overlay_scale" "1.0"
-    setRetroArchCoreOptiom  "video_shader"  "$raconfigdir/shaders/rpi/hqx/hq4x.glslp"
-    setRetroArchCoreOptiom  "video_shader_enable"  "true"
-    setRetroArchCoreOptiom  "video_smooth" "false"
 }

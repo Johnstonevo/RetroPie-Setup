@@ -40,67 +40,48 @@ function install_lr-gpsp() {
 }
 
 function configure_lr-gpsp() {
-  mkRomDir "gba"
-  ensureSystemretroconfig "gba"
-  mkRomDir "gbah"
-  ensureSystemretroconfig "gbah"
 
-    local def=0
-    isPlatform "armv6" && def=1
-    addEmulator $def "$md_id" "gba" "$md_inst/gpsp_libretro.so"
-    addEmulator $def "$md_id" "gbah" "$md_inst/gpsp_libretro.so"
-    addSystem "gba"
-    addSystem "gbah"
+        local system
+        local def
+        for system in gba gbah ; do
+            def=0
+            isPlatform "armv6" && def=1
+            mkRomDir "$system"
+            ensureSystemretroconfig "$system"
+            addEmulator def "$md_id" "$system" "$md_inst/gpsp_libretro.so"
+            addSystem "$system"
+            cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+            local core_config="$system"
+            sertRetroArchcoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyAdvance_1080p.cfg"
+            sertRetroArchcoreOption  "input_overlay_enable" "true"
+            sertRetroArchcoreOption  "input_overlay_opacity" "1.0"
+            sertRetroArchcoreOption  "input_overlay_scale" "1.0"
+            sertRetroArchcoreOption  "video_shader"  "$raconfigdir/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl"
+            sertRetroArchcoreOption  "video_shader_enable"  "true"
+            sertRetroArchcoreOption  "video_smooth" "false"
+
+        done
+
+    addBezel "gba"
+    
+
+
+
 
     if [ -e $md_instppa/gpsp_libretro.so ]
         then
-          mkRomDir "gba"
-          ensureSystemretroconfig "gba"
-          mkRomDir "gbah"
-          ensureSystemretroconfig "gbah"
-          addEmulator 0 "$md_id-ppa" "gba" "$md_instppa/gpsp_libretro.so"
-          addEmulator 0 "$md_id-ppa" "gbah" "$md_instppa/gpsp_libretro.so"
-          addSystem "gba"
-          addSystem "gbah"
+        local system
+        local def
+        for system in gba gbah ; do
+            def=0
+            mkRomDir "$system"
+            ensureSystemretroconfig "$system"
+            addEmulator def "$md_id-ppa" "$system" "$md_instppa/gpsp_libretro.so"
+            addSystem "$system"
+        done
+
       fi
 
-##ConfigureRetroarch##
-#####################
-
-      cp /home/$user/.config/RetroPie/gba/retroarch.cfg /home/$user/.config/RetroPie/gba/retroarch.cfg.bkp
-      local core_config="gba"
-      sertRetroArchcoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyAdvance_1080p.cfg"
-      sertRetroArchcoreOption  "input_overlay_enable" "true"
-      sertRetroArchcoreOption  "video_fullscreen_x" "1920"
-      sertRetroArchcoreOption  "video_fullscreen_y" "1080"
-      sertRetroArchcoreOption  "input_overlay_opacity" "1.0"
-      sertRetroArchcoreOption  "input_overlay_scale" "1.0"
-      sertRetroArchcoreOption  "custom_viewport_width"  "960"
-      sertRetroArchcoreOption  "custom_viewport_height" "640"
-      sertRetroArchcoreOption  "custom_viewport_x" "480"
-      sertRetroArchcoreOption  "custom_viewport_y" "220"
-      sertRetroArchcoreOption  "aspect_ratio_index" "23"
-      sertRetroArchcoreOption  "video_shader"  "$raconfigdir/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl"
-      sertRetroArchcoreOption  "video_shader_enable"  "true"
-      sertRetroArchcoreOption  "video_smooth" "false"
-
-
-      cp /home/$user/.config/RetroPie/gbah/retroarch.cfg /home/$user/.config/RetroPie/gbah/retroarch.cfg.bkp
-      local core_config="$configdir/gbah/retroarch.cfg"
-      sertRetroArchcoreOption  "input_overlay" "$raconfigdir/overlays/1080p_4-3/GameboyAdvance_1080p.cfg"
-      sertRetroArchcoreOption  "input_overlay_enable" "true"
-      sertRetroArchcoreOption  "video_fullscreen_x" "1920"
-      sertRetroArchcoreOption  "video_fullscreen_y" "1080"
-      sertRetroArchcoreOption  "input_overlay_opacity" "1.0"
-      sertRetroArchcoreOption  "input_overlay_scale" "1.0"
-      sertRetroArchcoreOption  "custom_viewport_width"  "960"
-      sertRetroArchcoreOption  "custom_viewport_height" "640"
-      sertRetroArchcoreOption  "custom_viewport_x" "480"
-      sertRetroArchcoreOption  "custom_viewport_y" "220"
-      sertRetroArchcoreOption  "aspect_ratio_index" "23"
-      sertRetroArchcoreOption  "video_shader"  "$raconfigdir/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl"
-      sertRetroArchcoreOption  "video_shader_enable"  "true"
-      sertRetroArchcoreOption  "video_smooth" "false"
 
 
 }

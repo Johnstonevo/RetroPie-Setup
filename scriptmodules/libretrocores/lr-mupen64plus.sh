@@ -78,72 +78,41 @@ function install_lr-mupen64plus() {
 }
 
 function configure_lr-mupen64plus() {
-  mkRomDir "n64"
-  mkRomDir "n64-japan"
-  mkRomDir "n64dd"
-  ensureSystemretroconfig "n64"
-  ensureSystemretroconfig "n64-japan"
-  ensureSystemretroconfig "n64dd"
 
-  addEmulator 1 "$md_id" "n64" "$md_inst/mupen64plus_libretro.so"
-  addEmulator 1 "$md_id" "n64-japan" "$md_inst/mupen64plus_libretro.so"
-  addEmulator 1 "$md_id" "n64dd" "$md_inst/mupen64plus_libretro.so"
-  addSystem "n64"
-  addSystem "n64-japan"
-  addSystem "n64dd"
+    local system
+    local def
+    for system in n64 n64-japan n64dd ; do
+        def=1
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/mupen64plus_libretro.so"
+        addSystem "$system"
+
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-64.cfg" "$core_config"
+        setRetroArchCoreOption "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption "input_overlay_scale" "1.0"
+        setRetroArchCoreOption "input_overlay_enable" "true"
+        setRetroArchCoreOption "video_aspect_ratio" "1.0"
+        setRetroArchCoreOption "video_smooth" "true"
+
+    done
+
   if [ -e $md_instppa/mupen64plus_libretro.so ]
   then
-    ensureSystemretroconfig "n64"
-    ensureSystemretroconfig "n64-japan"
-    ensureSystemretroconfig "n64dd"
-
-    addEmulator 0 "$md_id-ppa" "n64" "$md_instppa/mupen64plus_libretro.so"
-    addEmulator 0 "$md_id-ppa" "n64-japan" "$md_instppa/mupen64plus_libretro.so"
-    addEmulator 0 "$md_id-ppa" "n64dd" "$md_instppa/mupen64plus_libretro.so"
-    addSystem "n64"
-    addSystem "n64-japan"
-    addSystem "n64dd"
-fi
-if [ ! -d $raconfigdir/overlay/GameBezels/N64 ]
-then
-    git clone https://github.com/thebezelproject/bezelproject-N64.git  "/home/$user/RetroPie-Setup/tmp/N64"
-    cp -r  /home/$user/RetroPie-Setup/tmp/N64/retroarch/  /home/$user/.config/
-    rm -rf /home/$user/RetroPie-Setup/tmp/N64/
-    cd /home/$user/.config/retroarch/
-    chown -R $user:$user ../retroarch
-    find  -type f -exec sed -i 's/\/opt\/retropie\/configs\/all\/retroarch\/overlay/~\/.config\/retroarch\/overlay/' {} \;
-    ln -s "$raconfigdir/config/Mupen64Plus GLES2" "$raconfigdir/config/Mupen64Plus OpenGL"
+    local system
+    local def
+    for system in n64 n64-japan n64dd ; do
+        def=0
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id-ppa" "$system" "$md_instppa/mupen64plus_libretro.so"
+        addSystem "$system"
+    done
 fi
 
-        cp /home/$user/.config/RetroPie/n64/retroarch.cfg /home/$user/.config/RetroPie/n64/retroarch.cfg.bkp
-    local core_config="n64"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_aspect_ratio" "1.0"
-    setRetroArchCoreOption "video_smooth" "true"
-
-    cp /home/$user/.config/RetroPie/n64dd/retroarch.cfg /home/$user/.config/RetroPie/n64dd/retroarch.cfg.bkp
-    local core_config="n64dd"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_aspect_ratio" "1.0"
-    setRetroArchCoreOption "video_smooth" "true"
-
-
-    cp /home/$user/.config/RetroPie/n64-japan/retroarch.cfg /home/$user/.config/RetroPie/n64-japan/retroarch.cfg.bkp
-    local core_config="n64-japan"
-    setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg" "$core_config"
-    setRetroArchCoreOption "input_overlay_opacity" "1.0"
-    setRetroArchCoreOption "input_overlay_scale" "1.0"
-    setRetroArchCoreOption "input_overlay_enable" "true"
-    setRetroArchCoreOption "video_aspect_ratio" "1.0"
-    setRetroArchCoreOption "video_smooth" "true"
-
-
+addBezel "n64"
 
 
 }

@@ -54,17 +54,30 @@ function install_lr-parallel-n64() {
 }
 
 function configure_lr-parallel-n64() {
-  mkRomDir "n64"
-  mkRomDir "n64-japan"
-  mkRomDir "n64dd"
-  ensureSystemretroconfig "n64"
-  ensureSystemretroconfig "n64-japan"
-  ensureSystemretroconfig "n64dd"
+    local system
+    local def
+    for system in n64 n64-japan n64dd ; do
+        def=0
+        mkRomDir "$system"
+        ensureSystemretroconfig "$system"
+        addEmulator def "$md_id" "$system" "$md_inst/mupen64plus_next_libretro.so"
+        addSystem "$system"
+        cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
+        local core_config="$system"
+        setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-64.cfg" "$core_config"
+        setRetroArchCoreOption "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption "input_overlay_scale" "1.0"
+        setRetroArchCoreOption "input_overlay_enable" "true"
+        setRetroArchCoreOption "video_aspect_ratio" "1.0"
+        setRetroArchCoreOption "video_smooth" "true"
+        setRetroArchCoreOption "parallel-n64-gfxplugin" "auto"
+        setRetroArchCoreOption "parallel-n64-gfxplugin-accuracy" "low"
+        setRetroArchCoreOption "parallel-n64-screensize" "640x480"
+    done
+    
+    addBezel "n64"
 
-    # Set core options
-    setRetroArchCoreOption "parallel-n64-gfxplugin" "auto"
-    setRetroArchCoreOption "parallel-n64-gfxplugin-accuracy" "low"
-    setRetroArchCoreOption "parallel-n64-screensize" "640x480"
+
 
     # Copy config files
     cat > $home/RetroPie/BIOS/gles2n64rom.conf << _EOF_
@@ -171,69 +184,15 @@ target FPS=25
 _EOF_
     chown $user:$user "$biosdir/gles2n64rom.conf"
 
-    addEmulator 0 "$md_id" "n64" "$md_inst/parallel-n64_libretro.so"
-    addEmulator 0 "$md_id" "n64-japan" "$md_inst/parallel-n64_libretro.so"
-    addEmulator 0 "$md_id" "n64dd" "$md_inst/parallel-n64_libretro.so"
-    addSystem "n64"
-    addSystem "n64-japan"
-    addSystem "n64dd"
     if [ -e $md_instppa/parallel-n64_libretro.so ]
     then
-      ensureSystemretroconfig "n64"
-      ensureSystemretroconfig "n64-japan"
-      ensureSystemretroconfig "n64dd"
-
-      addEmulator 0 "$md_id-ppa" "n64" "$md_instppa/parallel-n64_libretro.so"
-      addEmulator 0 "$md_id-ppa" "n64-japan" "$md_instppa/parallel-n64_libretro.so"
-      addEmulator 0 "$md_id-ppa" "n64dd" "$md_instppa/parallel-n64_libretro.so"
-      addSystem "n64"
-      addSystem "n64-japan"
-      addSystem "n64dd"
+    local system
+    local def
+    for system in n64 n64-japan n64dd ; do
+        def=0
+        addEmulator def "$md_i-ppad" "$system" "$md_instppa/parallel-n64_libretro.so"
+    done
   fi
-
-        cp /home/$user/.config/RetroPie/n64/retroarch.cfg /home/$user/.config/RetroPie/n64/retroarch.cfg.bkp
-        local core_config="n64"
-        setRetroArchcoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg"
-        setRetroArchcoreOption "input_overlay_opacity" "1.0"
-        setRetroArchcoreOption "input_overlay_scale" "1.0"
-        setRetroArchcoreOption "input_overlay_enable" "true"
-        setRetroArchcoreOption "video_aspect_ratio" "1.0"
-        setRetroArchcoreOption "video_smooth" "true"
-        setRetroArchcoreOption "parallel-n64-gfxplugin" "auto"
-        setRetroArchcoreOption "parallel-n64-gfxplugin-accuracy" "low"
-        setRetroArchcoreOption "parallel-n64-screensize" "640x480"
-
-
-
-        cp /home/$user/.config/RetroPie/n64dd/retroarch.cfg /home/$user/.config/RetroPie/n64dd/retroarch.cfg.bkp
-        local core_config="n64dd"
-        setRetroArchcoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg"
-        setRetroArchcoreOption "input_overlay_opacity" "1.0"
-        setRetroArchcoreOption "input_overlay_scale" "1.0"
-        setRetroArchcoreOption "input_overlay_enable" "true"
-        setRetroArchcoreOption "video_aspect_ratio" "1.0"
-        setRetroArchcoreOption "video_smooth" "true"
-        setRetroArchcoreOption "parallel-n64-gfxplugin" "auto"
-        setRetroArchcoreOption "parallel-n64-gfxplugin-accuracy" "low"
-        setRetroArchcoreOption "parallel-n64-screensize" "640x480"
-
-
-
-
-        cp /home/$user/.config/RetroPie/n64-japan/retroarch.cfg /home/$user/.config/RetroPie/n64-japan/retroarch.cfg.bkp
-        local core_config="n64-japan"
-        setRetroArchcoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Entertainment-System.cfg"
-        setRetroArchcoreOption "input_overlay_opacity" "1.0"
-        setRetroArchcoreOption "input_overlay_scale" "1.0"
-        setRetroArchcoreOption "input_overlay_enable" "true"
-        setRetroArchcoreOption "video_aspect_ratio" "1.0"
-        setRetroArchcoreOption "video_smooth" "true"
-        setRetroArchcoreOption "parallel-n64-gfxplugin" "auto"
-        setRetroArchcoreOption "parallel-n64-gfxplugin-accuracy" "low"
-        setRetroArchcoreOption "parallel-n64-screensize" "640x480"
-
-
-        addBezel "n64"
 
 
 

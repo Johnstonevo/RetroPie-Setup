@@ -54,12 +54,12 @@ function configure_lr-stella2014() {
 
       cp /home/$user/.config/RetroPie/atari2600/retroarch.cfg /home/$user/.config/RetroPie/atari2600/retroarch.cfg.bkp
       local core_config="atari2600"
-      setRetroArchcoreOption  "input_overlay" "$raconfigdir/overlay/Atari-2600.cfg" "$core_config"
-      setRetroArchcoreOption "input_overlay_opacity" "1.0" "$core_config"
-      setRetroArchcoreOption "input_overlay_scale" "1.0" "$core_config"
+      setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Atari-2600.cfg" "$core_config"
+      setRetroArchCoreOption "input_overlay_opacity" "1.0" "$core_config"
+      setRetroArchCoreOption "input_overlay_scale" "1.0" "$core_config"
 
-      setRetroArchcoreOption "input_overlay_enable" "true" "$core_config"
-      setRetroArchcoreOption "video_smooth" "true" "$core_config"
+      setRetroArchCoreOption "input_overlay_enable" "true" "$core_config"
+      setRetroArchCoreOption "video_smooth" "true" "$core_config"
 
 
 
