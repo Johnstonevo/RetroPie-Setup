@@ -97,7 +97,7 @@ function configure_lr-fbneo() {
         addSystem "$system"
     done
 
-    for system in pcenegine supergrafx tg16 ; do
+    for system in pcengine supergrafx tg16 ; do
         def=0
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
@@ -105,7 +105,7 @@ function configure_lr-fbneo() {
         addSystem "$system"
     done
 
-    for system in pcenegine supergrafx tg16 ; do
+    for system in pcengine supergrafx tg16 ; do
         def=0
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
@@ -114,7 +114,7 @@ function configure_lr-fbneo() {
     done
 
 
-    for system in pcenegine supergrafx tg16 ; do
+    for system in pcengine supergrafx tg16 ; do
         def=0
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
@@ -176,7 +176,7 @@ if [ -e $md_instppa/fbneo_libretro.so ]
             addSystem "$system"
         done
 
-        for system in pcenegine supergrafx tg16 ; do
+        for system in pcengine supergrafx tg16 ; do
             def=0
             mkRomDir "$system"
             ensureSystemretroconfig "$system"
@@ -184,7 +184,7 @@ if [ -e $md_instppa/fbneo_libretro.so ]
             addSystem "$system"
         done
 
-        for system in pcenegine supergrafx tg16 ; do
+        for system in pcengine supergrafx tg16 ; do
             def=0
             mkRomDir "$system"
             ensureSystemretroconfig "$system"
@@ -193,7 +193,7 @@ if [ -e $md_instppa/fbneo_libretro.so ]
         done
 
 
-        for system in pcenegine supergrafx tg16 ; do
+        for system in pcengine supergrafx tg16 ; do
             def=0
             mkRomDir "$system"
             ensureSystemretroconfig "$system"
