@@ -46,7 +46,6 @@ function configure_lr-atari800() {
         setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Atari-5200.cfg"
         setRetroArchCoreOption "input_overlay_opacity" "1.0"
         setRetroArchCoreOption "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
-        setRetroArchCoreOption "system_directory" "$datadir/BIOS/atari/"
 
     done
 

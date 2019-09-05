@@ -70,6 +70,8 @@ function configure_lr-genesis-plus-gx() {
                 ensureSystemretroconfig "$system"
                 addEmulator def "$md_id-ppa" "$system" "$md_instppa/genesis_plus_gx_libretro.so"
                 addSystem "$system"
+                local core_config=$system
+
             done
 
 

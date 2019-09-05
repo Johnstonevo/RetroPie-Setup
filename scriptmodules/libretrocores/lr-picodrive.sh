@@ -66,6 +66,7 @@ function configure_lr-picodrive() {
                 setRetroArchCoreOption  "video_smooth" "false" 
                 setRetroArchCoreOption  "video_shader" "$raconfigdir/shaders/crt/zfast-crt.cgp" 
                 setRetroArchCoreOption  "video_shader_enable"  "true" 
+
             done
 
 

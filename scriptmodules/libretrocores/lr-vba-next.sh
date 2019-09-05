@@ -54,6 +54,7 @@ function configure_lr-vba-next() {
         setRetroArchCoreOption "video_shader"  "$raconfigdir/shaders/rpi/retropie/shaders/crt-hyllian-sharpness-hack.glsl"
         setRetroArchCoreOption "video_shader_enable"  "true"
         setRetroArchCoreOption "video_smooth" "false"
+
     done
 
 

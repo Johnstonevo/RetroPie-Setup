@@ -57,6 +57,7 @@ function configure_lr-flycast() {
         addSystem "$system"
         local core_config="$system"
         setRetroArchCoreOption "video_shared_context" "true"
+
         addBezel "$system"
     done
 

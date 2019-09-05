@@ -48,6 +48,8 @@ function configure_lr-gambatte() {
         ensureSystemretroconfig "$system"
         addEmulator def "$md_id" "$system" "$md_inst/gambatte_libretro.so"
         addSystem "$system"
+        local core_config="$system"
+
     done
 
     addBezel "gbc"

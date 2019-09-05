@@ -49,10 +49,7 @@ function configure_lr-mgba() {
         ensureSystemretroconfig "$system"
         addEmulator 1 "$md_id" "$system" "$md_inst/mgba_libretro.so"
         addSystem "$system"
-
-
-
-
+        local core_config="$system"
     done
 
     if [ -e $md_instppa/mgba_libretro.so ]

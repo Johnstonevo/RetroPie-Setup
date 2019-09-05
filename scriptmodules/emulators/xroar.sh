@@ -45,7 +45,7 @@ function configure_xroar() {
     mkRomDir "coco"
 
     mkdir -p "$md_inst/share/xroar"
-    ln -snf "$biosdir" "$md_inst/share/xroar/roms"
+    ln -snf "$datadir/BIOS" "$md_inst/share/xroar/roms"
 
     local params=(-fs)
     ! isPlatform "x11" && params+=(-vo sdl -ccr simple)

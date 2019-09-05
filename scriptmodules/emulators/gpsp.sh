@@ -43,14 +43,14 @@ function install_gpsp() {
 }
 
 function configure_gpsp() {
-  mkRomDir "gba"
-  mkRomDir "gbah"
+    mkRomDir "gba"
+    mkRomDir "gbah"
     chown $user:$user -R "$md_inst"
 
     mkUserDir "$md_conf_root/gba"
 
     # symlink the rom so so it can be installed with the other bios files
-    ln -sf "$biosdir/gba_bios.bin" "$md_inst/gba_bios.bin"
+    ln -sf "$biosdir/nintendo/gba_bios.bin" "$md_inst/gba_bios.bin"
 
     # move old config
     copyConfigFile "gpsp.cfg" "$md_conf_root/gba/gpsp.cfg"

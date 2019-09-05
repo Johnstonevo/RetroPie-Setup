@@ -39,4 +39,6 @@ function configure_lr-freeintv() {
 
     addEmulator 0 "$md_id" "intellivision" "$md_inst/freeintv_libretro.so"
     addSystem "intellivision"
+    local core_config="$system"
+
 }

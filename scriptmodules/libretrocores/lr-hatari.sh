@@ -52,6 +52,7 @@ function configure_lr-hatari() {
 
     addEmulator 1 "$md_id" "atarist" "$md_inst/hatari_libretro.so"
     addSystem "atarist"
+    local core_config="atarist"
 
     # add LD_LIBRARY_PATH='$md_inst' to start of launch command
     iniConfig " = " '"' "$configdir/atarist/emulators.cfg"

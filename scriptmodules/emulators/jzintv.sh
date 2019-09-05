@@ -48,6 +48,6 @@ function configure_jzintv() {
         setDispmanx "$md_id" 1
     fi
 
-    addEmulator 0 "$md_id" "intellivision" "$md_inst/bin/jzintv -p $biosdir -q %ROM%"
+    addEmulator 0 "$md_id" "intellivision" "$md_inst/bin/jzintv -p $biosdir/intellivision -q %ROM%"
     addSystem "intellivision"
 }
