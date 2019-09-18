@@ -29,7 +29,7 @@ function install_theme_esthemes() {
     fi
     if [[ -z "$theme" ]]; then
         theme="carbon"
-        repo="RetroPie"
+        repo="johnstonevo"
     fi
     mkdir -p "$home/.emulationstation/themes"
     gitPullOrClone "$home/.emulationstation/themes/$theme" "https://github.com/$repo/es-theme-$theme.git"
@@ -65,8 +65,8 @@ function gui_esthemes() {
         'AmadhiX eudora'
         'AmadhiX eudora-bigshot'
         'AmadhiX eudora-concise'
-        'InsecureSpike retroplay-clean-canela'
-        'InsecureSpike retroplay-clean-detail-canela'
+        'InsecureSpike clean-detail-canela'
+        'InsecureSpike clean-simple-canela'
         'Omnija simpler-turtlepi'
         'Omnija simpler-turtlemini'
         'Omnija metro'
