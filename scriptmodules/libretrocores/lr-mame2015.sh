@@ -56,10 +56,10 @@ function configure_lr-mame2015() {
         setRetroarchCoreOption "mame2015-samples" "enabled"
 
     done
-    if [ -e $md_instppa/mame2015_libretro.so ]
+    if [ -e $md_instcore=/mame2015_libretro.so ]
     then
-        addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame2015_libretro.so"
-        addEmulator 0 "$md_id-ppa" "mame-2015" "$md_instppa/mame2015_libretro.so"
+        addEmulator 0 "$md_id-core" "arcade" "$md_instcore/mame2015_libretro.so"
+        addEmulator 0 "$md_id-core" "mame-2015" "$md_instcore/mame2015_libretro.so"
     fi
         addBezel "mame-2015"
         ln -s "$raconfigdir/config/MAME 2010" "$raconfigdir/config/MAME 2015"

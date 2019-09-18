@@ -48,7 +48,7 @@ function configure_lr-beetle-saturn() {
 
     
 
-    if [ -e $md_instppa/mednafen_saturn_libretro.so ]
+    if [ -e $md_instcore=/mednafen_saturn_libretro.so ]
                     then
 
                         local system
@@ -58,7 +58,7 @@ function configure_lr-beetle-saturn() {
         [[ "$system" == "saturn" || "$system" == "saturn-japan"    ]] && def=1
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
-        addEmulator 0 "$md_id-ppa" "$system" "$md_instppa/mednafen_saturn_libretro.so"
+        addEmulator 0 "$md_id-core" "$system" "$md_instcore/mednafen_saturn_libretro.so"
         addSystem "$system"
      done
 

@@ -50,9 +50,9 @@ _EOF_
     chmod +x "$file"
 
     ensureSystemretroconfig "ports/cavestory"
-    if [ -e $md_instppa/nxengine_libretro.so ]
+    if [ -e $md_instcore=/nxengine_libretro.so ]
         then
-          addEmulator 1 "$md_id-ppa" "ports/cavestory" "$md_instppa/nxengine_libretro.so"
+          addEmulator 1 "$md_id-core" "ports/cavestory" "$md_instcore/nxengine_libretro.so"
     fi
 
     cp /home/$user/.config/RetroPie/ports/cavestory/retroarch.cfg /home/$user/.config/RetroPie/ports/cavestory/retroarch.cfg.bkp

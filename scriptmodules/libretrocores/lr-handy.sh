@@ -39,12 +39,12 @@ function configure_lr-handy() {
     addEmulator 1 "$md_id" "atarilynx" "$md_inst/handy_libretro.so"
     addSystem "atarilynx"
 
-    if [ -e $md_instppa/handy_libretro.so ]
+    if [ -e $md_instcore=/handy_libretro.so ]
         then
         mkRomDir "atarilynx"
         ensureSystemretroconfig "atarilynx"
 
-        addEmulator 1 "$md_id-ppa" "atarilynx" "$md_instppa/handy_libretro.so"
+        addEmulator 1 "$md_id-core" "atarilynx" "$md_instcore/handy_libretro.so"
         addSystem "atarilynx"
   fi
 

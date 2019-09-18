@@ -70,13 +70,13 @@ function configure_lr-fceumm() {
     setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Famicom-Disk-System.cfg"
 
 
-if [ -e $md_instppa/fceumm_libretro.so ]
+if [ -e $md_instcore=/fceumm_libretro.so ]
     then
         for system in nes nesh fds famicom ; do
         def=0
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
-        addEmulator def "$md_id-ppa" "$system" "$md_inst-ppa/fceumm_libretro.so"
+        addEmulator def "$md_id-core" "$system" "$md_inst-core/fceumm_libretro.so"
     done
 fi
 

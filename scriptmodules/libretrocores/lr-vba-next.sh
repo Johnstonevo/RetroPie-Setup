@@ -59,14 +59,14 @@ function configure_lr-vba-next() {
 
 
 
-    if [ -e $md_instppa/vba_next_libretro.so ]
+    if [ -e $md_instcore=/vba_next_libretro.so ]
         then
 
             for system in gba gbah ; do
                 def=0
                 mkRomDir "$system"
                 ensureSystemretroconfig "$system"
-                addEmulator def "$md_id-ppa" "$system" "$md_instppa/vba_next_libretro.so"
+                addEmulator def "$md_id-core" "$system" "$md_instcore/vba_next_libretro.so"
                 addSystem "$system"
             done
 

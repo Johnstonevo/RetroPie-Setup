@@ -53,7 +53,7 @@ function configure_openmsx() {
         [[ "$system" == "msxturbor"  ]] && def=1
         mkRomDir "$system"
         addEmulator def "$md_id" "$system" "$md_inst/bin/openmsx %ROM%"
-        addSystem "system"
+        addSystem "$system"
     done
 
 }

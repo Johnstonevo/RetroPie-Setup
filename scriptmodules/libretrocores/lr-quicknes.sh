@@ -52,7 +52,7 @@ function configure_lr-quicknes() {
     addBezel "famicom"
 
     
-if [ -e $md_instppa/quicknes_libretro.so ]
+if [ -e $md_instcore=/quicknes_libretro.so ]
 then
     local system
     local def
@@ -60,7 +60,7 @@ then
         def=0
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
-        addEmulator def "$md_id-ppa" "$system" "$md_instppa/quicknes_libretro.so"
+        addEmulator def "$md_id-core" "$system" "$md_instcore/quicknes_libretro.so"
         addSystem "$system"
 
     done

@@ -106,7 +106,9 @@ function rp_callModule() {
     local md_inst="$rootdir/$md_type/$md_id"
     local md_data="$scriptdir/scriptmodules/$md_type/$md_id"
     local md_mode="install"
-    local md_instppa="/usr/lib/libretro"
+    local md_instcore="$raconfigdir/cores"
+
+
 
     # set md_conf_root to $configdir and to $configdir/ports for ports
     # ports in libretrocores or systems (as ES sees them) in ports will need to change it manually with setConfigRoot

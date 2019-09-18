@@ -39,7 +39,7 @@ function configure_lr-genesis-plus-gx() {
             local def
             isPlatform "armv6" && def=0
 
-            for system in gamegear ggh mastersystem megadrive megadrive-japan genesis genh sg-1000  segacd markiii seag32x sc-3000 sor  ; do
+            for system in gamegear ggh mastersystem megadrive megadrive-japan genesis genh sg-1000  segacd markiii sega32x sc-3000 sor  ; do
                 def=0
                 [[ "$system" == "gamegear" || "$system" == "ggh"  || "$system" == "mastersystem"  || "$system" == "sg-1000"  || "$system" == "segacd"  || "$system" == "markiii"  || "$system" == "sc-1000"  ]] && def=1
                 mkRomDir "$system"
@@ -60,15 +60,15 @@ function configure_lr-genesis-plus-gx() {
   addBezel "sega32x
 
 "
-    if [ -e $md_instppa/genesis_plus_gx_libretro.so ]
+    if [ -e $md_instcore=/genesis_plus_gx_libretro.so ]
         then
             local system
             local def
-            for system in gamegear ggh mastersystem megadrive megadrive-japan genesis genh sg-1000  segacd markiii seag32x sc-3000 sor  ; do
+            for system in gamegear ggh mastersystem megadrive megadrive-japan genesis genh sg-1000  segacd markiii sega32x sc-3000 sor  ; do
                 def=0
                 mkRomDir "$system"
                 ensureSystemretroconfig "$system"
-                addEmulator def "$md_id-ppa" "$system" "$md_instppa/genesis_plus_gx_libretro.so"
+                addEmulator def "$md_id-core" "$system" "$md_instcore/genesis_plus_gx_libretro.so"
                 addSystem "$system"
                 local core_config=$system
 

@@ -81,7 +81,7 @@ function configure_lr-bluemsx() {
 
 
     
-     if [ -e $md_instppa/bluemsx_libretro.so ]
+     if [ -e $md_instcore=/bluemsx_libretro.so ]
                 then
 
                 for system in msx msx2 msx2+ coleco ; do
@@ -89,7 +89,7 @@ function configure_lr-bluemsx() {
                     [[ "$system" == "msx" || "$system" == "msx2"  || "$system" == "msx2+"  || "$system" == "coleco"  ]] && def=1
                     mkRomDir "$system"
                     ensureSystemretroconfig "$system"
-                    addEmulator 0 "$md_id" "$system" "$md_instppa/bluemsx_libretro.so"
+                    addEmulator 0 "$md_id" "$system" "$md_instcore/bluemsx_libretro.so"
                     addSystem "$system"
                     local core_config="$system"
 

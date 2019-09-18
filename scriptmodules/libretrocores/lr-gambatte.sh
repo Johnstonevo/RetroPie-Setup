@@ -55,7 +55,7 @@ function configure_lr-gambatte() {
     addBezel "gbc"
     addBezel "gb"
 
-    if [ -e $md_instppa/gambatte_libretro.so ]
+    if [ -e $md_instcore=/gambatte_libretro.so ]
         then
             local system
             local def
@@ -63,7 +63,7 @@ function configure_lr-gambatte() {
                 def=0
                 mkRomDir "$system"
                 ensureSystemretroconfig "$system"
-                addEmulator def "$md_id-ppa" "$system" "$md_instppa/gambatte_libretro.so"
+                addEmulator def "$md_id-core" "$system" "$md_instcore/gambatte_libretro.so"
                 addSystem "$system"
             done
     fi

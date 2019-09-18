@@ -150,13 +150,13 @@ function configure_lr-fbneo() {
     
     addBezel "fba"
 
-if [ -e $md_instppa/fbneo_libretro.so ]
+if [ -e $md_instcore=/fbneo_libretro.so ]
     then
         for system in arcade neogeo fba ; do
             def=0
             mkRomDir "$system"
             ensureSystemretroconfig "$system"
-            addEmulator def "$md_id-ppa" "$system" "$md_instppa/fbneo_libretro.so"
+            addEmulator def "$md_id-core" "$system" "$md_instcore/fbneo_libretro.so"
             addSystem "$system"
         done
 
@@ -164,7 +164,7 @@ if [ -e $md_instppa/fbneo_libretro.so ]
             def=0
             mkRomDir "$system"
             ensureSystemretroconfig "$system"
-            addEmulator def "$md_id-neocd-ppa" "$system" "$md_instppa/fbneo_libretro.so --subsystem neocd"
+            addEmulator def "$md_id-neocd-core" "$system" "$md_instcore/fbneo_libretro.so --subsystem neocd"
             addSystem "$system"
         done
 
@@ -172,7 +172,7 @@ if [ -e $md_instppa/fbneo_libretro.so ]
             def=0
             mkRomDir "$system"
             ensureSystemretroconfig "$system"
-            addEmulator def "$md_id-md-ppa" "$system" "$md_instppa/fbneo_libretro.so --subsystem md"
+            addEmulator def "$md_id-md-core" "$system" "$md_instcore/fbneo_libretro.so --subsystem md"
             addSystem "$system"
         done
 
@@ -180,7 +180,7 @@ if [ -e $md_instppa/fbneo_libretro.so ]
             def=0
             mkRomDir "$system"
             ensureSystemretroconfig "$system"
-            addEmulator def "$md_id-pce-ppa" "$system" "$md_instppa/fbneo_libretro.so --subsystem pce"
+            addEmulator def "$md_id-pce-core" "$system" "$md_instcore/fbneo_libretro.so --subsystem pce"
             addSystem "$system"
         done
 
@@ -188,7 +188,7 @@ if [ -e $md_instppa/fbneo_libretro.so ]
             def=0
             mkRomDir "$system"
             ensureSystemretroconfig "$system"
-            addEmulator def "$md_id-sgx-ppa" "$system" "$md_instppa/fbneo_libretro.so --subsystem sgx"
+            addEmulator def "$md_id-sgx-core" "$system" "$md_instcore/fbneo_libretro.so --subsystem sgx"
             addSystem "$system"
         done
 
@@ -197,16 +197,16 @@ if [ -e $md_instppa/fbneo_libretro.so ]
             def=0
             mkRomDir "$system"
             ensureSystemretroconfig "$system"
-            addEmulator def "$md_id-tg-ppa" "$system" "$md_instppa/fbneo_libretro.so --subsystem tg"
+            addEmulator def "$md_id-tg-core" "$system" "$md_instcore/fbneo_libretro.so --subsystem tg"
             addSystem "$system"
         done
 
-        addEmulator 0 "$md_id-gg-ppa" "gamegear" "$md_instppa/fbneo_libretro.so --subsystem gg"
-        addEmulator 0 "$md_id-sms-ppa" "mastersystem" "$md_instppa/fbneo_libretro.so --subsystem sms"
-        addEmulator 0 "$md_id-sg1k-ppa" "sg-1000" "$md_instppa/fbneo_libretro.so --subsystem sg1k"
-        addEmulator 0 "$md_id-cv-ppa" "coleco" "$md_instppa/fbneo_libretro.so --subsystem cv"
-        addEmulator 0 "$md_id-msx-ppa" "msx" "$md_instppa/fbneo_libretro.so --subsystem msx"
-        addEmulator 0 "$md_id-spec-ppa" "zxspectrum" "$md_instppa/fbneo_libretro.so --subsystem spec"
+        addEmulator 0 "$md_id-gg-core" "gamegear" "$md_instcore/fbneo_libretro.so --subsystem gg"
+        addEmulator 0 "$md_id-sms-core" "mastersystem" "$md_instcore/fbneo_libretro.so --subsystem sms"
+        addEmulator 0 "$md_id-sg1k-core" "sg-1000" "$md_instcore/fbneo_libretro.so --subsystem sg1k"
+        addEmulator 0 "$md_id-cv-core" "coleco" "$md_instcore/fbneo_libretro.so --subsystem cv"
+        addEmulator 0 "$md_id-msx-core" "msx" "$md_instcore/fbneo_libretro.so --subsystem msx"
+        addEmulator 0 "$md_id-spec-core" "zxspectrum" "$md_instcore/fbneo_libretro.so --subsystem spec"
 
 fi
 

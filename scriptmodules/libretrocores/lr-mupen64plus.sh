@@ -99,7 +99,7 @@ function configure_lr-mupen64plus() {
 
     done
 
-  if [ -e $md_instppa/mupen64plus_libretro.so ]
+  if [ -e $md_instcore=/mupen64plus_libretro.so ]
   then
     local system
     local def
@@ -107,7 +107,7 @@ function configure_lr-mupen64plus() {
         def=0
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
-        addEmulator def "$md_id-ppa" "$system" "$md_instppa/mupen64plus_libretro.so"
+        addEmulator def "$md_id-core" "$system" "$md_instcore/mupen64plus_libretro.so"
         addSystem "$system"
     done
 fi

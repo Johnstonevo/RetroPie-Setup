@@ -184,13 +184,13 @@ target FPS=25
 _EOF_
     chown $user:$user "$biosdir/gles2n64rom.conf"
 
-    if [ -e $md_instppa/parallel-n64_libretro.so ]
+    if [ -e $md_instcore=/parallel-n64_libretro.so ]
     then
     local system
     local def
     for system in n64 n64-japan n64dd ; do
         def=0
-        addEmulator def "$md_i-ppad" "$system" "$md_instppa/parallel-n64_libretro.so"
+        addEmulator def "$md_id-core" "$system" "$md_instcore/parallel-n64_libretro.so"
     done
   fi
 

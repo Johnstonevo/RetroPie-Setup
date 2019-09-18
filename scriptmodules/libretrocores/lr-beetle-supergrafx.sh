@@ -73,14 +73,14 @@ function configure_lr-beetle-supergrafx() {
     local core_config="supergrafx"
     setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-SuperGrafx.cfg"
            
-    if [ -e $md_instppa/mednafen_supergrafx_libretro.so ]
+    if [ -e $md_instcore=/mednafen_supergrafx_libretro.so ]
         then
             local system
             local def
             for system in tg16 tg-cd pcengine pce-cd supergrafx ; do
                 def=0
                 [[ "$system" == "tg16" || "$system" == "tg-cd"  || "$system" == "pcengine"  || "$system" == "pce-cd"  ||"$system" == "supergrafx" ]] && def=1
-                addEmulator 0 "$md_id-ppa" "$system" "$md_instppa/mednafen_supergrafx_libretro.so"
+                addEmulator 0 "$md_id-core" "$system" "$md_instcore/mednafen_supergrafx_libretro.so"
         done
 
     fi

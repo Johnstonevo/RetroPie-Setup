@@ -76,21 +76,21 @@ function configure_lr-beetle-psx() {
 
     addBezel "psx"
 
-    if [ -e $md_instppa/mednafen_psx_hw_libretro.so ]
+    if [ -e $md_instcore=/mednafen_psx_hw_libretro.so ]
                     then
                         for system in psx psx-japan; do
                             def=0
                             [[ "$system" == "psx" || "$system" == "psx-japan" ]] && def=1
-                            addEmulator 0 "$md_id-mednafen_psx_hw-ppa" "$system" "$md_instppa/mednafen_psx_hw_libretro.so"
+                            addEmulator 0 "$md_id-mednafen_psx_hw-core" "$system" "$md_instcore/mednafen_psx_hw_libretro.so"
                         done
     fi
 
-    if [ -e $md_instppa/mednafen_psx_libretro.so ]
+    if [ -e $md_instcore=/mednafen_psx_libretro.so ]
                     then
                         for system in psx psx-japan; do
                             def=0
                             [[ "$system" == "psx" || "$system" == "psx-japan" ]] && def=1
-                            addEmulator 0 "$md_id-mednafen_psx-ppa" "$system" "$md_instppa/mednafen_psx_libretro.so"
+                            addEmulator 0 "$md_id-mednafen_psx-core" "$system" "$md_instcore/mednafen_psx_libretro.so"
                         done
     fi
 

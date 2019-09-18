@@ -66,10 +66,10 @@ function configure_lr-mame() {
         addBezel "mame-current"
     done
 
-  if [ -e $md_instppa/mame_libretro.so ]
+  if [ -e $md_instcore=/mame_libretro.so ]
   then
-      addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame_libretro.so"
-      addEmulator 0 "$md_id-ppa" "mame-current" "$md_instppa/mame_libretro.so"
+      addEmulator 0 "$md_id-core" "arcade" "$md_instcore/mame_libretro.so"
+      addEmulator 0 "$md_id-core" "mame-current" "$md_instcore/mame_libretro.so"
   fi
 
 }

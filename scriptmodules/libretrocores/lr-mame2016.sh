@@ -49,10 +49,10 @@ function configure_lr-mame2016() {
         setRetroarchCoreOption "mame2016-dcs-speedhack" "enabled"
         setRetroarchCoreOption "mame2016-samples" "enabled"
     done
-    if [ -e $md_instppa/mame2016_libretro.so ]
+    if [ -e $md_instcore=/mame2016_libretro.so ]
     then
-        addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/mame2016_libretro.so"
-        addEmulator 0 "$md_id-ppa" "mame-2016" "$md_instppa/mame2016_libretro.so"
+        addEmulator 0 "$md_id-core" "arcade" "$md_instcore/mame2016_libretro.so"
+        addEmulator 0 "$md_id-core" "mame-2016" "$md_instcore/mame2016_libretro.so"
     fi
         addBezel "mame-2016"
         ln -s "$raconfigdir/config/MAME 2010" "$raconfigdir/config/MAME 2016"

@@ -58,10 +58,10 @@ function configure_lr-mame2000() {
         
     done
     
-    if [ -e $md_instppa/mame2000_libretro.so ]
+    if [ -e $md_instcore=/mame2000_libretro.so ]
     then
-        addEmulator 0 "$md_id-ppa" "arcade" "$md_instppa/${so_name}_libretro.so"
-    addEmulator 0 "$md_id-ppa" "mame-mame4all" "$md_instppa/${so_name}_libretro.so"
+        addEmulator 0 "$md_id-core" "arcade" "$md_instcore/${so_name}_libretro.so"
+    addEmulator 0 "$md_id-core" "mame-mame4all" "$md_instcore/${so_name}_libretro.so"
     fi
 
     

@@ -51,7 +51,7 @@ function configure_lr-tgbdual() {
 
     done
 
-    if [ -e $md_instppa/tgbdual_libretro.so ]
+    if [ -e $md_instcore=/tgbdual_libretro.so ]
         then
             local system
             local def
@@ -59,7 +59,7 @@ function configure_lr-tgbdual() {
                 def=0
                 mkRomDir "$system"
                 ensureSystemretroconfig "$system"
-                addEmulator def "$md_id-ppa" "$system" "$md_instppa/tgbdual_libretro.so"
+                addEmulator def "$md_id-core" "$system" "$md_instcore/tgbdual_libretro.so"
                 addSystem "$system"
             done
     fi

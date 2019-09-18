@@ -57,13 +57,13 @@ function configure_lr-fuse() {
     setRetroArchCoreOption  "fuse_machine" "Spectrum +3k"
 
 
-    if [ -e $md_instppa/fuse_libretro.so ]
+    if [ -e $md_instcore=/fuse_libretro.so ]
                     then
                         local system
                         local def
                         for system in zxspectrum zxspectrum+3 ; do
                             def=0
-                            addEmulator def "$md_id-ppa" "$system" "$md_instppa/fuse_libretro.so"
+                            addEmulator def "$md_id-core" "$system" "$md_instcore/fuse_libretro.so"
                         done
     fi
 }

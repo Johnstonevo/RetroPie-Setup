@@ -43,4 +43,11 @@ function configure_lr-vice-plus4() {
 
     addEmulator 0 "$md_id" "plus4" "$md_inst/vice_xplus4_libretro.so"
     addSystem "plus4"
+
+    if [ -e $md_instcore=/vice_xplus4_libretro.so ]
+    then
+    addEmulator 0 "$md_id-core" "plus4" "$md_instcore/vice_xplus4_libretro.so"
+
+    fi
+
 }

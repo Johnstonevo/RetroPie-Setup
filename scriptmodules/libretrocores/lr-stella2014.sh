@@ -45,9 +45,9 @@ function configure_lr-stella2014() {
     addEmulator 1 "$md_id" "atari2600" "$md_inst/stella2014_libretro.so"
     addSystem "atari2600"
     addBezel "atari2600"
-    if [ -e $md_instppa/stella_libretro.so ]
+    if [ -e $md_instcore=/stella_libretro.so ]
         then
-          addEmulator 0 "$md_id-ppa" "atari2600" "$md_instppa/stella_libretro.so"
+          addEmulator 0 "$md_id-core" "atari2600" "$md_instcore/stella_libretro.so"
           addSystem "atari2600"
     fi
 

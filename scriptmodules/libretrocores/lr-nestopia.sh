@@ -82,7 +82,7 @@ function configure_lr-nestopia() {
     #setRetroArchCoreOption "nestopia_palette" "canonical"
 
 
-        if [ -e $md_instppa/nestopia_libretro.so ]
+        if [ -e $md_instcore=/nestopia_libretro.so ]
         then
             local system
             local def
@@ -91,7 +91,7 @@ function configure_lr-nestopia() {
                 [[ "$system" == "nes" || "$system" == "nesh"  || "$system" == "fds"  || "$system" == "famicom"  ]] && def=1
                 mkRomDir "$system"
                 ensureSystemretroconfig "$system"
-                addEmulator 0 "$md_id-ppa" "$system" "$md_instppa/nestopia_libretro.so"
+                addEmulator 0 "$md_id-core" "$system" "$md_instcore/nestopia_libretro.so"
                 addSystem "$system"
             done
         fi

@@ -85,13 +85,13 @@ function configure_lr-pcsx-rearmed() {
     done
 
 
-    if [ -e $md_instppa/pcsx1_libretro.so ]
+    if [ -e $md_instcore=/pcsx1_libretro.so ]
                     then
                         for system in psx psx-japan  ; do
                         def=0
                         mkRomDir "$system"
                         ensureSystemretroconfig "$system"
-                        addEmulator def "$md_id-ppa" "$system" "$md_instppa/pcsx_rearmed_libretro.so"
+                        addEmulator def "$md_id-core" "$system" "$md_instcore/pcsx_rearmed_libretro.so"
                         addSystem "$system"
                     done
 

@@ -42,7 +42,7 @@ function configure_lr-mess2016() {
     [[ -z "$module" ]] && module="mess2016_libretro.so"
     local system
     local def
-    for system in nes gb coleco arcadia crvision neocdz cdimonoi ; do
+    for system in nes gb coleco arcadia crvision neocdz cdimono1 ; do
         def=0
         mkRomDir "$system"
         ensureSystemretroconfig "$system"

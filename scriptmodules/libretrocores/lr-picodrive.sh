@@ -46,7 +46,7 @@ function configure_lr-picodrive() {
             local def
             isPlatform "armv6" && def=0
 
-            for system in gamegear ggh mastersystem megadrive megadrive-japan genesis genh sg-1000  segacd markiii seag32x sc-3000 sor  ; do
+            for system in gamegear ggh mastersystem megadrive megadrive-japan genesis genh sg-1000  segacd markiii sega32x sc-3000 sor  ; do
                 def=0
                 [[ "$system" == "megadrive" || "$system" == "megadrive-japan"  || "$system" == "genesis"  || "$system" == "genh"  || "$system" == "sega32x"  || "$system" == "sc-3000"  || "$system" == "sor"  ]] && def=1
                 mkRomDir "$system"
@@ -73,18 +73,18 @@ function configure_lr-picodrive() {
 
 
 
-        if [ -e $md_instppa/picodrive_libretro.so ]
+        if [ -e $md_instcore=/picodrive_libretro.so ]
             then
 
                 local system
                 local def
                 isPlatform "armv6" && def=0
 
-                for system in gamegear ggh mastersystem megadrive megadrive-japan genesis genh sg-1000  segacd markiii seag32x sc-3000 sor  ; do
+                for system in gamegear ggh mastersystem megadrive megadrive-japan genesis genh sg-1000  segacd markiii sega32x sc-3000 sor  ; do
                     def=0
                     mkRomDir "$system"
                     ensureSystemretroconfig "$system"
-                    addEmulator def "$md_id-ppa" "$system" "$md_instppa/picodrive_libretro.so"
+                    addEmulator def "$md_id-core" "$system" "$md_instcore/picodrive_libretro.so"
                     addSystem "$system"
                 done
 

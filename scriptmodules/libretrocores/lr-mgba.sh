@@ -52,7 +52,7 @@ function configure_lr-mgba() {
         local core_config="$system"
     done
 
-    if [ -e $md_instppa/mgba_libretro.so ]
+    if [ -e $md_instcore=/mgba_libretro.so ]
         then
 
     local system
@@ -62,7 +62,7 @@ function configure_lr-mgba() {
         [[ "$system" == "gba" ]] && ! isPlatform "armv6" && def=1
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
-        addEmulator 1 "$md_id-ppa" "$system" "$md_instppa/mgba_libretro.so"
+        addEmulator 1 "$md_id-core" "$system" "$md_instcore/mgba_libretro.so"
         addSystem "$system"
 
 

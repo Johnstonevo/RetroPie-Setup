@@ -82,7 +82,7 @@ function install_retroarch() {
     mkUserDir "$raconfigdir/retroarch-joypads"
     mkUserDir "$raconfigdir/downloads"
     mkUserDir "$raconfigdir/config"
-    #mkUserDir "$raconfigdir/cores"
+    mkUserDir "$raconfigdir/cores"
     mkUserDir "$raconfigdir/screenshots"
     mkUserDir "$raconfigdir/playlists"
     mkUserDir "$raconfigdir/thumbnails"
@@ -368,6 +368,10 @@ function configure_retroarch() {
     iniSet "content_database_path" "$raconfigdir/database/rdb"
     iniSet "cheat_database_path" "$raconfigdir/cheats"
     iniSet "cheat_settings_path" "$raconfigdir/cheats/xml"
+
+    #Core Location
+    iniSet "libretro_directory" "$raconfigdir/cores"
+    iniSet "libretro_info_path"  "$raconfigdir/cores"
 
 
     copyDefaultConfig "$config" "$raconfigdir/retroarch.cfg"

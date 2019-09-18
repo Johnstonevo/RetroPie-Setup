@@ -69,7 +69,7 @@ function configure_lr-flycast() {
 
 
 
-if [ -e $md_instppa/reicast_libretro.so ]
+if [ -e $md_instcore=/reicast_libretro.so ]
     then
         local system
         local def
@@ -78,7 +78,7 @@ if [ -e $md_instppa/reicast_libretro.so ]
             [[ "$system" == "dreamcast" || "$system" == "atomiswave"  || "$system" == "naomi" ]] && def=1
             mkRomDir "$system"
             ensureSystemretroconfig "$system"
-            addEmulator 0 "$md_id-ppa" "$system" "$md_instppa/flycast_libretro.so </dev/null"
+            addEmulator 0 "$md_id-core" "$system" "$md_instcore/flycast_libretro.so </dev/null"
             addSystem "$system"
 
     done
