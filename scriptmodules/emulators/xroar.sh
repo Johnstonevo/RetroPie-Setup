@@ -21,7 +21,7 @@ function depends_xroar() {
 }
 
 function sources_xroar() {
-    git clone  http://www.6809.org.uk/git/xroar.git "$md_build"
+    gitPullOrClone "$md_build" http://www.6809.org.uk/git/xroar.git 0.35.4 "" 0
 }
 
 function build_xroar() {
