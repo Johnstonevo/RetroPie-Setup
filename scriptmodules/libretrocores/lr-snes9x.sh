@@ -40,7 +40,9 @@ function configure_lr-snes9x() {
     local system
     local def
     for system in snes smwhacks snesh sfc snesmsu1 satellaview sufami ; do
-        def=1
+        def=0
+        [[ "$system" == "snesmsu1"  ]] && def=1
+
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
         addEmulator def "$md_id" "$system" "$md_inst/snes9x_libretro.so"
@@ -55,6 +57,7 @@ function configure_lr-snes9x() {
 
     done
 
+
     
     addBezel "snes"
     addBezel "sfc"
@@ -64,7 +67,7 @@ function configure_lr-snes9x() {
             local system
             local def
             for system in snes smwhacks snesh sfc snesmsu1 satellaview sufami ; do
-                def=1
+                def=0
                 addEmulator def "$md_id-core" "$system" "$md_instcore/snes9x_libretro.so"
             done
     fi

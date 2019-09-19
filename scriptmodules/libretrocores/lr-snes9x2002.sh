@@ -42,7 +42,7 @@ function configure_lr-snes9x2002() {
     local system
     local def
     for system in snes smwhacks snesh sfc satellaview sufami ; do
-        def=1
+        def=0
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
         addEmulator def "$md_id" "$system" "$md_inst/snes9x2002_libretro.so"
@@ -60,6 +60,7 @@ function configure_lr-snes9x2002() {
     
     addBezel "snes"
     addBezel "sfc"
+    
     if [ ! -L "$raconfigdir/config/Snes9x\ 2002" ] ;
         then
             ln -s $raconfigdir/config/Snes9x $raconfigdir/config/Snes9x\ 2002

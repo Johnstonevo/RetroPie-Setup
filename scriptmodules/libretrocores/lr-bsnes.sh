@@ -38,12 +38,10 @@ function configure_lr-bsnes() {
     local def
     for system in snes sfc snesh satellaview sufami snesmsu1 smwhacks; do
         def=0
-        [[ "$system" == "snes" || "$system" == "sfc"  || "$system" == "snesh"  || "$system" == "satellaview" || "$system" == "sufami" || "$system" == "snesmsu1" || "$system" == "smwhacks" ]] 
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
         addEmulator 0 "$md_id" "$system" "$md_inst/bsnes_accuracy_libretro.so"
         addSystem "$system"
-        addBezel "$system"
 
         cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
        
@@ -60,8 +58,9 @@ function configure_lr-bsnes() {
     done
 
 
- 
-
+    for system in snes sfc ; do
+        addBezel "$system"
+    done
 
 
     if [ -e $md_instcore/bsnes_balanced_libretro.so ] ;
