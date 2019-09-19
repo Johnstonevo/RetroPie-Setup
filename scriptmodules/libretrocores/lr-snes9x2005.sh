@@ -59,6 +59,13 @@ function configure_lr-snes9x2005() {
     addBezel "snes"
     addBezel "sfc"
 
+    if [ ! -L "$raconfigdir/config/Snes9x\ 2005" ] ;
+        then
+            ln -s $raconfigdir/config/Snes9x $raconfigdir/config/Snes9x\ 2005
+        
+    fi
+
+
     if [ -e $md_instcore/snes9x2005_libretro.so ] ;
         then
             local system

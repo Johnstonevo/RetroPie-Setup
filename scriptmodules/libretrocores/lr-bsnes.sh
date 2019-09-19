@@ -38,7 +38,7 @@ function configure_lr-bsnes() {
     local def
     for system in snes sfc snesh satellaview sufami snesmsu1 smwhacks; do
         def=0
-        [[ "$system" == "snes" || "$system" == "sfc"  || "$system" == "snesh"  || "$system" == "satellaview" || "$system" == "sufami" || "$system" == "snesmsu1" || "$system" == "smwhacks" ]] && def=1
+        [[ "$system" == "snes" || "$system" == "sfc"  || "$system" == "snesh"  || "$system" == "satellaview" || "$system" == "sufami" || "$system" == "snesmsu1" || "$system" == "smwhacks" ]] 
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
         addEmulator 0 "$md_id" "$system" "$md_inst/bsnes_accuracy_libretro.so"
@@ -61,15 +61,6 @@ function configure_lr-bsnes() {
 
 
  
-    ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes
-    ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes\ accuracy
-    ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes\ balanced
-    ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes\ cplusplus98
-    ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes\ HD
-    ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes\ mercury\ accuracy
-    ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes\ mercury\ balanced
-    ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes\ mercury\ performance
-    ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes\ performance
 
 
 
@@ -81,6 +72,18 @@ function configure_lr-bsnes() {
             def=0
             [[ "$system" == "snes" || "$system" == "sfc"  || "$system" == "snesh"  || "$system" == "satellaview" || "$system" == "sufami" || "$system" == "smwhacks" ]] && def=1
                 addEmulator 0 "$md_id-balanced-core" "$system" "$md_instcore/bsnes_balanced_libretro.so"
+                addSystem "$system"
+    done
+    fi
+
+    if [ -e $md_instcore/bsnes_cplusplus98_libretro.so ] ;
+        then
+        local system
+        local def
+        for system in snes sfc snesh satellaview sufami smwhacks ; do
+            def=0
+            [[ "$system" == "snes" || "$system" == "sfc"  || "$system" == "snesh"  || "$system" == "satellaview" || "$system" == "sufami" || "$system" == "smwhacks" ]] && def=1
+                addEmulator 0 "$md_id-cplusplus98-core" "$system" "$md_instcore/bsnes_cplusplus98_libretro.so"
                 addSystem "$system"
     done
     fi
@@ -156,9 +159,70 @@ function configure_lr-bsnes() {
     setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg"
     local core_config="snesh"
     setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg"
-    local core_config="smwh"
+    local core_config="smwhacks"
     setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg"
     local core_config="sufami"
     setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg"
+    
+    
+    if [ ! -L "$raconfigdir/config/bsnes" ] ;
+        then
+            ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes
+        
+    fi
+
+
+    if [ ! -L "$raconfigdir/config/bsnes accuracy" ] ;
+        then
+            ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes\ accuracy
+        
+    fi
+
+
+
+    if [ ! -L "$raconfigdir/config/bsnes balanced" ] ;
+        then
+            ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes\ balanced
+        
+    fi
+
+
+
+    if [ ! -L "$raconfigdir/config/bSNES" ] ;
+        then
+            ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bSNES
+        
+    fi
+
+
+
+    if [ ! -L "$raconfigdir/config/bsnes HD" ] ;
+        then
+            ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes\ HD
+        
+    fi
+
+
+
+    if [ ! -L "$raconfigdir/config/bsnes-mercury" ] ;
+        then
+            ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes-mercury
+        
+    fi
+
+
+
+
+
+
+    if [ ! -L "$raconfigdir/config/bsnes performance" ] ;
+        then
+            ln -s $raconfigdir/config/Snes9x $raconfigdir/config/bsnes\ performance
+        
+    fi
+
+
 
 }
+
+

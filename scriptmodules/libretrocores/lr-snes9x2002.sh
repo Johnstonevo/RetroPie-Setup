@@ -60,6 +60,11 @@ function configure_lr-snes9x2002() {
     
     addBezel "snes"
     addBezel "sfc"
+    if [ ! -L "$raconfigdir/config/Snes9x\ 2002" ] ;
+        then
+            ln -s $raconfigdir/config/Snes9x $raconfigdir/config/Snes9x\ 2002
+        
+    fi
 
     if [ -e $md_instcore/snes9x2002_libretro.so ] ;
         then 
