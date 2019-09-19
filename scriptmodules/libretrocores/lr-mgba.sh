@@ -52,7 +52,7 @@ function configure_lr-mgba() {
         local core_config="$system"
     done
 
-    if [ -e $md_instcore/mgba_libretro.so ]
+    if [ -e $md_instcore/mgba_libretro.so ] ;
         then
 
     local system

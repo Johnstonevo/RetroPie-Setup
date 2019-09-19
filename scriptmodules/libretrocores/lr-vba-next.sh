@@ -59,7 +59,7 @@ function configure_lr-vba-next() {
 
 
 
-    if [ -e $md_instcore/vba_next_libretro.so ]
+    if [ -e $md_instcore/vba_next_libretro.so ] ;
         then
 
             for system in gba gbah ; do

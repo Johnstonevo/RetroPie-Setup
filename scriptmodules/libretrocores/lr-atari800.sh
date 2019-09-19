@@ -73,10 +73,10 @@ function configure_lr-atari800() {
 
 
 
-     if [ -e $md_instcore/atari800_libretro.so ]
-     then
-        addEmulator 0 "lr-atari800-core" "atari800" "$md_instcore/atari800_libretro.so"
-        addEmulator 0 "lr-atari800-core" "atari5200" "$md_instcore/atari800_libretro.so"
+     if [ -e $md_instcore/atari800_libretro.so ] ;
+        then
+            addEmulator 0 "lr-atari800-core" "atari800" "$md_instcore/atari800_libretro.so"
+            addEmulator 0 "lr-atari800-core" "atari5200" "$md_instcore/atari800_libretro.so"
     fi
 
 

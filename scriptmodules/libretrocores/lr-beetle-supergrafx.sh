@@ -73,7 +73,7 @@ function configure_lr-beetle-supergrafx() {
     local core_config="supergrafx"
     setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-SuperGrafx.cfg"
            
-    if [ -e $md_instcore/mednafen_supergrafx_libretro.so ]
+    if [ -e $md_instcore/mednafen_supergrafx_libretro.so ] ;
         then
             local system
             local def

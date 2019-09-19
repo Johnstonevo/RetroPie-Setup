@@ -44,13 +44,13 @@ function configure_lr-vice() {
     addEmulator 0 "$md_id" "c64" "$md_inst/vice_x64_libretro.so"
     addSystem "c64"
 
-    if [ -e $md_instcore/vice_x64_libretro.so ]
+    if [ -e $md_instcore/vice_x64_libretro.so ] ;
     then
     addEmulator 0 "$md_id-core" "c64" "$md_instcore/vice_x64_libretro.so"
 
     fi
 
-    if [ -e $md_instcore/vice_x64c_libretro.so ]
+    if [ -e $md_instcore/vice_x64c_libretro.so ] ;
     then
     addEmulator 0 "$md_id-core" "c64" "$md_instcore/vice_x64c_libretro.so"
 

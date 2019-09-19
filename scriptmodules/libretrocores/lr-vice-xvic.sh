@@ -44,7 +44,7 @@ function configure_lr-vice-xvic() {
     addEmulator 0 "$md_id" "vic20" "$md_inst/vice_xvic_libretro.so"
     addSystem "vic20"
 
-    if [ -e $md_instcore/vice_xvic_libretro.so ]
+    if [ -e $md_instcore/vice_xvic_libretro.so ] ;
     then
     addEmulator 0 "$md_id-core" "vic" "$md_instcore/vice_xvic_libretro.so"
 

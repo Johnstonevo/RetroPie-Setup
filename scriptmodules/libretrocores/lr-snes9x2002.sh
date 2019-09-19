@@ -61,8 +61,8 @@ function configure_lr-snes9x2002() {
     addBezel "snes"
     addBezel "sfc"
 
-    if [ -e $md_instcore/snes9x2002_libretro.so ]
-        then
+    if [ -e $md_instcore/snes9x2002_libretro.so ] ;
+        then 
             local system
             local def
             for system in snes smwhacks snesh sfc satellaview sufami ; do

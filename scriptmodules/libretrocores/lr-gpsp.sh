@@ -68,7 +68,7 @@ function configure_lr-gpsp() {
 
 
 
-    if [ -e $md_instcore/gpsp_libretro.so ]
+    if [ -e $md_instcore/gpsp_libretro.so ] ;
         then
         local system
         local def

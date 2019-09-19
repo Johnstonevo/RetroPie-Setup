@@ -72,7 +72,7 @@ function configure_lr-beetle-pce-fast() {
     setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/NEC-PC-Engine-CD.cfg"
 
 
-    if [ -e $md_instcore/mednafen_pce_fast_libretro.so ]
+    if [ -e $md_instcore/mednafen_pce_fast_libretro.so ] ;
         then
             local system
             local def

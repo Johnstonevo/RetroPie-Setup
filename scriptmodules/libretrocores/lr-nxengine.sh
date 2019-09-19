@@ -50,7 +50,7 @@ _EOF_
     chmod +x "$file"
 
     ensureSystemretroconfig "ports/cavestory"
-    if [ -e $md_instcore/nxengine_libretro.so ]
+    if [ -e $md_instcore/nxengine_libretro.so ] ;
         then
           addEmulator 1 "$md_id-core" "ports/cavestory" "$md_instcore/nxengine_libretro.so"
     fi

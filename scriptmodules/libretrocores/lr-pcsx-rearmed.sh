@@ -85,7 +85,7 @@ function configure_lr-pcsx-rearmed() {
     done
 
 
-    if [ -e $md_instcore/pcsx1_libretro.so ]
+    if [ -e $md_instcore/pcsx1_libretro.so ] ;
                     then
                         for system in psx psx-japan  ; do
                         def=0

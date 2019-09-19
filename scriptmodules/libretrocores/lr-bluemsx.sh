@@ -81,7 +81,7 @@ function configure_lr-bluemsx() {
 
 
     
-     if [ -e $md_instcore/bluemsx_libretro.so ]
+     if [ -e $md_instcore/bluemsx_libretro.so ] ;
                 then
 
                 for system in msx msx2 msx2+ coleco ; do

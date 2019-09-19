@@ -73,7 +73,7 @@ function configure_lr-picodrive() {
 
 
 
-        if [ -e $md_instcore/picodrive_libretro.so ]
+        if [ -e $md_instcore/picodrive_libretro.so ] ; 
             then
 
                 local system

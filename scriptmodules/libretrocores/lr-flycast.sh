@@ -69,7 +69,7 @@ function configure_lr-flycast() {
 
 
 
-if [ -e $md_instcore/reicast_libretro.so ]
+if [ -e $md_instcore/reicast_libretro.so ] ;
     then
         local system
         local def

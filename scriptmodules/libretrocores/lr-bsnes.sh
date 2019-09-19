@@ -73,7 +73,7 @@ function configure_lr-bsnes() {
 
 
 
-    if [ -e $md_instcore/bsnes_balanced_libretro.so ]
+    if [ -e $md_instcore/bsnes_balanced_libretro.so ] ;
         then
         local system
         local def
@@ -85,7 +85,7 @@ function configure_lr-bsnes() {
     done
     fi
 
-    if [ -e $md_instcore/bsnes_accuracy_libretro.so ]
+    if [ -e $md_instcore/bsnes_accuracy_libretro.so ] ;
         then
         local system
         local def
@@ -97,7 +97,7 @@ function configure_lr-bsnes() {
     done
     fi
 
-    if [ -e $md_instcore/bsnes_mercury_accuracy_libretro.so ]
+    if [ -e $md_instcore/bsnes_mercury_accuracy_libretro.so ] ;
         then
         local system
         local def
@@ -109,7 +109,7 @@ function configure_lr-bsnes() {
     done
     fi
 
-    if [ -e $md_instcore/bsnes_mercury_balanced_libretro.so ]
+    if [ -e $md_instcore/bsnes_mercury_balanced_libretro.so ] ;
         then
         local system
         local def
@@ -121,7 +121,7 @@ function configure_lr-bsnes() {
     done
     fi
 
-    if [ -e $md_instcore/bsnes_mercury_performance_libretro.so ]
+    if [ -e $md_instcore/bsnes_mercury_performance_libretro.so ] ;
         then
         local system
         local def
@@ -133,7 +133,7 @@ function configure_lr-bsnes() {
     done
     fi
 
-    if [ -e $md_instcore/bsnes_hd_libretro.so ]
+    if [ -e $md_instcore/bsnes_hd_libretro.so ] ;
         then
         local system
         local def

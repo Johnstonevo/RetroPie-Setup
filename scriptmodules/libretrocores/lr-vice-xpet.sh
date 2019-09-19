@@ -44,7 +44,7 @@ function configure_lr-vice-xpet() {
     addEmulator 0 "$md_id" "pet" "$md_inst/vice_xpet_libretro.so"
     addSystem "pet"
 
-    if [ -e $md_instcore/vice_xpet_libretro.so ]
+    if [ -e $md_instcore/vice_xpet_libretro.so ] ;
     then
     addEmulator 0 "$md_id-core" "pet" "$md_instcore/vice_xpet_libretro.so"
 

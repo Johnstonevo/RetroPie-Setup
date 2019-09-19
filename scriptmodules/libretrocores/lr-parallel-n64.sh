@@ -184,7 +184,7 @@ target FPS=25
 _EOF_
     chown $user:$user "$biosdir/gles2n64rom.conf"
 
-    if [ -e $md_instcore/parallel-n64_libretro.so ]
+    if [ -e $md_instcore/parallel-n64_libretro.so ] ;
     then
     local system
     local def

@@ -70,7 +70,7 @@ function configure_lr-fceumm() {
     setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Famicom-Disk-System.cfg"
 
 
-if [ -e $md_instcore/fceumm_libretro.so ]
+if [ -e $md_instcore/fceumm_libretro.so ] ;
     then
         for system in nes nesh fds famicom ; do
         def=0
