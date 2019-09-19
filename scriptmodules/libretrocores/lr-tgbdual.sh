@@ -51,7 +51,7 @@ function configure_lr-tgbdual() {
 
     done
 
-    if [ -e $md_instcore=/tgbdual_libretro.so ]
+    if [ -e $md_instcore/tgbdual_libretro.so ]
         then
             local system
             local def

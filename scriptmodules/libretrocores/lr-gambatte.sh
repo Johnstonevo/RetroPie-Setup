@@ -55,7 +55,7 @@ function configure_lr-gambatte() {
     addBezel "gbc"
     addBezel "gb"
 
-    if [ -e $md_instcore=/gambatte_libretro.so ]
+    if [ -e $md_instcore/gambatte_libretro.so ]
         then
             local system
             local def

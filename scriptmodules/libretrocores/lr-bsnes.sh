@@ -38,7 +38,7 @@ function configure_lr-bsnes() {
     local def
     for system in snes sfc snesh satellaview sufami snesmsu1 smwhacks; do
         def=0
-        [[ "$system" == "snes" || "$system" == "sfc"  || "$system" == "snesh"  || "$system" == "satellaview" || "$system" == "sufami" || "$system" == "smwhacks" ]] && def=1
+        [[ "$system" == "snes" || "$system" == "sfc"  || "$system" == "snesh"  || "$system" == "satellaview" || "$system" == "sufami" || "$system" == "snesmsu1" || "$system" == "smwhacks" ]] && def=1
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
         addEmulator 0 "$md_id" "$system" "$md_inst/bsnes_accuracy_libretro.so"

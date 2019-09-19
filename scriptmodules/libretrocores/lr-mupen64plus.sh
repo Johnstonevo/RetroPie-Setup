@@ -99,7 +99,7 @@ function configure_lr-mupen64plus() {
 
     done
 
-  if [ -e $md_instcore=/mupen64plus_libretro.so ]
+  if [ -e $md_instcore/mupen64plus_libretro.so ]
   then
     local system
     local def

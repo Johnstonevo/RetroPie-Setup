@@ -60,7 +60,7 @@ function configure_lr-genesis-plus-gx() {
   addBezel "sega32x
 
 "
-    if [ -e $md_instcore=/genesis_plus_gx_libretro.so ]
+    if [ -e $md_instcore/genesis_plus_gx_libretro.so ]
         then
             local system
             local def

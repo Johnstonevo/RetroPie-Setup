@@ -48,7 +48,7 @@ function configure_lr-beetle-saturn() {
 
     
 
-    if [ -e $md_instcore=/mednafen_saturn_libretro.so ]
+    if [ -e $md_instcore/mednafen_saturn_libretro.so ]
                     then
 
                         local system

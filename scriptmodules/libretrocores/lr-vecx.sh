@@ -49,7 +49,7 @@ function configure_lr-vecx() {
     addEmulator 0 "$md_id" "vectrex" "$md_inst/vecx_libretro.so"
     addSystem "vectrex"
     addBezel "vectrex"
-    if [ -e $md_instcore=/vecx_libretro.so ]
+    if [ -e $md_instcore/vecx_libretro.so ]
         then
           addEmulator 0 "$md_id-core" "vectrex" "$md_instcore/vecx_libretro.so"
           addSystem "vectrex"

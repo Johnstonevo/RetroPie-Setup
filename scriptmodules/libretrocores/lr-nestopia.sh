@@ -82,7 +82,7 @@ function configure_lr-nestopia() {
     #setRetroArchCoreOption "nestopia_palette" "canonical"
 
 
-        if [ -e $md_instcore=/nestopia_libretro.so ]
+        if [ -e $md_instcore/nestopia_libretro.so ]
         then
             local system
             local def

@@ -55,7 +55,7 @@ function configure_lr-mame2010() {
         setRetroArchCoreOption "mame2010-samples" "enabled"
         
     done
-    if [ -e $md_instcore=/mame2010_libretro.so ]
+    if [ -e $md_instcore/mame2010_libretro.so ]
     then
         addEmulator 0 "$md_id-core" "arcade" "$md_instcore/mame2010_libretro.so"
         addEmulator 0 "$md_id-core" "mame-2010" "$md_instcore/mame2010_libretro.so"

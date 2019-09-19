@@ -52,7 +52,7 @@ function configure_lr-quicknes() {
     addBezel "famicom"
 
     
-if [ -e $md_instcore=/quicknes_libretro.so ]
+if [ -e $md_instcore/quicknes_libretro.so ]
 then
     local system
     local def

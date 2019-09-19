@@ -59,7 +59,7 @@ function configure_lr-snes9x2005() {
     addBezel "snes"
     addBezel "sfc"
 
-    if [ -e $md_instcore=/snes9x2005_libretro.so ]
+    if [ -e $md_instcore/snes9x2005_libretro.so ]
         then
             local system
             local def

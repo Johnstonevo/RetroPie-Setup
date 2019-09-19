@@ -38,7 +38,7 @@ function configure_lr-beetle-lynx() {
     addEmulator 0 "$md_id" "atarilynx" "$md_inst/mednafen_lynx_libretro.so"
     addSystem "atarilynx"
 
-    if [ -e $md_instcore=/mednafen_lynx_libretro.so ]
+    if [ -e $md_instcore/mednafen_lynx_libretro.so ]
         then
         addEmulator 0 "$md_id-core" "atarilynx" "$md_instcore/handy_libretro.so"
   fi

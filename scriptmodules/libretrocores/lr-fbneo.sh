@@ -150,7 +150,7 @@ function configure_lr-fbneo() {
     
     addBezel "fba"
 
-if [ -e $md_instcore=/fbneo_libretro.so ]
+if [ -e $md_instcore/fbneo_libretro.so ]
     then
         for system in arcade neogeo fba ; do
             def=0

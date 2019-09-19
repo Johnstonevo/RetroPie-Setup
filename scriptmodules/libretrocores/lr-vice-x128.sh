@@ -44,7 +44,7 @@ function configure_lr-vice-x128() {
     addEmulator 0 "$md_id" "c128" "$md_inst/vice_x128_libretro.so"
     addSystem "c128"
 
-    if [ -e $md_instcore=/vice_x128_libretro.so ]
+    if [ -e $md_instcore/vice_x128_libretro.so ]
     then
     addEmulator 0 "$md_id-core" "128" "$md_instcore/vice_x128_libretro.so"
 

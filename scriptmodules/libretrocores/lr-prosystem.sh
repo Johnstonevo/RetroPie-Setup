@@ -41,7 +41,7 @@ function configure_lr-prosystem() {
 
     addEmulator 0 "$md_id" "atari7800" "$md_inst/prosystem_libretro.so"
     addSystem "atari7800"
-    if [ -e $md_instcore=/prosystem_libretro.so ]
+    if [ -e $md_instcore/prosystem_libretro.so ]
         then
           addEmulator 0 "$md_id-core" "atari7800" "$md_instcore/prosystem_libretro.so"
           addSystem "atari7800"

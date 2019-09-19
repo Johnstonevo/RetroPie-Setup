@@ -114,7 +114,7 @@ function configure_lr-mame2003() {
 
 
 
-    if [ -e $md_instcore=/mame2003_libretro.so ]
+    if [ -e $md_instcore/mame2003_libretro.so ]
     then
         addEmulator 0 "$md_id-core" "arcade" "$md_instcore/${so_name}_libretro.so"
         addEmulator 0 "$md_id-core" "mame-2003-plus" "$md_instcore/${so_name}_libretro.so"

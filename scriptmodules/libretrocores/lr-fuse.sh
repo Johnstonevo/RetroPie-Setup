@@ -57,7 +57,7 @@ function configure_lr-fuse() {
     setRetroArchCoreOption  "fuse_machine" "Spectrum +3k"
 
 
-    if [ -e $md_instcore=/fuse_libretro.so ]
+    if [ -e $md_instcore/fuse_libretro.so ]
                     then
                         local system
                         local def

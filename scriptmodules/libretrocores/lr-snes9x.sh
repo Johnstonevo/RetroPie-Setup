@@ -59,12 +59,12 @@ function configure_lr-snes9x() {
     addBezel "snes"
     addBezel "sfc"
 
-    if [ -e $md_instcore=/snes9x_libretro.so ]
+    if [ -e $md_instcore/snes9x_libretro.so ]
         then
             local system
             local def
             for system in snes smwhacks snesh sfc snesmsu1 satellaview sufami ; do
-                def=0
+                def=1
                 addEmulator def "$md_id-core" "$system" "$md_instcore/snes9x_libretro.so"
             done
     fi

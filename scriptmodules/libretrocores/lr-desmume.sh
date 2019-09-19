@@ -60,7 +60,7 @@ function configure_lr-desmume() {
         setRetroArchCoreOption  "custom_viewport_height"  "768"
         setRetroArchCoreOption  "custom_viewport_width"  "512"
 
-    if [ -e $md_instcore=/desmume_libretro.so ]
+    if [ -e $md_instcore/desmume_libretro.so ]
         then
     mkRomDir "nds"
     ensureSystemretroconfig "nds"

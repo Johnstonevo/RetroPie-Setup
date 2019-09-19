@@ -76,7 +76,7 @@ function configure_lr-beetle-psx() {
 
     addBezel "psx"
 
-    if [ -e $md_instcore=/mednafen_psx_hw_libretro.so ]
+    if [ -e $md_instcore/mednafen_psx_hw_libretro.so ]
                     then
                         for system in psx psx-japan; do
                             def=0
@@ -85,7 +85,7 @@ function configure_lr-beetle-psx() {
                         done
     fi
 
-    if [ -e $md_instcore=/mednafen_psx_libretro.so ]
+    if [ -e $md_instcore/mednafen_psx_libretro.so ]
                     then
                         for system in psx psx-japan; do
                             def=0
