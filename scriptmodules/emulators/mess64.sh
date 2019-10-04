@@ -11,7 +11,7 @@
 
 rp_module_id="mess64"
 rp_module_desc="MAME emulator"
-rp_module_help="ROM Extension: .zip\n\nCopy your MAME roms to either $romdir/mame or\n$romdir/arcade"
+rp_module_help="ROM Extension: .zip\n\nCopy your MAME roms to either $romdir/mame or\n$romdir/mame-current"
 rp_module_licence="GPL2 https://github.com/mamedev/mame/blob/master/LICENSE.md"
 rp_module_section="exp"
 rp_module_flags="!arm"
@@ -63,8 +63,8 @@ function install_mess64() {
 
 function configure_mess64() {
     local system="mess-current"
-    #mkRomDir "arcade"
-    #mkRomDir "arcade/$system"
+    #mkRomDir "mame-current"
+    #mkRomDir "mame-current/$system"
     mkRomDir "$system"
     mkRomDir "arcadia"
     mkRomDir "astrocade"
@@ -72,7 +72,7 @@ function configure_mess64() {
     mkRomDir "channelf"
     mkRomDir "electron"
     mkRomDir "supervision"
-
+    mkRomDir "mess-current"
 
     #copyConfigDir "$home/.mame" "$md_conf_root/$system"
 
@@ -81,23 +81,23 @@ function configure_mess64() {
         local mame_sub_dir
         for mame_sub_dir in artwork cfg comments diff inp nvram samples scores snap sta; do
             mkRomDir "$system/$mame_sub_dir"
-            ln -sf "$romdir/$system/$mame_sub_dir" "$romdir/arcade/$system"
+            ln -sf "$romdir/$system/$mame_sub_dir" "$romdir/mame-current/$system"
             # fix for older broken symlink generation
             rm -f "$romdir/$system/$mame_sub_dir/$mame_sub_dir"
         done
      fi
 
      # Create a new INI file if one does not already exist
-     if [[ "$md_mode" == "install" && ! -f "$md_conf_root/$system/mame.ini" ]]; then
+     if [[ "$md_mode" == "install" && ! -f "$md_conf_root/$system/mess.ini" ]]; then
         pushd "$md_conf_root/$system/"
         "$md_inst/mess64" -createconfig
         popd
 
         iniConfig " " "" "$md_conf_root/$system/$md_id.ini"
-        iniSet "rompath"            "$romdir/$system;$romdir/arcade"
+        iniSet "rompath"            "$romdir/$system;$romdir/mame-current;$datadir/BIOS"
         iniSet "hashpath"           "$md_inst/hash"
-        iniSet "samplepath"         "$romdir/$system/samples;$romdir/arcade/samples"
-        iniSet "artpath"            "$romdir/$system/artwork;$romdir/arcade/artwork"
+        iniSet "samplepath"         "$romdir/$system/samples;$romdir/mame-current/samples"
+        iniSet "artpath"            "$romdir/$system/artwork;$romdir/mame-current/artwork"
         iniSet "ctrlrpath"          "$md_inst/ctrlr"
         iniSet "pluginspath"        "$md_inst/plugins"
         iniSet "languagepath"       "$md_inst/language"
@@ -128,7 +128,7 @@ function configure_mess64() {
 
     fi
 
-   # addEmulator 0 "$md_id" "arcade" "$md_inst/mess64 %ROM%"
+   # addEmulator 0 "$md_id" "mame-current" "$md_inst/mess64 %ROM%"
     addEmulator 0 "$md_id" "$system" "$md_inst/mess64 %ROM%"
     addEmulator 1 "$md_id-arcadia" "arcadia" "$md_inst/mess64  arcadia -cfg_directory $configdir/arcadia/   -cart %ROM%"
     addEmulator 1 "$md_id-astrocade" "astrocade" "$md_inst/mess64 astrocade -cfg_directory $configdir/astrocade/ -cart %ROM%"
@@ -136,7 +136,7 @@ function configure_mess64() {
     addEmulator 1 "$md_id-channelf" "channelf" "$md_inst/mess64 channelf -cfg_directory $configdir/channelf/ -cart %ROM%"
     addEmulator 1 "$md_id-electron" "electron" "$md_inst/mess64 electron -cfg_directory $configdir/electron/ -cass %ROM%"
     addEmulator 1 "$md_id-supervision" "supervision" "$md_inst/mess64 svision -cfg_directory $configdir/supervision/ -cart %ROM%"
-    #addSystem "arcade"
+    #addSystem "mame-current"
     addSystem "$system"
     addSystem "arcadia"
     addSystem "astrocade"
@@ -144,5 +144,7 @@ function configure_mess64() {
     addSystem "channelf"
     addSystem "electron"
     addSystem "supervision"
+
+    
 
 }
