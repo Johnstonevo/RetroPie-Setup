@@ -227,6 +227,7 @@ function gui_esthemes() {
         'blowfinger77 locomotion'
         'justincaseurskynet Arcade1up-5x4-Horizontal'
         'KALEL1981 Super-Retroboy'
+        'Arcanthur NeoGeoClassic'
     )
     while true; do
         local theme
