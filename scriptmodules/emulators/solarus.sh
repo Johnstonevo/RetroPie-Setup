@@ -62,8 +62,8 @@ function configure_solarus() {
     mkRomDir "solarus"
     addEmulator 1 "$md_id" "solarus" "$md_inst/solarus.sh %ROM%"
     addSystem "solarus"
-      moveConfigDir "$home/.solarus" "$md_conf_root/solarus"
-    [[ "$mode" == "remove" ]] && return
+    moveConfigDir "$home/.solarus" "$configdir/solarus"
+    [[ "$md_mode" == "remove" ]] && return
 
 
     # create launcher for Solarus that disables JACK driver in OpenAL,

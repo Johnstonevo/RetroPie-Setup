@@ -67,7 +67,9 @@ function get_os_version() {
 
     # get os distributor id, description, release number and codename
     local os
-    mapfile -t os < <(lsb_release -sidrc)
+    # armbian uses a minimal shell script replacement for lsb_release with basic
+    # parameter parsing that requires the arguments split rather than using -sidrc
+    mapfile -t os < <(lsb_release -s -i -d -r -c)
     __os_id="${os[0]}"
     __os_desc="${os[1]}"
     __os_release="${os[2]}"
@@ -99,8 +101,8 @@ function get_os_version() {
                 __platform_flags+=" xbian"
             fi
 
-            # we provide binaries for RPI on Raspbian 9 only
-            if isPlatform "rpi" && compareVersions "$__os_debian_ver" gt 8 && compareVersions "$__os_debian_ver" lt 10; then
+            # we provide binaries for RPI on Raspbian 9/10
+            if isPlatform "rpi" && compareVersions "$__os_debian_ver" gt 8 && compareVersions "$__os_debian_ver" lt 11; then
                 __has_binaries=1
             fi
             ;;

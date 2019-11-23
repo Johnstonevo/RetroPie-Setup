@@ -61,7 +61,7 @@ def sysdev_get(key, sysdev_path):
     return value
 
 def get_button_codes(dev_path):
-    js_cfg_dir = RACONFIG_DIR + '/retroarch-joypads/'
+    js_cfg_dir = RACONFIG_DIR + '/autoconfig/'
     js_cfg = ''
     dev_name = ''
     dev_button_codes = list(default_button_codes)

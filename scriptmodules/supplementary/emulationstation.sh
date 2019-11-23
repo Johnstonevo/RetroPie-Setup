@@ -269,7 +269,7 @@ function configure_emulationstation() {
     moveConfigDir "$home/.emulationstation" "$configdir/all/emulationstation"
     chown -R $user:$user "$configdir/all/emulationstation"
 
-    [[ "$mode" == "remove" ]] && return
+    [[ "$md_mode" == "remove" ]] && return
 
     # remove other emulation station if it's installed, so we don't end up with
     # both packages interfering - but leave configs alone so switching is easy
