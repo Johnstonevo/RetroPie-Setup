@@ -102,15 +102,15 @@ function install_retroarch() {
 function update_shaders_retroarch() {
     local dir="$raconfigdir/shaders"
     local branch=""
-    #if isPlatform "rpi" && branch="rpi"; then
+    if isPlatform "rpi" && branch="rpi"; then
     # remove if not git repository for fresh checkout
-    #[[ ! -d "$dir/.git" ]] && rm -rf "$dir"
-    #gitPullOrClone "$dir" https://github.com/RetroPie/common-shaders.git "$branch"
-    #fi
-   #if  isPlatform "x86" ; then
+    [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
+    gitPullOrClone "$dir" https://github.com/RetroPie/common-shaders.git "$branch"
+    fi
+   if  isPlatform "x86" ; then
      [[ ! -d "$dir/.git" ]] && rm -rf "$dir"
-    gitPullOrClone "$dir" https://github.com/Johnstonevo/common-shaders.git
-    #fi
+    gitPullOrClone "$dir" https://github.com/libretro/common-shaders.git
+    fi
     chown -R $user:$user "$dir"
 }
 
