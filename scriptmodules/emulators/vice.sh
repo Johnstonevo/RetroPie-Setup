@@ -107,7 +107,9 @@ _EOF_
         iniSet "SDLWindowHeight" "272"
         isPlatform "rpi1" && iniSet "SoundSampleRate" "22050"
         iniSet "SidEngine" "0"
-    else
+    fi
+
+    if isPlatform "x11" || isPlatform "kms"; then
         iniSet "VICIIFullscreen" "1"
     fi
 
@@ -123,5 +125,4 @@ _EOF_
         iniSet "SDLWindowWidth" "384"
         iniSet "SDLWindowHeight" "272"
     fi
-
 }

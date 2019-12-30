@@ -28,13 +28,19 @@ function sources_lr-flycast() {
 }
 
 function build_lr-flycast() {
+    local params=()
     make clean
     if isPlatform "rpi"; then
-        # MAKEFLAGS replace removes any distcc from path, as it segfaults with cross compiler and lto
-        MAKEFLAGS="${MAKEFLAGS/\/usr\/lib\/distcc:/}" make platform=rpi
-    else
-        make
+        if isPlatform "rpi4"; then
+            params+=("platform=rpi4")
+        elif isPlatform "mesa"; then
+            params+=("platform=rpi-mesa")
+        else
+            params+=("platform=rpi")
+        fi
     fi
+    # temporarily disable distcc due to segfaults with cross compiler and lto
+    DISTCC_HOSTS="" make "${params[@]}"
     md_ret_require="$md_build/flycast_libretro.so"
 }
 

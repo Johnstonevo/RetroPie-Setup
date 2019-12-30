@@ -11,7 +11,7 @@
 
 rp_module_id="skyscraper"
 rp_module_desc="Scraper for EmulationStation by Lars Muldjord"
-rp_module_licence="GPLv3.0 https://raw.githubusercontent.com/muldjord/skyscraper/master/LICENSE"
+rp_module_licence="GPL3 https://raw.githubusercontent.com/muldjord/skyscraper/master/LICENSE"
 rp_module_section="exp"
 
 function depends_skyscraper() {
@@ -46,6 +46,7 @@ function install_skyscraper() {
         'hints.txt'
         'import'
         'resources'
+        'cache/priorities.xml.example'
     )
 }
 
@@ -231,6 +232,10 @@ function _init_config_skyscraper() {
         mkUserDir "$md_conf_dir/import/$folder"
     done
     cp -rf "$md_inst/import" "$md_conf_dir"
+
+    # Create the cache folder and add the sample 'priorities.xml' file to it
+    mkdir -p "$md_conf_dir/cache"
+    cp -f "$md_inst/priorities.xml.example" "$md_conf_dir/cache"
 }
 
 # Scrape one system, passed as parameter
