@@ -21,7 +21,7 @@ function sources_lr-atari800() {
 
 function build_lr-atari800() {
     make clean
-    CFLAGS+=" -DDEFAULT_CFG_NAME=\\\"$md_conf_root/atari800/lr-atari800.cfg\\\"" make
+    CFLAGS+=" -DDEFAULT_CFG_NAME=\\\".lr-atari800.cfg\\\"" make
     md_ret_require="$md_build/atari800_libretro.so"
 }
 
@@ -50,6 +50,7 @@ function configure_lr-atari800() {
     done
 
     mkUserDir "$md_conf_root/atari800"
+    moveConfigFile "$home/.lr-atari800.cfg" "$md_conf_root/atari800/lr-atari800.cfg"
 
     addBezel "atari5200"
 

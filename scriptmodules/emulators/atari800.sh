@@ -23,7 +23,7 @@ function depends_atari800() {
 }
 
 function sources_atari800() {
-    gitPullOrClone "$md_build" "https://github.com/atari800/atari800.git" ATARI800_4_1_0
+    gitPullOrClone "$md_build" "https://github.com/atari800/atari800.git" ATARI800_4_2_0
     if isPlatform "rpi"; then
         applyPatch "$md_data/01_rpi_fixes.diff"
     fi
@@ -66,7 +66,10 @@ function configure_atari800() {
     fi
 
     addEmulator 1 "atari800" "atari800" "$md_inst/atari800.sh %ROM% ${params[*]}"
-    addEmulator 1 "atari800" "atari5200" "$md_inst/atari800.sh %ROM% ${params[*]}"
+    addEmulator 1 "atari800-800" "atari800" "$md_inst/atari800.sh %ROM% ${params[*]} -atari"
+    addEmulator 1 "atari800-800xl" "atari800" "$md_inst/atari800.sh %ROM% ${params[*]} -xl"
+    addEmulator 1 "atari800-130xe" "atari800" "$md_inst/atari800.sh %ROM% ${params[*]} -xe"
+    addEmulator 1 "atari800-5200" "atari5200" "$md_inst/atari800.sh %ROM% ${params[*]} -5200"
     addSystem "atari800"
     addSystem "atari5200"
 }
