@@ -137,7 +137,7 @@ function install_minimal_assets_retroarch() {
     [[ ! -d "$dir" ]] && mkUserDir "$dir"
     downloadAndExtract "$__binary_base_url/retroarch-minimal-assets.tar.gz" "$dir"
     chown -R $user:$user "$dir"
-    fi
+    
 }
 
 function _package_minimal_assets_retroarch() {
