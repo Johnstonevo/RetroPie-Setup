@@ -241,7 +241,7 @@ function get_all_tvs_modes() {
 
 function get_all_kms_modes() {
     declare -Ag MODE
-    local default_mode="$(echo "$KMS_BUFFER" | grep "crtc" | grep -m1 "Mode:")"
+    local default_mode="$(echo "$KMS_BUFFER" | grep -m1 "^Mode:.*driver.*crtc")"
     local crtc="$(echo "$default_mode" | awk '{ print $(NF-1) }')"
     local crtc_encoder="$(echo "$KMS_BUFFER" | grep "Encoder map:" | awk -v crtc="$crtc" '$5 == crtc { print $3 }')"
 
@@ -999,6 +999,8 @@ function restore_fb() {
 }
 
 function config_dispmanx() {
+    # if we are running under X then don't try and use dispmanx
+    [[ -n "$DISPLAY" || "$XINIT" -eq 1 ]] && return
     local name="$1"
     # if we have a dispmanx conf file and $name is in it (as a variable) and set to 1,
     # change the library path to load dispmanx sdl first
@@ -1137,7 +1139,7 @@ function get_sys_command() {
         CONSOLE_OUT=1
     fi
 
-   # if it starts with XINIT: it is an X11 application (so we need to launch via xinit)
+    # if it starts with XINIT: it is an X11 application (so we need to launch via xinit)
     if [[ "$COMMAND" == XINIT:* ]]; then
         # remove XINIT:
         COMMAND="${COMMAND:6}"

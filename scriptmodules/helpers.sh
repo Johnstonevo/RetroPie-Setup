@@ -219,6 +219,17 @@ function getDepends() {
             isPlatform "xbian" && required="xbian-package-firmware"
         fi
 
+        # handle our custom package alias LINUX-HEADERS
+        if [[ "$required" == "LINUX-HEADERS" ]]; then
+            if isPlatform "rpi"; then
+                required="raspberrypi-kernel-headers"
+            elif [[ -z "$__os_ubuntu_ver" ]]; then
+                required="linux-headers-$(uname -r)"
+            else
+                required="linux-headers-generic"
+            fi
+        fi
+
         # map libpng12-dev to libpng-dev for Stretch+
         if [[ "$required" == "libpng12-dev" ]] && compareVersions "$__os_debian_ver" ge 9;  then
             required="libpng-dev"
@@ -232,7 +243,7 @@ function getDepends() {
 
         if [[ "$md_mode" == "install" ]]; then
             # make sure we have our sdl1 / sdl2 installed
-            if ! isPlatform "x11" && ! isPlatform "mesa" && [[ "$required" == "libsdl1.2-dev" ]] && hasPackage libsdl1.2-dev $(get_pkg_ver_sdl1) "ne"; then
+            if ! isPlatform "x11" && [[ "$required" == "libsdl1.2-dev" ]] && hasPackage libsdl1.2-dev $(get_pkg_ver_sdl1) "ne"; then
                 packages+=("$required")
                 continue
             fi
