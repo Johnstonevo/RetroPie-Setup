@@ -49,7 +49,7 @@ function install_lr-mame() {
 
 function configure_lr-mame() {
     local system
-    for system in arcade mame-current; do
+    for system in arcade mame; do
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
         addEmulator 0 "$md_id" "$system" "$md_inst/mamearcade_libretro.so"
@@ -63,13 +63,13 @@ function configure_lr-mame() {
         setRetroArchCoreOption "mame-dcs-speedhack" "enabled"
         setRetroArchCoreOption "mame-samples" "enabled"
 
-        addBezel "mame-current"
+        addBezel "mame"
     done
 
   if [ -e $md_instcore/mame_libretro.so ] ;
   then
       addEmulator 0 "$md_id-core" "arcade" "$md_instcore/mame_libretro.so"
-      addEmulator 0 "$md_id-core" "mame-current" "$md_instcore/mame_libretro.so"
+      addEmulator 0 "$md_id-core" "mame" "$md_instcore/mame_libretro.so"
   fi
 
 }

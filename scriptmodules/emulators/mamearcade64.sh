@@ -62,7 +62,7 @@ function install_mamearcade64() {
 }
 
 function configure_mamearcade64() {
-    local system="mame-current"
+    local system="mame"
     mkRomDir "arcade"
     mkRomDir "arcade/$system"
     mkRomDir "$system"
