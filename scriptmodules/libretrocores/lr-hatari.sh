@@ -28,9 +28,8 @@ function sources_lr-hatari() {
 function build_lr-hatari() {
     #_build_libcapsimage_hatari
 
-    #cd "$md_build"
-  #  CFLAGS+=" -D__cdecl='' -DHAVE_CAPSIMAGE=1 -DCAPSIMAGE_VERSION=5" LDFLAGS+="-L./lib -l:libcapsimage.so.5.1" make -f Makefile.libretro
-    make -f Makefile.libretro EXTERNAL_ZLIB=1
+    cd "$md_build"
+    CFLAGS+=" -D__cdecl='' -DHAVE_CAPSIMAGE=1 -DCAPSIMAGE_VERSION=5" CAPSIMG_LDFLAGS="-L./lib -l:libcapsimage.so.5.1" make -f Makefile.libretro
     md_ret_require="$md_build/hatari_libretro.so"
 }
 

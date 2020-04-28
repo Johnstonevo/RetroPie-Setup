@@ -39,7 +39,7 @@ function depends_retroarch() {
 }
 
 function sources_retroarch() {
-    gitPullOrClone "$md_build" https://github.com/libretro/RetroArch.git v1.8.4
+    gitPullOrClone "$md_build" https://github.com/libretro/RetroArch.git v1.8.5
     applyPatch "$md_data/01_hotkey_hack.diff"
     applyPatch "$md_data/02_disable_search.diff"
     applyPatch "$md_data/03_shader_path_config_enable.diff"
@@ -362,6 +362,9 @@ function configure_retroarch() {
     iniConfig " = " '"' "$raconfigdir/retroarch.cfg"
     iniGet "menu_driver"
     [[ -z "$ini_value" ]] && iniSet "menu_driver" "rgui"
+
+    # enable menu_unified_controls by default (see below for more info)
+    iniSet "menu_unified_controls" "true"
 
     # disable 'press twice to quit'
     iniSet "quit_press_twice" "false"

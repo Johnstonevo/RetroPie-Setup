@@ -12,7 +12,7 @@
 rp_module_id="skyscraper"
 rp_module_desc="Scraper for EmulationStation by Lars Muldjord"
 rp_module_licence="GPL3 https://raw.githubusercontent.com/muldjord/skyscraper/master/LICENSE"
-rp_module_section="exp"
+rp_module_section="opt"
 
 function depends_skyscraper() {
     getDepends qt5-default p7zip-full
@@ -64,6 +64,8 @@ function _cache_folder_skyscraper() {
 function _purge_skyscraper() {
     local platform
     local cache_folder=$(_cache_folder_skyscraper)
+
+    [[ ! -d "$configdir/all/skyscraper/$cache_folder" ]] && return
 
     while read platform; do
         # Find any sub-folders of the cache folder and clear them
@@ -185,20 +187,20 @@ function configure_skyscraper() {
 }
 
 function _init_config_skyscraper() {
-    local md_conf_dir="$configdir/all/skyscraper"
+    local scraper_conf_dir="$configdir/all/skyscraper"
 
     # Make sure the `artwork.xml` and other conf file(s) are present, but don't overwrite them on upgrades
     local f_conf
     for f_conf in artwork.xml aliasMap.csv; do
-        if [[ -f "$md_conf_dir/$f_conf" ]]; then
-            cp -f "$md_inst/$f_conf" "$md_conf_dir/$f_conf.default"
+        if [[ -f "$scraper_conf_dir/$f_conf" ]]; then
+            cp -f "$md_inst/$f_conf" "$scraper_conf_dir/$f_conf.default"
         else
-            cp "$md_inst/$f_conf" "$md_conf_dir"
+            cp "$md_inst/$f_conf" "$scraper_conf_dir"
         fi
     done
 
     # If we don't have a previous config.ini file, copy the example one
-    [[ ! -f "$md_conf_dir/config.ini" ]] && cp "$md_inst/config.ini.example" "$md_conf_dir/config.ini"
+    [[ ! -f "$scraper_conf_dir/config.ini" ]] && cp "$md_inst/config.ini.example" "$scraper_conf_dir/config.ini"
 
     # Try to find the rest of the necesary files from the qmake build file
     # They should be listed in the `unix:examples.file` configuration line
@@ -209,33 +211,33 @@ function _init_config_skyscraper() {
         for file in $files; do
             # Copy the files to the configuration folder. Skip config.ini, artwork.xml and aliasMap.csv
             if [[ $file != "artwork.xml" && $file != "config.ini" && $file != "aliasMap.csv" ]]; then
-                cp -f "$md_build/$file" "$md_conf_dir"
+                cp -f "$md_build/$file" "$scraper_conf_dir"
             fi
         done
     else
         # Fallback to the known resource files list
-        cp -f "$md_inst/artwork.xml.example"* "$md_conf_dir"
+        cp -f "$md_inst/artwork.xml.example"* "$scraper_conf_dir"
 
         # Copy resources and readme
         local resource_file
         for resource_file in README.md mameMap.csv tgdb_developers.json tgdb_publishers.json hints.txt; do
-            cp -f "$md_inst/$resource_file" "$md_conf_dir"
+            cp -f "$md_inst/$resource_file" "$scraper_conf_dir"
         done
     fi
 
     # Copy the rest of the folders
-    cp -rf "$md_inst/resources" "$md_conf_dir"
+    cp -rf "$md_inst/resources" "$scraper_conf_dir"
 
     # Create the import folders and add the sample files.
     local folder
-    for folder in boxart marquee screenshots textual snap wheel; do
-        mkUserDir "$md_conf_dir/import/$folder"
+    for folder in covers marquees screenshots textual videos wheels; do
+        mkUserDir "$scraper_conf_dir/import/$folder"
     done
-    cp -rf "$md_inst/import" "$md_conf_dir"
+    cp -rf "$md_inst/import" "$scraper_conf_dir"
 
     # Create the cache folder and add the sample 'priorities.xml' file to it
-    mkdir -p "$md_conf_dir/cache"
-    cp -f "$md_inst/priorities.xml.example" "$md_conf_dir/cache"
+    mkdir -p "$scraper_conf_dir/cache"
+    cp -f "$md_inst/priorities.xml.example" "$scraper_conf_dir/cache"
 }
 
 # Scrape one system, passed as parameter

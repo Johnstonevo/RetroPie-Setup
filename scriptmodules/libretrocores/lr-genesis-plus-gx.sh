@@ -52,7 +52,6 @@ function configure_lr-genesis-plus-gx() {
 
 
 
-
   addBezel "megadrive"
   addBezel "sg-1000"
   addBezel "segacd"
@@ -154,4 +153,5 @@ cp /home/$user/.config/RetroPie/ggh/retroarch.cfg /home/$user/.config/RetroPie/g
     setRetroArchCoreOption "genesis_plus_gx_system_hw" "game gear"
     setRetroArchCoreOption  "game_specific_options" "false"
     setRetroArchCoreOption  "auto_overrides_enable" "false"
+
 }

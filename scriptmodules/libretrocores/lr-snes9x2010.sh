@@ -46,7 +46,8 @@ function install_lr-snes9x2010() {
 
 function configure_lr-snes9x2010() {
     local system
-    local def
+    local def=0
+    isPlatform "armv7" && def=1
     for system in snes smwhacks snesh sfc satellaview sufami ; do
         def=1
         mkRomDir "$system"
@@ -92,6 +93,7 @@ function configure_lr-snes9x2010() {
         local core_config="$system"
         setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Super-Nintendo-Entertainment-System.cfg"
     done
+
 
 
 }

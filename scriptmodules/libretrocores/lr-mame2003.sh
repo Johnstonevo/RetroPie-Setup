@@ -47,6 +47,14 @@ function install_lr-mame2003() {
 }
 
 function configure_lr-mame2003() {
+    local so_name="$(_get_so_name_${md_id})"
+    addEmulator 0 "$md_id" "arcade" "$md_inst/${so_name}_libretro.so"
+    addEmulator 1 "$md_id" "mame-libretro" "$md_inst/${so_name}_libretro.so"
+    addSystem "arcade"
+    addSystem "mame-libretro"
+
+    [[ "$md_mode" == "remove" ]] && return
+
     local dir_name="$(_get_dir_name_${md_id})"
   local core_config=mame-2003    local mame_dir
     local mame_sub_dir

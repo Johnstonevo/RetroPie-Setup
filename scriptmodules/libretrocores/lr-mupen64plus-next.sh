@@ -13,11 +13,11 @@ rp_module_id="lr-mupen64plus-next"
 rp_module_desc="N64 emulator - Mupen64Plus + GLideN64 for libretro (next version)"
 rp_module_help="ROM Extensions: .z64 .n64 .v64\n\nCopy your N64 roms to $romdir/n64"
 rp_module_licence="GPL2 https://raw.githubusercontent.com/libretro/mupen64plus-libretro-nx/master/LICENSE"
-rp_module_section="exp"
-rp_module_flags="!armv6"
+rp_module_section="opt kms=main"
+rp_module_flags=""
 
 function depends_lr-mupen64plus-next() {
-    local depends=(flex bison libpng-dev)
+    local depends=()
     isPlatform "x11" && depends+=(libglew-dev libglu1-mesa-dev)
     isPlatform "x86" && depends+=(nasm)
     isPlatform "videocore" && depends+=(libraspberrypi-dev)
@@ -46,10 +46,18 @@ function build_lr-mupen64plus-next() {
     elif isPlatform "gles"; then
         params+=(FORCE_GLES=1)
     fi
+
     # use a custom core name to avoid core option name clashes with lr-mupen64plus
     params+=(CORE_NAME=mupen64plus-next)
     make "${params[@]}" clean
-    make "${params[@]}"
+
+    # workaround for linkage_arm.S including some armv7 instructions without this
+    if isPlatform "armv6"; then
+        CFLAGS="$CFLAGS -DARMv5_ONLY" make "${params[@]}"
+    else
+        make "${params[@]}"
+    fi
+
     md_ret_require="$md_build/mupen64plus_next_libretro.so"
 }
 

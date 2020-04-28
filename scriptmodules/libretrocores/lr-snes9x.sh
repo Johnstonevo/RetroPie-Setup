@@ -42,6 +42,8 @@ function configure_lr-snes9x() {
     local def
     for system in snes smwhacks snesh sfc snesmsu1 satellaview sufami ; do
         def=0
+        ! isPlatform "armv6" && ! isPlatform "armv7" && def=1
+
         [[ "$system" == "snesmsu1"  ]] && def=1
 
         mkRomDir "$system"
@@ -92,6 +94,7 @@ function configure_lr-snes9x() {
 
 
  
+
 
 
 }

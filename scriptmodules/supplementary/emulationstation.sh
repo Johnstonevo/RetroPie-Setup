@@ -130,7 +130,7 @@ function depends_emulationstation() {
 
     compareVersions "$__os_debian_ver" gt 8 && depends+=(rapidjson-dev)
     isPlatform "x11" && depends+=(gnome-terminal)
-    isPlatform "rpi" && depends+=(omxplayer)
+    isPlatform "rpi" && ! isPlatform "osmc" && depends+=(omxplayer)
     getDepends "${depends[@]}"
 }
 
@@ -225,8 +225,8 @@ if [[ "\$(uname --machine)" != *86* ]]; then
 fi
 
 # save current tty/vt number for use with X so it can be launched on the correct tty
-tty=\$(tty)
-export TTY="\${tty:8:1}"
+TTY=\$(tty)
+export TTY="\${TTY:8:1}"
 
 clear
 tput civis

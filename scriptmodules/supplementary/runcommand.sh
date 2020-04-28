@@ -31,7 +31,7 @@ function install_bin_runcommand() {
     cp "$md_data/joy2key.py" "$md_inst/"
     chmod a+x "$md_inst/runcommand.sh"
     chmod a+x "$md_inst/joy2key.py"
-    python -m compileall "$md_inst/joy2key.py"
+    python3 -m compileall "$md_inst/joy2key.py"
     if [[ ! -f "$configdir/all/runcommand.cfg" ]]; then
         mkUserDir "$configdir/all"
         iniConfig " = " '"' "$configdir/all/runcommand.cfg"
@@ -49,10 +49,14 @@ function install_bin_runcommand() {
 
     # needed for KMS modesetting (debian buster or later only)
     if compareVersions "$__os_debian_ver" ge 10; then
-        rp_installModule "$(rp_getIdxFromId mesa-drm)"
+        rp_installModule "mesa-drm" "_autoupdate_"
     fi
 
     md_ret_require="$md_inst/runcommand.sh"
+}
+
+function remove_runcommand() {
+    rp_callModule "mesa-drm" "remove"
 }
 
 function governor_runcommand() {

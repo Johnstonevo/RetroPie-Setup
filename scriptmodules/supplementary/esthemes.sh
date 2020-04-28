@@ -237,6 +237,8 @@ function gui_esthemes() {
         'arcadeforge pixel-heaven-text'
         'arcadeforge 240p_Bubblegum'
         'arcadeforge 240p-honey'
+        'dionmunk clean'
+        'c64-dev epicnoir'
     )
     while true; do
         local theme
