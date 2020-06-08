@@ -40,7 +40,7 @@ function install_lr-snes9x() {
 function configure_lr-snes9x() {
     local system
     local def
-    for system in snes smwhacks snesh sfc snesmsu1 satellaview sufami ; do
+    for system in snes smwhacks snes-usa snesh sfc snesmsu1 satellaview sufami ; do
         def=0
         ! isPlatform "armv6" && ! isPlatform "armv7" && def=1
 
@@ -69,14 +69,14 @@ function configure_lr-snes9x() {
         then
             local system
             local def
-            for system in snes smwhacks snesh sfc snesmsu1 satellaview sufami ; do
+            for system in snes snes-usa smwhacks snesh sfc snesmsu1 satellaview sufami ; do
                 def=0
                 addEmulator def "$md_id-core" "$system" "$md_instcore/snes9x_libretro.so"
             done
     fi
 
 
-    for system in snes smwhacks snesh snesmsu1 ; do
+    for system in snes snes-usa smwhacks snesh snesmsu1 ; do
 
             cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
             local core_config="$system"

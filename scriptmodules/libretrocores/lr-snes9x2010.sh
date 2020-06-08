@@ -48,7 +48,7 @@ function configure_lr-snes9x2010() {
     local system
     local def=0
     isPlatform "armv7" && def=1
-    for system in snes smwhacks snesh sfc satellaview sufami ; do
+    for system in snes smwhacks snes-usa snesh sfc satellaview sufami ; do
         def=1
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
@@ -72,14 +72,14 @@ function configure_lr-snes9x2010() {
         then
             local system
             local def
-            for system in snes smwhacks snesh sfc satellaview sufami ; do
+            for system in snes smwhacks snes-usa snesh sfc satellaview sufami ; do
                 def=0
                 addEmulator def "$md_id-core" "$system" "$md_instcore/snes9x2010_libretro.so"
             done
     fi
 
 
-    for system in snes smwhacks snesh ; do
+    for system in snes smwhacks snes-usa snesh ; do
 
             cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
             local core_config="$system"

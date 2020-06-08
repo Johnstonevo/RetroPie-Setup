@@ -77,7 +77,8 @@ function configure_lr-fbneo() {
         setRetroArchCoreOption "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
         setRetroArchCoreOption "input_overlay_opacity" "1.0"
         setRetroArchCoreOption "fbneo-diagnostic-input" "Hold Start"
-
+        local core_config="neogeo"
+        setRetroArchCoreOption "fbneo-neogeo-mode" "AES"
     done
 
     for system in arcade neogeo fba neocdz ; do

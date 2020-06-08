@@ -36,7 +36,7 @@ function install_lr-bsnes() {
 function configure_lr-bsnes() {
     local system
     local def
-    for system in snes sfc snesh satellaview sufami snesmsu1 smwhacks; do
+    for system in snes snes-usa sfc snesh satellaview sufami snesmsu1 smwhacks; do
         def=0
         mkRomDir "$system"
         ensureSystemretroconfig "$system"
