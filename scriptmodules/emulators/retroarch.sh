@@ -39,7 +39,7 @@ function depends_retroarch() {
 }
 
 function sources_retroarch() {
-    gitPullOrClone "$md_build" https://github.com/libretro/RetroArch.git v1.8.5
+    gitPullOrClone "$md_build" https://github.com/libretro/RetroArch.git v1.8.8
     applyPatch "$md_data/01_hotkey_hack.diff"
     applyPatch "$md_data/02_disable_search.diff"
     applyPatch "$md_data/03_shader_path_config_enable.diff"
@@ -206,7 +206,6 @@ function configure_retroarch() {
     iniSet "system_directory" "$biosdir"
     iniSet "config_save_on_exit" "false"
     iniSet "video_aspect_ratio_auto" "true"
-    iniSet "video_smooth" "false"
     iniSet "rgui_show_start_screen" "false"
     iniSet "video_shader_dir" "/home/$user/.config/retroarch/shaders/rpi/retropie"
     iniSet "rgui_browser_directory" "$romdir"
@@ -217,6 +216,7 @@ function configure_retroarch() {
 
     iniSet "video_font_size" "20"
     iniSet "core_options_path" "$raconfigdir/config/retroarch-core-options.cfg"
+    
     isPlatform "x11" && iniSet "video_fullscreen" "true"
     isPlatform "mesa" && iniSet "video_fullscreen" "true"
 
@@ -390,6 +390,9 @@ function configure_retroarch() {
 
     # enable video shaders on existing configs
     _set_config_option_retroarch "video_shader_enable" "true"
+
+    # (compat) keep all core options in a single file
+    _set_config_option_retroarch "global_core_options" "true"
 
     # remapping hack for old 8bitdo firmware
     addAutoConf "8bitdo_hack" 0

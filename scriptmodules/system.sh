@@ -46,7 +46,7 @@ function test_chroot() {
 
 function conf_memory_vars() {
     __memory_total_kb=$(awk '/^MemTotal:/{print $2}' /proc/meminfo)
-    __memory_total=$(( "$__memory_total_kb" / 1024 ))
+    __memory_total=$(( __memory_total_kb / 1024 ))
     if grep -q "^MemAvailable:" /proc/meminfo; then
         __memory_avail_kb=$(awk '/^MemAvailable:/{print $2}' /proc/meminfo)
     else
@@ -55,7 +55,7 @@ function conf_memory_vars() {
         local mem_buffers=$(awk '/^Buffers:/{print $2}' /proc/meminfo)
         __memory_avail_kb=$((mem_free + mem_cached + mem_buffers))
     fi
-    __memory_avail=$(( "$__memory_avail_kb" / 1024 ))
+    __memory_avail=$(( __memory_avail_kb / 1024 ))
 }
 
 function conf_binary_vars() {
@@ -112,7 +112,7 @@ function conf_build_vars() {
 
     # workaround for GCC ABI incompatibility with threaded armv7+ C++ apps built
     # on Raspbian's armv6 userland https://github.com/raspberrypi/firmware/issues/491
-    if [[ "$__os_id" == "Raspbian" ]] && compareVersions $__gcc_version lt 5.0.0; then
+    if [[ "$__os_id" == "Raspbian" ]] && compareVersions $__gcc_version lt 5; then
         __cxxflags+=" -U__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2"
     fi
 
@@ -208,7 +208,7 @@ function get_os_version() {
                 fi
             fi
             ;;
-        Ubuntu|neon)
+        Ubuntu|neon|Pop)
             if compareVersions "$__os_release" lt 16.04; then
                 error="You need Ubuntu 16.04 or newer"
             # although ubuntu 16.10 reports as being based on stretch it is before some

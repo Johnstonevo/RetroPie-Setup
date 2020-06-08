@@ -47,7 +47,7 @@ function install_pisnes() {
 
 function configure_pisnes() {
     mkRomDir "snes"
-    mkRomdDir "smwhacks"
+    mkRomDir "smwhacks"
     mkRomDir "snesh"
     mkRomDir "sfc"
     mkRomDir "satellaview"
@@ -72,4 +72,9 @@ function configure_pisnes() {
     addSystem "satellaview"
     addSystem "sufami"
     addSystem "smwhacks"
+
+    [[ "$md_mode" == "remove" ]] && return
+
+    moveConfigFile "$md_inst/snes9x.cfg" "$md_conf_root/snes/snes9x.cfg"
+    copyDefaultConfig "$md_inst/snes9x.cfg.template" "$md_conf_root/snes/snes9x.cfg"
 }
