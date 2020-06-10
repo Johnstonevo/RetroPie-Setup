@@ -26,7 +26,7 @@ function sources_lr-hatari() {
 }
 
 function build_lr-hatari() {
-    #_build_libcapsimage_hatari
+    _build_libcapsimage_hatari
 
     cd "$md_build"
     CFLAGS+=" -D__cdecl='' -DHAVE_CAPSIMAGE=1 -DCAPSIMAGE_VERSION=5" CAPSIMG_LDFLAGS="-L./lib -l:libcapsimage.so.5.1" make -f Makefile.libretro
@@ -51,7 +51,6 @@ function configure_lr-hatari() {
 
     addEmulator 1 "$md_id" "atarist" "$md_inst/hatari_libretro.so"
     addSystem "atarist"
-    local core_config="atarist"
 
     # add LD_LIBRARY_PATH='$md_inst' to start of launch command
     iniConfig " = " '"' "$configdir/atarist/emulators.cfg"

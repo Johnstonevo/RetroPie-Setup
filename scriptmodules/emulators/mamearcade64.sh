@@ -52,12 +52,12 @@ function install_mamearcade64() {
         'ini'
         'language'
         'mamearcade64'
-        'nl_examples'
+        #'nl_examples'
         'plugins'
         'roms'
         'samples'
         'uismall.bdf'
-        'LICENSE.md'
+        #LICENSE.md'
     )
 }
 

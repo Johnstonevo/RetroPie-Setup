@@ -52,19 +52,18 @@ function install_mess64() {
         'ini'
         'language'
         'mess64'
-        'nl_examples'
+        #'nl_examples'
         'plugins'
         'roms'
         'samples'
         'uismall.bdf'
-        'LICENSE.md'
+        #'LICENSE.md'
     )
 }
 
 function configure_mess64() {
-    local system="mess-current"
-    #mkRomDir "mame"
-    #mkRomDir "mame/$system"
+    local system="mess"
+
     mkRomDir "$system"
     mkRomDir "arcadia"
     mkRomDir "astrocade"
