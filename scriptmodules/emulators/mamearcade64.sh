@@ -13,7 +13,7 @@ rp_module_id="mamearcade64"
 rp_module_desc="MAME emulator"
 rp_module_help="ROM Extension: .zip\n\nCopy your MAME roms to either $romdir/mame or\n$romdir/arcade"
 rp_module_licence="GPL2 https://github.com/mamedev/mame/blob/master/LICENSE.md"
-rp_module_section="exp"
+rp_module_section="not_working"
 rp_module_flags="!arm"
 
 function depends_mamearcade64() {

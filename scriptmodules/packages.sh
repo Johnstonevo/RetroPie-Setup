@@ -18,6 +18,9 @@ __sections[exp]="experimental"
 __sections[driver]="driver"
 __sections[config]="configuration"
 __sections[depends]="dependency"
+__sections[not_working]="not working"
+__sections[extras]="extra"
+__sections[frontend]="alternate front end"
 
 function rp_listFunctions() {
     local idx
@@ -55,7 +58,6 @@ function rp_printUsageinfo() {
     echo    "configure:  configure the installed module (es_systems.cfg / launch parameters etc)"
     echo    "clean:      remove the sources/build folder for the module"
     echo    "help:       get additional help on the module"
-    echo -e "\nThis is a list of valid modules/packages and supported commands:\n"
     rp_listFunctions
 }
 

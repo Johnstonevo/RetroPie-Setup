@@ -492,7 +492,7 @@ function packages_gui_setup() {
     local default
     local options=()
 
-    for section in core main opt driver exp depends; do
+    for section in core main frontend opt driver exp depends extras not_working; do
         options+=($section "Manage ${__sections[$section]} packages" "$section Choose top install/update/configure packages from the ${__sections[$section]}")
     done
 
@@ -570,6 +570,7 @@ function gui_setup() {
 
             R "Perform reboot"
             "R Reboot your machine."
+
         )
 
         choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -625,6 +626,8 @@ function gui_setup() {
                 dialog --defaultno --yesno "Are you sure you want to reboot?\n\nNote that if you reboot when Emulation Station is running, you will lose any metadata changes." 22 76 2>&1 >/dev/tty || continue
                 reboot_setup
                 ;;
+           
+
         esac
     done
     joy2keyStop

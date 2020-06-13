@@ -12,7 +12,7 @@
 rp_module_id="kodi"
 rp_module_desc="Kodi - Open source home theatre software"
 rp_module_licence="GPL2 https://raw.githubusercontent.com/xbmc/xbmc/master/LICENSE.md"
-rp_module_section=""
+rp_module_section="extras"
 rp_module_flags="!mali !osmc !xbian"
 
 function _update_hook_kodi() {

@@ -12,7 +12,7 @@
 rp_module_id="launchingimages"
 rp_module_desc="Generate runcommand launching images based on emulationstation themes."
 rp_module_help="A runcommand launching image is displayed while loading a game, with this tool you can automatically create some cool images based on a chosen emulationstation theme you have on your system."
-rp_module_section="exp"
+rp_module_section="extras"
 rp_module_flags="noinstclean"
 
 function depends_launchingimages() {
