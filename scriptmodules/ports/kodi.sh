@@ -12,7 +12,7 @@
 rp_module_id="kodi"
 rp_module_desc="Kodi - Open source home theatre software"
 rp_module_licence="GPL2 https://raw.githubusercontent.com/xbmc/xbmc/master/LICENSE.md"
-rp_module_section="extras"
+rp_module_section="main"
 rp_module_flags="!mali !osmc !xbian"
 
 function _update_hook_kodi() {
@@ -54,9 +54,12 @@ function remove_kodi() {
 
 function configure_kodi() {
     # remove old directLaunch entry
-    delSystem "$md_id" "kodi"
+    if isPlatform "rpi"; then
+        delSystem "$md_id" "kodi"
 
-    moveConfigDir "$home/.kodi" "$md_conf_root/kodi"
-
-    addPort "$md_id" "kodi" "Kodi" "kodi-standalone"
+        moveConfigDir "$home/.kodi" "$md_conf_root/kodi"
+        
+        addPort "$md_id" "kodi" "Kodi" "kodi-standalone"
+    fi
+    
 }
