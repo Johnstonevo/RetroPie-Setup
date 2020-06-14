@@ -28,8 +28,8 @@ function depends_system() {
 
 function install_bin_system() {
     
-    aptInstall code obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons get-iplayer fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor  git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge
-    snap install code 
+    aptInstall obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor  git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge
+    snap install code --classic
     snap install get-iplayer
     wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
 }
@@ -40,7 +40,7 @@ function remove_system() {
     ppa-purge -y ppa:transmissionbt/ppa
     ppa-purge -y ppa:musicbrainz-developers/stable
     ppa-purge -y ppa:lutris-team/lutris    
-    aptRemove -y code obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons virtualbox get-iplayer fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge calibre
+    aptRemove -y obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons virtualbox fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge calibre
     snap remove code
     snap remove get-iplayer
 }
