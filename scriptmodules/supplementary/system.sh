@@ -39,6 +39,8 @@ function remove_system() {
     ppa-purge -y ppa:transmissionbt/ppa
     ppa-purge -y ppa:musicbrainz-developers/stable
     ppa-purge -y ppa:lutris-team/lutris    
+    apt-get remove -y code obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons virtualbox get-iplayer fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor git-extras p7zip-rar unrar gwenview kodi libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge calibre
+
 }
 
 function configure_system() {
