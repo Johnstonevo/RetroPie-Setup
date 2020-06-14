@@ -12,7 +12,7 @@
 rp_module_id="system"
 rp_module_desc="install all my usual extra programs and extra THIS IS A TEST FOR FIRST INSTALL"
 rp_module_help=""
-rp_module_licence="GPL3 https://raw.githubusercontent.com/PCSX2/pcsx2/master/COPYING.GPLv3"
+rp_module_licence=""
 rp_module_section="extras"
 rp_module_flags="!all x86"
 

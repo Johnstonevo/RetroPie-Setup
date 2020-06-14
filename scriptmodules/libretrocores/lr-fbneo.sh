@@ -42,7 +42,6 @@ function install_lr-fbneo() {
         'src/burner/libretro/fbneo_libretro.so'
         'gamelist.txt'
         'whatsnew.html'
-        'preset-example.zip'
         'metadata'
         'dats'
     )
@@ -142,11 +141,12 @@ function configure_lr-fbneo() {
     
     addEmulator 0 "$md_id-fds" "fds" "$md_inst/fbneo_libretro.so --subsystem fds"
     addEmulator 0 "$md_id-nes" "nes" "$md_inst/fbneo_libretro.so --subsystem nes"
+    addEmulator 0 "$md_id-ngp" "ngp" "$md_inst/fbneo_libretro.so --subsystem ngp"
+    addEmulator 0 "$md_id-ngpc" "ngpc" "$md_inst/fbneo_libretro.so --subsystem ngp"
 
     addSystem "arcade"
     addSystem "neogeo"
     addSystem "fba"
-
     addSystem "pcengine"
     addSystem "gamegear"
     addSystem "mastersystem"
@@ -156,6 +156,10 @@ function configure_lr-fbneo() {
     addSystem "coleco"
     addSystem "msx"
     addSystem "zxspectrum"
+    addSystem "fds"
+    addSystem "nes"
+    addSystem "ngp"
+    addSystem "ngpc"   
     
     addBezel "fba"
 
@@ -210,6 +214,7 @@ if [ -e $md_instcore/fbneo_libretro.so ] ;
             addSystem "$system"
         done
 
+
         addEmulator 0 "$md_id-gg-core" "gamegear" "$md_instcore/fbneo_libretro.so --subsystem gg"
         addEmulator 0 "$md_id-sms-core" "mastersystem" "$md_instcore/fbneo_libretro.so --subsystem sms"
         addEmulator 0 "$md_id-sg1k-core" "sg-1000" "$md_instcore/fbneo_libretro.so --subsystem sg1k"
@@ -218,6 +223,7 @@ if [ -e $md_instcore/fbneo_libretro.so ] ;
         addEmulator 0 "$md_id-spec-core" "zxspectrum" "$md_instcore/fbneo_libretro.so --subsystem spec"
 
 fi
+
 
 
 
