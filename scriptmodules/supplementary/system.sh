@@ -31,7 +31,7 @@ function install_bin_system() {
     aptInstall code obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons get-iplayer fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor  git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge
     snap install code 
     snap install get-iplayer
-    -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+    wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
 }
 
 function remove_system() {
