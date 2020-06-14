@@ -9,15 +9,15 @@
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
 
-rp_module_id="system install"
-rp_module_desc="install all my usual programs THIS IS A TEST"
+rp_module_id="system"
+rp_module_desc="install all my usual extra programs and extra THIS IS A TEST FOR FIRST INSTALL"
 rp_module_help=""
 rp_module_licence="GPL3 https://raw.githubusercontent.com/PCSX2/pcsx2/master/COPYING.GPLv3"
 rp_module_section="extras"
 rp_module_flags="!all x86"
 
 function depends_system() {
-    getDepend software-properties-common
+    getDepends software-properties-common
     add-apt-repository -y ppa:libretro/stable
     add-apt-repository -y ppa:papirus/papirus
     add-apt-repository -y ppa:transmissionbt/ppa
@@ -27,7 +27,10 @@ function depends_system() {
 }
 
 function install_bin_system() {
-    aptinstall code obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons get-iplayer fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor  git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge
+    
+    aptInstall code obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons get-iplayer fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor  git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge
+    snap install code 
+    snap install get-iplayer
     -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
 }
 
@@ -37,8 +40,9 @@ function remove_system() {
     ppa-purge -y ppa:transmissionbt/ppa
     ppa-purge -y ppa:musicbrainz-developers/stable
     ppa-purge -y ppa:lutris-team/lutris    
-    apt-get remove -y code obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons virtualbox get-iplayer fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge calibre
-
+    aptRemove -y code obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons virtualbox get-iplayer fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge calibre
+    snap remove code
+    snap remove get-iplayer
 }
 
 function configure_system() {
