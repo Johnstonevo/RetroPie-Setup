@@ -23,12 +23,13 @@ function depends_system() {
     add-apt-repository -y ppa:transmissionbt/ppa
     add-apt-repository -y ppa:musicbrainz-developers/stable
     add-apt-repository -y ppa:lutris-team/lutris
-
+    wget -q -O - http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc | sudo apt-key add -
+    add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian $__os_codename non-free contrib"
 }
 
 function install_bin_system() {
     
-    aptInstall obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor  git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge
+    aptInstall obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor  git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge virtualbox dkms
     snap install code --classic
     snap install get-iplayer
     wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
@@ -40,7 +41,7 @@ function remove_system() {
     ppa-purge -y ppa:transmissionbt/ppa
     ppa-purge -y ppa:musicbrainz-developers/stable
     ppa-purge -y ppa:lutris-team/lutris    
-    aptRemove -y obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons virtualbox fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge calibre
+    aptRemove -y obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge calibre virtualbox
     snap remove code
     snap remove get-iplayer
 }
@@ -48,5 +49,5 @@ function remove_system() {
 function configure_system() {
     get-iplayer --prefs-add --output="/home/$user/Videos"
     get-iplayer --prefs-add --fileprefix="<nameshort><.senum><.episodeshort>"
-
+    usermod -aG vboxusers $user
 }

@@ -221,6 +221,10 @@ if [ -e $md_instcore/fbneo_libretro.so ] ;
         addEmulator 0 "$md_id-cv-core" "coleco" "$md_instcore/fbneo_libretro.so --subsystem cv"
         addEmulator 0 "$md_id-msx-core" "msx" "$md_instcore/fbneo_libretro.so --subsystem msx"
         addEmulator 0 "$md_id-spec-core" "zxspectrum" "$md_instcore/fbneo_libretro.so --subsystem spec"
+        addEmulator 0 "$md_id-fds-core" "fds" "$md_instcore/fbneo_libretro.so --subsystem fds"
+        addEmulator 0 "$md_id-nes-core" "nes" "$md_instcore/fbneo_libretro.so --subsystem nes"
+        addEmulator 0 "$md_id-ngp-core" "ngp" "$md_instcore/fbneo_libretro.so --subsystem ngp"
+        addEmulator 0 "$md_id-ngp-core" "ngpc" "$md_instcore/fbneo_libretro.so --subsystem ngp"
 
 fi
 
