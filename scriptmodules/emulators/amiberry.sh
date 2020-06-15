@@ -97,15 +97,5 @@ function configure_amiberry() {
 
     chown -R $user:$user "$config_dir/whdboot"
 
-    mkRomDir "amiga"
-    mkRomDir "amigacd32"
-
-    addEmulator 1 "$md_id" "amiga" "$md_inst/amiberry.sh"
-    addEmulator 1 "$md_id" "amigacd32" "$md_inst/amiberry.sh"
-    addEmulator 0 "$md_id-a500" "amigacd32" "$md_inst/$md_id.sh rp-a500.uae %ROM%"
-    addEmulator 0 "$md_id-a1200" "amigacd32" "$md_inst/$md_id.sh rp-a1200.uae %ROM%"
-
-    addSystem "amiga"
-    addSystem "amigacd32"
 
 }

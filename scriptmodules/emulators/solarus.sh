@@ -10,14 +10,14 @@
 #
 
 rp_module_id="solarus"
-rp_module_desc="solarus - A lightweight, free and open-source game engine for Action-RPGs"
+rp_module_desc="Solarus - A lightweight, free and open-source game engine for Action-RPGs"
 rp_module_help="Copy your Solarus quests (games) to $romdir/solarus"
 rp_module_licence="GPL3 https://gitlab.com/solarus-games/solarus/raw/dev/license.txt"
 rp_module_section="opt"
 rp_module_flags="!aarch64"
 
 function _options_cfg_file_solarus() {
-    echo "$md_conf_root/solarus/options.cfg"
+    echo "$configdir/solarus/options.cfg"
 }
 
 function depends_solarus() {
@@ -51,6 +51,9 @@ function build_solarus() {
     cd build
     cmake "${params[@]}" ..
     make
+    md_ret_require=(
+        "$md_build/build/solarus-run"
+    )
 }
 
 function install_solarus() {
@@ -58,14 +61,15 @@ function install_solarus() {
     make install/strip
 }
 
-
 function configure_solarus() {
-    mkRomDir "solarus"
+    setConfigRoot ""
     addEmulator 1 "$md_id" "solarus" "$md_inst/solarus.sh %ROM%"
     addSystem "solarus"
     moveConfigDir "$home/.solarus" "$configdir/solarus"
     [[ "$md_mode" == "remove" ]] && return
 
+    # ensure rom dir exists
+    mkRomDir "solarus"
 
     # create launcher for Solarus that:
     # * starts in fullscreen mode
@@ -87,4 +91,64 @@ fi
 exec "$md_inst"/bin/solarus-run "\${ARGS[@]}" "\$@"
 _EOF_
     chmod +x "$md_inst/solarus.sh"
+}
+
+function gui_solarus() {
+    local options=()
+    local default
+    local cmd
+    local choice
+    local joypad_deadzone
+    local quit_combo
+
+    # initialise options config file
+    iniConfig "=" "\"" "$(_options_cfg_file_solarus)"
+
+    # start the menu gui
+    default="D"
+    while true; do
+        # read current options
+        iniGet "JOYPAD_DEADZONE" && joypad_deadzone="$ini_value"
+        iniGet "QUIT_COMBO" && quit_combo="$ini_value"
+
+        # create menu options
+        options=(
+            D "Set joypad axis deadzone (${joypad_deadzone:-default})"
+            Q "Set joypad quit buttons combo (${quit_combo:-unset})"
+        )
+
+        # show main menu
+        cmd=(dialog --backtitle "$__backtitle" --default-item "$default" --menu "Choose an option" 16 60 16)
+        choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+        default="$choice"
+        case "$choice" in
+            D)
+                cmd=(dialog --backtitle "$__backtitle" --inputbox "Please enter a joypad axis deadzone value between 0-32767, higher is less sensitive (leave BLANK to use engine default)" 10 65)
+                choice=$("${cmd[@]}" 2>&1 >/dev/tty)
+                if [[ $? -eq 0 ]]; then
+                    if [[ -n "$choice" ]]; then
+                        iniSet "JOYPAD_DEADZONE" "$choice"
+                    else
+                        iniDel "JOYPAD_DEADZONE"
+                    fi
+                    chown $user:$user "$(_options_cfg_file_solarus)"
+                fi
+                ;;
+            Q)
+                cmd=(dialog --backtitle "$__backtitle" --inputbox "Please enter joypad button numbers to use for quitting separated by '+' signs (leave BLANK to unset)\n\nTip: use 'jstest' to find button numbers for your joypad" 12 65)
+                choice=$("${cmd[@]}" 2>&1 >/dev/tty)
+                if [[ $? -eq 0 ]]; then
+                    if [[ -n "$choice" ]]; then
+                        iniSet "QUIT_COMBO" "$choice"
+                    else
+                        iniDel "QUIT_COMBO"
+                    fi
+                    chown $user:$user "$(_options_cfg_file_solarus)"
+                fi
+                ;;
+            *)
+                break
+                ;;
+        esac
+    done
 }

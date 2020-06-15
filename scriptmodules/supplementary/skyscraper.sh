@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 # This file is part of The RetroPie Project
@@ -269,7 +268,7 @@ function _scrape_skyscraper() {
 
     if [[ "$use_rom_folder" -eq 1 ]]; then
         params+=(-g "$romdir/$system")
-        params+=(-o "$romdir/$system")
+        params+=(-o "$romdir/$system/media")
         # If we're saving to the ROM folder, then use relative paths in the gamelist
         flags+="relative,"
     else
@@ -380,10 +379,10 @@ function _load_config_skyscraper() {
     echo "$(loadModuleConfig \
         'rom_name=0' \
         'use_rom_folder=0' \
-        'download_snap=0' \
+        'download_videos=0' \
         'cache_marquees=1' \
-        'cache_boxart=1' \
-        'cache_wheel=1' \
+        'cache_covers=1' \
+        'cache_wheels=1' \
         'cache_screenshots=1' \
         'scrape_source=screenscraper' \
         'remove_brackets=0' \
@@ -550,10 +549,10 @@ function gui_skyscraper() {
 
         options+=("-" "OTHER options")
 
-        if [[ "$download_snap" -eq 1 ]]; then
-            options+=(V "Download snap (Enabled)")
+        if [[ "$download_videos" -eq 1 ]]; then
+            options+=(V "Download videos (Enabled)")
         else
-            options+=(V "Download snap (Disabled)")
+            options+=(V "Download videos (Disabled)")
         fi
 
         options+=(A "Advanced options -->")
@@ -637,8 +636,8 @@ function gui_skyscraper() {
                     ;;
 
                 V)
-                    download_snap="$((download_snap ^ 1))"
-                    iniSet "download_snap" "$download_snap"
+                    download_videos="$((download_videos ^ 1))"
+                    iniSet "download_videos" "$download_videos"
                     ;;
 
                 A)
@@ -702,16 +701,16 @@ function _gui_cache_skyscraper() {
             options+=(1 "Cache screenshots (Disabled)")
         fi
 
-        if [[ "$cache_boxart" -eq 1 ]]; then
-            options+=(2 "Cache boxart (Enabled)")
+        if [[ "$cache_covers" -eq 1 ]]; then
+            options+=(2 "Cache covers (Enabled)")
         else
-            options+=(2 "Cache boxart (Disabled)")
+            options+=(2 "Cache covers (Disabled)")
         fi
 
-        if [[ "$cache_wheel" -eq 1 ]]; then
-            options+=(3 "Cache wheel (Enabled)")
+        if [[ "$cache_wheels" -eq 1 ]]; then
+            options+=(3 "Cache wheels (Enabled)")
         else
-            options+=(3 "Cache wheel (Disabled)")
+            options+=(3 "Cache wheels (Disabled)")
         fi
 
         if [[ "$cache_marquees" -eq 1 ]]; then
@@ -744,13 +743,13 @@ function _gui_cache_skyscraper() {
                     ;;
 
                 2)
-                    cache_boxart="$((cache_boxart ^ 1))"
-                    iniSet "cache_boxart" "$cache_boxart"
+                    cache_covers="$((cache_covers ^ 1))"
+                    iniSet "cache_covers" "$cache_covers"
                     ;;
 
                 3)
-                    cache_wheel="$((cache_wheel ^ 1))"
-                    iniSet "cache_wheel" "$cache_wheel"
+                    cache_wheels="$((cache_wheels ^ 1))"
+                    iniSet "cache_wheels" "$cache_wheels"
                     ;;
 
                 4)

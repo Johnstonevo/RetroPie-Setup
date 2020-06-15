@@ -51,8 +51,6 @@ function configure_linapple() {
 
     [[ "$md_mode" == "remove" ]] && return
 
-    addEmulator 0 "$md_id" "apple2" "pushd $romdir/apple2; $md_inst/linapple -1 %ROM%; popd"
-    addSystem "apple2"
     # copy default config/disk if user doesn't have them installed
     local file
     for file in Master.dsk linapple.conf; do

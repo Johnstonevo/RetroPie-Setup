@@ -98,11 +98,11 @@ function scrape_scraper() {
             params+=(-console_img "s,b,3b,l,f")
         fi
     fi
-    if [[ "$download_snap" -eq 1 ]]; then
-        params+=(-download_snap)
+    if [[ "$download_videos" -eq 1 ]]; then
+        params+=(-download_videos)
     fi
-    if [[ "$download_marquee" -eq 1 ]]; then
-        params+=(-download_marquee)
+    if [[ "$download_marquees" -eq 1 ]]; then
+        params+=(-download_marquees)
     fi
     if [[ -n "$max_width" ]]; then
         params+=(-max_width "$max_width")
