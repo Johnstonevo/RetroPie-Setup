@@ -42,7 +42,7 @@ function configure_lr-mame2003-plus() {
   local mame_sub_dir
   #for mame_dir in mame-2003-plus ; do
       mkRomDir "mame-2003-plus"
-      mkRomDir "$mame_dir/$dir_name"
+      #mkRomDir "$mame_dir/$dir_name"
       ensureSystemretroconfig "mame-2003-plus"
 
       for mame_sub_dir in cfg ctrlr diff hi memcard nvram; do

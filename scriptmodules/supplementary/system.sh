@@ -17,7 +17,7 @@ rp_module_section="extras"
 rp_module_flags="!all x86"
 
 function depends_system() {
-    getDepends software-properties-common
+    getDepends software-properties-common gcc make perl 
     add-apt-repository -y ppa:libretro/stable
     add-apt-repository -y ppa:papirus/papirus
     add-apt-repository -y ppa:transmissionbt/ppa
@@ -26,6 +26,14 @@ function depends_system() {
     if [[ "$__os_id" == "Ubuntu" ]] || [[ "$__os_id" == "Debian"]]; then
         wget -q -O - http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc | sudo apt-key add -
         add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian $__os_codename non-free contrib"
+    fi
+    if [[ "$__os_id" == "linuxmint" ]] || [[ "$__os_release" == "19"]]; then
+        wget -q -O - http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc | sudo apt-key add -
+        add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian bionic non-free contrib"
+    fi
+    if [[ "$__os_id" == "linuxmint" ]] || [[ "$__os_release" == "20"]]; then
+        wget -q -O - http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc | sudo apt-key add -
+        add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian focal non-free contrib"
     fi
 }
 

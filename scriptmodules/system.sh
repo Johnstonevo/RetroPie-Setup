@@ -202,6 +202,9 @@ function get_os_version() {
                 elif compareVersions "$__os_release" lt 19; then
                     __os_ubuntu_ver="16.04"
                     __os_debian_ver="9"
+                elif [[ "$__os_desc" == Linux Mint 20 ]]; then
+                    __os_ubuntu_ver="20.04"
+                    __os_debian_ver="11"
                 else
                     __os_ubuntu_ver="18.04"
                     __os_debian_ver="10"
