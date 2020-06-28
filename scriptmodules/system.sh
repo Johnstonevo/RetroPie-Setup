@@ -38,6 +38,9 @@ function test_chroot() {
     if [[ "$(stat -c %d:%i /)" != "$(stat -c %d:%i /proc/1/root/.)" ]]; then
         [[ -z "$QEMU_CPU" && -n "$__qemu_cpu" ]] && export QEMU_CPU=$__qemu_cpu
         __chroot=1
+    # detect the usage of systemd-nspawn
+    elif [[ -n "$(systemd-detect-virt)" && "$(systemd-detect-virt)" == "systemd-nspawn" ]]; then
+        __chroot=1
     else
         __chroot=0
     fi
@@ -202,9 +205,6 @@ function get_os_version() {
                 elif compareVersions "$__os_release" lt 19; then
                     __os_ubuntu_ver="16.04"
                     __os_debian_ver="9"
-                elif [[ "$__os_desc" == Linux Mint 20 ]]; then
-                    __os_ubuntu_ver="20.04"
-                    __os_debian_ver="11"
                 else
                     __os_ubuntu_ver="18.04"
                     __os_debian_ver="10"

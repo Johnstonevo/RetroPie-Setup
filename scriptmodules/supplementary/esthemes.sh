@@ -240,6 +240,7 @@ function gui_esthemes() {
         'dionmunk clean'
         'c64-dev epicnoir'
         'AndreaMav arcade-crt'
+        'Zechariel VectorPie'
     )
     while true; do
         local theme
