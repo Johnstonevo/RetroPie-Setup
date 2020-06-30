@@ -198,13 +198,16 @@ function get_os_version() {
                     ;;
             esac
             ;;
-        LinuxMint)
+        LinuxMint|Linuxmint)
             if [[ "$__os_desc" != LMDE* ]]; then
                 if compareVersions "$__os_release" lt 18; then
                     error="You need Linux Mint 18 or newer"
                 elif compareVersions "$__os_release" lt 19; then
                     __os_ubuntu_ver="16.04"
                     __os_debian_ver="9"
+                elif compareVersions "$__os_release" lt 20; then
+                    __os_ubuntu_ver="20.04"
+                    __os_debian_ver="11"
                 else
                     __os_ubuntu_ver="18.04"
                     __os_debian_ver="10"

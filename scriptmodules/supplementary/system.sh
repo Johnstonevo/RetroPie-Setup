@@ -13,25 +13,21 @@ rp_module_id="system"
 rp_module_desc="install all my usual extra PPA's, programs and extra's THIS IS A TEST FOR FIRST INSTALL"
 rp_module_help=""
 rp_module_licence=""
-rp_module_section="extras"
+rp_module_section="core"
 rp_module_flags="!all x86"
 
 function depends_system() {
-    getDepends software-properties-common gcc make perl 
+    getDepends software-properties-common
     add-apt-repository -y ppa:libretro/stable
     add-apt-repository -y ppa:papirus/papirus
     add-apt-repository -y ppa:transmissionbt/ppa
     add-apt-repository -y ppa:musicbrainz-developers/stable
     add-apt-repository -y ppa:lutris-team/lutris
-    if [[ "$__os_id" == "Ubuntu" ]] || [[ "$__os_id" == "Debian"]]; then
+    if [[ "$__os_id" == "Ubuntu" ]] ; then
         wget -q -O - http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc | sudo apt-key add -
         add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian $__os_codename non-free contrib"
     fi
-    if [[ "$__os_id" == "linuxmint" ]] || [[ "$__os_release" == "19"]]; then
-        wget -q -O - http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc | sudo apt-key add -
-        add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian bionic non-free contrib"
-    fi
-    if [[ "$__os_id" == "linuxmint" ]] || [[ "$__os_release" == "20"]]; then
+       if [[ "$__os_codename" == "ulyana" ]] ; then
         wget -q -O - http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc | sudo apt-key add -
         add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian focal non-free contrib"
     fi
@@ -39,10 +35,14 @@ function depends_system() {
 
 function install_bin_system() {
     
-    aptInstall obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor  git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge virtualbox dkms
+    aptInstall obs-studio neofetch  fonts-hack fonts-opendyslexic steam-installer handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor  git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge virtualbox dkms snapd breeze-cursor-theme
     snap install code --classic
     snap install get-iplayer
+    snap install chromium
+    snap install caprine
     wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+    curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+    chmod a+rx /usr/local/bin/youtube-dl
 }
 
 function remove_system() {
@@ -51,9 +51,11 @@ function remove_system() {
     ppa-purge -y ppa:transmissionbt/ppa
     ppa-purge -y ppa:musicbrainz-developers/stable
     ppa-purge -y ppa:lutris-team/lutris    
-    aptRemove -y obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge calibre virtualbox dkms
+    aptRemove -y obs-studio neofetch ubuntu-restricted-extras ubuntu-restricted-addons fonts-hack fonts-opendyslexic steam-installer gnome-tweak-tool gnome-tweaks handbrake samba samba-common nfs-kernel-server nfs-common dconf-editor git-extras p7zip-rar unrar gwenview libretro* retroarch*  papirus-icon-theme picard lutris ppa-purge calibre virtualbox dkms snapd breeze-cursor-theme youtube-dl
     snap remove code
     snap remove get-iplayer
+    snap remove chromium
+    snap remove caprine
 }
 
 function configure_system() {
