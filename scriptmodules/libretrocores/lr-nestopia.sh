@@ -71,14 +71,6 @@ function configure_lr-nestopia() {
     setRetroArchCoreOption  "input_overlay" "$raconfigdir/overlay/Nintendo-Famicom-Disk-System"
 
 
-    cp NstDatabase.xml "$biosdir/"
-    chown $user:$user "$biosdir/NstDatabase.xml"
-
-
-
-    cp NstDatabase.xml "$biosdir/"
-    chown $user:$user "$biosdir/NstDatabase.xml"
-    #setRetroArchCoreOption "nestopia_palette" "canonical"
 
 
         if [ -e $md_instcore/nestopia_libretro.so ] ;
@@ -94,7 +86,6 @@ function configure_lr-nestopia() {
                 addSystem "$system"
             done
         fi
-
 
 
 

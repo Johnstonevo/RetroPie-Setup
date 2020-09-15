@@ -970,8 +970,12 @@ function mode_switch() {
     if [[ "$HAS_MODESET" == "kms" ]]; then
         # update the target resolution even though the underlying fb hasn't changed
         MODE_CUR=($(get_${HAS_MODESET}_mode_info "${mode_id[*]}"))
-        # inject the environment variables to do modesetting for SDL2 applications
-        command_prefix="SDL_VIDEO_KMSDRM_CRTCID=${MODE_CUR[0]} SDL_VIDEO_KMSDRM_MODEID=${MODE_CUR[1]}"
+
+        # check the mode tuple against the list of current available CRCTID/MODEID values
+        if [[ -n ${MODE["${MODE_CUR[0]}-${MODE_CUR[1]}"]} ]]; then
+            # inject the environment variables to do modesetting for SDL2 applications
+            command_prefix="SDL_VIDEO_KMSDRM_CRTCID=${MODE_CUR[0]} SDL_VIDEO_KMSDRM_MODEID=${MODE_CUR[1]}"
+        fi
         COMMAND="$(echo "$command_prefix $COMMAND" | sed -e "s/;/; $command_prefix /g")"
 
         return 0
@@ -1015,7 +1019,12 @@ function config_dispmanx() {
     if [[ -f "$DISPMANX_CONF" ]]; then
         iniConfig " = " '"' "$DISPMANX_CONF"
         iniGet "$name"
-        [[ "$ini_value" == "1" ]] && COMMAND="SDL1_VIDEODRIVER=dispmanx $COMMAND"
+        if [[ "$ini_value" == "1" ]]; then
+            if [[ "$HAS_MODESET" == "kms" ]]; then
+                COMMAND="SDL_DISPMANX_WIDTH=${MODE_CUR[2]} SDL_DISPMANX_HEIGHT=${MODE_CUR[3]} $COMMAND"
+            fi
+            COMMAND="SDL1_VIDEODRIVER=dispmanx $COMMAND"
+        fi
     fi
 }
 

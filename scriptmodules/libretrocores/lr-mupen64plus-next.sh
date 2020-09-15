@@ -31,14 +31,14 @@ function sources_lr-mupen64plus-next() {
 
 function build_lr-mupen64plus-next() {
     local params=()
-    if isPlatform "videocore"; then
-        params+=(platform="$__platform")
-    elif isPlatform "mesa"; then
-        params+=(platform="$__platform-mesa")
-    elif isPlatform "mali"; then
-        params+=(platform="odroid")
-    else
-        isPlatform "arm" && params+=(WITH_DYNAREC=arm)
+    if isPlatform "arm"; then
+        if isPlatform "videocore"; then
+            params+=(platform="$__platform")
+        elif isPlatform "mesa"; then
+            params+=(platform="$__platform-mesa")
+        elif isPlatform "mali"; then
+            params+=(platform="odroid")
+        fi
         isPlatform "neon" && params+=(HAVE_NEON=1)
     fi
     if isPlatform "gles3"; then
@@ -87,8 +87,19 @@ function configure_lr-mupen64plus-next() {
         setRetroArchCoreOption "input_overlay_enable" "true"
         setRetroArchCoreOption "video_aspect_ratio" "1.0"
         setRetroArchCoreOption "video_smooth" "true"
-
+        setRetroArchCoreOption "mupen64plus-next-EnableNativeResFactor" "1"
+    if isPlatform "rpi"; then
+        # Disable hybrid upscaling filter (needs better GPU)
+        setRetroArchCoreOption "mupen64plus-next-HybridFilter" "False"
+        # Disable overscan/VI emulation (slight performance drain)
+        setRetroArchCoreOption "mupen64plus-next-EnableOverscan" "Disabled"
+        # Enable Threaded GL calls
+        setRetroArchCoreOption "mupen64plus-next-ThreadedRenderer" "True"
+    fi
     done
     
     addBezel "n64"
+
+    
+
 }

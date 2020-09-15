@@ -35,8 +35,13 @@ function get_pkg_ver_sdl1() {
     elif [[ "$1" == "base" ]]; then
         echo "$basever"
     else
-        echo "$basever-$(($revision + 2))rpi"
+        echo "$basever-$(($revision + 3))rpi"
     fi
+}
+
+function _get_arch_sdl1() {
+    isPlatform "arm" && echo "armhf"
+    isPlatform "aarch64" && echo "arm64"
 }
 
 function depends_sdl1() {
@@ -68,8 +73,9 @@ function build_sdl1() {
 }
 
 function install_sdl1() {
+    local arch="$(_get_arch_sdl1)"
     # if the packages don't install completely due to missing dependencies the apt-get -y -f install will correct it
-    if ! dpkg -i libsdl1.2debian_$(get_pkg_ver_sdl1)_armhf.deb libsdl1.2-dev_$(get_pkg_ver_sdl1)_armhf.deb; then
+    if ! dpkg -i libsdl1.2debian_$(get_pkg_ver_sdl1)_${arch}.deb libsdl1.2-dev_$(get_pkg_ver_sdl1)_${arch}.deb; then
         apt-get -y -f --no-install-recommends install
     fi
     echo "libsdl1.2-dev hold" | dpkg --set-selections
@@ -77,12 +83,13 @@ function install_sdl1() {
 
 
 function __binary_url_sdl1() {
-    rp_hasBinaries && echo "$__binary_url/libsdl1.2debian_$(get_pkg_ver_sdl1)_armhf.deb"
+    rp_hasBinaries && echo "$__binary_url/libsdl1.2debian_$(get_pkg_ver_sdl1)_$(_get_arch_sdl1).deb"
 }
 
 function install_bin_sdl1() {
-    wget "$__binary_url/libsdl1.2debian_$(get_pkg_ver_sdl1)_armhf.deb"
-    wget "$__binary_url/libsdl1.2-dev_$(get_pkg_ver_sdl1)_armhf.deb"
+    local arch="$(_get_arch_sdl1)"
+    wget "$__binary_url/libsdl1.2debian_$(get_pkg_ver_sdl1)_${arch}.deb"
+    wget "$__binary_url/libsdl1.2-dev_$(get_pkg_ver_sdl1)_${arch}.deb"
     install_sdl1
     rm ./*.deb
 }

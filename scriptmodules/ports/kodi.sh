@@ -53,9 +53,7 @@ function remove_kodi() {
 }
 
 function configure_kodi() {
-    # remove old directLaunch entry
-    if isPlatform "rpi"; then
-        delSystem "$md_id" "kodi"
+    moveConfigDir "$home/.kodi" "$md_conf_root/kodi"
 
         moveConfigDir "$home/.kodi" "$md_conf_root/kodi"
         

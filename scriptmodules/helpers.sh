@@ -103,7 +103,7 @@ function hasFlag() {
 ## @brief Test for current platform / platform flags.
 function isPlatform() {
     local flag="$1"
-    if hasFlag "$__platform $__platform_flags" "$flag"; then
+    if hasFlag "${__platform_flags[*]}" "$flag"; then
         return 0
     fi
     return 1
@@ -1155,13 +1155,6 @@ function getPlatformConfig() {
 ## @param exts optional extensions for the frontend (if not present in platforms.cfg)
 ## @details Adds a system to one of the frontend launchers
 function addSystem() {
-    # backward compatibility for old addSystem functionality
-    if [[ $# > 3 ]]; then
-        addEmulator "$@"
-        addSystem "$3"
-        return
-    fi
-
     local system="$1"
     local fullname="$2"
     local exts=($3)
@@ -1171,9 +1164,9 @@ function addSystem() {
     local cmd
     local path
 
-    # check if we are removing the system
-    if [[ "$md_mode" == "remove" ]]; then
-        delSystem "$id" "$system"
+    # if removing and we don't have an emulators.cfg we can remove the system from the frontends
+    if [[ "$md_mode" == "remove" ]] && [[ ! -f "$md_conf_root/$system/emulators.cfg" ]]; then
+        delSystem "$system" "$fullname"
         return
     fi
 
@@ -1219,7 +1212,11 @@ function addSystem() {
 ## @details deletes a system from all frontends.
 function delSystem() {
     local system="$1"
-    local fullname="$(getPlatformConfig "${system}_fullname")"
+    local fullname="$2"
+
+    local temp
+    temp="$(getPlatformConfig "${system}_fullname")"
+    [[ -n "$temp" ]] && fullname="$temp"
 
     local function
     for function in $(compgen -A function _del_system_); do
@@ -1270,13 +1267,16 @@ function addPort() {
         mv "$configdir/$port" "$md_conf_root/"
     fi
 
-    # remove the ports launch script if in remove mode
+    # remove the emulator / port
     if [[ "$md_mode" == "remove" ]]; then
-        rm -f "$file"
         delEmulator "$id" "$port"
+
+        # remove launch script if in remove mode and the ports emulators.cfg is empty
+        [[ ! -f "$md_conf_root/$port/emulators.cfg" ]] && rm -f "$file"
+
         # if there are no more port launch scripts we can remove ports from emulation station
         if [[ "$(find "$romdir/ports" -maxdepth 1 -name "*.sh" | wc -l)" -eq 0 ]]; then
-            delSystem "$id" "ports"
+            delSystem "ports"
         fi
         return
     fi
@@ -1382,13 +1382,6 @@ function delEmulator() {
         grep -q "=" "$config" || rm -f "$config"
     fi
 
-    # if we don't have an emulators.cfg we can remove the system from the frontends
-    if [[ ! -f "$md_conf_root/$system/emulators.cfg" ]]; then
-        local function
-        for function in $(compgen -A function _del_system_); do
-            "$function" "$fullname" "$system"
-        done
-    fi
 }
 
 

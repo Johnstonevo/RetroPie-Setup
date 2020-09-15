@@ -37,6 +37,7 @@ function install_lr-vice() {
 function configure_lr-vice() {
     mkRomDir "c64"
     ensureSystemretroconfig "c64"
+    [[ "$md_mode" == "remove" ]] && return
 
     cp -R "$md_inst/data" "$biosdir"
     chown -R $user:$user "$biosdir/data"
@@ -55,5 +56,8 @@ function configure_lr-vice() {
     addEmulator 0 "$md_id-core" "c64" "$md_instcore/vice_x64c_libretro.so"
 
     fi
+
+
+    
 
 }
