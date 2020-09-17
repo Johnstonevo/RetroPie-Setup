@@ -68,7 +68,6 @@ function install_bin_uqm() {
         dpkg -i *.deb
         aptInstall uqm-content uqm-music uqm-voice
     else
-    
         aptInstall uqm uqm-content uqm-music uqm-voice
     fi
 }

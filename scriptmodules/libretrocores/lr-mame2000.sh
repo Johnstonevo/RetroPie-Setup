@@ -53,9 +53,9 @@ function configure_lr-mame2000() {
         local core_config="$system"
         cp /home/$user/.config/RetroPie/$system/retroarch.cfg /home/$user/.config/RetroPie/$system/retroarch.cfg.bkp
 
-        setRetroarchCoreOption "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
-        setRetroarchCoreOption "input_overlay_opacity" "1.0"
-        setRetroarchCoreOption "input_overlay_enable" "true"
+        setRetroArchCoreOption "input_overlay"  "$raconfigdir/overlay/MAME-Horizontal.cfg"
+        setRetroArchCoreOption "input_overlay_opacity" "1.0"
+        setRetroArchCoreOption "input_overlay_enable" "true"
         
     done
     

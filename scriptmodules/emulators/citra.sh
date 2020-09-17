@@ -7,7 +7,7 @@ rp_module_id="citra"
 rp_module_desc="3ds emulator"
 rp_module_help="ROM Extension: .zip\n\nCopy your MAME roms to  $romdir/3ds"
 rp_module_licence="GPL2 https://github.com/citra-emu/citra/blob/master/license.txt"
-rp_module_section="exp"
+rp_module_section="not_working"
 rp_module_flags="!arm"
 
 function depends_citra() {
@@ -17,7 +17,7 @@ function depends_citra() {
     fi
 
     # Additional libraries required for running
-    local depends=(libsdl2-dev doxygen qtbase5-dev libqt5opengl5-dev qtmultimedia5-dev build-essential clang libc++-dev cmake qtbase5-dev libqt5opengl5-dev qtmultimedia5-dev)
+    local depends=(libsdl2-dev doxygen qtbase5-dev libqt5opengl5-dev qtmultimedia5-dev build-essential clang libc++-dev cmake qtbase5-dev libqt5opengl5-dev qtmultimedia5-dev libfdk-aac-dev )
     getDepends "${depends[@]}"
 }
 
